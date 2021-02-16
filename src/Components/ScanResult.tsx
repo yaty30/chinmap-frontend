@@ -48,8 +48,6 @@ import PortOpened from '@material-ui/icons/Visibility';
 import PortFiltered from '@material-ui/icons/VisibilityOff';
 import { targetData, chosenMode, scanTarget } from './target'
 
-// Components
-import NmapOutput from './NmapOutput'
 
 // Backend
 import { isScanning } from '../Backend/frontendData/isScanning'
@@ -59,7 +57,7 @@ import scannedTarget from '../Backend/frontendData/scannedTargetForSelect.json'
 import { rows } from '../Backend/frontendData/getPortStatus'
 
 // Mobx Global Status
-import selectResult from '../Mobx/Models/resultSelectStatus'
+import storeTarget from '../Mobx/Models/resultSelectStatus'
 
 const mainStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -147,7 +145,7 @@ export default () => {
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setTarget(event.target.value as any);
-    // setTarget(selectResult.target)
+    // setTarget(storeTarget.target)
   };
 
   const [value, setValue] = React.useState(0);
@@ -179,6 +177,29 @@ export default () => {
     return Math.random() * (max - min) + min;
   }
   
+  function NmapOutput() {
+    return(
+      <>
+        
+          {pureOutput.map((obj) => (
+            <>
+              {
+                obj.id == target ?
+                  <>
+                     <Typography style={{whiteSpace: "pre-line"}}>
+                        {obj.output}
+                      </Typography>
+                  </>
+                    :
+                  null
+              }
+            </>
+          ))}
+        
+      </>
+    );
+  }
+
   function HostsAndPorts() {
   
     return (
@@ -740,7 +761,6 @@ export default () => {
   
   return (
     <div className={classes.root}>
-      <button onClick={()=>console.log(selectResult.target)}>click</button>
        {isScanning.map((status) => (
            status === true ?
             <>
@@ -781,7 +801,7 @@ export default () => {
                             <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
-                                value={selectResult.target}
+                                value={target}
                                 onChange={handleChange}
                                 label="Choose a target IP or Domain"
                                 style={{
