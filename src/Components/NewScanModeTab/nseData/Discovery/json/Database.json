@@ -1,0 +1,102 @@
+[
+ {
+   "id": "cassandra-info",
+   "des": "Attempts to get basic info and server status from a Cassandra database."
+ },
+ {
+   "id": "couchdb-databases",
+   "des": "Gets database tables from a CouchDB database."
+ },
+ {
+   "id": "couchdb-stats",
+   "des": "Gets database statistics from a CouchDB database."
+ },
+ {
+   "id": "drda-info",
+   "des": "Attempts to extract information from database servers supporting the DRDA protocol. The script sends a DRDA EXCSAT (exchange server attributes) command packet and parses the response."
+ },
+ {
+   "id": "hbase-master-info",
+   "des": "Retrieves information from an Apache HBase (Hadoop database) master HTTP status page."
+ },
+ {
+   "id": "hbase-region-info",
+   "des": "Retrieves information from an Apache HBase (Hadoop database) region server HTTP status page."
+ },
+ {
+   "id": "hostmap-bfk",
+   "des": "Discovers hostnames that resolve to the target's IP address by querying the online database at http://www.bfk.de/bfk_dnslogger.html."
+ },
+ {
+   "id": "hostmap-crtsh",
+   "des": "Finds subdomains of a web server by querying Google's Certificate Transparency logs database (https://crt.sh)."
+ },
+ {
+   "id": "http-favicon",
+   "des": "Gets the favicon (\"favorites icon\") from a web page and matches it against a database of the icons of known web applications. If there is a match, the name of the application is printed; otherwise the MD5 hash of the icon data is printed."
+ },
+ {
+   "id": "http-xssed",
+   "des": "This script searches the xssed.com database and outputs the result."
+ },
+ {
+   "id": "ip-geolocation-maxmind",
+   "des": "Tries to identify the physical location of an IP address using a Geolocation Maxmind database file (available from http://www.maxmind.com/app/ip-location). This script supports queries using all Maxmind databases that are supported by their API including the commercial ones."
+ },
+ {
+   "id": "mongodb-databases",
+   "des": "Attempts to get a list of tables from a MongoDB database."
+ },
+ {
+   "id": "mongodb-info",
+   "des": "Attempts to get build info and server status from a MongoDB database."
+ },
+ {
+   "id": "ms-sql-config",
+   "des": "Queries Microsoft SQL Server (ms-sql) instances for a list of databases, linked servers, and configuration settings."
+ },
+ {
+   "id": "ms-sql-dac",
+   "des": "Queries the Microsoft SQL Browser service for the DAC (Dedicated Admin Connection) port of a given (or all) SQL Server instance. The DAC port is used to connect to the database instance when normal connection attempts fail, for example, when server is hanging, out of memory or in other bad states. In addition, the DAC port provides an admin with access to system objects otherwise not accessible over normal connections."
+ },
+ {
+   "id": "ms-sql-hasdbaccess",
+   "des": "Queries Microsoft SQL Server (ms-sql) instances for a list of databases a user has access to."
+ },
+ {
+   "id": "ms-sql-tables",
+   "des": "Queries Microsoft SQL Server (ms-sql) for a list of tables per database."
+ },
+ {
+   "id": "mysql-audit",
+   "des": "Audits MySQL database server security configuration against parts of the CIS MySQL v1.0.2 benchmark (the engine can be used for other MySQL audits by creating appropriate audit files)."
+ },
+ {
+   "id": "mysql-databases",
+   "des": "Attempts to list all databases on a MySQL server."
+ },
+ {
+   "id": "mysql-query",
+   "des": "Runs a query against a MySQL database and returns the results as a table."
+ },
+ {
+   "id": "riak-http-info",
+   "des": "Retrieves information (such as node name and architecture) from a Basho Riak distributed database using the HTTP protocol."
+ },
+ {
+   "id": "ssl-known-key",
+   "des": "Checks whether the SSL certificate used by a host has a fingerprint that matches an included database of problematic keys."
+ },
+ {
+   "id": "versant-info",
+   "des": "Extracts information, including file paths, version and database names from a Versant object database."
+ },
+ {
+   "id": "citrix-enum-apps",
+   "des": "Extracts a list of published applications from the ICA Browser service."
+ },
+ {
+   "id": "citrix-enum-apps-xml",
+   "des": "Extracts a list of applications, ACLs, and settings from the Citrix XML service."
+ }
+]

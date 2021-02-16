@@ -1,0 +1,30 @@
+[
+ {
+   "id": "hadoop-datanode-info",
+   "des": "Discovers information such as log directories from an Apache Hadoop DataNode HTTP status page."
+ },
+ {
+   "id": "hadoop-jobtracker-info",
+   "des": "Retrieves information from an Apache Hadoop JobTracker HTTP status page."
+ },
+ {
+   "id": "hadoop-namenode-info",
+   "des": "Retrieves information from an Apache Hadoop NameNode HTTP status page."
+ },
+ {
+   "id": "hadoop-secondary-namenode-info",
+   "des": "Retrieves information from an Apache Hadoop secondary NameNode HTTP status page."
+ },
+ {
+   "id": "hadoop-tasktracker-info",
+   "des": "Retrieves information from an Apache Hadoop TaskTracker HTTP status page."
+ },
+ {
+   "id": "hbase-master-info",
+   "des": "Retrieves information from an Apache HBase (Hadoop database) master HTTP status page."
+ },
+ {
+   "id": "hddtemp-info",
+   "des": "Reads hard disk information (such as brand, model, and sometimes temperature) from a listening hddtemp service."
+ }
+]

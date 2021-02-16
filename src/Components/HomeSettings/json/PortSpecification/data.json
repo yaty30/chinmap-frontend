@@ -1,0 +1,14 @@
+[
+    {
+        "flag": "-p-",
+        "tooltip": "Port scan all ports"
+    },
+    {
+        "flag": "-F",
+        "tooltip": "ast port scan (100 ports)"
+    },
+    {
+        "flag": "-p0",
+        "tooltip": "Leaving off end port in range makes the scan go through to port 65535"
+    }
+]

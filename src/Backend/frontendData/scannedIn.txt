@@ -1,0 +1,27 @@
+,{
+"id": "TNEwKPKcjEFfSXAfHIWgC",
+"cm": "nmapscanme.nmap.org; with scan mode: topOneHundredScanMode",
+"target": "scanme.nmap.org (45.33.32.156) [host down; Received no-response]",
+"targetForSelect": "scanme.nmap.org",
+"date": "2021-02-15",
+"time": " 10:13 HKT",
+"upHost": "",
+"runTime": "1.98 seconds",
+"latency": "",
+"notShown": "",
+"os": "",
+"uptime": "",
+"deviceType": "",
+"rawPacket": "2 (56B)",
+"rcvd": "0 (0B)",
+"scanMode": "Top One Hundred Scan Mode",
+"hop": "",
+"macAddr": "",
+"difficulty": "",
+"auto": "False",
+"cveDetect": "False",
+"setRange": "Target have no range",
+"flags": "",
+"nmapVer": "7.91"
+}
+]

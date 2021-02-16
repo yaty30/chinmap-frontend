@@ -1,0 +1,42 @@
+[
+ {
+   "id": "ip-forwarding",
+   "des": "Detects whether the remote device has ip forwarding or \"Internet connection sharing\" enabled, by sending an ICMP echo request to a given target using the scanned host as default gateway."
+ },
+ {
+   "id": "ip-geolocation-geoplugin",
+   "des": "Tries to identify the physical location of an IP address using the Geoplugin geolocation web service (http://www.geoplugin.com/). There is no limit on lookups using this service"
+ },
+ {
+   "id": "ip-geolocation-ipinfodb",
+   "des": "Tries to identify the physical location of an IP address using the IPInfoDB geolocation web service (http://ipinfodb.com/ip_location_api.php)."
+ },
+ {
+   "id": "ip-geolocation-maxmind",
+   "des": "Tries to identify the physical location of an IP address using a Geolocation Maxmind database file (available from http://www.maxmind.com/app/ip-location). This script supports queries using all Maxmind databases that are supported by their API including the commercial ones."
+ },
+ {
+   "id": "ip-https-discover",
+   "des": "Checks if the IP over HTTPS (IP-HTTPS) Tunneling Protocol [1] is supported."
+ },
+ {
+   "id": "ipidseq",
+   "des": "Classifies a host's IP ID sequence (test for susceptibility to idle scan)."
+ },
+ {
+   "id": "ipmi-version",
+   "des": "Performs IPMI Information Discovery through Channel Auth probes."
+ },
+ {
+   "id": "ipv6-multicast-mld-list",
+   "des": "Uses Multicast Listener Discovery to list the multicast addresses subscribed to by IPv6 multicast listeners on the link-local scope. Addresses in the IANA IPv6 Multicast Address Space Registry have their descriptions listed."
+ },
+ {
+   "id": "ipv6-node-info",
+   "des": "Obtains hostnames, IPv4 and IPv6 addresses through IPv6 Node Information Queries."
+ },
+ {
+   "id": "nbns-interfaces",
+   "des": "Retrieves IP addresses of the target's network interfaces via NetBIOS NS. Additional network interfaces may reveal more information about the target, including finding paths to hidden non-routed networks via multihomed systems."
+ }
+]

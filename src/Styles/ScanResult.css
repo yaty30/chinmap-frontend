@@ -1,0 +1,7 @@
+#scanResultTab .MuiAppBar-colorPrimary{
+    background-color: transparent;
+}
+
+#scanResultTab .MuiPaper-elevation4{
+    box-shadow: none;
+}

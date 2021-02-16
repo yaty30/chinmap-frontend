@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+a{
+    text-decoration: none !important;
+    color: black;
+}
+
+#menuBtn{
+    color: #fff;
+    
+}
+
+body{
+    background: #eeeeee;
+}
+
+#menuAppTitle{
+    text-align: center;
+    position: relative;
+    top: 5px;
+    color: #0E397C;
+    font-family: 'Quicksand', sans-serif;
+}

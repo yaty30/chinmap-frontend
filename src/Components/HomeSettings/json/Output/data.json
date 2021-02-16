@@ -1,0 +1,18 @@
+[
+    {
+        "flag": "-v",
+        "tooltip": "Increase the verbosity level"
+    },
+    {
+        "flag": "-vv",
+        "tooltip": "Use more v for greater effect"
+    },
+    {
+        "flag": "-d",
+        "tooltip": "Increase debugging level"
+    },
+    {
+        "flag": "-dd",
+        "tooltip": "Use more d for greater effect"
+    }
+]

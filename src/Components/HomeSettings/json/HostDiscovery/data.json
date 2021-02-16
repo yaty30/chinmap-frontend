@@ -1,0 +1,22 @@
+[
+    {
+      "flag": "-sL",
+      "tooltip": "No Scan. List targets only."
+    },
+    {
+        "flag": "-sN",
+        "tooltip": "Disable port scanning. Host discovery only."
+    },
+    {
+        "flag": "-Pn",
+        "tooltip": "Disable host discovery. Port scan only."
+    },
+    {
+        "flag": "-PR",
+        "tooltip": "ARP discovery on local network."
+    },
+    {
+        "flag": "-n",
+        "tooltip": "Never do DNS resolution."
+    }
+]

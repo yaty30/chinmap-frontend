@@ -1,0 +1,26 @@
+[
+    {
+        "flag": "-sS",
+        "tooltip": "TCP SYN port scan (Default)"
+    },
+    {
+        "flag": "-sT",
+        "tooltip": "TCP connect port scan (Default without root privilege)"
+    },
+    {
+        "flag": "-sU",
+        "tooltip": "UDP port scan"
+    },
+    {
+        "flag": "-sA",
+        "tooltip": "TCP ACK port scan"
+    },
+    {
+        "flag": "-sW",
+        "tooltip": "TCP Window port scan"
+    },
+    {
+        "flag": "-sM",
+        "tooltip": "TCP Maimon port scan"
+    }
+]

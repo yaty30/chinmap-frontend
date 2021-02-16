@@ -1,0 +1,82 @@
+[
+ {
+   "id": "id",
+   "des": "des"
+ },
+ {
+   "id": "broadcast-eigrp-discovery",
+   "des": "Performs network discovery and routing information gathering through Cisco's Enhanced Interior Gateway Routing Protocol (EIGRP)."
+ },
+ {
+   "id": "bjnp-discover",
+   "des": "Discovers HID devices on a LAN by sending a discoveryd network broadcast probe."
+ },
+ {
+   "id": "broadcast-ospf2-discover",
+   "des": "Discover IPv4 networks using Open Shortest Path First version 2(OSPFv2) protocol."
+ },
+ {
+   "id": "dns-ip6-arpa-scan",
+   "des": "Performs a quick reverse DNS lookup of an IPv6 network using a technique which analyzes DNS server response codes to dramatically reduce the number of queries needed to enumerate large networks."
+ },
+ {
+   "id": "gpsd-info",
+   "des": "Retrieves GPS time, coordinates and speed from the GPSD network daemon."
+ },
+ {
+   "id": "hnap-info",
+   "des": "Retrieve hardwares details and configuration information utilizing HNAP, the \"Home Network Administration Protocol\". It is an HTTP-Simple Object Access Protocol (SOAP)-based protocol which allows for remote topology discovery, configuration, and management of devices (routers, cameras, PCs, NAS, etc.)"
+ },
+ {
+   "id": "http-affiliate-id",
+   "des": "Grabs affiliate network IDs (e.g. Google AdSense or Analytics, Amazon Associates, etc.) from a web page. These can be used to identify pages with the same owner."
+ },
+ {
+   "id": "http-qnap-nas-info",
+   "des": "Attempts to retrieve the model, firmware version, and enabled services from a QNAP Network Attached Storage (NAS) device."
+ },
+ {
+   "id": "lltd-discovery",
+   "des": "Uses the Microsoft LLTD protocol to discover hosts on a local network."
+ },
+ {
+   "id": "nbns-interfaces",
+   "des": "Retrieves IP addresses of the target's network interfaces via NetBIOS NS. Additional network interfaces may reveal more information about the target, including finding paths to hidden non-routed networks via multihomed systems."
+ },
+ {
+   "id": "ndmp-fs-info",
+   "des": "Lists remote file systems by querying the remote device using the Network Data Management Protocol (ndmp). NDMP is a protocol intended to transport data between a NAS device and the backup device, removing the need for the data to pass through the backup server."
+ },
+ {
+   "id": "omp2-enum-targets",
+   "des": "Attempts to retrieve the list of target systems and networks from an OpenVAS Manager server."
+ },
+ {
+   "id": "openlookup-info",
+   "des": "Parses and displays the banner information of an OpenLookup (network key-value store) server."
+ },
+ {
+   "id": "qscan",
+   "des": "Repeatedly probe open and/or closed ports on a host to obtain a series of round-trip time values for each port. These values are used to group collections of ports which are statistically different from other groups. Ports being in different groups (or \"families\") may be due to network mechanisms such as port forwarding to machines behind a NAT."
+ },
+ {
+   "id": "sniffer-detect",
+   "des": "Checks if a target on a local Ethernet has its network card in promiscuous mode."
+ },
+ {
+   "id": "snmp-interfaces",
+   "des": "Attempts to enumerate network interfaces through SNMP."
+ },
+ {
+   "id": "targets-ipv6-map4to6",
+   "des": "This script runs in the pre-scanning phase to map IPv4 addresses onto IPv6 networks and add them to the scan queue."
+ },
+ {
+   "id": "targets-sniffer",
+   "des": "Sniffs the local network for a configurable amount of time (10 seconds by default) and prints discovered addresses. If the newtargets script argument is set, discovered addresses are added to the scan queue."
+ },
+ {
+   "id": "ubiquiti-discovery",
+   "des": "Extracts information from Ubiquiti networking devices."
+ }
+]

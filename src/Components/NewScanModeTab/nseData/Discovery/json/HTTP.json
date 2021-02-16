@@ -1,0 +1,174 @@
+[
+ {
+   "id": "http-aspnet-debug",
+   "des": "Determines if a ASP.NET application has debugging enabled using a HTTP DEBUG request. "
+ },
+ {
+   "id": "http-auth-finder",
+   "des": "Spiders a web site to find web pages requiring form-based or HTTP-based authentication. The results are returned in a table with each url and the detected method."
+ },
+ {
+   "id": "http-backup-finder",
+   "des": "Spiders a website and attempts to identify backup copies of discovered files. It does so by requesting a number of different combinations of the filename (eg. index.bak, index.html~, copy of index.html)."
+ },
+ {
+   "id": "http-bigip-cookie",
+   "des": "Decodes any unencrypted F5 BIG-IP cookies in the HTTP response. BIG-IP cookies contain information on backend systems such as internal IP addresses and port numbers"
+ },
+ {
+   "id": "http-cakephp-version",
+   "des": "Obtains the CakePHP version of a web application built with the CakePHP framework by fingerprinting default files shipped with the CakePHP framework."
+ },
+ {
+   "id": "http-chrono",
+   "des": "Measures the time a website takes to deliver a web page and returns the maximum, minimum and average time it took to fetch a page."
+ },
+ {
+   "id": "http-cisco-anyconnect",
+   "des": "Connect as Cisco AnyConnect client to a Cisco SSL VPN and retrieves version and tunnel information."
+ },
+ {
+   "id": "http-comments-displayer",
+   "des": "Extracts and outputs HTML and JavaScript comments from HTTP responses."
+ },
+ {
+   "id": "http-date",
+   "des": "Gets the date from HTTP-like services. Also prints how much the date differs from local time. Local time is the time the HTTP request was sent, so the difference includes at least the duration of one RTT."
+ },
+ {
+   "id": "http-default-accounts",
+   "des": "Tests for access with default credentials used by a variety of web applications and devices."
+ },
+ {
+   "id": "http-devframework",
+   "des": ""
+ },
+ {
+   "id": "http-drupal-enum",
+   "des": "Enumerates the installed Drupal modules/themes by using a list of known modules and themes."
+ },
+ {
+   "id": "http-drupal-enum-users",
+   "des": "Enumerates Drupal users by exploiting an information disclosure vulnerability in Views, Drupal's most popular module."
+ },
+ {
+   "id": "http-errors",
+   "des": "This script crawls through the website and returns any error pages."
+ },
+ {
+   "id": "http-favicon",
+   "des": "Gets the favicon (\"favorites icon\") from a web page and matches it against a database of the icons of known web applications. If there is a match, the name of the application is printed; otherwise the MD5 hash of the icon data is printed."
+ },
+ {
+   "id": "http-feed",
+   "des": "This script crawls through the website to find any rss or atom feeds."
+ },
+ {
+   "id": "http-generator",
+   "des": "Displays the contents of the \"generator\" meta tag of a web page (default: /) if there is one."
+ },
+ {
+   "id": "http-gitweb-projects-enum",
+   "des": "Retrieves a list of Git projects, owners and descriptions from a gitweb (web interface to the Git revision control system)."
+ },
+ {
+   "id": "http-grep",
+   "des": "Spiders a website and attempts to match all pages and urls against a given string. Matches are counted and grouped per url under which they were discovered."
+ },
+ {
+   "id": "http-hp-ilo-info",
+   "des": "Attempts to extract information from HP iLO boards including versions and addresses."
+ },
+ {
+   "id": "http-icloud-findmyiphone",
+   "des": "Retrieves the locations of all \"Find my iPhone\" enabled iOS devices by querying the MobileMe web service (authentication required)."
+ },
+ {
+   "id": "http-icloud-sendmsg",
+   "des": "Sends a message to a iOS device through the Apple MobileMe web service. The device has to be registered with an Apple ID using the Find My Iphone application."
+ },
+ {
+   "id": "http-ls",
+   "des": "Shows the content of an \"index\" Web page."
+ },
+ {
+   "id": "http-mobileversion-checker",
+   "des": "Checks if the website holds a mobile version."
+ },
+ {
+   "id": "http-ntlm-info",
+   "des": "This script enumerates information from remote HTTP services with NTLM authentication enabled."
+ },
+ {
+   "id": "http-open-proxy",
+   "des": "Checks if an HTTP proxy is open."
+ },
+ {
+   "id": "http-open-redirect",
+   "des": "Spiders a website and attempts to identify open redirects. Open redirects are handlers which commonly take a URL as a parameter and responds with a HTTP redirect (3XX) to the target."
+ },
+ {
+   "id": "http-qnap-nas-info",
+   "des": "Attempts to retrieve the model, firmware version, and enabled services from a QNAP Network Attached Storage (NAS) device."
+ },
+ {
+   "id": "http-referer-checker",
+   "des": "Informs about cross-domain include of scripts. Websites that include external javascript scripts are delegating part of their security to third-party entities."
+ },
+ {
+   "id": "http-robtex-reverse-ip",
+   "des": "Obtains up to 100 forward DNS names for a target IP address by querying the Robtex service"
+ },
+ {
+   "id": "http-sap-netweaver-leak",
+   "des": "Detects SAP Netweaver Portal instances that allow anonymous access to the KM unit navigation page. This page leaks file names, ldap users, etc."
+ },
+ {
+   "id": "http-security-headers",
+   "des": "Checks for the HTTP response headers related to security given in OWASP Secure Headers Project and gives a brief description of the header and its configuration value."
+ },
+ {
+   "id": "http-svn-enum",
+   "des": "Enumerates users of a Subversion repository by examining logs of most recent commits."
+ },
+ {
+   "id": "http-svn-info",
+   "des": "Requests information from a Subversion repository."
+ },
+ {
+   "id": "http-trace",
+   "des": "Sends an HTTP TRACE request and shows if the method TRACE is enabled. If debug is enabled, it returns the header fields that were modified in the response."
+ },
+ {
+   "id": "http-traceroute",
+   "des": "Exploits the Max-Forwards HTTP header to detect the presence of reverse proxies."
+ },
+ {
+   "id": "http-trane-info",
+   "des": "Attempts to obtain information from Trane Tracer SC devices. Trane Tracer SC is an intelligent field panel for communicating with HVAC equipment controllers deployed across several sectors including commercial facilities and others."
+ },
+ {
+   "id": "http-unsafe-output-escaping",
+   "des": "Spiders a website and attempts to identify output escaping problems where content is reflected back to the user. This script locates all parameters, ?x=foo&y=bar and checks if the values are reflected on the page. If they are indeed reflected, the script will try to insert ghz>hzx\"zxc'xcv and check which (if any) characters were reflected back onto the page without proper html escaping. This is an indication of potential XSS vulnerability."
+ },
+ {
+   "id": "http-useragent-tester",
+   "des": "Checks if various crawling utilities are allowed by the host."
+ },
+ {
+   "id": "http-waf-fingerprint",
+   "des": "Tries to detect the presence of a web application firewall and its type and version."
+ },
+ {
+   "id": "http-webdav-scan",
+   "des": "A script to detect WebDAV installations. Uses the OPTIONS and PROPFIND methods."
+ },
+ {
+   "id": "http-wordpress-enum",
+   "des": "Enumerates themes and plugins of Wordpress installations. The script can also detect outdated plugins by comparing version numbers with information pulled from api.wordpress.org."
+ },
+ {
+   "id": "http-xssed",
+   "des": "This script searches the xssed.com database and outputs the result."
+ }
+]

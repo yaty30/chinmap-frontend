@@ -1,0 +1,18 @@
+[
+ {
+   "id": "broadcast-hid-discoveryd",
+   "des": "Discovers HID devices on a LAN by sending a discoveryd network broadcast probe."
+ },
+ {
+   "id": "broadcast-igmp-discovery",
+   "des": "Discovers targets that have IGMP Multicast memberships and grabs interesting information."
+ },
+ {
+   "id": "broadcast-pim-discovery",
+   "des": "Discovers routers that are running PIM (Protocol Independent Multicast)."
+ },
+ {
+   "id": "broadcast-ping",
+   "des": "Sends broadcast pings on a selected interface using raw ethernet packets and outputs the responding hosts' IP and MAC addresses or (if requested) adds them as targets. Root privileges on UNIX are required to run this script since it uses raw sockets. Most operating systems don't respond to broadcast-ping probes, but they can be configured to do so."
+ }
+]

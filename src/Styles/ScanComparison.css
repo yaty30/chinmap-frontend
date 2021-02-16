@@ -1,0 +1,8 @@
+#scanComparisonTab .MuiAppBar-colorPrimary{
+    background-color: transparent;
+}
+
+#scanComparisonTab .MuiPaper-elevation4{
+    box-shadow: none;
+}
+

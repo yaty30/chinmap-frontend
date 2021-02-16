@@ -1,0 +1,14 @@
+[
+    {
+        "flag": "-sV",
+        "tooltip": "Attempts to determine the version of the service running on port."
+    },
+    {
+        "flag": "-sV --version-light",
+        "tooltip": "Intensity level 0 to 9. Higher number increases possibility of correctness."
+    },
+    {
+        "flag": "-sV --version-all",
+        "tooltip": "Enable intensity level 9. Higher possibility of correctness. Slower"
+    }
+]

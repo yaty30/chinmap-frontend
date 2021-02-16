@@ -1,0 +1,38 @@
+[
+ {
+   "id": "targets-asn",
+   "des": "Produces a list of IP prefixes for a given routing AS number (ASN)."
+ },
+ {
+   "id": "targets-ipv6-map4to6",
+   "des": "This script runs in the pre-scanning phase to map IPv4 addresses onto IPv6 networks and add them to the scan queue."
+ },
+ {
+   "id": "targets-ipv6-multicast-echo",
+   "des": "Sends an ICMPv6 echo request packet to the all-nodes link-local multicast address (ff02::1) to discover responsive hosts on a LAN without needing to individually ping each IPv6 address."
+ },
+ {
+   "id": "targets-ipv6-multicast-invalid-dst",
+   "des": "Sends an ICMPv6 packet with an invalid extension header to the all-nodes link-local multicast address (ff02::1) to discover (some) available hosts on the LAN. This works because some hosts will respond to this probe with an ICMPv6 Parameter Problem packet."
+ },
+ {
+   "id": "targets-ipv6-multicast-mld",
+   "des": "Attempts to discover available IPv6 hosts on the LAN by sending an MLD (multicast listener discovery) query to the link-local multicast address (ff02::1) and listening for any responses. The query's maximum response delay set to 1 to provoke hosts to respond immediately rather than waiting for other responses from their multicast group."
+ },
+ {
+   "id": "targets-ipv6-multicast-slaac",
+   "des": "asd"
+ },
+ {
+   "id": "targets-ipv6-wordlist",
+   "des": "Adds IPv6 addresses to the scan queue using a wordlist of hexadecimal \"words\" that form addresses in a given subnet."
+ },
+ {
+   "id": "targets-sniffer",
+   "des": "Sniffs the local network for a configurable amount of time (10 seconds by default) and prints discovered addresses. If the newtargets script argument is set, discovered addresses are added to the scan queue."
+ },
+ {
+   "id": "targets-traceroute",
+   "des": "Inserts traceroute hops into the Nmap scanning queue. It only functions if Nmap's --traceroute option is used and the newtargets script argument is given."
+ }
+]

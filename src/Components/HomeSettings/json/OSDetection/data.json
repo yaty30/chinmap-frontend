@@ -1,0 +1,19 @@
+[
+    {
+        "flag": "-O",
+        "tooltip": "Remote OS detection using TCP/IPstack fingerprinting."
+    },
+    {
+        "flag": "-O --osscan-limit",
+        "tooltip": "If at least one open and one closed TCP port are not found it will not try OS detection against host."
+    },
+    {
+        "flag": "-A",
+        "tooltip": "Enables OS detection, version detection, script scanning, and traceroute."
+    },
+    {
+        "flag": "--O --osscan-guess",
+        "tooltip": "Makes Nmap guess more aggressively."
+    }
+    
+]

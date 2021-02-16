@@ -1,0 +1,42 @@
+[
+ {
+   "id": "smtp-ntlm-info",
+   "des": "This script enumerates information from remote SMTP services with NTLM authentication enabled."
+ },
+ {
+   "id": "sniffer-detect",
+   "des": "Checks if a target on a local Ethernet has its network card in promiscuous mode."
+ },
+ {
+   "id": "snmp-hh3c-logins",
+   "des": "Attempts to enumerate Huawei / HP/H3C Locally Defined Users through the hh3c-user.mib OID"
+ },
+ {
+   "id": "snmp-interfaces",
+   "des": "Attempts to enumerate network interfaces through SNMP."
+ },
+ {
+   "id": "snmp-netstat",
+   "des": "Attempts to query SNMP for a netstat like output. The script can be used to identify and automatically add new targets to the scan by supplying the newtargets script argument."
+ },
+ {
+   "id": "snmp-processes",
+   "des": "Attempts to enumerate running  processes through SNMP."
+ },
+ {
+   "id": "snmp-sysdescr",
+   "des": "Attempts to extract system information from an SNMP service."
+ },
+ {
+   "id": "snmp-win32-services",
+   "des": "Attempts to enumerate Windows services through SNMP."
+ },
+ {
+   "id": "snmp-win32-shares",
+   "des": "Attempts to enumerate Windows Shares through SNMP."
+ },
+ {
+   "id": "snmp-win32-software",
+   "des": "Attempts to enumerate installed software through SNMP."
+ }
+]

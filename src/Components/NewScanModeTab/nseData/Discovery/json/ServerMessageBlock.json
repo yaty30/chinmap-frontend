@@ -1,0 +1,78 @@
+[
+ {
+   "id": "smb-enum-domains",
+   "des": "Attempts to enumerate domains on a system, along with their policies. This generally requires credentials, except against Windows 2000. In addition to the actual domain, the \"Builtin\" domain is generally displayed. Windows returns this in the list of domains, but its policies don't appear to be used anywhere."
+ },
+ {
+   "id": "smb-enum-groups",
+   "des": "Obtains a list of groups from the remote Windows system, as well as a list of the group's users. This works similarly to enum.exe with the /G switch."
+ },
+ {
+   "id": "smb-enum-services",
+   "des": "Retrieves the list of services running on a remote Windows system. Each service attribute contains service name, display name and service status of each service."
+ },
+ {
+   "id": "smb-enum-sessions",
+   "des": "Enumerates the users logged into a system either locally or through an SMB share. The local users can be logged on either physically on the machine, or through a terminal services session. Connections to a SMB share are, for example, people connected to fileshares or making RPC calls. Nmap's connection will also show up, and is generally identified by the one that connected \"0 seconds ago\"."
+ },
+ {
+   "id": "smb-enum-shares",
+   "des": "Attempts to list shares using the srvsvc.NetShareEnumAll MSRPC function and retrieve more information about them using srvsvc.NetShareGetInfo. If access to those functions is denied, a list of common share names are checked."
+ },
+ {
+   "id": "smb-ls",
+   "des": "Attempts to retrieve useful information about files shared on SMB volumes. The output is intended to resemble the output of the UNIX ls command."
+ },
+ {
+   "id": "smb-mbenum",
+   "des": "Queries information managed by the Windows Master Browser."
+ },
+ {
+   "id": "smb-security-mode",
+   "des": "Returns information about the SMB security level determined by SMB."
+ },
+ {
+   "id": "smb-system-info",
+   "des": "Pulls back information about the remote system from the registry. Getting all of the information requires an administrative account, although a user account will still get a lot of it. Guest probably won't get any, nor will anonymous. This goes for all operating systems, including Windows 2000."
+ },
+ {
+   "id": "id",
+   "des": "des"
+ },
+ {
+   "id": "smb-enum-domains",
+   "des": "Attempts to enumerate domains on a system, along with their policies. This generally requires credentials, except against Windows 2000. In addition to the actual domain, the \"Builtin\" domain is generally displayed. Windows returns this in the list of domains, but its policies don't appear to be used anywhere."
+ },
+ {
+   "id": "smb-enum-groups",
+   "des": "Obtains a list of groups from the remote Windows system, as well as a list of the group's users. This works similarly to enum.exe with the /G switch."
+ },
+ {
+   "id": "smb-enum-services",
+   "des": "Retrieves the list of services running on a remote Windows system. Each service attribute contains service name, display name and service status of each service."
+ },
+ {
+   "id": "smb-enum-sessions",
+   "des": "Enumerates the users logged into a system either locally or through an SMB share. The local users can be logged on either physically on the machine, or through a terminal services session. Connections to a SMB share are, for example, people connected to fileshares or making RPC calls. Nmap's connection will also show up, and is generally identified by the one that connected \"0 seconds ago\"."
+ },
+ {
+   "id": "smb-enum-shares",
+   "des": "Attempts to list shares using the srvsvc.NetShareEnumAll MSRPC function and retrieve more information about them using srvsvc.NetShareGetInfo. If access to those functions is denied, a list of common share names are checked."
+ },
+ {
+   "id": "smb-ls",
+   "des": "Attempts to retrieve useful information about files shared on SMB volumes. The output is intended to resemble the output of the UNIX ls command."
+ },
+ {
+   "id": "smb-mbenum",
+   "des": "Queries information managed by the Windows Master Browser."
+ },
+ {
+   "id": "smb-security-mode",
+   "des": "Returns information about the SMB security level determined by SMB."
+ },
+ {
+   "id": "smb-system-info",
+   "des": "Pulls back information about the remote system from the registry. Getting all of the information requires an administrative account, although a user account will still get a lot of it. Guest probably won't get any, nor will anonymous. This goes for all operating systems, including Windows 2000."
+ }
+]

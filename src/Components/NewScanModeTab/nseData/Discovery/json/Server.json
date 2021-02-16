@@ -1,0 +1,410 @@
+[
+ {
+   "id": "afp-ls",
+   "des": "Attempts to get useful information about files from AFP volumes. The output is intended to resemble the output of ls."
+ },
+ {
+   "id": "afp-serverinfo",
+   "des": "Shows AFP server information. This information includes the server's hostname, IPv4 and IPv6 addresses, and hardware type (for example Macmini or MacBookPro)."
+ },
+ {
+   "id": "afp-showmount",
+   "des": "Shows AFP shares and ACLs."
+ },
+ {
+   "id": "ajp-headers",
+   "des": "Performs a HEAD or GET request against either the root directory or any optional directory of an Apache JServ Protocol server and returns the server response headers."
+ },
+ {
+   "id": "ajp-request",
+   "des": "Requests a URI over the Apache JServ Protocol and displays the result (or stores it in a file). Different AJP methods such as; GET, HEAD, TRACE, PUT or DELETE may be used."
+ },
+ {
+   "id": "allseeingeye-info",
+   "des": "Detects the All-Seeing Eye service. Provided by some game servers for querying the server's status."
+ },
+ {
+   "id": "amqp-info",
+   "des": "Gathers information (a list of all server properties) from an AMQP (advanced message queuing protocol) server."
+ },
+ {
+   "id": "asn-query",
+   "des": "Maps IP addresses to autonomous system (AS) numbers."
+ },
+ {
+   "id": "backorifice-info",
+   "des": "Connects to a BackOrifice service and gathers information about the host and the BackOrifice service itself."
+ },
+ {
+   "id": "bacnet-info",
+   "des": "Discovers and enumerates BACNet Devices collects device information based off standard requests. In some cases, devices may not strictly follow the specifications, or may comply with older versions of the specifications, and will result in a BACNET error response. Presence of this error positively identifies the device as a BACNet device, but no enumeration is possible."
+ },
+ {
+   "id": "banner",
+   "des": "A simple banner grabber which connects to an open TCP port and prints out anything sent by the listening service within five seconds."
+ },
+ {
+   "id": "bitcoin-getaddr",
+   "des": "Queries a Bitcoin server for a list of known Bitcoin nodes"
+ },
+ {
+   "id": "bitcoin-info",
+   "des": "Extracts version and node information from a Bitcoin server"
+ },
+ {
+   "id": "bitcoinrpc-info",
+   "des": "Obtains information from a Bitcoin server by calling getinfo on its JSON-RPC interface."
+ },
+ {
+   "id": "cassandra-info",
+   "des": "Attempts to get basic info and server status from a Cassandra database."
+ },
+ {
+   "id": "cics-info",
+   "des": "Using the CICS transaction CEMT, this script attempts to gather information about the current CICS transaction server region. It gathers OS information, Datasets (files), transactions and user ids. Based on CICSpwn script by Ayoub ELAASSAL."
+ },
+ {
+   "id": "citrix-enum-servers",
+   "des": "Extracts a list of Citrix servers from the ICA Browser service."
+ },
+ {
+   "id": "citrix-enum-servers-xml",
+   "des": "Extracts the name of the server farm and member servers from Citrix XML service."
+ },
+ {
+   "id": "daap-get-library",
+   "des": "Retrieves a list of music from a DAAP server. The list includes artist names and album and song titles."
+ },
+ {
+   "id": "db2-das-info",
+   "des": "Connects to the IBM DB2 Administration Server (DAS) on TCP or UDP port 523 and exports the server profile. No authentication is required for this request."
+ },
+ {
+   "id": "dicom-ping",
+   "des": "Attempts to discover DICOM servers (DICOM Service Provider) through a partial C-ECHO request. It also detects if the server allows any called Application Entity Title or not."
+ },
+ {
+   "id": "dict-info",
+   "des": "Connects to a dictionary server using the DICT protocol, runs the SHOW SERVER command, and displays the result. The DICT protocol is defined in RFC 2229 and is a protocol which allows a client to query a dictionary server for definitions from a set of natural language dictionary databases."
+ },
+ {
+   "id": "dns-cache-snoop",
+   "des": "Performs DNS cache snooping against a DNS server."
+ },
+ {
+   "id": "dns-ip6-arpa-scan",
+   "des": "Performs a quick reverse DNS lookup of an IPv6 network using a technique which analyzes DNS server response codes to dramatically reduce the number of queries needed to enumerate large networks."
+ },
+ {
+   "id": "dns-nsec3-enum",
+   "des": "Tries to enumerate domain names from the DNS server that supports DNSSEC NSEC3 records."
+ },
+ {
+   "id": "dns-nsid",
+   "des": "Retrieves information from a DNS nameserver by requesting its nameserver ID (nsid) and asking for its id.server and version.bind values. This script performs the same queries as the following two dig commands: - dig CH TXT bind.version @target - dig +nsid CH TXT id.server @target"
+ },
+ {
+   "id": "dns-srv-enum",
+   "des": "Enumerates various common service (SRV) records for a given domain name. The service records contain the hostname, port and priority of servers for a given service. The following services are enumerated by the script: - Active Directory Global Catalog - Exchange Autodiscovery - Kerberos KDC Service - Kerberos Passwd Change Service - LDAP Servers - SIP Servers - XMPP S2S - XMPP C2S"
+ },
+ {
+   "id": "dns-zone-transfer",
+   "des": "Requests a zone transfer (AXFR) from a DNS server."
+ },
+ {
+   "id": "drda-info",
+   "des": "Attempts to extract information from database servers supporting the DRDA protocol. The script sends a DRDA EXCSAT (exchange server attributes) command packet and parses the response."
+ },
+ {
+   "id": "freelancer-info",
+   "des": "Detects the Freelancer game server (FLServer.exe) service by sending a status query UDP probe."
+ },
+ {
+   "id": "giop-info",
+   "des": "Queries a CORBA naming server for a list of objects."
+ },
+ {
+   "id": "hbase-region-info",
+   "des": "Retrieves information from an Apache HBase (Hadoop database) region server HTTP status page."
+ },
+ {
+   "id": "hostmap-crtsh",
+   "des": "Finds subdomains of a web server by querying Google's Certificate Transparency logs database (https://crt.sh)."
+ },
+ {
+   "id": "http-apache-negotiation",
+   "des": "Checks if the target http server has mod_negotiation enabled. This feature can be leveraged to find hidden resources and spider a web site using fewer requests."
+ },
+ {
+   "id": "http-apache-server-status",
+   "des": "Attempts to retrieve the server-status page for Apache webservers that have mod_status enabled. If the server-status page exists and appears to be from mod_status the script will parse useful information such as the system uptime, Apache version and recent HTTP requests."
+ },
+ {
+   "id": "http-cors",
+   "des": "Tests an http server for Cross-Origin Resource Sharing (CORS), a way for domains to explicitly opt in to having certain methods invoked by another domain."
+ },
+ {
+   "id": "http-enum",
+   "des": "Enumerates directories used by popular web applications and servers."
+ },
+ {
+   "id": "http-google-malware",
+   "des": "Checks if hosts are on Google's blacklist of suspected malware and phishing servers. These lists are constantly updated and are part of Google's Safe Browsing service."
+ },
+ {
+   "id": "http-headers",
+   "des": "Performs a HEAD request for the root folder (\"/\") of a web server and displays the HTTP headers returned."
+ },
+ {
+   "id": "http-internal-ip-disclosure",
+   "des": "Determines if the web server leaks its internal IP address when sending an HTTP/1.0 request without a Host header."
+ },
+ {
+   "id": "http-jsonp-detection",
+   "des": "Attempts to discover JSONP endpoints in web servers. JSONP endpoints can be used to bypass Same-origin Policy restrictions in web browsers."
+ },
+ {
+   "id": "http-mcmp",
+   "des": "Checks if the webserver allows mod_cluster management protocol (MCMP) methods."
+ },
+ {
+   "id": "http-php-version",
+   "des": "Attempts to retrieve the PHP version from a web server. PHP has a number of magic queries that return images or text that can vary with the PHP version. "
+ },
+ {
+   "id": "http-put",
+   "des": "Uploads a local file to a remote web server using the HTTP PUT method. You must specify the filename and URL path with NSE arguments"
+ },
+ {
+   "id": "http-robots.txt",
+   "des": "Checks for disallowed entries in /robots.txt on a web server."
+ },
+ {
+   "id": "http-robtex-shared-ns",
+   "des": "Finds up to 100 domain names which use the same name server as the target by querying the Robtex service at http://www.robtex.com/dns/."
+ },
+ {
+   "id": "http-sitemap-generator",
+   "des": "Spiders a web server and displays its directory structure along with number and types of files in each folder. Note that files listed as having an 'Other' extension are ones that have no extension or that are a root document."
+ },
+ {
+   "id": "http-title",
+   "des": "Shows the title of the default page of a web server."
+ },
+ {
+   "id": "http-vhosts",
+   "des": "Searches for web virtual hostnames by making a large number of HEAD requests against http servers using common hostnames."
+ },
+ {
+   "id": "http-vlcstreamer-ls",
+   "des": "Connects to a VLC Streamer helper service and lists directory contents. The VLC Streamer helper service is used by the iOS VLC Streamer application to enable streaming of multimedia content from the remote server to the device."
+ },
+ {
+   "id": "http-waf-detect",
+   "des": "Attempts to determine whether a web server is protected by an IPS (Intrusion Prevention System), IDS (Intrusion Detection System) or WAF (Web Application Firewall) by probing the web server with malicious payloads and detecting changes in the response code and body."
+ },
+ {
+   "id": "icap-info",
+   "des": "Tests a list of known ICAP service names and prints information about any it detects. The Internet Content Adaptation Protocol (ICAP) is used to extend transparent proxy servers and is generally used for content filtering and antivirus scanning."
+ },
+ {
+   "id": "irc-botnet-channels",
+   "des": "Checks an IRC server for channels that are commonly used by malicious botnets."
+ },
+ {
+   "id": "irc-info",
+   "des": "Gathers information from an IRC server."
+ },
+ {
+   "id": "memcached-info",
+   "des": "Retrieves information (including system architecture, process ID, and server time) from distributed memory object caching system memcached."
+ },
+ {
+   "id": "mongodb-info",
+   "des": "Attempts to get build info and server status from a MongoDB database."
+ },
+ {
+   "id": "ms-sql-config",
+   "des": "Queries Microsoft SQL Server (ms-sql) instances for a list of databases, linked servers, and configuration settings."
+ },
+ {
+   "id": "ms-sql-dac",
+   "des": "Queries the Microsoft SQL Browser service for the DAC (Dedicated Admin Connection) port of a given (or all) SQL Server instance. The DAC port is used to connect to the database instance when normal connection attempts fail, for example, when server is hanging, out of memory or in other bad states. In addition, the DAC port provides an admin with access to system objects otherwise not accessible over normal connections."
+ },
+ {
+   "id": "ms-sql-dump-hashes",
+   "des": "Dumps the password hashes from an MS-SQL server in a format suitable for cracking by tools such as John-the-ripper. In order to do so the user needs to have the appropriate DB privileges."
+ },
+ {
+   "id": "ms-sql-hasdbaccess",
+   "des": "Queries Microsoft SQL Server (ms-sql) instances for a list of databases a user has access to."
+ },
+ {
+   "id": "ms-sql-info",
+   "des": "Attempts to determine configuration and version information for Microsoft SQL Server instances."
+ },
+ {
+   "id": "ms-sql-query",
+   "des": "Runs a query against Microsoft SQL Server (ms-sql)."
+ },
+ {
+   "id": "ms-sql-tables",
+   "des": "Queries Microsoft SQL Server (ms-sql) for a list of tables per database."
+ },
+ {
+   "id": "mysql-audit",
+   "des": "Audits MySQL database server security configuration against parts of the CIS MySQL v1.0.2 benchmark (the engine can be used for other MySQL audits by creating appropriate audit files)."
+ },
+ {
+   "id": "mysql-databases",
+   "des": "Attempts to list all databases on a MySQL server."
+ },
+ {
+   "id": "mysql-dump-hashes",
+   "des": "Dumps the password hashes from an MySQL server in a format suitable for cracking by tools such as John the Ripper. Appropriate DB privileges (root) are required."
+ },
+ {
+   "id": "mysql-info",
+   "des": "Connects to a MySQL server and prints information such as the protocol and version numbers, thread ID, status, capabilities, and the password salt."
+ },
+ {
+   "id": "mysql-variables",
+   "des": "Attempts to show all variables on a MySQL server."
+ },
+ {
+   "id": "nbd-info",
+   "des": "Displays protocol and block device information from NBD servers."
+ },
+ {
+   "id": "ncp-serverinfo",
+   "des": "Retrieves eDirectory server information (OS version, server name, mounts, etc.) from the Novell NetWare Core Protocol (NCP) service."
+ },
+ {
+   "id": "netbus-info",
+   "des": "Opens a connection to a NetBus server and extracts information about the host and the NetBus service itself."
+ },
+ {
+   "id": "ntp-info",
+   "des": "Gets the time and configuration variables from an NTP server. We send two requests: a time request and a \"read variables\" (opcode 2) control message. Without verbosity, the script shows the time and the value of the version, processor, system, refid, and stratum variables. With verbosity, all variables are shown."
+ },
+ {
+   "id": "ntp-monlist",
+   "des": "Obtains and prints an NTP server's monitor data."
+ },
+ {
+   "id": "omp2-enum-targets",
+   "des": "Attempts to retrieve the list of target systems and networks from an OpenVAS Manager server."
+ },
+ {
+   "id": "openlookup-info",
+   "des": "Parses and displays the banner information of an OpenLookup (network key-value store) server."
+ },
+ {
+   "id": "pop3-capabilities",
+   "des": "Retrieves POP3 email server capabilities."
+ },
+ {
+   "id": "quake1-info",
+   "des": "Extracts information from Quake game servers and other game servers which use the same protocol."
+ },
+ {
+   "id": "quake3-info",
+   "des": "Extracts information from a Quake3 game server and other games which use the same protocol."
+ },
+ {
+   "id": "quake3-master-getservers",
+   "des": "Queries Quake3-style master servers for game servers (many games other than Quake 3 use this same protocol)."
+ },
+ {
+   "id": "sip-methods",
+   "des": "Enumerates a SIP Server's allowed methods (INVITE, OPTIONS, SUBSCRIBE, etc.)"
+ },
+ {
+   "id": "smb-enum-processes",
+   "des": "Pulls a list of processes from the remote server over SMB. This will determine all running processes, their process IDs, and their parent processes. It is done by querying the remote registry service, which is disabled by default on Vista; on all other Windows versions, it requires Administrator privileges."
+ },
+ {
+   "id": "smb-os-discovery",
+   "des": "Attempts to determine the operating system, computer name, domain, workgroup, and current time over the SMB protocol (ports 445 or 139).This is done by starting a session with the anonymous account (or with a proper user account, if one is given; it likely doesn't make a difference); in response to a session starting, the server will send back all this information."
+ },
+ {
+   "id": "smb-protocols",
+   "des": "Attempts to list the supported protocols and dialects of a SMB server."
+ },
+ {
+   "id": "smb-server-stats",
+   "des": "Attempts to grab the server's statistics over SMB and MSRPC, which uses TCP ports 445 or 139."
+ },
+ {
+   "id": "smb2-capabilities",
+   "des": "Attempts to list the supported capabilities in a SMBv2 server for each enabled dialect."
+ },
+ {
+   "id": "smb2-security-mode",
+   "des": "Determines the message signing configuration in SMBv2 servers for all supported dialects."
+ },
+ {
+   "id": "smb2-time",
+   "des": "Attempts to obtain the current system date and the start date of a SMB2 server."
+ },
+ {
+   "id": "smtp-commands",
+   "des": "Attempts to use EHLO and HELP to gather the Extended commands supported by an SMTP server."
+ },
+ {
+   "id": "smtp-open-relay",
+   "des": "Attempts to relay mail by issuing a predefined combination of SMTP commands. The goal of this script is to tell if a SMTP server is vulnerable to mail relaying."
+ },
+ {
+   "id": "socks-auth-info",
+   "des": "Determines the supported authentication mechanisms of a remote SOCKS proxy server. Starting with SOCKS version 5 socks servers may support authentication. The script checks for the following authentication types: 0 - No authentication 1 - GSSAPI 2 - Username and password"
+ },
+ {
+   "id": "ssh2-enum-algos",
+   "des": "Reports the number of algorithms (for encryption, compression, etc.) that the target SSH2 server offers. If verbosity is set, the offered algorithms are each listed by type."
+ },
+ {
+   "id": "ssl-cert",
+   "des": "Retrieves a server's SSL certificate. The amount of information printed about the certificate depends on the verbosity level. With no extra verbosity, the script prints the validity period and the commonName, organizationName, stateOrProvinceName, and countryName of the subject."
+ },
+ {
+   "id": "ssl-date",
+   "des": "Retrieves a target host's time and date from its TLS ServerHello response."
+ },
+ {
+   "id": "telnet-encryption",
+   "des": "Determines whether the encryption option is supported on a remote telnet server. Some systems (including FreeBSD and the krb5 telnetd available in many Linux distributions) implement this option incorrectly, leading to a remote root vulnerability. This script currently only tests whether encryption is supported, not for that particular vulnerability."
+ },
+ {
+   "id": "tls-alpn",
+   "des": "Enumerates a TLS server's supported application-layer protocols using the ALPN protocol."
+ },
+ {
+   "id": "tls-nextprotoneg",
+   "des": "Enumerates a TLS server's supported protocols by using the next protocol negotiation extension."
+ },
+ {
+   "id": "tn3270-screen",
+   "des": "Connects to a tn3270 'server' and returns the screen."
+ },
+ {
+   "id": "ventrilo-info",
+   "des": "Detects the Ventrilo voice communication server service versions 2.1.2 and above and tries to determine version and configuration information. Some of the older versions (pre 3.0.0) may not have the UDP service that this probe relies on enabled by default."
+ },
+ {
+   "id": "vmware-version",
+   "des": "Queries VMware server (vCenter, ESX, ESXi) SOAP API to extract the version information."
+ },
+ {
+   "id": "vnc-info",
+   "des": "Queries a VNC server for its protocol version and supported security types."
+ },
+ {
+   "id": "vnc-title",
+   "des": "Tries to log into a VNC server and get its desktop name. Uses credentials discovered by vnc-brute, or None authentication types. If realvnc-auth-bypass was run and returned VULNERABLE, this script will use that vulnerability to bypass authentication."
+ },
+ {
+   "id": "xmpp-info",
+   "des": "Connects to XMPP server (port 5222) and collects server information such as: supported auth mechanisms, compression methods, whether TLS is supported and mandatory, stream management, language, support of In-Band registration, server capabilities. If possible, studies server vendor."
+ }
+]
