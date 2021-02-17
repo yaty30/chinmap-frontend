@@ -1,12 +1,17 @@
-Command: nmap 192.168.1.7
+Command: nmap  192.168.1.1
 ======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-16 20:32 HKT
-Nmap scan report for 192.168.1.7
-Host is up (0.000010s latency).
-Not shown: 997 closed ports
-PORT     STATE SERVICE
-53/tcp   open  domain
-3001/tcp open  nessus
-3306/tcp open  mysql
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-17 20:39 HKT
+Nmap scan report for 192.168.1.1
+Host is up (0.0015s latency).
+Not shown: 993 closed ports
+PORT      STATE SERVICE
+53/tcp    open  domain
+80/tcp    open  http
+548/tcp   open  afp
+631/tcp   open  ipp
+5000/tcp  open  upnp
+8200/tcp  open  trivnet1
+20005/tcp open  btx
+MAC Address: CC:40:D0:F4:D9:1D (Netgear)
 
-Nmap done: 1 IP address (1 host up) scanned in 0.20 seconds
+Nmap done: 1 IP address (1 host up) scanned in 0.43 seconds

@@ -48,7 +48,6 @@ import PortOpened from '@material-ui/icons/Visibility';
 import PortFiltered from '@material-ui/icons/VisibilityOff';
 import { targetData, chosenMode, scanTarget } from './target'
 
-
 // Backend
 import { isScanning } from '../Backend/frontendData/isScanning'
 import { pureOutput } from '../Backend/frontendData/Result'
@@ -56,7 +55,14 @@ import scannedIn from '../Backend/frontendData/scannedIn.json'
 import scannedTarget from '../Backend/frontendData/scannedTargetForSelect.json'
 import { rows } from '../Backend/frontendData/getPortStatus'
 
+// Components
+import NmapOutput from './ScanResults/NmapOutput'
+import HostsAndPorts from './ScanResults/HostsAndPorts'
+import ScanDetails from './ScanResults/ScanDetails'
+import ExportResult from './ScanResults/ExportResult'
+
 // Mobx Global Status
+import { observer } from 'mobx-react-lite'
 import storeTarget from '../Mobx/Models/resultSelectStatus'
 
 const mainStyles = makeStyles((theme: Theme) =>
@@ -139,13 +145,12 @@ function a11yProps(index: any) {
   };
 }
 
-export default () => {
+export default observer (() => {
   const classes = mainStyles();
-  const [target, setTarget] = React.useState("");
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setTarget(event.target.value as any);
-    // setTarget(storeTarget.target)
+    // setTarget(event.target.value as any);
+    storeTarget.setTarget(event.target.value as any)
   };
 
   const [value, setValue] = React.useState(0);
@@ -156,7 +161,6 @@ export default () => {
 
   const handleClickJO = () => {
     console.log(scannedIn)
-    alert(target)
   }
 
   const [open, setOpen] = React.useState(true);
@@ -176,589 +180,7 @@ export default () => {
     
     return Math.random() * (max - min) + min;
   }
-  
-  function NmapOutput() {
-    return(
-      <>
-        
-          {pureOutput.map((obj) => (
-            <>
-              {
-                obj.id == target ?
-                  <>
-                     <Typography style={{whiteSpace: "pre-line"}}>
-                        {obj.output}
-                      </Typography>
-                  </>
-                    :
-                  null
-              }
-            </>
-          ))}
-        
-      </>
-    );
-  }
 
-  function HostsAndPorts() {
-  
-    return (
-      <TableContainer>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">PORT</TableCell>
-              <TableCell align="center">STATUS</TableCell>
-              <TableCell align="center">SERVICE</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <>
-                {
-                  row.scanId == target ?
-                    <>
-                      <TableRow key={row.scanId + "_" + row.portno}>
-                        <TableCell align="center">
-                          {row.portno}/{row.port}
-                        </TableCell>
-                        <TableCell align="center">
-                          <Chip
-                            label={row.status}
-                            style={{
-                              textTransform: "uppercase",
-                              // fontWeight: "bold",
-                              color: row.status == 'open' ? '#198BF7' : '#BA3B28',
-                              minWidth: 120,
-                            }}
-                            icon={
-                              row.status == 'open' ? <PortOpened style={{color: '#198BF7'}}/> : <PortFiltered style={{color: '#BA3B28'}}/>
-                            }
-                            clickable
-                            variant="outlined"
-                          />
-                        </TableCell>
-                        <TableCell align="center">{row.service}</TableCell>
-                      </TableRow>
-                    </>
-                      : null
-                }
-              </>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  }
-  
-  function ScanDetails() {
-    const classes = mainStyles();
-  
-    const handleClick = () => {
-      console.log(targetData);
-    }
-
-    return (
-      <>
-          {scannedIn.map((data) => (
-            data.id != target || target === "" || data.target === "" ?
-                null
-                    :
-                <>
-                {/* <button onClick={handleClick}>click</button> */}
-                <form 
-                    className={classes.root} 
-                    noValidate 
-                    autoComplete="off"
-                >
-                    <br/>
-                    <Grid container justify="center" spacing={2} style={{width: "100%", textAlign: "center"}}>
-                      <>
-                        <Grid item xs={12} style={{width: "100%", marginBottom: 15,}}>
-                          <div style={{textAlign: "left"}}><FormLabel component="legend">Basic Details: </FormLabel></div>
-                        </Grid>
-  
-                        <Grid item xs={12} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Scan Target" 
-                              variant="outlined" 
-                              multiline
-                              style={{
-                                width: "85%",
-                              }}
-                              value={data.target}
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                          />
-                        </Grid>
-                      
-  
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Scan Time" 
-                              variant="outlined" 
-                              value={data.time}
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                          />
-                        </Grid>
-  
-                        <Grid item xs={6} style={{width: "100%"}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Chosen Scan Mode" 
-                              variant="outlined" 
-                              value={
-                                data.scanMode == "" ? "Regular Scan" : data.scanMode
-                              }
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-                        
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <Tooltip 
-                            arrow 
-                            placement="top"
-                            title={
-                              (parseInt(data.runTime)/60).toFixed(3) + " min; " + (parseInt(data.runTime)/60/60).toFixed(3) + " hr"
-                            } 
-                          >
-                            <TextField
-                                className={classes.centering} 
-                                id="outlined-basic" 
-                                label="Target Scanned In" 
-                                variant="outlined" 
-                                value={data.runTime}
-                                inputProps={{
-                                    readOnly: true,
-                                }}
-                              />
-                            </Tooltip>
-                        </Grid>
-                    
-                    
-                        <Grid item xs={6} style={{width: "100%"}}>
-                          <TextField
-                            className={classes.centering} 
-                            id="outlined-basic" 
-                            label='Scan Date [Y-M-D]' 
-                            variant="outlined" 
-                            value={data.date}
-                            inputProps={{
-                                readOnly: true,
-                            }}
-                          />
-                        </Grid>
-                        
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Scan Latency" 
-                              variant="outlined" 
-                              multiline={
-                                data.latency.length > 17 ? true : false
-                              }
-                              value={
-                                data.latency == '' ? "Target host is down" 
-                                //   :
-                                // data.latency.length > 17 ? data.target + ": " + data.latency
-                                   :
-                                data.latency
-                              }
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-  
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Up Host" 
-                              variant="outlined" 
-                              value={data.upHost == '' ? "Target host is down" : data.upHost}
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-                        
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Closed Port Qty." 
-                              variant="outlined" 
-                              multiline={
-                                data.notShown.length > 15 ? true : false
-                              }
-                              value={data.notShown == '' ? "Target host is down" : data.notShown}
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-  
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Nmap Version" 
-                              variant="outlined" 
-                              multiline
-                              value={data.nmapVer}
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-  
-                      <Grid item xs={12} style={{width: "100%", marginBottom: 15, marginTop: 25,}}>
-                        <Divider /><br/>
-                        <div style={{textAlign: "left"}}><FormLabel component="legend">Advanced Details: </FormLabel></div>
-                      </Grid>
-                        
-                        <Grid item xs={12} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Target OS" 
-                              variant="outlined" 
-                              style={{
-                                width: "85%",
-                              }}
-                              multiline={
-                                data.os.length > 5 ? true : false
-                              }
-                              value={
-                                data.os == "" ? "No OS found or target is currently down" : data.os
-                              }
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-  
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Network Distance" 
-                              variant="outlined" 
-                              multiline={
-                                data.hop.length > 5 ? true : false
-                              }
-                              value={
-                                data.hop == "" ? 
-                                  "Enable -v to discover" 
-                                  : 
-                                data.hop
-  
-                              }
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-                        
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="TCP Sequence Prediction" 
-                              variant="outlined" 
-                              multiline={
-                                data.notShown.length > 15 ? true : false
-                              }
-                              value={data.difficulty == '' ? "Target host is down" : data.difficulty}
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-                        
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Device Type" 
-                              variant="outlined" 
-                              multiline={
-                                data.macAddr.length > 17 ? true : false
-                              }
-                              value={
-                                data.deviceType == "" ? "Enable -v to discover" : data.deviceType
-                              }
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-  
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="MAC Address" 
-                              variant="outlined" 
-                              multiline={
-                                data.macAddr.length > 28 ? true : false
-                              }
-                              value={
-                                data.macAddr == "" ? "MAC Address not found" : data.macAddr
-                              }
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-  
-                        <Grid item xs={12} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Up Time" 
-                              variant="outlined" 
-                              multiline
-                              style={{
-                                width: "85%",
-                              }}
-                              value={
-                                data.uptime == "" ? "Enable -v to discover" : data.uptime
-                              }
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-  
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Raw Packets Sent" 
-                              variant="outlined" 
-                              value={
-                                data.rawPacket == "" ? "Enable -v to discover" : data.rawPacket
-                              }
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-  
-                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                          <TextField
-                              className={classes.centering} 
-                              id="outlined-basic" 
-                              label="Raw Packets Received" 
-                              variant="outlined" 
-                              value={
-                                data.rcvd == "" ? "Enable -v to discover" : data.rcvd
-                              }
-                              inputProps={{
-                                  readOnly: true,
-                              }}
-                            />
-                        </Grid>
-  
-  
-                      <Grid item xs={12} style={{width: "100%", marginBottom: 15, marginTop: 25,}}>
-                        <Divider /><br/>
-                        <div style={{textAlign: "left"}}><FormLabel component="legend">Scan Settings</FormLabel></div>
-                      </Grid>
-  
-                          <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                            <TextField
-                                className={classes.centering} 
-                                id="outlined-basic" 
-                                label="Automation" 
-                                variant="outlined" 
-                                value={
-                                  data.auto == "True" ? "Enabled" : "Disabled"
-                                }
-                                inputProps={{
-                                    readOnly: true,
-                                }}
-                              />
-                          </Grid>
-                          <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                            <TextField
-                                className={classes.centering} 
-                                id="outlined-basic" 
-                                label="CVE Detection" 
-                                variant="outlined" 
-                                value={
-                                  data.cveDetect == "True" ? "Enabled" : "Disabled"
-                                }
-                                inputProps={{
-                                    readOnly: true,
-                                }}
-                              />
-                          </Grid>
-                          <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                            <TextField
-                                className={classes.centering} 
-                                id="outlined-basic" 
-                                label="Scan Range" 
-                                variant="outlined" 
-                                value={
-                                  data.setRange == " " ? "Not Specify" : data.setRange
-                                }
-                                inputProps={{
-                                    readOnly: true,
-                                }}
-                              />
-                          </Grid>
-                          <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
-                            <TextField
-                                className={classes.centering} 
-                                id="outlined-basic" 
-                                label="Set Flags" 
-                                variant="outlined" 
-                                multiline
-                                value={
-                                  data.flags == " " ? "Null" : data.flags
-                                }
-                                inputProps={{
-                                    readOnly: true,
-                                }}
-                              />
-                          </Grid>
-                        </>
-                      
-                    </Grid>
-                </form>
-                </>
-          ))}
-      </>
-    );
-  }
-
-  function ExportResult() {
-    const datas = [{
-      first: 'foo',
-      second: 'bar'
-    }, {
-      first: 'foobar',
-      second: 'foobar'
-    }];
-
-    return (
-      <>
-          {scannedIn.map((obj) => (
-              obj.id != target || target === "" || obj.target === "" ?
-                  null
-                      :
-                  <>
-                      <Grid container justify="center" spacing={4}>
-                          <Grid item xs={12} style={{textAlign: "center"}}>
-                              <form 
-                                  noValidate 
-                                  autoComplete="off"
-                              >
-                                  <TextField 
-                                      id="outlined-basic" 
-                                      label="Current Target" 
-                                      variant="outlined" 
-                                      value={obj.targetForSelect}
-                                      inputProps={{
-                                          readOnly: true,
-                                      }}
-                                      style={{
-                                          textAlignLast: "center",
-                                          width: "60%",
-                                      }}
-                                  />
-                                  
-                              </form>
-                          </Grid>
-                          <Grid item xs={6} style={{textAlign: "center"}}>
-                              <form 
-                                  noValidate 
-                                  autoComplete="off"
-                              >
-                                  <TextField 
-                                      id="outlined-basic" 
-                                      label="Target Scan Date [D/M/Y]" 
-                                      variant="outlined" 
-                                      value={obj.date}
-                                      inputProps={{
-                                          readOnly: true,
-                                      }}
-                                      style={{
-                                          textAlignLast: "center",
-                                          width: "60%",
-                                      }}
-                                  />
-                                  
-                              </form>
-                          </Grid>
-                          <Grid item xs={6} style={{textAlign: "center"}}>
-                          <Tooltip title="" arrow placement="top">
-                              <form 
-                                  noValidate 
-                                  autoComplete="off"
-                              >
-                                  
-                                    <TextField 
-                                        id="outlined-basic" 
-                                        label="Target Scan Time" 
-                                        variant="outlined" 
-                                        value={obj.time}
-                                        inputProps={{
-                                            readOnly: true,
-                                        }}
-                                        style={{
-                                            textAlignLast: "center",
-                                            width: "60%",
-                                        }}
-                                    />
-                              </form>
-                              </Tooltip>
-                          </Grid>
-  
-                            <Grid item xs={12} style={{textAlign: "center", position: "relative", left: 12,}}>
-                                <ButtonGroup 
-                                    size="large" 
-                                    color="primary" 
-                                >
-                                    <Button 
-                                      style={{width: "50%"}}
-                                    >
-                                        CSV
-                                    </Button>
-                                    
-                                    <Button style={{width: "50%"}}>
-                                        PDF
-                                    </Button>
-                                </ButtonGroup>
-                                <Tooltip title="By clicking the button, the scan result will be exported to a file in the format of CSV or Excel." arrow placement="top">
-                                    <span style={{position:"relative", top: 5, left: 15, color: "lightgrey", cursor: "pointer"}}>
-                                        <HelpIcon style={{fontSize: 20}}/>
-                                    </span>
-                                </Tooltip>
-                            </Grid>
-                      </Grid>
-                      
-                  </>
-          ))}
-      </>
-    );
-  }
-  
-  
   return (
     <div className={classes.root}>
        {isScanning.map((status) => (
@@ -801,7 +223,7 @@ export default () => {
                             <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
-                                value={target}
+                                value={storeTarget.target}
                                 onChange={handleChange}
                                 label="Choose a target IP or Domain"
                                 style={{
@@ -821,7 +243,7 @@ export default () => {
                         </FormControl>
                     </div>
                     { 
-                        target === "" ?
+                        storeTarget.target === "" ?
                         null
                             :
                         <>
@@ -882,3 +304,4 @@ export default () => {
     </div>
   );
 }
+)

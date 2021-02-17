@@ -11,7 +11,7 @@ const selectResult = types
     }))
 
 const store = selectResult.create({
-    target: "123"
+    target: ""
 });
 
 export default store;

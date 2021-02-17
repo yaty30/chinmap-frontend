@@ -11,7 +11,7 @@ import fileinput
 # ========================== Get from front-end user input ================================== #
 # Scan Information
 # test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
-target = '192.168.1.7'
+target = '192.168.1.1'
 scanMode = ''
 flags = ' '
 
@@ -210,7 +210,7 @@ def RunNormalScan():
     # Export normal scan output to text file
     normalScanTxt = open("Result.txt", "w+")
     
-    normalScanTxtResult = "Command: " + "nmap" + flags + target + divider + normalScanOutput
+    normalScanTxtResult = "Command: " + "nmap " + flags + target + divider + normalScanOutput
 
     normalScanTxt.writelines(normalScanTxtResult)
     normalScanTxt.close()
@@ -256,7 +256,7 @@ def RunScanMode():
     # Export normal scan output to text file
     normalScanTxt = open("Result.txt", "w+")
     
-    normalScanTxtResult = "Command: " + "nmap" + target + " With Scan mode: " + mode + divider + normalScanOutput
+    normalScanTxtResult = "Command: " + "nmap " + target + " With Scan mode: " + mode + divider + normalScanOutput
 
     normalScanTxt.writelines(normalScanTxtResult)
     normalScanTxt.close()
