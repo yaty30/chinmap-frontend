@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles, createStyles, Theme, lighten } from '@material-ui/core/styles';
 import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
@@ -118,7 +118,7 @@ interface TabPanelProps {
     value: any;
   }
   
-  function TabPanel(props: TabPanelProps) {
+  const TabPanel = (props: TabPanelProps) => {
     const { children, value, index, ...other } = props;
   
     return (
@@ -138,7 +138,7 @@ interface TabPanelProps {
     );
   }
   
-function a11yProps(index: any) {
+const a11yProps = (index: any) => {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,

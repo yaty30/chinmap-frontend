@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -65,8 +65,7 @@ const mainStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default   
-function ScanDetails() {
+export default () => {
   const classes = mainStyles();
 
   const handleClick = () => {

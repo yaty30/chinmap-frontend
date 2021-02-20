@@ -77,10 +77,9 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-
 type Anchor = 'left';
 
-export default function TemporaryDrawer() {
+export default () => {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,

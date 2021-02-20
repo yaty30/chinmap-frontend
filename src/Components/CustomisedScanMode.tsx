@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
@@ -21,6 +21,8 @@ import DeleteMode from '@material-ui/icons/DeleteForever';
 import NewScanMode from './NewScanMode'
 
 import { customisedScanModes } from './NewScanModeArray'
+import modeData from '../Backend/frontendData/scanModes/customised.json'
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function CenteredGrid() {
+export default () => {
   const classes = useStyles();
 
   const handleDeleteMode = () => {
@@ -63,22 +65,23 @@ export default function CenteredGrid() {
                 </Typography>
                     <br/><br/>
                 <Grid container justify="center" spacing={5}>
-                    {customisedScanModes.map((mode) => (
+                    {modeData.map((mode) => (
+                       mode.profile.map((data, index) => (
                         <>
-                            <Grid item xs={6} id={mode.name}>
+                            <Grid item xs={6} id={data.name}>
                                 <Card>
                                     <CardContent style={{whiteSpace: "nowrap"}}>
                                         <Typography color="textSecondary" style={{fontWeight: "bold", fontSize: 18}} gutterBottom>
-                                            {mode.name}
+                                            {data.name}
                                         </Typography>
                                         <Divider /><br/>
                                         <Typography color="textSecondary" gutterBottom style={{whiteSpace: "normal"}}>
-                                            {mode.des}
+                                            {data.des}
                                         </Typography>
                                     </CardContent>
                                         <Divider variant="middle" />
                                     <CardActions style={{textAlign: "center"}}>
-                                    <Link to="/pingScanMode">
+                                    <Link to={`/${data.name}`}>
                                         <Button 
                                             color="primary" 
                                             style={{
@@ -102,6 +105,7 @@ export default function CenteredGrid() {
                                 </Card>
                             </Grid>
                         </>
+                       ))
                     ))}
                 </Grid>
             </Paper>

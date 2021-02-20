@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import Table from '@material-ui/core/Table';
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function DoneScanning() {
+const DoneScanning = () => {
     const [open, setOpen] = React.useState(true);
   
     const handleClick = () => {
@@ -96,64 +96,64 @@ function DoneScanning() {
     );
   }
   
-  export default function BasicTable() {
-    const classes = useStyles();
-  
-    return (
-    <>
-        {isScanning.map((status) => (
-           status === true ?
-            <>
-              <div style={{textAlign: "center"}}>
-                <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
-                  <LinearProgress style={{width: "83%",marginLeft:90, height: 4}} />
-                </Tooltip>
-              </div>
-            </>
-            :
-            null
-        ))}
-        <Grid container spacing={5} justify="center" alignItems="center">
-            <Grid item xs={10}>
-                <Paper className={classes.paper}>  
-                    <Typography variant="h6">
-                        Scan History
-                    </Typography>
-                        <br/><br/>
-                    <TableContainer>
-                        <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                            <TableCell align="center">Target</TableCell>
-                            <TableCell align="center">Timestamp</TableCell>
-                            <TableCell align="center">Date</TableCell>
-                            <TableCell align="center" />
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {scannedIn.map((target) => (
-                                target.target == "" ? 
-                                    null
-                                        :
-                                    <TableRow key={target.target} hover>
-                                        <TableCell align="center">{target.targetForSelect}</TableCell>
-                                        <TableCell align="center">{target.runTime}</TableCell>
-                                        <TableCell align="center">{target.date}</TableCell>
-                                        <TableCell align="center">
-                                            <Link to="/scanResult">
-                                                <IconButton>
-                                                    <ShowHistoryIcon />
-                                                </IconButton>
-                                            </Link>
-                                        </TableCell>
-                                    </TableRow>
-                            ))}
-                        </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Paper>
-            </Grid>
-        </Grid>
-    </>
-    );
-  }
+export default () => {
+  const classes = useStyles();
+
+  return (
+  <>
+      {isScanning.map((status) => (
+          status === true ?
+          <>
+            <div style={{textAlign: "center"}}>
+              <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
+                <LinearProgress style={{width: "83%",marginLeft:90, height: 4}} />
+              </Tooltip>
+            </div>
+          </>
+          :
+          null
+      ))}
+      <Grid container spacing={5} justify="center" alignItems="center">
+          <Grid item xs={10}>
+              <Paper className={classes.paper}>  
+                  <Typography variant="h6">
+                      Scan History
+                  </Typography>
+                      <br/><br/>
+                  <TableContainer>
+                      <Table className={classes.table} aria-label="simple table">
+                      <TableHead>
+                          <TableRow>
+                          <TableCell align="center">Target</TableCell>
+                          <TableCell align="center">Timestamp</TableCell>
+                          <TableCell align="center">Date</TableCell>
+                          <TableCell align="center" />
+                          </TableRow>
+                      </TableHead>
+                      <TableBody>
+                          {scannedIn.map((target) => (
+                              target.target == "" ? 
+                                  null
+                                      :
+                                  <TableRow key={target.target} hover>
+                                      <TableCell align="center">{target.targetForSelect}</TableCell>
+                                      <TableCell align="center">{target.runTime}</TableCell>
+                                      <TableCell align="center">{target.date}</TableCell>
+                                      <TableCell align="center">
+                                          <Link to="/scanResult">
+                                              <IconButton>
+                                                  <ShowHistoryIcon />
+                                              </IconButton>
+                                          </Link>
+                                      </TableCell>
+                                  </TableRow>
+                          ))}
+                      </TableBody>
+                      </Table>
+                  </TableContainer>
+              </Paper>
+          </Grid>
+      </Grid>
+  </>
+  );
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -21,7 +21,7 @@ const styles = (theme: Theme) =>
       top: theme.spacing(1),
       color: theme.palette.grey[500],
     },
-  });
+});
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string;
@@ -56,7 +56,7 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function TraceRouteDialog() {
+export default () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

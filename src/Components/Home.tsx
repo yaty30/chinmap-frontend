@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
@@ -26,7 +26,6 @@ import { observer } from 'mobx-react-lite'
 import AutomationIcon from '@material-ui/icons/BrightnessAuto';
 
 import Settings from './HomeSettings/HomeSettings'
-import { defaultScanModes } from './DefaultScanMode'
 import { customisedScanModes } from './NewScanModeArray'
 
 import { scanTarget, targetData, targetTime, chosenMode, scanDate } from './target'
@@ -34,6 +33,7 @@ import { scanRange, autoVal, cveVal } from './HomeSettings/HomeSettings'
 
 // Backend
 import { isScanning } from '../Backend/frontendData/isScanning'
+import scanModeData from '../Backend/frontendData/scanModes/default.json'
 
 // Mobx
 import homeSettingsStatus from '../Mobx/Models/homeSettingsStatus'
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function ScanOnProgress() {
+const ScanOnProgress = () => {
   const [open, setOpen] = React.useState(true);
 
   const handleClick = () => {
@@ -121,7 +121,7 @@ export default observer (() => {
     target.length < 1 || scanMode == "" ? setIsEmpty(true) : setIsEmpty(false);
   }
 
-  function CurrentTime() {
+  const CurrentTime = () => {
     var scanTime: any;
     var date = new Date();
 
@@ -132,10 +132,9 @@ export default observer (() => {
     var minAddZero = min < 10 ? '0' + min : min;
 
     return scanTime = hourAddZero + ":" + minAddZero;
-
   }
 
-  function CurrentDate() {
+  const CurrentDate = () => {
     var today = new Date();
     var currentDate: any;
 
@@ -148,11 +147,11 @@ export default observer (() => {
     return currentDate = dateAddZero + "/" + mthAddZerp + "/" + today.getFullYear();
   }
 
-  function Cap(scanMode: string) {
+  const Cap = (scanMode: string) => {
     return scanMode.charAt(0).toUpperCase() + scanMode.slice(1);
   }
 
-  function AddSpaces(obj: string) {
+  const AddSpaces = (obj: string) => {
     return obj.replace(/([A-Z])/g, ' $1').trim();
   }
 
@@ -205,7 +204,7 @@ export default observer (() => {
     setTarget("")
   )
 
-  function WhatIsThis() {
+  const WhatIsThis = () => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
   
@@ -365,14 +364,17 @@ export default observer (() => {
                             value={scanMode}
                             onChange={handleChange}
                             label="Scan Mode"
+                            margin="dense"
                             style={{
                                 width: "85%",
                                 textAlign: "center",
                             }}
                         >
                             <ListSubheader>Default Scan Modes</ListSubheader>
-                            {defaultScanModes.map((modes) => (
-                              <MenuItem value={modes.value} className="default">{modes.name}</MenuItem>
+                            {scanModeData.map((data, index) => (
+                              data.cardInfo.map((data, index) => (
+                                <MenuItem value={data.name} key={index} className="default">{data.name}</MenuItem>
+                              ))
                             ))}
                             
                             <ListSubheader>Customised Scan Modes</ListSubheader>

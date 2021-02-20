@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -40,7 +40,7 @@ interface TabPanelProps {
   value: any;
 }
 
-function TabPanel(props: TabPanelProps) {
+const TabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -60,7 +60,7 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-function a11yProps(index: any) {
+const a11yProps = (index: any) => {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function FormDialog() {
+export default () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [modeName, setModeName] = React.useState("");

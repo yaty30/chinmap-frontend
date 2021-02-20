@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles, createStyles, Theme, lighten } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Table from '@material-ui/core/Table';
@@ -70,8 +70,6 @@ const mainStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
-  
 export default () => {
 const classes = mainStyles();
   
@@ -122,4 +120,4 @@ const classes = mainStyles();
         </Table>
       </TableContainer>
     );
-  }
+}

@@ -19,9 +19,12 @@ import Button from '@material-ui/core/Button';
 import ScanModeIcon from '@material-ui/icons/Settings';
 import DeleteMode from '@material-ui/icons/DeleteForever';
 
+// Components
+import SettingDialog from './defaultScanModes/defaultModeDialog'
+
 import Result from './ScanResults/scanme.nmap.org'
 
-
+import scanMode from '../Backend/frontendData/scanModes/default.json'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -85,7 +88,7 @@ export const defaultScanModes = [
     },
 ]
 
-export default function CenteredGrid() {
+export default () => {
   const classes = useStyles();
 
   return (
@@ -99,36 +102,28 @@ export default function CenteredGrid() {
                     </Typography>
                         <br/>
                     <Grid container justify="center" spacing={5}>
-                        {defaultScanModes.map((mode) => (
-                            <>
-                                <Grid item xs={6}>
-                                    <Link to={mode.link}>
-                                        <Card>
-                                            <CardContent style={{whiteSpace: "nowrap"}}>
+                        {scanMode.map((mode) => (
+                            mode.cardInfo.map((data) => (
+                                <>
+                                    <Grid item xs={6}>
+                                        <Card style={{minHeight: 190}}>
+                                            <CardContent style={{whiteSpace: "nowrap", minHeight: 130}}>
                                                 <Typography color="textSecondary" style={{fontWeight: "bold", fontSize: 18}} gutterBottom>
-                                                    {mode.name}
+                                                    {data.name}
                                                 </Typography>
                                                 <Divider /><br/>
                                                 <div style={{whiteSpace: "normal"}}>
-                                                    <Typography color="textSecondary">{mode.des}</Typography>
+                                                    <Typography color="textSecondary">{data.des}</Typography>
                                                 </div>
                                             </CardContent>
                                                 <Divider variant="middle" />
                                             <CardActions style={{textAlign: "center"}}>
-                                            <Link to={mode.link}>
-                                                <Button 
-                                                    color="primary" 
-                                                    style={{
-                                                        textTransform: "capitalize",
-                                                    }}>
-                                                    Setting<ScanModeIcon style={{fontSize: 20}}/>
-                                                </Button>
-                                            </Link>
+                                                <SettingDialog />
                                             </CardActions>
                                         </Card>
-                                    </Link>
-                                </Grid>
-                            </>
+                                    </Grid>
+                                </>
+                            ))
                         ))}
                     </Grid>
                 </Paper>
