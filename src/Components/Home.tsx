@@ -331,7 +331,7 @@ export default observer (() => {
         <Grid item xs={4}>
             <Paper className={classes.paper}>
                 <Typography variant="h6">
-                    Settings
+                    1Settings
                 </Typography>
                   <FormControl variant="outlined" style={{width: "100%"}}>
                     
