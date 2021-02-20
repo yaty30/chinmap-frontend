@@ -6,9 +6,16 @@ This project was created by React-Typescript and Python
 
 Steps to starting the app in localhost
 
-Step 1: ### `install git`
+### Step 1: `install git`
 
 For Windows: https://git-scm.com/book/zh-tw/v2/開始-Git-安裝教學
+
+### Step 2: `git config`
+
+### Step 3: `git clone`
+
+### Step 4: `git pull`
+
 
 
 
