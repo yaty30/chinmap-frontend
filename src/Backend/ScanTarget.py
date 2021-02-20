@@ -11,8 +11,8 @@ import fileinput
 # ========================== Get from front-end user input ================================== #
 # Scan Information
 # test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
-target = '192.168.1.1'
-scanMode = ''
+target = 'scanme.nmap.org'
+scanMode = 'topOneHundredScanMode'
 flags = ' '
 
 # Extra freatures

@@ -20,7 +20,10 @@ import Divider from '@material-ui/core/Divider';
 import Collapse from '@material-ui/core/Collapse';
 import Popover from '@material-ui/core/Popover';
 import LiveHelpOutlinedIcon from '@material-ui/icons/LiveHelpOutlined';
-import { exec } from 'child_process';
+import Chip from '@material-ui/core/Chip';
+import { observer } from 'mobx-react-lite'
+
+import AutomationIcon from '@material-ui/icons/BrightnessAuto';
 
 import Settings from './HomeSettings/HomeSettings'
 import { defaultScanModes } from './DefaultScanMode'
@@ -32,6 +35,9 @@ import { scanRange, autoVal, cveVal } from './HomeSettings/HomeSettings'
 // Backend
 import { isScanning } from '../Backend/frontendData/isScanning'
 
+// Mobx
+import homeSettingsStatus from '../Mobx/Models/homeSettingsStatus'
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -42,6 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'left',
       backgroundColor: "#fefefe",
       color: "#333333",
+      minHeight: 155,
     },
     centerGrid: {
         textAlign: "center",
@@ -99,7 +106,7 @@ function ScanOnProgress() {
   );
 }
 
-export default function CenteredGrid() {
+export default observer (() => {
   const classes = useStyles();
   const [scanMode, setScanMode] = React.useState('');
   const [isEmpty, setIsEmpty] = React.useState(true);
@@ -321,12 +328,35 @@ export default function CenteredGrid() {
           </Paper>
         </Grid>
 
-        <Grid item xs={10}>
+        <Grid item xs={4}>
+            <Paper className={classes.paper}>
+                <Typography variant="h6">
+                    Settings
+                </Typography>
+                  <FormControl variant="outlined" style={{width: "100%"}}>
+                    
+                    <Chip
+                        label="Automation"
+                        clickable
+                        color="primary"
+                        onDelete={()=> {console.log('chips clicked')}}
+                        deleteIcon={<AutomationIcon />}
+                        variant="outlined"
+                        style={{
+                          width: 120,
+                        }}
+                      />
+                    
+                  </FormControl>
+            </Paper>
+        </Grid>
+        
+        <Grid item xs={6}>
             <Paper className={classes.paper}>
                 <Typography variant="h6">
                     Scan Mode
                 </Typography>
-                <div style={{textAlign: "center",marginTop: 15,marginLeft: 120}}>
+                <div style={{textAlign: "center",marginTop: 15,marginLeft: 70}}>
                     <FormControl variant="outlined" style={{width: "100%"}}>
                         <InputLabel id="demo-simple-select-outlined-label">Scan Mode</InputLabel>
                         <Select
@@ -336,7 +366,7 @@ export default function CenteredGrid() {
                             onChange={handleChange}
                             label="Scan Mode"
                             style={{
-                                width: "83%",
+                                width: "85%",
                                 textAlign: "center",
                             }}
                         >
@@ -359,8 +389,9 @@ export default function CenteredGrid() {
             </Paper>
         </Grid>
     
-        <Grid item xs={10} style={{marginTop: 65}}>
-            <Paper className={classes.paper}>
+        
+        <Grid item xs={10} style={{marginTop: 55}}>
+            <Paper className={classes.paper} style={{minHeight: 0,}}>
                 <Button 
                   color="primary"
                   onClick={handleReset}
@@ -436,8 +467,10 @@ export default function CenteredGrid() {
                     null
             ))}
         </Grid>
+      
+        
       </Grid>
       
     </div>
   );
-}
+})

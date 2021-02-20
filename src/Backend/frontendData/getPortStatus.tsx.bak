@@ -26,4 +26,14 @@ createData('BNUhtbnTzNRthehmofeAU','3372', 'tcp', 'filtered', 'msdtc'),
 createData('BNUhtbnTzNRthehmofeAU','9929', 'tcp', 'open', 'nping-echo'),
 createData('BNUhtbnTzNRthehmofeAU','31337', 'tcp', 'open', 'Elite'),
 // ===================== END of scanme.nmap.org =================================
+
+// ===================== Target: 192.168.1.1 ================================
+createData('MJQhFPgfDGYZDPwgPdoqF','53', 'tcp', 'open', 'domain'),
+createData('MJQhFPgfDGYZDPwgPdoqF','80', 'tcp', 'open', 'http'),
+createData('MJQhFPgfDGYZDPwgPdoqF','548', 'tcp', 'open', 'afp'),
+createData('MJQhFPgfDGYZDPwgPdoqF','631', 'tcp', 'open', 'ipp'),
+createData('MJQhFPgfDGYZDPwgPdoqF','5000', 'tcp', 'open', 'upnp'),
+createData('MJQhFPgfDGYZDPwgPdoqF','8200', 'tcp', 'open', 'trivnet1'),
+createData('MJQhFPgfDGYZDPwgPdoqF','20005', 'tcp', 'open', 'btx'),
+// ===================== END of 192.168.1.1 =================================
 ]

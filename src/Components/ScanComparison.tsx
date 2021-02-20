@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
@@ -19,9 +19,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Chip from '@material-ui/core/Chip';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 import { scanTarget, targetData, targetTime } from './target'
 
@@ -110,11 +113,11 @@ interface TabPanelProps {
 
 export default function CenteredGrid() {
   const classes = useStyles();
-  const [targetToCompare, setTarget] = React.useState('');
-  const [timestampOne, setTimestampOne] = React.useState('');
-  const [timestampTwo, setTimestampTwo] = React.useState('');
-  const [isDisabled, setIsDisabled] = React.useState(true);
-  const [value, setValue] = React.useState(0);
+  const [targetToCompare, setTarget] = useState('');
+  const [timestampOne, setTimestampOne] = useState('');
+  const [timestampTwo, setTimestampTwo] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setTarget(event.target.value as string);
@@ -170,9 +173,13 @@ export default function CenteredGrid() {
                                 textAlign: "center",
                             }}
                         >
-                            {scannedIn.map((target) => (
-                                <MenuItem value={target.id} key={target.id}>
-                                    {target.targetForSelect} - {target.time}
+                            
+                            {scannedIn.map((target, index) => (
+                                <MenuItem 
+                                    value={target.target} 
+                                    key={index}
+                                >
+                                    {target.targetForSelect}
                                 </MenuItem>
                             ))}
                         </Select>
@@ -204,7 +211,7 @@ export default function CenteredGrid() {
                                         value={target.runTime} 
                                         key={target.runTime}
                                         className={
-                                            target.runTime == timestampTwo ? classes.defaultHide : classes.defaultShow
+                                            target.runTime == timestampTwo || target.target != targetToCompare ? classes.defaultHide : classes.defaultShow
                                         }
                                     >
                                         {target.runTime}
@@ -238,7 +245,7 @@ export default function CenteredGrid() {
                                         value={target.runTime} 
                                         key={target.runTime}
                                         className={
-                                            target.runTime == timestampOne ? classes.defaultHide : classes.defaultShow
+                                            target.runTime == timestampOne || target.target != targetToCompare ? classes.defaultHide : classes.defaultShow
                                         }
                                     >
                                         {target.runTime}
@@ -270,125 +277,129 @@ export default function CenteredGrid() {
                                 <br/>
                             {
                                 timestampOne == "" || timestampTwo == "" ?
-                                    null
-                                        :
-                                    <>
-                                        <Typography style={{textAlign: "center"}} color="textSecondary">Scan Result of [{targetToCompare}]</Typography>
-                                            {scannedIn.map((result) => (
-                                                <TabPanel value={value} index={0}>
-                                                    <Grid container justify="center">
-                                                        <Grid item xs={5} className={classes.cardGrid}>
-                                                            <Card className={classes.root} variant="outlined">
-                                                                <CardContent>
-                                                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                                        First Scan Time: [{timestampOne}]
-                                                                    </Typography>
-                                                                        <Divider style={{marginTop: 10, marginBottom: 10,}} />
-                                                                    <Typography variant="body2" component="p">
-                                                                        Command Used: {result.cm}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" component="p">
-                                                                        Scan Mode: {result.scanMode}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" component="p">
-                                                                        Closed Port: {result.notShown}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" component="p">
-                                                                        Scan Run Time: {result.runTime}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" component="p">
-                                                                        Target OS: {result.os}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" component="p">
-                                                                        Network Distance: {result.hop}
-                                                                    </Typography>
-                                                                </CardContent>
-                                                            </Card>
-                                                        </Grid>
+                                null
+                                    :
+                                <>
+                                    <Typography style={{textAlign: "center"}} color="textSecondary">Scan Result of [{targetToCompare}]</Typography>
+                                    <TabPanel value={value} index={0}>
+                                        <Grid container justify="center">
+                                            <Grid item xs={12} className={classes.cardGrid}>
+                                                <TableContainer>
+                                                    <Table aria-label="simple table">
+                                                        <TableHead>
+                                                        <TableRow>
+                                                            <TableCell align="left">Output</TableCell>
+                                                            <TableCell align="left"></TableCell>
+                                                            <TableCell align="left">Scan A</TableCell>
+                                                            <TableCell align="left">Scan B</TableCell>
+                                                        </TableRow>
+                                                        </TableHead>
+                                                        <TableBody>
+                                                            <TableRow>
+                                                                <TableCell align="left">
+                                                                    Scan Mode
+                                                                </TableCell>
+                                                                <TableCell />
+                                                                {scannedIn.map((output, index) => (
+                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
+                                                                    <TableCell align="left" key={index}>{output.scanMode}</TableCell> : null
+                                                                ))}
+                                                            </TableRow>
 
-                                                        <Grid item xs={5}>
-                                                            <Card className={classes.root} variant="outlined">
-                                                                <CardContent>
-                                                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                                        Second Scan Time: [{timestampTwo}]
-                                                                    </Typography>
-                                                                        <Divider style={{marginTop: 10, marginBottom: 10,}} />
-                                                                    <Typography variant="body2" component="p">
-                                                                        Command Used: {result.cm}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" component="p">
-                                                                        Scan Mode: {result.scanMode}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" component="p">
-                                                                        Closed Port: {result.notShown}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" component="p">
-                                                                        Scan Run Time: {result.runTime}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" component="p">
-                                                                        Target OS: {result.os}
-                                                                    </Typography>
-                                                                    <Typography variant="body2" component="p">
-                                                                        Network Distance: {result.hop}
-                                                                    </Typography>
-                                                                </CardContent>
-                                                            </Card>
-                                                        </Grid>
-                                                    </Grid>
-                                                </TabPanel>
-                                            ))}
-                                            <TabPanel value={value} index={1}>
-                                                <Grid container justify="center">
-                                                    <Grid item xs={5} className={classes.cardGrid}>
-                                                        <Card className={classes.root} variant="outlined">
-                                                            <CardContent>
-                                                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                                    First Scan Time: [{timestampOne}]
-                                                                </Typography>
-                                                                <Typography variant="h5" component="h2">
-                                                                2
-                                                                </Typography>
-                                                                <Typography className={classes.pos} color="textSecondary">
-                                                                adjective
-                                                                </Typography>
-                                                                <Typography variant="body2" component="p">
-                                                                well meaning and kindly.
-                                                                <br />
-                                                                {'"a benevolent smile"'}
-                                                                </Typography>
-                                                            </CardContent>
-                                                            <CardActions>
-                                                                <Button size="small">Learn More</Button>
-                                                            </CardActions>
-                                                        </Card>
-                                                    </Grid>
+                                                            <TableRow>
+                                                                <TableCell align="left">
+                                                                    Date
+                                                                </TableCell>
+                                                                <TableCell />
+                                                                {scannedIn.map((output, index) => (
+                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
+                                                                    <TableCell align="left" key={index}>{output.date}</TableCell> : null
+                                                                ))}
+                                                            </TableRow>
 
-                                                    <Grid item xs={5}>
-                                                        <Card className={classes.root} variant="outlined">
-                                                            <CardContent>
-                                                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                                    Second Scan Time: [{timestampTwo}]
-                                                                </Typography>
-                                                                <Typography variant="h5" component="h2">
-                                                                2
-                                                                </Typography>
-                                                                <Typography className={classes.pos} color="textSecondary">
-                                                                adjective
-                                                                </Typography>
-                                                                <Typography variant="body2" component="p">
-                                                                well meaning and kindly.
-                                                                <br />
-                                                                {'"a benevolent smile"'}
-                                                                </Typography>
-                                                            </CardContent>
-                                                            <CardActions>
-                                                                <Button size="small">Learn More</Button>
-                                                            </CardActions>
-                                                        </Card>
-                                                    </Grid>
-                                                </Grid>
-                                        </TabPanel>
-                                    </>
+                                                            <TableRow>
+                                                                <TableCell align="left">
+                                                                    Time
+                                                                </TableCell>
+                                                                <TableCell />
+                                                                {scannedIn.map((output, index) => (
+                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
+                                                                    <TableCell align="left" key={index}>{output.time}</TableCell> : null
+                                                                ))}
+                                                            </TableRow>
+
+                                                            <TableRow>
+                                                                <TableCell align="left">
+                                                                    Latency
+                                                                </TableCell>
+                                                                <TableCell />
+                                                                {scannedIn.map((output, index) => (
+                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
+                                                                    <TableCell align="left" key={index}>{output.latency}</TableCell> : null
+                                                                ))}
+                                                            </TableRow>
+
+                                                            <TableRow>
+                                                                <TableCell align="left">
+                                                                    Not Shown Ports
+                                                                </TableCell>
+                                                                <TableCell />
+                                                                {scannedIn.map((output, index) => (
+                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
+                                                                    <TableCell align="left" key={index}>{output.notShown}</TableCell> : null
+                                                                ))}
+                                                            </TableRow>
+
+                                                            <TableRow>
+                                                                <TableCell align="left">
+                                                                    Raw Packets Sent
+                                                                </TableCell>
+                                                                <TableCell />
+                                                                {scannedIn.map((output, index) => (
+                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
+                                                                    <TableCell align="left" key={index}>{output.rawPacket}</TableCell> : null
+                                                                ))}
+                                                            </TableRow>
+
+                                                            <TableRow>
+                                                                <TableCell align="left">
+                                                                    Raw Packets Received
+                                                                </TableCell>
+                                                                <TableCell />
+                                                                {scannedIn.map((output, index) => (
+                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
+                                                                    <TableCell align="left" key={index}>{output.rcvd}</TableCell> : null
+                                                                ))}
+                                                            </TableRow>
+                                                            
+                                                            {rows.map((output, index) => (
+                                                                output.port ? 
+                                                                <>  
+                                                                    <TableRow>
+                                                                        {/* <TableCell align="left" key={index}>{output.portno}/{output.port}</TableCell> */}
+                                                                        {scannedIn.map((output, index) => (
+                                                                            output.runTime == timestampOne || output.runTime == timestampTwo ? 
+                                                                            <>
+                                                                                <TableCell>{output.id}</TableCell>
+                                                                                <TableCell />
+                                                                                {rows.map((portStatus, index) => (
+                                                                                    <TableCell>{portStatus.status}</TableCell> 
+                                                                                ))}
+                                                                            </>
+                                                                            : null
+                                                                        ))}
+                                                                    </TableRow>
+                                                                    
+                                                                </> : null
+                                                            ))}
+                                                            
+                                                        </TableBody>
+                                                    </Table>
+                                                </TableContainer>
+                                            </Grid>
+                                        </Grid>
+                                    </TabPanel>    
+                                </>
                             }
                         </div>
                     </Grid>

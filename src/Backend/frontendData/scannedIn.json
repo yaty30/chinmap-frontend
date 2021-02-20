@@ -103,4 +103,30 @@
 "flags": " ",
 "nmapVer": "7.91"
 }
+,{
+"id": "ijCCjRttPmAPWqdcfDQDi",
+"cm": "nmapscanme.nmap.org; with scan mode: topOneHundredScanMode",
+"target": "scanme.nmap.org (45.33.32.156)",
+"targetForSelect": "scanme.nmap.org",
+"date": "2021-02-20",
+"time": " 17:48 HKT",
+"upHost": "1 host up",
+"runTime": "3.18 seconds",
+"latency": "0.16s ",
+"notShown": "94 closed ports",
+"os": "",
+"uptime": "",
+"deviceType": "",
+"rawPacket": "108 (4.728KB)",
+"rcvd": "97 (3.876KB)",
+"scanMode": "Top One Hundred Scan Mode",
+"hop": "",
+"macAddr": "",
+"difficulty": "",
+"auto": "False",
+"cveDetect": "False",
+"setRange": "Target have no range",
+"flags": " ",
+"nmapVer": "7.91"
+}
 ]

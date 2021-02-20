@@ -12,8 +12,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import { automation, cveDetection } from './homeSettingsData'
 
-// Redux
-import { useSelector } from 'react-redux'
+// Mobx
+import homeSettingsStatus from '../../Mobx/Models/homeSettingsStatus'
 
 
 const useStyles = makeStyles({
@@ -108,12 +108,12 @@ export default function SimpleCard() {
                 </CardContent>
                 <CardActions>
                 <div style={{position:"relative", top: 35, left: 10,}}>
+                    <span>{homeSettingsStatus.automation}</span>
                     <FormControlLabel
                         control={
                         <Checkbox
-                            checked={state.autoState}
-                            onChange={handleChange}
-                            onClick={handleAuto}
+                            checked={homeSettingsStatus.automation}
+                            onChange={(e)=>(homeSettingsStatus.setAuto(e.target.value))}
                             name="autoState"
                             color="primary"
                         />
@@ -145,7 +145,7 @@ export default function SimpleCard() {
                         <Checkbox
                             checked={state.cveState}
                             onChange={handleChange}
-                            onClick={handleCve}
+                            // onClick={()=>(homeSettingsStatus.setCVE(!homeSettingsStatus.cveDetection))}
                             name="cveState"
                             color="primary"
                         />
