@@ -10,13 +10,13 @@ Steps to starting the app in localhost
 
 For Windows: https://git-scm.com/book/zh-tw/v2/開始-Git-安裝教學
 
-### Step 2: `git config`
+#### Step 2: `git config`
 
-### Step 3: `git clone`
+#### Step 3: `git clone`
 
-### Step 4: `git pull`
+#### Step 4: `git pull`
 
-### `git pull`, `git commit`, `git push`
+#### `git pull`, `git commit`, `git push`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
