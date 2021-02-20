@@ -16,8 +16,7 @@ For Windows: https://git-scm.com/book/zh-tw/v2/開始-Git-安裝教學
 
 ### Step 4: `git pull`
 
-
-
+# `git pull`, `git commit`, `git push`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
