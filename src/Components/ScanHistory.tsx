@@ -20,9 +20,8 @@ import Button from '@material-ui/core/Button';
 
 import ShowHistoryIcon from '@material-ui/icons/DoubleArrow';
 
-import { scanTarget, targetData, targetTime } from './target'
-
 // Backend
+import history from '../Backend/frontendData/scannedTargetForSelect.json'
 import { isScanning } from '../Backend/frontendData/isScanning'
 import scannedIn from '../Backend/frontendData/scannedIn.json'
 
@@ -94,7 +93,7 @@ const DoneScanning = () => {
         ))}
       </div>
     );
-  }
+}
   
 export default () => {
   const classes = useStyles();
@@ -131,12 +130,12 @@ export default () => {
                           </TableRow>
                       </TableHead>
                       <TableBody>
-                          {scannedIn.map((target) => (
+                          {history.map((target) => (
                               target.target == "" ? 
                                   null
                                       :
-                                  <TableRow key={target.target} hover>
-                                      <TableCell align="center">{target.targetForSelect}</TableCell>
+                                  <TableRow key={target.id} hover>
+                                      <TableCell align="center">{target.target}</TableCell>
                                       <TableCell align="center">{target.runTime}</TableCell>
                                       <TableCell align="center">{target.date}</TableCell>
                                       <TableCell align="center">

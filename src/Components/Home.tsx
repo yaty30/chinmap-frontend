@@ -364,7 +364,6 @@ export default observer (() => {
                             value={scanMode}
                             onChange={handleChange}
                             label="Scan Mode"
-                            margin="dense"
                             style={{
                                 width: "85%",
                                 textAlign: "center",
