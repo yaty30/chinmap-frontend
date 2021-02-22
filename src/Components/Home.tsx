@@ -155,7 +155,7 @@ export default observer (() => {
     return obj.replace(/([A-Z])/g, ' $1').trim();
   }
 
-  function ScanIdentifier(length: any) {
+  const ScanIdentifier = (length: any) => {
     var result           = 'scanID';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
@@ -294,7 +294,6 @@ export default observer (() => {
     );
   }
 
-
   return (
     <div className={classes.root}>
 
@@ -389,7 +388,6 @@ export default observer (() => {
                 </div>
             </Paper>
         </Grid>
-    
         
         <Grid item xs={10} style={{marginTop: 55}}>
             <Paper className={classes.paper} style={{minHeight: 0,}}>
@@ -458,18 +456,16 @@ export default observer (() => {
                 ))}
             </Paper>
             {isScanning.map((isScanning) => (
-                  isScanning === true ?
-                    <>
-                      <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
-                        <LinearProgress style={{height: 5, position:"relative",bottom:4}}/>
-                      </Tooltip>
-                    </>
-                      :
-                    null
+                isScanning === true ?
+                  <>
+                    <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
+                      <LinearProgress style={{height: 5, position:"relative",bottom:4}}/>
+                    </Tooltip>
+                  </>
+                    :
+                  null
             ))}
         </Grid>
-      
-        
       </Grid>
       
     </div>

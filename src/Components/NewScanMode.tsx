@@ -92,13 +92,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default () => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [modeName, setModeName] = React.useState("");
-  const [modeDes, setModeDes] = React.useState("");
-  const [value, setValue] = React.useState(0);
-  const [frequency, setFrequency] = React.useState<number>(4);
-  const [TCP, setTCP] = React.useState('');
-  const [nonTCP, setNonTCP] = React.useState('');
+  const [open, setOpen] = useState(false);
+  const [modeName, setModeName] = useState("");
+  const [modeDes, setModeDes] = useState("");
+  const [value, setValue] = useState(0);
+  const [frequency, setFrequency] = useState<number>(4);
+  const [TCP, setTCP] = useState('');
+  const [nonTCP, setNonTCP] = useState('');
 
   const handleTCP = (event: React.ChangeEvent<{ value: unknown }>) => {
     setTCP(event.target.value as string);

@@ -45,4 +45,18 @@ createData('ijCCjRttPmAPWqdcfDQDi','135', 'tcp', 'filtered', 'msrpc'),
 createData('ijCCjRttPmAPWqdcfDQDi','139', 'tcp', 'filtered', 'netbios-ssn'),
 createData('ijCCjRttPmAPWqdcfDQDi','445', 'tcp', 'filtered', 'microsoft-ds'),
 // ===================== END of scanme.nmap.org =================================
+
+// ===================== Target: scanme.nmap.org ================================
+createData('efvvpejuKjqGHdiqpbmWp','22', 'tcp', 'open', 'ssh'),
+createData('efvvpejuKjqGHdiqpbmWp','25', 'tcp', 'filtered', 'smtp'),
+createData('efvvpejuKjqGHdiqpbmWp','80', 'tcp', 'open', 'http'),
+createData('efvvpejuKjqGHdiqpbmWp','135', 'tcp', 'filtered', 'msrpc'),
+createData('efvvpejuKjqGHdiqpbmWp','139', 'tcp', 'filtered', 'netbios-ssn'),
+createData('efvvpejuKjqGHdiqpbmWp','445', 'tcp', 'filtered', 'microsoft-ds'),
+// ===================== END of scanme.nmap.org =================================
+
+// ===================== Target: scanme.nmap.org ================================
+createData('EXPtIuwQAGlIWmpYRaNci','80', 'tcp', 'open', 'http'),
+createData('EXPtIuwQAGlIWmpYRaNci','161', 'udp', 'closed', 'snmp'),
+// ===================== END of scanme.nmap.org =================================
 ]

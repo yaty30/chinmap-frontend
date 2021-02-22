@@ -4,25 +4,18 @@ import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography'
-
-import List from '@material-ui/core/List';
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-
-import ScanModeIcon from '@material-ui/icons/Settings';
-import DeleteMode from '@material-ui/icons/DeleteForever';
+import { observer } from 'mobx-react-lite'
 
 // Components
+import Result from './ScanResults/scanme.nmap.org'
 import SettingDialog from './defaultScanModes/defaultModeDialog'
 
-import Result from './ScanResults/scanme.nmap.org'
+// Mobx
+import defaultScanMode from '../Mobx/Models/defaultScanModeStatus'
 
 import scanMode from '../Backend/frontendData/scanModes/default.json'
 
@@ -46,47 +39,39 @@ const useStyles = makeStyles((theme: Theme) =>
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
     },
+    appBar: {
+        position: 'relative',
+      },
+      title: {
+        marginLeft: theme.spacing(2),
+        flex: 1,
+    },
+    avatarText: {
+        background: "#4A92FF",
+        borderRadius: 6,
+        color: "#fff",
+        padding: "2px 6px",
+    }, 
+    sectionStyle: {
+        marginTop: 35, 
+        border: "1px solid #C4C4C4", 
+        padding: "10px 10px", 
+        borderRadius: 5,
+    },
+    sectionTitleBg: {
+        position: "relative",
+        bottom: 22,
+        background: "#fff",
+        padding: "0 5px",
+        width: "auto",
+    },
+    sectionTitle: {
+        color: "#757575",
+        fontSize: 13,
+    },
   }),
 );
 
-export const defaultScanModes = [
-    {
-        name: "Ping Scan Mode",
-        link: "/pingScanMode",
-        value: "pingScanMode",
-        des: "This mode will not do a port scan after host discovery, and only print out the available hosts that responded to the host discovery probes.",
-    },
-    {
-        name: "Lightning Scan Mode",
-        link: "/lightningScanMode",
-        value: "lightningScanMode",
-        des: "Lightning scan mode able to check specific ports in a rapid way that user can see if the target is scannable or not.",
-    },
-    {
-        name: "Intense Scan Mode",
-        link: "/intenseScanMode",
-        value: "intenseScanMode",
-        des: "Intense scan mode is capable of getting the information of the target's OS, services version and tracing the target router in one command.",
-    },
-    {
-        name: "Non-Ping Scan Mode",
-        link: "/nonPingScanMode",
-        value: "nonPingScanMode",
-        des: "Non-Ping scan mode is specifically aim for checking the target is alive or down.",
-    },
-    {
-        name: "Top 100 Ports Scan Mode",
-        link: "/top100PortsScanMode",
-        value: "topOneHundredScanMode",
-        des: "Top 100 Ports scan mode will show the top 100 poplar ports, such as DNS, SMTP or HTTP. This mode can dramatically speed up scanning while still representing the majority of commonly used ports.",
-    },
-    {
-        name: "Full Ports Scan Mode",
-        link: "/fullPortsScanMode",
-        value: "fullPortsScanMode",
-        des: "This mode is able to check every single port of a pc, however, it requires a while of time.",
-    },
-]
 
 export default () => {
   const classes = useStyles();
@@ -102,28 +87,26 @@ export default () => {
                     </Typography>
                         <br/>
                     <Grid container justify="center" spacing={5}>
-                        {scanMode.map((mode) => (
-                            mode.cardInfo.map((data) => (
-                                <>
-                                    <Grid item xs={6}>
-                                        <Card style={{minHeight: 190}}>
-                                            <CardContent style={{whiteSpace: "nowrap", minHeight: 130}}>
-                                                <Typography color="textSecondary" style={{fontWeight: "bold", fontSize: 18}} gutterBottom>
-                                                    {data.name}
-                                                </Typography>
-                                                <Divider /><br/>
-                                                <div style={{whiteSpace: "normal"}}>
-                                                    <Typography color="textSecondary">{data.des}</Typography>
-                                                </div>
-                                            </CardContent>
-                                                <Divider variant="middle" />
-                                            <CardActions style={{textAlign: "center"}}>
-                                                <SettingDialog />
-                                            </CardActions>
-                                        </Card>
-                                    </Grid>
-                                </>
-                            ))
+                        {defaultScanMode.data.map((mode, index) => (
+                            <>
+                                <Grid item xs={6}>
+                                    <Card style={{minHeight: 190}}>
+                                        <CardContent style={{whiteSpace: "nowrap", minHeight: 130}}>
+                                            <Typography color="textSecondary" style={{fontWeight: "bold", fontSize: 18}} gutterBottom>
+                                                {mode.name}
+                                            </Typography>
+                                            <Divider /><br/>
+                                            <div style={{whiteSpace: "normal"}}>
+                                                <Typography color="textSecondary">{mode.des}</Typography>
+                                            </div>
+                                        </CardContent>
+                                            <Divider variant="middle" />
+                                        <CardActions style={{textAlign: "center"}}>
+                                            <SettingDialog index={index}/>
+                                        </CardActions>
+                                    </Card>
+                                </Grid>
+                            </>
                         ))}
                     </Grid>
                 </Paper>

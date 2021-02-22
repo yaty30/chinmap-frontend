@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const DoneScanning = () => {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = useState(true);
   
     const handleClick = () => {
       setOpen(true);

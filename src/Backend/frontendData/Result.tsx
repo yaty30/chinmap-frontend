@@ -121,12 +121,12 @@ output: `Command: nmap scanme.nmap.org With Scan mode:  -T4 -F -vv
 ======================================================
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-20 17:48 HKT
 Initiating Ping Scan at 17:48
-Scanning scanme.nmap.org (45.33.32.156) [4 ports]
+Scanning scanme.nmap.org (45.33.32.156) [4 ports
 Completed Ping Scan at 17:48, 0.17s elapsed (1 total hosts)
 Initiating Parallel DNS resolution of 1 host. at 17:48
 Completed Parallel DNS resolution of 1 host. at 17:48, 0.90s elapsed
 Initiating SYN Stealth Scan at 17:48
-Scanning scanme.nmap.org (45.33.32.156) [100 ports]
+Scanning scanme.nmap.org (45.33.32.156) [100 ports
 Discovered open port 80/tcp on 45.33.32.156
 Discovered open port 22/tcp on 45.33.32.156
 Completed SYN Stealth Scan at 17:48, 1.55s elapsed (100 total ports)
@@ -146,5 +146,70 @@ PORT    STATE    SERVICE      REASON
 Read data files from: /usr/local/bin/../share/nmap
 Nmap done: 1 IP address (1 host up) scanned in 3.18 seconds
            Raw packets sent: 108 (4.728KB) | Rcvd: 97 (3.876KB)
+`,},
+
+{
+id: 'efvvpejuKjqGHdiqpbmWp',
+output: `Command: nmap scanme.nmap.org With Scan mode:  -T4 -F -vv 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-21 04:12 HKT
+Initiating Ping Scan at 04:12
+Scanning scanme.nmap.org (45.33.32.156) [4 ports
+Completed Ping Scan at 04:12, 0.16s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 04:12
+Completed Parallel DNS resolution of 1 host. at 04:12, 0.00s elapsed
+Initiating SYN Stealth Scan at 04:12
+Scanning scanme.nmap.org (45.33.32.156) [100 ports
+Discovered open port 22/tcp on 45.33.32.156
+Discovered open port 80/tcp on 45.33.32.156
+Completed SYN Stealth Scan at 04:12, 1.54s elapsed (100 total ports)
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up, received echo-reply ttl 53 (0.16s latency).
+Scanned at 2021-02-21 04:12:23 HKT for 2s
+Not shown: 94 closed ports
+Reason: 94 resets
+PORT    STATE    SERVICE      REASON
+22/tcp  open     ssh          syn-ack ttl 54
+25/tcp  filtered smtp         no-response
+80/tcp  open     http         syn-ack ttl 53
+135/tcp filtered msrpc        no-response
+139/tcp filtered netbios-ssn  no-response
+445/tcp filtered microsoft-ds no-response
+
+Read data files from: /usr/local/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 1.87 seconds
+           Raw packets sent: 108 (4.728KB) | Rcvd: 97 (3.876KB)
+`,},
+
+{
+id: 'EXPtIuwQAGlIWmpYRaNci',
+output: `Command: nmap scanme.nmap.org With Scan mode:  -v -sU -sT -p U:161,T:80 -T0 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-21 04:13 HKT
+Initiating Ping Scan at 04:13
+Scanning scanme.nmap.org (45.33.32.156) [4 ports]
+Ping Scan Timing: About 12.50% done; ETC: 04:53 (0:35:00 remaining)
+Completed Ping Scan at 04:18, 300.16s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 04:18
+Completed Parallel DNS resolution of 1 host. at 04:18, 0.00s elapsed
+Initiating UDP Scan at 04:18
+Scanning scanme.nmap.org (45.33.32.156) [1 port]
+UDP Scan Timing: About 50.00% done; ETC: 04:28 (0:05:00 remaining)
+Completed UDP Scan at 04:23, 300.17s elapsed (1 total ports)
+Initiating Connect Scan at 04:23
+Scanning scanme.nmap.org (45.33.32.156) [1 port]
+Connect Scan Timing: About 50.00% done; ETC: 04:33 (0:05:00 remaining)
+Discovered open port 80/tcp on 45.33.32.156
+Completed Connect Scan at 04:28, 301.18s elapsed (1 total ports)
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.28s latency).
+
+PORT    STATE  SERVICE
+80/tcp  open   http
+161/udp closed snmp
+
+Read data files from: /usr/local/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 901.73 seconds
+           Raw packets sent: 2 (116B) | Rcvd: 2 (144B)
 `,},
 ]

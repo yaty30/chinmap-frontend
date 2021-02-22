@@ -8,43 +8,20 @@
                 "des": "This mode will not do a port scan after host discovery, and only print out the available hosts that responded to the host discovery probes."
             }
         ],
-        "profile": [
+        "command": "nmap -v -sU -sT -p -U:161, T:80 -T0 + [ Target IP / Domain ]",
+        "settings": [
             {
-                "name": "testing",
-                "des": "testffff",
                 "freq": 4,
-                "tcp": "",
-                "nonTcp": ""
-            }
-        ],
-        "ping": [
-            {
-                "flags": ""
-            }
-        ],
-        "nse": [
-            {
-                "flags": ""
-            }
-        ],
-        "target": [
-            {
-                "flags": ""
-            }
-        ],
-        "source": [
-            {
-                "flags": ""
-            }
-        ],
-        "timing": [
-            {
-                "flags": ""
-            }
-        ],
-        "other": [
-            {
-                "flags": ""
+                "flags": [
+                    {
+                        "flag": "-v",
+                        "des": "des"
+                    },
+                    {
+                        "flag": "-Pn",
+                        "des": "des"
+                    }
+                ]
             }
         ]
     },
@@ -57,43 +34,20 @@
                 "des": "Lightning scan mode able to check specific ports in a rapid way that user can see if the target is scannable or not."
             }
         ],
-        "profile": [
+        "command": "nmap ",
+        "settings": [
             {
-                "name": "testing",
-                "des": "testffff",
                 "freq": 4,
-                "tcp": "",
-                "nonTcp": ""
-            }
-        ],
-        "ping": [
-            {
-                "flags": ""
-            }
-        ],
-        "nse": [
-            {
-                "flags": ""
-            }
-        ],
-        "target": [
-            {
-                "flags": ""
-            }
-        ],
-        "source": [
-            {
-                "flags": ""
-            }
-        ],
-        "timing": [
-            {
-                "flags": ""
-            }
-        ],
-        "other": [
-            {
-                "flags": ""
+                "flags": [
+                    {
+                        "flag": "-v",
+                        "des": "des"
+                    },
+                    {
+                        "flag": "-Pn",
+                        "des": "des"
+                    }
+                ]
             }
         ]
     },
@@ -106,43 +60,20 @@
                 "des": "Intense scan mode is capable of getting the information of the target's OS, services version and tracing the target router in one command."
             }
         ],
-        "profile": [
+        "command": "nmap ",
+        "settings": [
             {
-                "name": "testing",
-                "des": "testffff",
                 "freq": 4,
-                "tcp": "",
-                "nonTcp": ""
-            }
-        ],
-        "ping": [
-            {
-                "flags": ""
-            }
-        ],
-        "nse": [
-            {
-                "flags": ""
-            }
-        ],
-        "target": [
-            {
-                "flags": ""
-            }
-        ],
-        "source": [
-            {
-                "flags": ""
-            }
-        ],
-        "timing": [
-            {
-                "flags": ""
-            }
-        ],
-        "other": [
-            {
-                "flags": ""
+                "flags": [
+                    {
+                        "flag": "-v",
+                        "des": "des"
+                    },
+                    {
+                        "flag": "-Pn",
+                        "des": "des"
+                    }
+                ]
             }
         ]
     },
@@ -155,43 +86,20 @@
                 "des": "Top 100 Ports scan mode will show the top 100 poplar ports, such as DNS, SMTP or HTTP. This mode can dramatically speed up scanning while still representing the majority of commonly used ports."
             }
         ],
-        "profile": [
+        "command": "nmap ",
+        "settings": [
             {
-                "name": "testing",
-                "des": "testffff",
                 "freq": 4,
-                "tcp": "",
-                "nonTcp": ""
-            }
-        ],
-        "ping": [
-            {
-                "flags": ""
-            }
-        ],
-        "nse": [
-            {
-                "flags": ""
-            }
-        ],
-        "target": [
-            {
-                "flags": ""
-            }
-        ],
-        "source": [
-            {
-                "flags": ""
-            }
-        ],
-        "timing": [
-            {
-                "flags": ""
-            }
-        ],
-        "other": [
-            {
-                "flags": ""
+                "flags": [
+                    {
+                        "flag": "-v",
+                        "des": "des"
+                    },
+                    {
+                        "flag": "-Pn",
+                        "des": "des"
+                    }
+                ]
             }
         ]
     },
@@ -204,43 +112,20 @@
                 "des": "Non-Ping scan mode is specifically aim for checking the target is alive or down."
             }
         ],
-        "profile": [
+        "command": "nmap ",
+        "settings": [
             {
-                "name": "testing",
-                "des": "testffff",
                 "freq": 4,
-                "tcp": "",
-                "nonTcp": ""
-            }
-        ],
-        "ping": [
-            {
-                "flags": ""
-            }
-        ],
-        "nse": [
-            {
-                "flags": ""
-            }
-        ],
-        "target": [
-            {
-                "flags": ""
-            }
-        ],
-        "source": [
-            {
-                "flags": ""
-            }
-        ],
-        "timing": [
-            {
-                "flags": ""
-            }
-        ],
-        "other": [
-            {
-                "flags": ""
+                "flags": [
+                    {
+                        "flag": "-v",
+                        "des": "des"
+                    },
+                    {
+                        "flag": "-Pn",
+                        "des": "des"
+                    }
+                ]
             }
         ]
     },
@@ -253,43 +138,20 @@
                 "des": "This mode is able to check every single port of a pc, however, it requires a while of time."
             }
         ],
-        "profile": [
+        "command": "nmap ",
+        "settings": [
             {
-                "name": "testing",
-                "des": "testffff",
                 "freq": 4,
-                "tcp": "",
-                "nonTcp": ""
-            }
-        ],
-        "ping": [
-            {
-                "flags": ""
-            }
-        ],
-        "nse": [
-            {
-                "flags": ""
-            }
-        ],
-        "target": [
-            {
-                "flags": ""
-            }
-        ],
-        "source": [
-            {
-                "flags": ""
-            }
-        ],
-        "timing": [
-            {
-                "flags": ""
-            }
-        ],
-        "other": [
-            {
-                "flags": ""
+                "flags": [
+                    {
+                        "flag": "-v",
+                        "des": "des"
+                    },
+                    {
+                        "flag": "-Pn",
+                        "des": "des"
+                    }
+                ]
             }
         ]
     }
