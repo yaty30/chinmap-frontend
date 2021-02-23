@@ -187,17 +187,17 @@ output: `Command: nmap scanme.nmap.org With Scan mode:  -v -sU -sT -p U:161,T:80
 ======================================================
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-21 04:13 HKT
 Initiating Ping Scan at 04:13
-Scanning scanme.nmap.org (45.33.32.156) [4 ports]
+Scanning scanme.nmap.org (45.33.32.156) [4 ports
 Ping Scan Timing: About 12.50% done; ETC: 04:53 (0:35:00 remaining)
 Completed Ping Scan at 04:18, 300.16s elapsed (1 total hosts)
 Initiating Parallel DNS resolution of 1 host. at 04:18
 Completed Parallel DNS resolution of 1 host. at 04:18, 0.00s elapsed
 Initiating UDP Scan at 04:18
-Scanning scanme.nmap.org (45.33.32.156) [1 port]
+Scanning scanme.nmap.org (45.33.32.156) [1 port
 UDP Scan Timing: About 50.00% done; ETC: 04:28 (0:05:00 remaining)
 Completed UDP Scan at 04:23, 300.17s elapsed (1 total ports)
 Initiating Connect Scan at 04:23
-Scanning scanme.nmap.org (45.33.32.156) [1 port]
+Scanning scanme.nmap.org (45.33.32.156) [1 port
 Connect Scan Timing: About 50.00% done; ETC: 04:33 (0:05:00 remaining)
 Discovered open port 80/tcp on 45.33.32.156
 Completed Connect Scan at 04:28, 301.18s elapsed (1 total ports)
@@ -212,4 +212,27 @@ Read data files from: /usr/local/bin/../share/nmap
 Nmap done: 1 IP address (1 host up) scanned in 901.73 seconds
            Raw packets sent: 2 (116B) | Rcvd: 2 (144B)
 `,},
+
+
+{
+id: 'sJbFCuGKprMGawJDnbWaZ',
+output: `Command: nmap  192.168.1.1
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-23 12:08 HKT
+Nmap scan report for 192.168.1.1
+Host is up (0.0050s latency).
+Not shown: 993 closed ports
+PORT      STATE SERVICE
+53/tcp    open  domain
+80/tcp    open  http
+548/tcp   open  afp
+631/tcp   open  ipp
+5000/tcp  open  upnp
+8200/tcp  open  trivnet1
+20005/tcp open  btx
+MAC Address: CC:40:D0:F4:D9:1D (Netgear)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.50 seconds
+`,},
+
 ]

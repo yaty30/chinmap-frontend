@@ -54,4 +54,20 @@ createData('efvvpejuKjqGHdiqpbmWp','135', 'tcp', 'filtered', 'msrpc'),
 createData('efvvpejuKjqGHdiqpbmWp','139', 'tcp', 'filtered', 'netbios-ssn'),
 createData('efvvpejuKjqGHdiqpbmWp','445', 'tcp', 'filtered', 'microsoft-ds'),
 // ===================== END of scanme.nmap.org =================================
+
+// ===================== Target: scanme.nmap.org ================================
+createData('EXPtIuwQAGlIWmpYRaNci','80', 'tcp', 'open', 'http'),
+createData('EXPtIuwQAGlIWmpYRaNci','161', 'udp', 'closed', 'snmp'),
+// ===================== END of scanme.nmap.org =================================
+
+
+// ===================== Target: 192.168.1.1 ================================
+createData('sJbFCuGKprMGawJDnbWaZ','53', 'tcp', 'open', 'domain'),
+createData('sJbFCuGKprMGawJDnbWaZ','80', 'tcp', 'open', 'http'),
+createData('sJbFCuGKprMGawJDnbWaZ','548', 'tcp', 'open', 'afp'),
+createData('sJbFCuGKprMGawJDnbWaZ','631', 'tcp', 'open', 'ipp'),
+createData('sJbFCuGKprMGawJDnbWaZ','5000', 'tcp', 'open', 'upnp'),
+createData('sJbFCuGKprMGawJDnbWaZ','8200', 'tcp', 'open', 'trivnet1'),
+createData('sJbFCuGKprMGawJDnbWaZ','20005', 'tcp', 'open', 'btx'),
+// ===================== END of 192.168.1.1 =================================
 ]

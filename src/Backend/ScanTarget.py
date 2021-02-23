@@ -11,8 +11,8 @@ import fileinput
 # ========================== Get from front-end user input ================================== #
 # Scan Information
 # test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
-target = 'scanme.nmap.org'
-scanMode = 'lightningScanMode'
+target = '192.168.1.1'
+scanMode = ''
 flags = ' '
 
 # Extra freatures
@@ -102,12 +102,12 @@ def GetScanDetails(result):
     targetForSelect = str(target)
 
     # find scan date
-    date = re.findall(r'(\d{4}-\d{2}-\d{2}[ \t]+\d{2}:\d{2} HKT)', data)
-    foundDate = str(date)[2:-12]
+    date = re.findall(r'(\d{4}-\d{2}-\d{2}[ \t]+\d{2}:\d{2})', data)
+    foundDate = str(date)[2:-8]
 
     # find scan time
-    time = re.findall(r'([ \t]+\d{2}:\d{2} HKT)', data)
-    foundTime = str(time)[2:-2]
+    time = re.findall(r'(\d{4}-\d{2}-\d{2}[ \t]+\d{2}:\d{2})', data)
+    foundTime = str(time)[12:-2]
 
     # find up host
     hostUp = re.findall(r'(\d host up)', data)

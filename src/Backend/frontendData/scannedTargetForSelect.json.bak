@@ -40,4 +40,18 @@
 "runTime": "1.87 seconds",
 "date": "2021-02-21"
 }
+,
+{
+"id": "EXPtIuwQAGlIWmpYRaNci",
+"target": "scanme.nmap.org",
+"runTime": "901.73 seconds",
+"date": "2021-02-21"
+}
+,
+{
+"id": "sJbFCuGKprMGawJDnbWaZ",
+"target": "192.168.1.1",
+"runTime": "0.50 seconds",
+"date": "2021-0"
+}
 ]

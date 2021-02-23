@@ -372,26 +372,7 @@ export default () => {
                                                                 ))}
                                                             </TableRow>
                                                             
-                                                            {rows.map((output, index) => (
-                                                                output.port ? 
-                                                                <>  
-                                                                    <TableRow>
-                                                                        {/* <TableCell align="left" key={index}>{output.portno}/{output.port}</TableCell> */}
-                                                                        {scannedIn.map((output, index) => (
-                                                                            output.runTime == timestampOne || output.runTime == timestampTwo ? 
-                                                                            <>
-                                                                                <TableCell>{output.id}</TableCell>
-                                                                                <TableCell />
-                                                                                {rows.map((portStatus, index) => (
-                                                                                    <TableCell>{portStatus.status}</TableCell> 
-                                                                                ))}
-                                                                            </>
-                                                                            : null
-                                                                        ))}
-                                                                    </TableRow>
-                                                                    
-                                                                </> : null
-                                                            ))}
+                                                            
                                                             
                                                         </TableBody>
                                                     </Table>
