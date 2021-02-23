@@ -16,6 +16,7 @@ Everything before you pushing something to this git, it requires your github acc
 (You just need to do it one time unless the computer will reborn after reboot)
 
 git config --global user.name "John Doe"
+
 git config --global user.email johndoe@example.com
 
 
