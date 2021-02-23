@@ -12,6 +12,13 @@ For Windows: https://git-scm.com/book/zh-tw/v2/開始-Git-安裝教學
 
 #### Step 2: `git config`
 
+Everything before you pushing something to this git, it requires your github account, here's the settings: 
+(You just need to do it one time unless the computer will reborn after reboot)
+
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+
+
 #### Step 3: `git clone`
 
 #### Step 4: `git pull`
