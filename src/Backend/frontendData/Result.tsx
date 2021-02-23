@@ -213,14 +213,13 @@ Nmap done: 1 IP address (1 host up) scanned in 901.73 seconds
            Raw packets sent: 2 (116B) | Rcvd: 2 (144B)
 `,},
 
-
 {
-id: 'sJbFCuGKprMGawJDnbWaZ',
+id: 'tUZNyJRmqDsTeOWmVfXpT',
 output: `Command: nmap  192.168.1.1
 ======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-23 12:08 HKT
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-23 12:13 HKT
 Nmap scan report for 192.168.1.1
-Host is up (0.0050s latency).
+Host is up (0.0023s latency).
 Not shown: 993 closed ports
 PORT      STATE SERVICE
 53/tcp    open  domain
@@ -232,7 +231,15 @@ PORT      STATE SERVICE
 20005/tcp open  btx
 MAC Address: CC:40:D0:F4:D9:1D (Netgear)
 
-Nmap done: 1 IP address (1 host up) scanned in 0.50 seconds
+Nmap done: 1 IP address (1 host up) scanned in 2.57 seconds
 `,},
 
+{
+id: 'zAgoxnNZGQQtqGmSsjklW',
+output: `Command: nmap  chinmap.xyz
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-23 22:10 HKT
+Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
+Nmap done: 1 IP address (0 hosts up) scanned in 1.87 seconds
+`,},
 ]

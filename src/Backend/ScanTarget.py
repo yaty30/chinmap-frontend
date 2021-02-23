@@ -11,13 +11,14 @@ import fileinput
 # ========================== Get from front-end user input ================================== #
 # Scan Information
 # test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
-target = '192.168.1.1'
+target = 'chinmap.xyz'
 scanMode = ''
 flags = ' '
 
 # Extra freatures
-automation = False
+automation = True
 cveDetection = False
+avoidPingBlocking = True
 
 # if target is an independent IP, set scan range will not be able to apply
 if re.findall(r'.0\/\d+$', target):
@@ -71,6 +72,15 @@ def GetPortStatus(result):
     fePortStatusTxt = open("getPortStatus.tsx", "a")
     fePortStatusTxt.writelines("\n// ===================== Target: " + target + " ================================")
     for ports in re.findall(pattern, result):
+        # Check if automation is checked, is yes, check if the result is null, if yes, run scan function again until something in the result
+        if automation == True:
+            while len(ports) < 1:
+                if len(scanMode) < 1:
+                    RunNormalScan()
+                else:
+                    RunScanMode()
+                i += 1
+            
         fePortStatusTxt.writelines("\ncreateData('" + str(scanID) + "'," + str(ports)[1:] + ",")
 
     fePortStatusTxt.writelines("\n// ===================== END of " + target + " =================================")
@@ -93,9 +103,9 @@ def GetScanDetails(result):
     # avoiding [host down, received no-response] [ , => \n\n ] situation
     scanTargetfirstRoundReplace = re.sub(", r", "; R", str(scanTarget))
     # removing single collons of the result, i.e. 'x.x.x.x', 'x.x.x.x' => x.x.x.x, x.x.x.x
-    scanTargetsecondRoundReplace = re.sub("'", " ", str(scanTargetfirstRoundReplace))
+    scanTargetsecondRoundReplace = re.sub("'", "", str(scanTargetfirstRoundReplace))
     # removing comma between targets, i.e. x.x.x.x, x.x.x.x => x.x.x.x \n\n x.x.x.x
-    scanTargetThirdRoundReplace = re.sub(",", "\n\n", str(scanTargetsecondRoundReplace))
+    scanTargetThirdRoundReplace = re.sub(",", " ", str(scanTargetsecondRoundReplace))
     foundTarget = str(scanTargetThirdRoundReplace)[2:-2]
 
     # plain target for dropdown select menu option
@@ -107,7 +117,7 @@ def GetScanDetails(result):
 
     # find scan time
     time = re.findall(r'(\d{4}-\d{2}-\d{2}[ \t]+\d{2}:\d{2})', data)
-    foundTime = str(time)[12:-2]
+    foundTime  = str(time)[12:-2]
 
     # find up host
     hostUp = re.findall(r'(\d host up)', data)
@@ -120,20 +130,20 @@ def GetScanDetails(result):
     # find host scan latency
     latency = re.findall(r'(\d+.\d+s latency)', data)
     latencyfirstRoundReplace = re.sub("'", " ", str(latency))
-    latencysecondRoundReplace = re.sub(",", "\n\n", str(latencyfirstRoundReplace))
+    latencysecondRoundReplace = re.sub(",", ", ", str(latencyfirstRoundReplace))
     latencythirdRoundReplace = re.sub("latency", "", str(latencysecondRoundReplace))
     foundLatency = str(latencythirdRoundReplace)[2:-2]
 
     # find closed ports quantity
     notShown = re.findall(r'(\d+ closed ports)', data)
     notShownfirstRoundReplace = re.sub("'", " ", str(notShown))
-    notShownsecondRoundReplace = re.sub(",", "\n\n", str(notShownfirstRoundReplace))
+    notShownsecondRoundReplace = re.sub(",", ", ", str(notShownfirstRoundReplace))
     foundNotShown = str(notShownsecondRoundReplace)[2:-2]
 
     # find target running os
     os = re.findall(r'OS details: (.*)', data)
     osfirstRoundReplace = re.sub("'", " ", str(os))
-    ossecondRoundReplace = re.sub(",", "\n\n", str(osfirstRoundReplace))
+    ossecondRoundReplace = re.sub(",", ", ", str(osfirstRoundReplace))
     foundOS = str(ossecondRoundReplace)[2:-2]
 
     # find target up time, day + period
@@ -143,7 +153,7 @@ def GetScanDetails(result):
     # find target device type
     deviceType = re.findall(r'Device type: (.*)', data)
     deviceTypefirstRoundReplace = re.sub("'", " ", str(deviceType))
-    deviceTypesecondRoundReplace = re.sub(",", "\n\n", str(deviceTypefirstRoundReplace))
+    deviceTypesecondRoundReplace = re.sub(",", ", ", str(deviceTypefirstRoundReplace))
     foundDeviceType = str(deviceTypesecondRoundReplace)[2:-2]
 
     # find quantity of raw packets sent
@@ -162,13 +172,13 @@ def GetScanDetails(result):
     # find routing table hop quantity
     hop = re.findall(r'Network Distance: (.*)', data)
     hopfirstRoundReplace = re.sub("'", " ", str(hop))
-    hopsecondRoundReplace = re.sub(",", "\n\n", str(hopfirstRoundReplace))
+    hopsecondRoundReplace = re.sub(",", ", ", str(hopfirstRoundReplace))
     foundHop = str(hopsecondRoundReplace)[2:-2]
 
     # find target MAC address
     macAddr = re.findall(r'MAC Address: (.*)', data)
     macAddrfirstRoundReplace = re.sub("'", " ", str(macAddr))
-    macAddrsecondRoundReplace = re.sub(",", "\n\n", str(macAddrfirstRoundReplace))
+    macAddrsecondRoundReplace = re.sub(",", ", ", str(macAddrfirstRoundReplace))
     foundMacAddr = str(macAddrsecondRoundReplace)[2:-2]
 
     # find scan mode for current scan
@@ -199,13 +209,24 @@ def GetScanDetails(result):
     targetForSelectTxt.close() 
     
 
-    return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(foundTarget) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + str(foundTime) + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '"\n}}'
+    return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(foundTarget) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + str(foundTime) + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '"\n}}'
     
+def AvoidPingBlock():
+   bypassBlocking = " -Pn "
+   return bypassBlocking
+
 def RunNormalScan():
     StartScan()
     
-    runNormalScan = os.popen('sudo nmap ' + flags + target)
-    normalScanOutput = runNormalScan.read()
+    # Check if Avoid Ping Blocking feature is on
+    if avoidPingBlocking == True:
+        runNormalScan = os.popen('nmap ' + flags + AvoidPingBlock() + target)
+        normalScanOutput = runNormalScan.read()
+        return normalScanOutput
+    else:
+        runNormalScan = os.popen('nmap ' + flags + target)
+        normalScanOutput = runNormalScan.read()
+        return normalScanOutput
 
     # Export normal scan output to text file
     normalScanTxt = open("Result.txt", "w+")
@@ -235,7 +256,6 @@ def RunNormalScan():
     portStatusToRead = f.read()
     GetPortStatus(portStatusToRead)
     f.close()
-    
 
     # Frontend Nmap Output
     with fileinput.FileInput("Result.tsx", inplace=True, backup='.bak') as file:
@@ -250,8 +270,15 @@ def RunNormalScan():
 def RunScanMode():
     StartScan()
 
-    runNormalScan = os.popen('sudo nmap ' + mode + target)
-    normalScanOutput = runNormalScan.read()
+    # Check if Avoid Ping Blocking feature is on
+    if avoidPingBlocking == True:
+        runNormalScan = os.popen('nmap ' + mode + AvoidPingBlock() + target)
+        normalScanOutput = runNormalScan.read()
+        return normalScanOutput
+    else:
+        runNormalScan = os.popen('nmap ' + mode + target)
+        normalScanOutput = runNormalScan.read()
+        return normalScanOutput
 
     # Export normal scan output to text file
     normalScanTxt = open("Result.txt", "w+")

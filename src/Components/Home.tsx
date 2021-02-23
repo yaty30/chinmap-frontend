@@ -29,7 +29,6 @@ import Settings from './HomeSettings/HomeSettings'
 import { customisedScanModes } from './NewScanModeArray'
 
 import { scanTarget, targetData, targetTime, chosenMode, scanDate } from './target'
-import { scanRange, autoVal, cveVal } from './HomeSettings/HomeSettings'
 
 // Backend
 import { isScanning } from '../Backend/frontendData/isScanning'
@@ -165,40 +164,6 @@ export default observer (() => {
     return result;
  }
 
-  const handlePushToArray = () => {
-    scanTarget.push(target)
-    targetTime.push(CurrentTime());
-    targetData.push(
-      {
-        target: target,
-        value: target,
-        time: CurrentTime(),
-        scanMode: AddSpaces(
-          Cap(
-            scanMode
-          )
-        ),
-        scanDate: CurrentDate(),
-        id: ScanIdentifier(12),
-        setRange: scanRange,
-        auto: autoVal,
-        cve: cveVal,
-      },
-    );
-    
-    chosenMode.push(
-      AddSpaces(
-        Cap(
-          scanMode
-        )
-      )
-    );
-
-    scanDate.push(
-      CurrentDate()
-    );
-  }
-
   const [reset, setReset] = React.useState(false);
   const handleReset = () => (
     setTarget("")
@@ -322,34 +287,29 @@ export default observer (() => {
                 <Grid item xs={12} className={classes.centerGrid}>
                     <Settings />
                 </Grid>
+                <Grid item xs={6}>
+                  {
+                     homeSettingsStatus.automation === true ?
+                      <Chip label="Automation" variant="outlined" deleteIcon={<AutomationIcon />}/> : null
+                  }
+                  {
+                    homeSettingsStatus.cve === true ? 
+                      <Chip label="CVE Detection" variant="outlined" deleteIcon={<AutomationIcon />}/> : null
+                  }
+                  {
+                    homeSettingsStatus.pn === true ? 
+                      <Chip label="Ping Block Bypass" variant="outlined" deleteIcon={<AutomationIcon />}/> : null
+                  }
+                  {
+                    homeSettingsStatus.whoIs === true ? 
+                      <Chip label="WhoIs" variant="outlined" deleteIcon={<AutomationIcon />}/> : null
+                  }
+                </Grid>
               </Grid>
           </Paper>
         </Grid>
 
-        <Grid item xs={4}>
-            <Paper className={classes.paper}>
-                <Typography variant="h6">
-                    1Settings
-                </Typography>
-                  <FormControl variant="outlined" style={{width: "100%"}}>
-                    
-                    <Chip
-                        label="Automation"
-                        clickable
-                        color="primary"
-                        onDelete={()=> {console.log('chips clicked')}}
-                        deleteIcon={<AutomationIcon />}
-                        variant="outlined"
-                        style={{
-                          width: 120,
-                        }}
-                      />
-                    
-                  </FormControl>
-            </Paper>
-        </Grid>
-        
-        <Grid item xs={6}>
+        <Grid item xs={10}>
             <Paper className={classes.paper}>
                 <Typography variant="h6">
                     Scan Mode
@@ -375,10 +335,10 @@ export default observer (() => {
                               ))
                             ))}
                             
-                            <ListSubheader>Customised Scan Modes</ListSubheader>
+                            {/* <ListSubheader>Customised Scan Modes</ListSubheader>
                             {customisedScanModes.map((modes) => (
                               <MenuItem value={modes.value} className="customised">{modes.name}</MenuItem>
-                            ))}
+                            ))} */}
                         </Select>
                     </FormControl>
                 </div>
@@ -447,7 +407,6 @@ export default observer (() => {
                           style={{
                             float: "right",
                           }}
-                          onClick={handlePushToArray}
                         >
                           Scan
                         </Button>
