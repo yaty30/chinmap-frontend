@@ -1,7 +1,6 @@
 import os
 import sys
 import subprocess
-import nmap
 import re
 import random
 import string
@@ -11,7 +10,7 @@ import fileinput
 # ========================== Get from front-end user input ================================== #
 # Scan Information
 # test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
-target = 'chinmap.xyz'
+target = '192.168.1.1'
 scanMode = ''
 flags = ' '
 
@@ -219,14 +218,16 @@ def RunNormalScan():
     StartScan()
     
     # Check if Avoid Ping Blocking feature is on
-    if avoidPingBlocking == True:
-        runNormalScan = os.popen('nmap ' + flags + AvoidPingBlock() + target)
-        normalScanOutput = runNormalScan.read()
-        return normalScanOutput
-    else:
-        runNormalScan = os.popen('nmap ' + flags + target)
-        normalScanOutput = runNormalScan.read()
-        return normalScanOutput
+    # if avoidPingBlocking == True:
+    #     runNormalScan = os.popen('nmap ' + flags + AvoidPingBlock() + target)
+    #     normalScanOutput = runNormalScan.read()
+    #     return normalScanOutput
+    # else:
+    #     runNormalScan = os.popen('nmap ' + flags + target)
+    #     normalScanOutput = runNormalScan.read()
+    #     return normalScanOutput
+    runNormalScan = os.popen('nmap ' + flags + target)
+    normalScanOutput = runNormalScan.read()
 
     # Export normal scan output to text file
     normalScanTxt = open("Result.txt", "w+")
@@ -271,14 +272,16 @@ def RunScanMode():
     StartScan()
 
     # Check if Avoid Ping Blocking feature is on
-    if avoidPingBlocking == True:
-        runNormalScan = os.popen('nmap ' + mode + AvoidPingBlock() + target)
-        normalScanOutput = runNormalScan.read()
-        return normalScanOutput
-    else:
-        runNormalScan = os.popen('nmap ' + mode + target)
-        normalScanOutput = runNormalScan.read()
-        return normalScanOutput
+    # if avoidPingBlocking == True:
+    #     runNormalScan = os.popen('nmap ' + mode + AvoidPingBlock() + target)
+    #     normalScanOutput = runNormalScan.read()
+    #     return normalScanOutput
+    # else:
+    #     runNormalScan = os.popen('nmap ' + mode + target)
+    #     normalScanOutput = runNormalScan.read()
+    #     return normalScanOutput
+    runNormalScan = os.popen('nmap ' + mode + target)
+    normalScanOutput = runNormalScan.read()
 
     # Export normal scan output to text file
     normalScanTxt = open("Result.txt", "w+")

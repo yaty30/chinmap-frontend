@@ -294,4 +294,7 @@ createData('oNkLNmHqxoUaJlqcypOwn','3372', 'tcp', 'filtered', 'msdtc'),
 createData('oNkLNmHqxoUaJlqcypOwn','9929', 'tcp', 'open', 'nping-echo'),
 createData('oNkLNmHqxoUaJlqcypOwn','31337', 'tcp', 'open', 'Elite'),
 // ===================== END of scanme.nmap.org =================================
+
+// ===================== Target: chinmap.xyz ================================
+// ===================== END of chinmap.xyz =================================
 ]

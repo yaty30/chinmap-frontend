@@ -297,4 +297,14 @@ createData('oNkLNmHqxoUaJlqcypOwn','31337', 'tcp', 'open', 'Elite'),
 
 // ===================== Target: chinmap.xyz ================================
 // ===================== END of chinmap.xyz =================================
+
+// ===================== Target: 192.168.1.1 ================================
+createData('uRIzRzVpMfRoZKxmnlPqt','53', 'tcp', 'open', 'domain'),
+createData('uRIzRzVpMfRoZKxmnlPqt','80', 'tcp', 'open', 'http'),
+createData('uRIzRzVpMfRoZKxmnlPqt','548', 'tcp', 'open', 'afp'),
+createData('uRIzRzVpMfRoZKxmnlPqt','631', 'tcp', 'open', 'ipp'),
+createData('uRIzRzVpMfRoZKxmnlPqt','5000', 'tcp', 'open', 'upnp'),
+createData('uRIzRzVpMfRoZKxmnlPqt','8200', 'tcp', 'open', 'trivnet1'),
+createData('uRIzRzVpMfRoZKxmnlPqt','20005', 'tcp', 'open', 'btx'),
+// ===================== END of 192.168.1.1 =================================
 ]

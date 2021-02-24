@@ -259,4 +259,30 @@
 "flags": " ",
 "nmapVer": "7.91"
 }
+,{
+"id": "uRIzRzVpMfRoZKxmnlPqt",
+"cm": "nmap 192.168.1.1",
+"target": "92.168.1.",
+"targetForSelect": "192.168.1.1",
+"date": "2021-02-24",
+"time": " 11:47 HKT",
+"upHost": "1 host up",
+"runTime": "1.08 seconds",
+"latency": "0.0029s ",
+"notShown": "993 closed ports",
+"os": "",
+"uptime": "",
+"deviceType": "",
+"rawPacket": "",
+"rcvd": "",
+"scanMode": "",
+"hop": "",
+"macAddr": "",
+"difficulty": "",
+"auto": "True",
+"cveDetect": "False",
+"setRange": "Target have no range",
+"flags": " ",
+"nmapVer": "7.91"
+}
 ]
