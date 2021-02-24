@@ -27,7 +27,8 @@ import scanTechniquesData from './json/ScanTechniques/data.json'
 import hostDiscovery from './json/HostDiscovery/data.json'
 import osDetection from './json/OSDetection/data.json'
 import outputOpt from './json/Output/data.json'
-
+import portSpecification from './json/PortSpecification/data.json'
+import serviceAndVersionDetectiony from './json/ServiceAndVersionDetectiony/data.json'
 
 // Mobx
 import settingsStatus from '../../Mobx/Models/homeSettingsStatus'
@@ -87,11 +88,15 @@ export default () => {
     setOthers({ ...others, [event.target.name]: event.target.checked });
   };
 
-  const [setRange, setSetRange] = useState('');
+  const [setRange, setSetRange] = useState('none');
 
   const handleSetRange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSetRange((event.target as HTMLInputElement).value);
     settingsStatus.setRange((event.target as HTMLInputElement).value);
+    if (/.0\/\d\d$/.test(settingsStatus.target) === false){
+      settingsStatus.setRange('none');
+      setSetRange('none')
+    }
   };
 
   return (
@@ -101,6 +106,7 @@ export default () => {
         style={{
           textTransform: "none"
         }}
+        disabled={settingsStatus.target.length > 0 ? false : true}
       >
         Settings
       </Button>
@@ -114,118 +120,221 @@ export default () => {
         <DialogContent>
           <Divider variant="middle" style={{marginBottom: 25}}/>
           <Grid container spacing={6}>
+            <Grid item xs={12}>
+              <Paper style={{background: "#f9f9f9", padding: "15px 15px", textAlign: "center"}} elevation={0}>
+                  <Typography>Target:&nbsp;{settingsStatus.target}</Typography>
+              </Paper>
+            </Grid>
             {/* Set Range */}
             <Grid item xs={12}>
-              <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>
+              <Tooltip title="Scan range only for the target with range, e.g. 192.168.1.0/24" arrow placement="top" disableHoverListener={/.0\/\d\d$/.test(settingsStatus.target) === true ? true : false}>
+                <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>
                 <FormControl component="fieldset">
                   <FormLabel component="legend">Set Range</FormLabel>
                   <RadioGroup aria-label="gender" name="gender1" value={setRange} onChange={handleSetRange} style={{marginLeft: 65,marginTop:15}}>
                     <table>
                       <tr>
+                      {/* disabled={'.0\/\d+$'.test(homeSettings.target) === true ? false : true} */}
                         <td>
-                          <FormControlLabel value="oddOnly" control={<Radio />} label="Odd Numbers Only" />
+                          <FormControlLabel value="oddOnly" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Odd Numbers Only" />
                         </td>
                         <td>
-                          <FormControlLabel value="even" control={<Radio />} label="Even Numbers Only" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <FormControlLabel value="every5hosts" control={<Radio />} label="Every 5 hosts" />
-                        </td>
-                        <td>
-                          <FormControlLabel value="every10hosts" control={<Radio />} label="Every 10 hosts" />
+                          <FormControlLabel value="even" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Even Numbers Only" />
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <FormControlLabel value="every15hosts" control={<Radio />} label="Every 15 hosts" />
+                          <FormControlLabel value="every5hosts" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Every 5 hosts" />
                         </td>
                         <td>
-                          <FormControlLabel value="every20hosts" control={<Radio />} label="Every 20 hosts" />
+                          <FormControlLabel value="every10hosts" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Every 10 hosts" />
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <FormControlLabel value="none" control={<Radio />} label="None" />
-                          
+                          <FormControlLabel value="every15hosts" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Every 15 hosts" />
+                        </td>
+                        <td>
+                          <FormControlLabel value="every20hosts" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Every 20 hosts" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <FormControlLabel value="none" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="None" />
+
                         </td>
                       </tr>
                     </table>
                   </RadioGroup>
                 </FormControl>
               </Paper>
+              </Tooltip>
             </Grid>
             {/* Set Flags */}
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{textAlign: "left"}}>
               <Paper style={{background: "#f9f9f9", padding: "15px 15px", textAlign: "center"}} elevation={0}>
                 <Typography style={{textAlign: "left",marginBottom: 12,}}>Scan Techniques</Typography>
-                {scanTechniquesData.map((data, index) => 
-                  <Tooltip title={data.tooltip} arrow placement="top">
+                {scanTechniquesData.map((data, index) => {
+                  const [opt, setOpt] = useState(false)
+
+                  return(
+                    <Tooltip title={data.tooltip} arrow placement="top">
                       <FormControlLabel
-                          value="end"
+                          value={opt}
                           control={
                               <Checkbox 
                                   color="primary" 
+                                  checked={opt}
+                                  onChange={(event: React.ChangeEvent<HTMLInputElement>)=> {
+                                    settingsStatus.setFlag(settingsStatus.flag + 1); 
+                                    console.log(settingsStatus.flag);
+                                    setOpt(event.target.checked);
+                                  }}
                               />
                           }
                           label={data.flag}
                           labelPlacement="end"
                       />
-                  </Tooltip>
-                )}
+                    </Tooltip>
+                  )
+                })}
                 <Divider variant="middle" style={{marginTop: 10, marginBottom: 20,}}/>
                 
                 <Typography style={{textAlign: "left",marginBottom: 12,}}>Host Discovery</Typography>
-                {hostDiscovery.map((data, index) => 
-                  <Tooltip title={data.tooltip} arrow placement="top">
+                {hostDiscovery.map((data, index) => {
+                    const [opt, setOpt] = useState(false)
+
+                  return(
+                    <Tooltip title={data.tooltip} arrow placement="top">
                       <FormControlLabel
-                          value="end"
+                          value={opt}
                           control={
                               <Checkbox 
                                   color="primary" 
+                                  checked={opt}
+                                  onChange={(event: React.ChangeEvent<HTMLInputElement>)=> {
+                                    settingsStatus.setFlag(settingsStatus.flag + 1); 
+                                    console.log(settingsStatus.flag);
+                                    setOpt(event.target.checked);
+                                  }}
                               />
                           }
                           label={data.flag}
                           labelPlacement="end"
                       />
-                  </Tooltip>
-                )}
+                    </Tooltip>
+                  )
+                })}
                 <Divider variant="middle" style={{marginTop: 10, marginBottom: 20,}}/>
 
                 <Typography style={{textAlign: "left",marginBottom: 12,}}>OS Detection</Typography>
-                {osDetection.map((data, index) => 
-                  <Tooltip title={data.tooltip} arrow placement="top">
+                {osDetection.map((data, index) => {
+                    const [opt, setOpt] = useState(false)
+
+                  return(
+                    <Tooltip title={data.tooltip} arrow placement="top">
                       <FormControlLabel
-                          value="end"
+                          value={opt}
                           control={
                               <Checkbox 
                                   color="primary" 
+                                  checked={opt}
+                                  onChange={(event: React.ChangeEvent<HTMLInputElement>)=> {
+                                    settingsStatus.setFlag(settingsStatus.flag + 1); 
+                                    console.log(settingsStatus.flag);
+                                    setOpt(event.target.checked);
+                                  }}
                               />
                           }
                           label={data.flag}
                           labelPlacement="end"
                       />
-                  </Tooltip>
-                )}
+                    </Tooltip>
+                  )
+                })}
                 <Divider variant="middle" style={{marginTop: 10, marginBottom: 20,}}/>
 
                 <Typography style={{textAlign: "left",marginBottom: 12,}}>Output</Typography>
-                {outputOpt.map((data, index) => 
-                  <Tooltip title={data.tooltip} arrow placement="top">
+                {outputOpt.map((data, index) => {
+                    const [opt, setOpt] = useState(false)
+
+                  return(
+                    <Tooltip title={data.tooltip} arrow placement="top">
                       <FormControlLabel
-                          value="end"
+                          value={opt}
                           control={
                               <Checkbox 
                                   color="primary" 
+                                  checked={opt}
+                                  onChange={(event: React.ChangeEvent<HTMLInputElement>)=> {
+                                    settingsStatus.setFlag(settingsStatus.flag + 1); 
+                                    console.log(settingsStatus.flag);
+                                    setOpt(event.target.checked);
+                                  }}
                               />
                           }
                           label={data.flag}
                           labelPlacement="end"
                       />
-                  </Tooltip>
-                )}
+                    </Tooltip>
+                  )
+                })}
                 <Divider variant="middle" style={{marginTop: 10, marginBottom: 20,}}/>
+
+                <Typography style={{textAlign: "left",marginBottom: 12,}}>Port Specification</Typography>
+                {portSpecification.map((data, index) => {
+                    const [opt, setOpt] = useState(false)
+
+                  return(
+                    <Tooltip title={data.tooltip} arrow placement="top">
+                      <FormControlLabel
+                          value={opt}
+                          control={
+                              <Checkbox 
+                                  color="primary" 
+                                  checked={opt}
+                                  onChange={(event: React.ChangeEvent<HTMLInputElement>)=> {
+                                    settingsStatus.setFlag(settingsStatus.flag + 1); 
+                                    console.log(settingsStatus.flag);
+                                    setOpt(event.target.checked);
+                                  }}
+                              />
+                          }
+                          label={data.flag}
+                          labelPlacement="end"
+                      />
+                    </Tooltip>
+                  )
+                })}
+                <Divider variant="middle" style={{marginTop: 10, marginBottom: 20,}}/>
+
+                <Typography style={{textAlign: "left",marginBottom: 12,}}>Service And Version Detectiony</Typography>
+                {serviceAndVersionDetectiony.map((data, index) => {
+                    const [opt, setOpt] = useState(false)
+
+                  return(
+                    <Tooltip title={data.tooltip} arrow placement="top">
+                      <FormControlLabel
+                          value={opt}
+                          control={
+                              <Checkbox 
+                                  color="primary" 
+                                  checked={opt}
+                                  onChange={(event: React.ChangeEvent<HTMLInputElement>)=> {
+                                    settingsStatus.setFlag(settingsStatus.flag + 1); 
+                                    console.log(settingsStatus.flag);
+                                    setOpt(event.target.checked);
+                                  }}
+                              />
+                          }
+                          label={data.flag}
+                          labelPlacement="end"
+                      />
+                    </Tooltip>
+                  )
+                })}
+                <Divider variant="middle" style={{marginTop: 10, marginBottom: 20,}}/>
+                
               </Paper>
             </Grid>
             {/* Others */}

@@ -31,8 +31,9 @@ import { rows } from '../Backend/frontendData/getPortStatus'
 // Components
 import NmapOutput from './ScanResults/NmapOutput'
 import HostsAndPorts from './ScanResults/HostsAndPorts'
-import CVEResult from './ScanResults/CVEResult'
 import ScanDetails from './ScanResults/ScanDetails'
+import CVEResult from './ScanResults/CVEResult'
+import WhoIs from './ScanResults/WhoIs'
 import ExportResult from './ScanResults/ExportResult'
 
 // Mobx Global Status
@@ -162,7 +163,7 @@ export default observer (() => {
             <>
               <div style={{textAlign: "center"}}>
                 <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
-                  <LinearProgress style={{width: "83%",marginLeft:90, height: 4}} />
+                  <LinearProgress style={{width: "100%",marginLeft:0, height: 5, color: "#333"}} />
                 </Tooltip>
               </div>
             </>
@@ -170,7 +171,7 @@ export default observer (() => {
             null
         ))}
       <Grid container spacing={5} justify="center" alignItems="center">
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           {/* <button onClick={handleClickJO}>click</button> */}
                 <Paper className={classes.paper}>
                     <table style={{width: "100%"}}>
@@ -232,9 +233,10 @@ export default observer (() => {
                                         centered>
                                       <Tab label="Nmap Output" {...a11yProps(0)} style={{textTransform: "capitalize"}} />
                                       <Tab label="Hosts and Ports" {...a11yProps(1)} style={{textTransform: "capitalize"}} />
-                                      <Tab label="CVE" {...a11yProps(2)} style={{textTransform: "capitalize"}} />
-                                      <Tab label="Scan Details" {...a11yProps(3)} style={{textTransform: "capitalize"}} />
-                                      <Tab label="Export Results" {...a11yProps(4)} style={{textTransform: "capitalize"}} />
+                                      <Tab label="Scan Details" {...a11yProps(2)} style={{textTransform: "capitalize"}} />
+                                      <Tab label="CVE" {...a11yProps(3)} style={{textTransform: "capitalize"}} />
+                                      <Tab label="WhoIs" {...a11yProps(4)} style={{textTransform: "capitalize"}} />
+                                      <Tab label="Export Results" {...a11yProps(5)} style={{textTransform: "capitalize"}} />
                                     </Tabs>
                                 </AppBar>
                                 <Paper className={classes.paper}>
@@ -247,12 +249,15 @@ export default observer (() => {
                                       </div>
                                     </TabPanel>
                                     <TabPanel value={value} index={2}>
-                                        <CVEResult />
-                                    </TabPanel>
-                                    <TabPanel value={value} index={3}>
                                         <ScanDetails />
                                     </TabPanel>
+                                    <TabPanel value={value} index={3}>
+                                        <CVEResult />
+                                    </TabPanel>
                                     <TabPanel value={value} index={4}>
+                                        <WhoIs />
+                                    </TabPanel>
+                                    <TabPanel value={value} index={5}>
                                         <ExportResult />
                                     </TabPanel>
                                 </Paper>

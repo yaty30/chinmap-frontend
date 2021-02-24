@@ -6,18 +6,47 @@ import random
 import string
 import tempfile
 import fileinput
+from flask import Flask
+from datetime import datetime
 
 # ========================== Get from front-end user input ================================== #
 # Scan Information
 # test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
-target = 'scanme.nmap.org'
-scanMode = ''
-flags = ' '
+target = 'www.vtc.edu.hk'
+flags = ''
+scanMode = 'fullPortsScanMode'
+
+# Default Scan Modes
+pingScanMode = ' -v -sU -sT -p -U:161, T:80 -T0 '
+lightningScanMode = ' -v -sU -sT -p U:161,T:80 -T0 '
+intenseScanMode = ' -T4 -A -v '
+nonPingScanMode = ' -v -sU -sT -p U:161,T:80 -T0 '
+topOneHundredScanMode = ' -T4 -F -vv '
+fullPortsScanMode = ' -T4 -p- -v -v '
+
+if scanMode == 'pingScanMode':
+    mode = pingScanMode
+elif scanMode == 'lightningScanMode':
+    mode = lightningScanMode
+elif scanMode == 'intenseScanMode':
+    mode = intenseScanMode
+elif scanMode == 'nonPingScanMode':
+    mode = nonPingScanMode
+elif scanMode == 'topOneHundredScanMode':
+    mode = topOneHundredScanMode
+elif scanMode == 'fullPortsScanMode':
+    mode = fullPortsScanMode
+else:
+    mode = ''
 
 # Extra freatures
-automation = True
-cveDetection = True
-avoidPingBlocking = True
+automation = False
+cveDetection = False
+avoidPingBlocking = False
+whois = False
+
+# Flask API
+# app = Flask(__name__) # Current model
 
 # if target is an independent IP, set scan range will not be able to apply
 if re.findall(r'.0\/\d+$', target):
@@ -30,14 +59,6 @@ else:
 # Python-nmap scanner
 # nm = nmap.PortScanner()
 # nm.scan(target)
-
-# Default Scan Modes
-pingScanMode = ' -v -sU -sT -p -U:161, T:80 -T0 '
-lightningScanMode = ' -v -sU -sT -p U:161,T:80 -T0 '
-intenseScanMode = ' -T4 -A -v '
-nonPingScanMode = ' -v -sU -sT -p U:161,T:80 -T0 '
-topOneHundredScanMode = ' -T4 -F -vv '
-fullPortsScanMode = ' -T4 -p- -v -v '
 
 # Elements
 divider = "\n======================================================\n"
@@ -75,9 +96,7 @@ def GetPortStatus(result):
         if automation == True:
             while len(ports) < 1:
                 if len(scanMode) < 1:
-                    RunNormalScan()
-                else:
-                    RunScanMode()
+                    InitiateScan(scanCommand)
                 i += 1
             
         fePortStatusTxt.writelines("\ncreateData('" + str(scanID) + "'," + str(ports)[1:] + ",")
@@ -110,13 +129,12 @@ def GetScanDetails(result):
     # plain target for dropdown select menu option
     targetForSelect = str(target)
 
-    # find scan date
-    date = re.findall(r'(\d{4}-\d{2}-\d{2}[ \t]+\d{2}:\d{2})', data)
-    foundDate = str(date)[2:-8]
+    # find scan date rg ) at 2021-02-24 19:03 HKT
+    foundDate = datetime.today().strftime('%Y-%m-%d')
 
     # find scan time
-    time = re.findall(r'(\d{4}-\d{2}-\d{2}[ \t]+\d{2}:\d{2})', data)
-    foundTime  = str(time)[12:-2]
+    now = datetime.now()
+    foundTime = now.strftime("%H:%M")
 
     # find up host
     hostUp = re.findall(r'(\d host up)', data)
@@ -208,7 +226,7 @@ def GetScanDetails(result):
     targetForSelectTxt.close() 
     
 
-    return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(foundTarget) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + str(foundTime) + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '"\n}}'
+    return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(target) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + foundTime + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '"\n}}'
     
 def GetCVE():
     runCVEScan = os.popen('nmap -sS -sV --script=vulscan/vulscan ' + target)
@@ -226,12 +244,50 @@ def GetCVE():
     cveScanOutputTsx.writelines("\n]")
     cveScanOutputTsx.close()
 
+def GetWhoIs():
+    if whois == True:
+        runWhois = os.popen('sudo nmap --script whois-domain.nse -d ' + target)
+        whoisScan = runWhois.read()
+
+        # Finding WhoIs script result
+        whoisResult = re.findall(r'(Host script results:(.*))', whoisScan)
+
+        with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
+            for line in file:
+                print(line.replace("]", ""), end='')
+        whoisScanTsx = open("whoisScan.tsx", "a")
+
+        whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
+        
+        if len(whoisResult) < 1:
+            whoisScanTsx.writelines("No WhoIs result found, either the target is a local network address, or the target is currently down.")
+        else:
+            whoisScanTsx.writelines(str(whoisResult)[3:-7])
+
+        whoisScanTsx.writelines("\n`},\n")
+
+        whoisScanTsx.writelines("\n]")
+        whoisScanTsx.close()
+    else:
+        with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
+            for line in file:
+                print(line.replace("]", ""), end='')
+        whoisScanTsx = open("whoisScan.tsx", "a")
+
+        whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
+        whoisScanTsx.writelines("Enable WhoIs feature to discover.")
+        whoisScanTsx.writelines("\n`},\n")
+
+        whoisScanTsx.writelines("\n]")
+        whoisScanTsx.close()
+
 
 def AvoidPingBlock():
    bypassBlocking = " -Pn "
    return bypassBlocking
 
-def RunNormalScan():
+# @app.route('/')
+def InitiateScan(scanCommand):
     StartScan()
     
     # Check if Avoid Ping Blocking feature is on
@@ -245,17 +301,18 @@ def RunNormalScan():
     #     return normalScanOutput
 
     # CVE Detection
+
     if cveDetection == True:
         GetCVE()
+    
+    
+    GetWhoIs()
 
-    runNormalScan = os.popen('nmap ' + flags + target)
-    normalScanOutput = runNormalScan.read()
+    normalScanOutput = scanCommand.read()
 
     # Export normal scan output to text file
     normalScanTxt = open("Result.txt", "w+")
-    
     normalScanTxtResult = "Command: " + "nmap " + flags + target + divider + normalScanOutput
-
     normalScanTxt.writelines(normalScanTxtResult)
     normalScanTxt.close()
 
@@ -263,7 +320,8 @@ def RunNormalScan():
     feNormalScanTxt = open("scannedIn.json", "a")
     # Appending new data to scannedIn.json
     feNormalScanResult = "Result.txt"
-    feNormalScanTxt.writelines(str(GetScanDetails(feNormalScanResult))[:-1])
+    getScanDetailsOutput = str(GetScanDetails(feNormalScanResult))[:-1]
+    feNormalScanTxt.writelines(getScanDetailsOutput)
     feNormalScanTxt.close()
 
      # remove ] in json and insert new data with a ]
@@ -273,6 +331,7 @@ def RunNormalScan():
     fileInputFixBracket = open("scannedIn.json", "a")
     fileInputFixBracket.write('\n]')
     fileInputFixBracket.close()
+    
    
     # Port Status
     f = open("Result.txt", "r")
@@ -290,81 +349,13 @@ def RunNormalScan():
 
     EndScan()
 
-def RunScanMode():
-    StartScan()
-
-    # Check if Avoid Ping Blocking feature is on
-    # if avoidPingBlocking == True:
-    #     runNormalScan = os.popen('nmap ' + mode + AvoidPingBlock() + target)
-    #     normalScanOutput = runNormalScan.read()
-    #     return normalScanOutput
-    # else:
-    #     runNormalScan = os.popen('nmap ' + mode + target)
-    #     normalScanOutput = runNormalScan.read()
-    #     return normalScanOutput
-    runNormalScan = os.popen('nmap ' + mode + target)
-    normalScanOutput = runNormalScan.read()
-
-    # Export normal scan output to text file
-    normalScanTxt = open("Result.txt", "w+")
-    
-    normalScanTxtResult = "Command: " + "nmap " + target + " With Scan mode: " + mode + divider + normalScanOutput
-
-    normalScanTxt.writelines(normalScanTxtResult)
-    normalScanTxt.close()
-
-    # Generating normal scan output for Frontend
-    feNormalScanTxt = open("scannedIn.json", "a")
-    # Appending new data to scannedIn.json
-    feNormalScanResult = "Result.txt"
-    feNormalScanTxt.writelines(str(GetScanDetails(feNormalScanResult))[:-1])
-    feNormalScanTxt.close()
-
-     # remove ] in json and insert new data with a ]
-    with fileinput.FileInput("scannedIn.json", inplace=True, backup='.bak') as file:
-        for line in file:
-            print(line.replace("]", ""), end='')
-    fileInputFixBracket = open("scannedIn.json", "a")
-    fileInputFixBracket.write('\n]')
-    fileInputFixBracket.close()
-   
-    # Port Status
-    f = open("Result.txt", "r")
-    portStatusToRead = f.read()
-    GetPortStatus(portStatusToRead)
-    f.close()
-    
-
-    # Frontend Nmap Output
-    with fileinput.FileInput("Result.tsx", inplace=True, backup='.bak') as file:
-        for line in file:
-            print(line.replace("]", ""), end='')
-    feNomralScanPureOutputTxt = open("Result.tsx", "a")
-    feNomralScanPureOutputTxt.writelines("\n{\nid: '" + str(scanID) + "',\noutput: `" + normalScanTxtResult + "`,},\n]")
-    feNomralScanPureOutputTxt.close()
-    
-    EndScan()
-
-# Starting Point
-if len(scanMode) < 1:
-    RunNormalScan()
+if scanMode == '':
+    scanCommand = os.popen('sudo nmap ' + flags + target)
+    InitiateScan(scanCommand)
 else:
-    if scanMode == 'pingScanMode':
-        mode = pingScanMode
-        RunScanMode()
-    elif scanMode == 'lightningScanMode':
-        mode = lightningScanMode
-        RunScanMode()
-    elif scanMode == 'intenseScanMode':
-        mode = intenseScanMode
-        RunScanMode()
-    elif scanMode == 'nonPingScanMode':
-        mode = nonPingScanMode
-        RunScanMode()
-    elif scanMode == 'topOneHundredScanMode':
-        mode = topOneHundredScanMode
-        RunScanMode()
-    else:
-        mode = fullPortsScanMode
-        RunScanMode()
-  
+    scanCommand = os.popen('sudo nmap ' + mode + target)
+    InitiateScan(scanCommand)
+
+# if __name__ == "__main__":
+#     app.debug = True
+#     app.run() 

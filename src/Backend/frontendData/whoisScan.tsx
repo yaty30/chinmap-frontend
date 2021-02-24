@@ -1,4 +1,4 @@
-export const cveScanOutput = [
+export const whoisScanOutput = [
 
     {
 
@@ -7,5 +7,4 @@ export const cveScanOutput = [
         output: "",
 
     },
-
 ]

@@ -2,13 +2,18 @@ import { types } from "mobx-state-tree";
 
 const homeSettings = types
     .model({
+        target: types.string,
         range: types.string,
         automation: types.boolean,
         cve: types.boolean,
         pn: types.boolean,
         whoIs: types.boolean,
+        flag: types.number,
     })
     .actions(self => ({
+        setTarget(target: string) {
+            self.target = target
+        },
         setRange(range: string) {
             self.range = range
         },
@@ -23,15 +28,20 @@ const homeSettings = types
         },
         setWhoIs(whoIs: any) {
             self.whoIs = whoIs
+        },
+        setFlag(flag: any) {
+            self.flag = flag
         }
     }))
 
 const store = homeSettings.create({
+    target: "",
     range: "",
     automation: false,
     cve: false,
     pn: false,
     whoIs: false,
+    flag: 0,
 });
 
 export default store;

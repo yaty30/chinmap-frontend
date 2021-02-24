@@ -1,92 +1,14 @@
 [
+
     {
+
         "id": "",
+
         "target": "",
+
         "runTime": "",
+
         "date": ""
+
     }
-,
-{
-"id": "ddxwcuJKVOpMthvjQIUxY",
-"target": "scanme.nmap.org",
-"runTime": "1.95 seconds",
-"date": "2021-02-15"
-}
-,
-{
-"id": "BNUhtbnTzNRthehmofeAU",
-"target": "scanme.nmap.org",
-"runTime": "1110.76 seconds",
-"date": "2021-02-16"
-}
-,
-{
-"id": "MJQhFPgfDGYZDPwgPdoqF",
-"target": "192.168.1.1",
-"runTime": "0.43 seconds",
-"date": "2021-02-17"
-}
-,
-{
-"id": "ijCCjRttPmAPWqdcfDQDi",
-"target": "scanme.nmap.org",
-"runTime": "3.18 seconds",
-"date": "2021-02-20"
-}
-,
-{
-"id": "efvvpejuKjqGHdiqpbmWp",
-"target": "scanme.nmap.org",
-"runTime": "1.87 seconds",
-"date": "2021-02-21"
-}
-,
-{
-"id": "EXPtIuwQAGlIWmpYRaNci",
-"target": "scanme.nmap.org",
-"runTime": "901.73 seconds",
-"date": "2021-02-21"
-}
-,
-{
-"id": "tUZNyJRmqDsTeOWmVfXpT",
-"target": "192.168.1.1",
-"runTime": "2.57 seconds",
-"date": "2021-02-23"
-}
-,
-{
-"id": "zAgoxnNZGQQtqGmSsjklW",
-"target": "chinmap.xyz",
-"runTime": "1.87 seconds",
-"date": "2021-02-23"
-}
-,
-{
-"id": "uRIzRzVpMfRoZKxmnlPqt",
-"target": "192.168.1.1",
-"runTime": "1.08 seconds",
-"date": "2021-02-24"
-}
-,
-{
-"id": "odeRmNAyopbJXeMmywvnY",
-"target": "scanme.nmap.org",
-"runTime": "5.70 seconds",
-"date": "2021-02-24"
-}
-,
-{
-"id": "gSwlbTwxVjqgVPoWkanRf",
-"target": "scanme.nmap.org",
-"runTime": "3.93 seconds",
-"date": "2021-02-24"
-}
-,
-{
-"id": "DoenReAakbRfvsWtPluem",
-"target": "scanme.nmap.org",
-"runTime": "5.69 seconds",
-"date": "2021-02-24"
-}
 ]

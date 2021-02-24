@@ -1,85 +1,63 @@
 [
+
     {
+
         "id": "",
+
         "target": "",
+
         "runTime": "",
+
         "date": ""
+
     }
 ,
 {
-"id": "ddxwcuJKVOpMthvjQIUxY",
-"target": "scanme.nmap.org",
-"runTime": "1.95 seconds",
-"date": "2021-02-15"
-}
-,
-{
-"id": "BNUhtbnTzNRthehmofeAU",
-"target": "scanme.nmap.org",
-"runTime": "1110.76 seconds",
-"date": "2021-02-16"
-}
-,
-{
-"id": "MJQhFPgfDGYZDPwgPdoqF",
-"target": "192.168.1.1",
-"runTime": "0.43 seconds",
-"date": "2021-02-17"
-}
-,
-{
-"id": "ijCCjRttPmAPWqdcfDQDi",
-"target": "scanme.nmap.org",
-"runTime": "3.18 seconds",
-"date": "2021-02-20"
-}
-,
-{
-"id": "efvvpejuKjqGHdiqpbmWp",
-"target": "scanme.nmap.org",
-"runTime": "1.87 seconds",
-"date": "2021-02-21"
-}
-,
-{
-"id": "EXPtIuwQAGlIWmpYRaNci",
-"target": "scanme.nmap.org",
-"runTime": "901.73 seconds",
-"date": "2021-02-21"
-}
-,
-{
-"id": "tUZNyJRmqDsTeOWmVfXpT",
-"target": "192.168.1.1",
-"runTime": "2.57 seconds",
-"date": "2021-02-23"
-}
-,
-{
-"id": "zAgoxnNZGQQtqGmSsjklW",
-"target": "chinmap.xyz",
-"runTime": "1.87 seconds",
-"date": "2021-02-23"
-}
-,
-{
-"id": "uRIzRzVpMfRoZKxmnlPqt",
-"target": "192.168.1.1",
-"runTime": "1.08 seconds",
+"id": "jbCqrXQoeJhLyIlHUBVDI",
+"target": "168.235.74.9",
+"runTime": "1.67 seconds",
 "date": "2021-02-24"
 }
 ,
 {
-"id": "odeRmNAyopbJXeMmywvnY",
+"id": "cQFsMbHyqLCfStWulvFhP",
 "target": "scanme.nmap.org",
-"runTime": "5.70 seconds",
+"runTime": "1.61 seconds",
 "date": "2021-02-24"
 }
 ,
 {
-"id": "gSwlbTwxVjqgVPoWkanRf",
+"id": "YQPXnZUBEnoStFxjFnCBZ",
+"target": "192.168.1.1",
+"runTime": "0.60 seconds",
+"date": "2021-02-24"
+}
+,
+{
+"id": "qgiYyrQLmcCfsHvgKmTqr",
+"target": "192.168.1.1",
+"runTime": "1.54 seconds",
+"date": "2021-02-24"
+}
+,
+{
+"id": "yEoIdLZHmehEifEIojVxR",
 "target": "scanme.nmap.org",
-"runTime": "3.93 seconds",
+"runTime": "1.70 seconds",
+"date": "2021-02-24"
+}
+,
+{
+"id": "rofZGmXSXgsZUNPulmsHZ",
+"target": "www.vtc.edu.hk",
+"runTime": "1.75 seconds",
+"date": "2021-02-24"
+}
+,
+{
+"id": "SuENLzufFrKLIMjMchOLd",
+"target": "www.vtc.edu.hk",
+"runTime": "1.64 seconds",
 "date": "2021-02-24"
 }
 ]

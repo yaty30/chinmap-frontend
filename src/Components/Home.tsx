@@ -116,53 +116,9 @@ export default observer (() => {
 
   const [target, setTarget] = React.useState("");
   const handleScanTarget = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setTarget(event.target.value as string)
-    target.length < 1 || scanMode == "" ? setIsEmpty(true) : setIsEmpty(false);
+    homeSettingsStatus.setTarget(event.target.value as string)
+    homeSettingsStatus.target.length < 1 || scanMode == "" ? setIsEmpty(true) : setIsEmpty(false);
   }
-
-  const CurrentTime = () => {
-    var scanTime: any;
-    var date = new Date();
-
-    var hours = date.getHours();
-    var min = date.getMinutes();
-
-    var hourAddZero = hours < 10 ? '0' + hours : hours;
-    var minAddZero = min < 10 ? '0' + min : min;
-
-    return scanTime = hourAddZero + ":" + minAddZero;
-  }
-
-  const CurrentDate = () => {
-    var today = new Date();
-    var currentDate: any;
-
-    var date = today.getDate();
-    var month = today.getMonth();
-
-    var dateAddZero = date < 10 ? '0' + date : date;
-    var mthAddZerp = month < 10 ? '0' + month : month;
-    
-    return currentDate = dateAddZero + "/" + mthAddZerp + "/" + today.getFullYear();
-  }
-
-  const Cap = (scanMode: string) => {
-    return scanMode.charAt(0).toUpperCase() + scanMode.slice(1);
-  }
-
-  const AddSpaces = (obj: string) => {
-    return obj.replace(/([A-Z])/g, ' $1').trim();
-  }
-
-  const ScanIdentifier = (length: any) => {
-    var result           = 'scanID';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
- }
 
   const [reset, setReset] = React.useState(false);
   const handleReset = () => (
@@ -189,7 +145,7 @@ export default observer (() => {
                             width: "70%",
                         }}
                         onChange={handleScanTarget}
-                        value={target}
+                        value={homeSettingsStatus.target}
                     />
                 </Tooltip>
               </div>
@@ -197,24 +153,114 @@ export default observer (() => {
                 <Grid item xs={12} className={classes.centerGrid}>
                     <Settings />
                 </Grid>
-                <Grid item xs={6}>
-                  {
-                     homeSettingsStatus.automation === true ?
-                      <Chip label="Automation" clickable variant="outlined" deleteIcon={<AutomationIcon />}/> : null
-                  }
-                  {
-                    homeSettingsStatus.cve === true ? 
-                      <Chip label="CVE Detection" clickable variant="outlined" deleteIcon={<AutomationIcon />}/> : null
-                  }
-                  {
-                    homeSettingsStatus.pn === true ? 
-                      <Chip label="Ping Block Bypass" clickable variant="outlined" deleteIcon={<AutomationIcon />}/> : null
-                  }
-                  {
-                    homeSettingsStatus.whoIs === true ? 
-                      <Chip label="WhoIs" clickable variant="outlined" deleteIcon={<AutomationIcon />}/> : null
-                  }
-                  <span>{homeSettingsStatus.range}</span>
+                <Grid item xs={12}>
+                  <table style={{width: "100%",textAlign: "center"}}>
+                    <tbody>
+                      <tr>
+                        <td style={{width: "25%"}}>
+                          <Button 
+                            variant="outlined" 
+                            style={{
+                              width: "100%", 
+                              whiteSpace: "nowrap",
+                              cursor: 'default',
+                            }}
+                            size="small"
+                            color="primary"
+                            disabled={homeSettingsStatus.automation === true ? false : true}
+                          >
+                            Automation
+                          </Button>
+                        </td>
+                        <td style={{width: "25%"}}>
+                          <Button 
+                            variant="outlined" 
+                            style={{
+                              width: "100%", 
+                              whiteSpace: "nowrap",
+                              cursor: 'default',
+                            }}
+                            size="small"
+                            color="primary"
+                            disabled={homeSettingsStatus.cve === true ? false : true}
+                          >
+                            CVE Detection
+                          </Button>
+                        </td>
+                        <td style={{width: "25%"}}>
+                          <Button 
+                            variant="outlined" 
+                            style={{
+                              width: "100%", 
+                              whiteSpace: "nowrap",
+                              cursor: 'default',
+                            }}
+                            size="small"
+                            color="primary"
+                            disabled={homeSettingsStatus.pn === true ? false : true}
+                          >
+                            Ping Block Bypass
+                          </Button>
+                        </td>
+                        <td style={{width: "25%"}}>
+                          <Button 
+                            variant="outlined" 
+                            style={{
+                              width: "100%", 
+                              whiteSpace: "nowrap",
+                              cursor: 'default',
+                            }}
+                            size="small"
+                            color="primary"
+                            disabled={homeSettingsStatus.whoIs === true ? false : true}
+                          >
+                            WhoIs
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colSpan={2}>
+                          <Button 
+                            variant="outlined" 
+                            style={{
+                              width: "100%", 
+                              whiteSpace: "nowrap",
+                              cursor: 'default',
+                            }}
+                            size="small"
+                            color="primary"
+                            disabled={homeSettingsStatus.range == '' || homeSettingsStatus.range == 'none' ? true : false}
+                          >
+                            Set Range:&nbsp;
+                              {
+                                homeSettingsStatus.range == '' ? 'none' :
+                                homeSettingsStatus.range == 'oddOnly' ?  'Odd Numbers Only' :
+                                homeSettingsStatus.range == 'evenOnly' ?  'Even Numbers Only' :
+                                homeSettingsStatus.range == 'every5hosts' ?  'Every 5 Hosts' :
+                                homeSettingsStatus.range == 'every10hosts' ?  'Every 10 Hosts' :
+                                homeSettingsStatus.range == 'every15hosts' ?  'Every 15 Hosts' : 'Every 20 Hosts'
+                              }
+                          </Button>
+                        </td>
+                        <td colSpan={3}>
+                          <Button 
+                            variant="outlined" 
+                            style={{
+                              width: "100%", 
+                              whiteSpace: "nowrap",
+                              cursor: 'default',
+                              textTransform: "capitalize",
+                            }}
+                            size="small"
+                            color="primary"
+                            disabled={homeSettingsStatus.flag > 0 ? false : true}
+                          >
+                            Flags: &nbsp;{homeSettingsStatus.flag}
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </Grid>
               </Grid>
           </Paper>
@@ -256,8 +302,8 @@ export default observer (() => {
               </Paper>
           </Grid>
           
-          <Grid item xs={10} style={{marginTop: 55}}>
-            <Paper className={classes.paper} style={{minHeight: 0,}}>
+        <div style={{position: 'fixed', width: 865, bottom: 10}}>
+          <Paper className={classes.paper} style={{minHeight: 0,}}>
                 <Button 
                   color="primary"
                   onClick={handleReset}
@@ -331,7 +377,7 @@ export default observer (() => {
                     :
                   null
             ))}
-        </Grid>
+        </div>
       </Grid>
       
     </div>
