@@ -17,36 +17,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Chip from '@material-ui/core/Chip';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Switcher from '@material-ui/core/Switch';
 import AppBar from '@material-ui/core/AppBar';
-import FormLabel from '@material-ui/core/FormLabel';
-import HelpIcon from '@material-ui/icons/Help';
-import CsvDownloader from 'react-csv-downloader';
-import CsvLink from 'react-csv-export';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import clsx from 'clsx';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import DeleteIcon from '@material-ui/icons/Delete';
-import DoneIcon from '@material-ui/icons/Done';
-import PortOpened from '@material-ui/icons/Visibility';
-import PortFiltered from '@material-ui/icons/VisibilityOff';
-import { targetData, chosenMode, scanTarget } from './target'
 
 // Backend
 import { isScanning } from '../Backend/frontendData/isScanning'
@@ -58,6 +31,7 @@ import { rows } from '../Backend/frontendData/getPortStatus'
 // Components
 import NmapOutput from './ScanResults/NmapOutput'
 import HostsAndPorts from './ScanResults/HostsAndPorts'
+import CVEResult from './ScanResults/CVEResult'
 import ScanDetails from './ScanResults/ScanDetails'
 import ExportResult from './ScanResults/ExportResult'
 
@@ -273,7 +247,7 @@ export default observer (() => {
                                       </div>
                                     </TabPanel>
                                     <TabPanel value={value} index={2}>
-                                        CVE
+                                        <CVEResult />
                                     </TabPanel>
                                     <TabPanel value={value} index={3}>
                                         <ScanDetails />
