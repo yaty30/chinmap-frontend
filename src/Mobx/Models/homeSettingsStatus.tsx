@@ -2,12 +2,16 @@ import { types } from "mobx-state-tree";
 
 const homeSettings = types
     .model({
+        range: types.string,
         automation: types.boolean,
         cve: types.boolean,
         pn: types.boolean,
         whoIs: types.boolean,
     })
     .actions(self => ({
+        setRange(range: string) {
+            self.range = range
+        },
         setAuto(automation: any) {
             self.automation = automation
         },
@@ -23,6 +27,7 @@ const homeSettings = types
     }))
 
 const store = homeSettings.create({
+    range: "",
     automation: false,
     cve: false,
     pn: false,

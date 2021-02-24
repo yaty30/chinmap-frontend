@@ -38,31 +38,31 @@ export default function OutlinedCard() {
 
   return (
     <Grid container justify="center" spacing={5} className={classes.mainGrid}>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
             <ScanTechinques />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
             <HostDiscovery />
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12}>
             <PortSpecification />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
             <ServiceAndVersionDetectiony />
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12}>
             <OSDetection />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
             <TimingAndPerformance />
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12}>
             <Output />
         </Grid>
-        <Grid item xs={6} />
+        <Grid item xs={12} />
     </Grid>
     
   );

@@ -169,96 +169,6 @@ export default observer (() => {
     setTarget("")
   )
 
-  const WhatIsThis = () => {
-    const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-  
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-  
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
-  
-    return (
-      <div>
-        <Button 
-          color="primary" 
-          onClick={handleClick}
-          disabled={
-            scanMode == "" ? true : false
-          }
-        >
-          What is this&nbsp;<LiveHelpOutlinedIcon/>
-        </Button>
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-        >
-          { 
-            scanMode == "pingScanMode" ?
-              <>
-                <Typography className={classes.typography}>
-                  This mode will not do a port scan after host discovery, and only print out the available hosts that responded to the host discovery probes.
-                </Typography>
-              </>
-              :
-            scanMode == "lightningScanMode" ?
-              <>
-                <Typography className={classes.typography}>
-                  Lightning scan mode able to check specific ports in a rapid way that user can see if the target is scannable or not.
-                </Typography>
-              </>
-              :
-            scanMode == "intenseScanMode" ?
-              <>
-                <Typography className={classes.typography}>
-                  Intense scan mode is capable of getting the information of the target's OS, services version and tracing the target router in one command.
-                </Typography>
-              </>
-              :
-            scanMode == "nonPingScanMode" ?
-              <>
-                <Typography className={classes.typography}>
-                  Non-Ping scan mode is specifically aim for checking the target is alive or down.
-                </Typography>
-              </>
-              :
-            scanMode == "top100PortsScanMode" ?
-              <>
-                <Typography className={classes.typography}>
-                  Top 100 Ports scan mode will show the top 100 poplar ports, such as DNS, SMTP or HTTP. This mode can dramatically speed up scanning while still representing the majority of commonly used ports.
-                </Typography>
-              </>
-              :
-            scanMode == "fullPortsScanMode" ?
-              <>
-                <Typography className={classes.typography}>
-                  This mode is able to check every single port of a pc, however, it requires a while of time.
-                </Typography>
-              </>
-              :
-            scanMode == ""
-          }
-        </Popover>
-      </div>
-    );
-  }
-
   return (
     <div className={classes.root}>
 
@@ -290,20 +200,21 @@ export default observer (() => {
                 <Grid item xs={6}>
                   {
                      homeSettingsStatus.automation === true ?
-                      <Chip label="Automation" variant="outlined" deleteIcon={<AutomationIcon />}/> : null
+                      <Chip label="Automation" clickable variant="outlined" deleteIcon={<AutomationIcon />}/> : null
                   }
                   {
                     homeSettingsStatus.cve === true ? 
-                      <Chip label="CVE Detection" variant="outlined" deleteIcon={<AutomationIcon />}/> : null
+                      <Chip label="CVE Detection" clickable variant="outlined" deleteIcon={<AutomationIcon />}/> : null
                   }
                   {
                     homeSettingsStatus.pn === true ? 
-                      <Chip label="Ping Block Bypass" variant="outlined" deleteIcon={<AutomationIcon />}/> : null
+                      <Chip label="Ping Block Bypass" clickable variant="outlined" deleteIcon={<AutomationIcon />}/> : null
                   }
                   {
                     homeSettingsStatus.whoIs === true ? 
-                      <Chip label="WhoIs" variant="outlined" deleteIcon={<AutomationIcon />}/> : null
+                      <Chip label="WhoIs" clickable variant="outlined" deleteIcon={<AutomationIcon />}/> : null
                   }
+                  <span>{homeSettingsStatus.range}</span>
                 </Grid>
               </Grid>
           </Paper>
@@ -317,39 +228,35 @@ export default observer (() => {
                 <div style={{textAlign: "center",marginTop: 15,marginLeft: 70}}>
                     <FormControl variant="outlined" style={{width: "100%"}}>
                         <InputLabel id="demo-simple-select-outlined-label">Scan Mode</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-outlined-label"
-                            id="demo-simple-select-outlined"
-                            value={scanMode}
-                            onChange={handleChange}
-                            label="Scan Mode"
-                            style={{
-                                width: "85%",
-                                textAlign: "center",
-                            }}
-                        >
-                            <ListSubheader>Default Scan Modes</ListSubheader>
-                            {scanModeData.map((data, index) => (
-                              data.cardInfo.map((data, index) => (
-                                <MenuItem value={data.name} key={index} className="default">{data.name}</MenuItem>
-                              ))
-                            ))}
-                            
-                            {/* <ListSubheader>Customised Scan Modes</ListSubheader>
-                            {customisedScanModes.map((modes) => (
-                              <MenuItem value={modes.value} className="customised">{modes.name}</MenuItem>
-                            ))} */}
-                        </Select>
-                    </FormControl>
-                </div>
-                    <br/>
-                <div style={{color: "lightgrey",fontSize:10,textAlign: "center"}}>
-                  <WhatIsThis />
-                </div>
-            </Paper>
-        </Grid>
-        
-        <Grid item xs={10} style={{marginTop: 55}}>
+                          <Select
+                              labelId="demo-simple-select-outlined-label"
+                              id="demo-simple-select-outlined"
+                              value={scanMode}
+                              onChange={handleChange}
+                              label="Scan Mode"
+                              style={{
+                                  width: "85%",
+                                  textAlign: "center",
+                              }}
+                          >
+                              <ListSubheader>Default Scan Modes</ListSubheader>
+                              {scanModeData.map((data, index) => (
+                                data.cardInfo.map((data, index) => (
+                                  <MenuItem value={data.name} key={index} className="default">{data.name}</MenuItem>
+                                ))
+                              ))}
+                              
+                              {/* <ListSubheader>Customised Scan Modes</ListSubheader>
+                              {customisedScanModes.map((modes) => (
+                                <MenuItem value={modes.value} className="customised">{modes.name}</MenuItem>
+                              ))} */}
+                          </Select>
+                      </FormControl>
+                  </div>
+              </Paper>
+          </Grid>
+          
+          <Grid item xs={10} style={{marginTop: 55}}>
             <Paper className={classes.paper} style={{minHeight: 0,}}>
                 <Button 
                   color="primary"

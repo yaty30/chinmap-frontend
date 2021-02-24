@@ -14,6 +14,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import Tooltip from '@material-ui/core/Tooltip';
+import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Divider from '@material-ui/core/Divider';
@@ -21,6 +23,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 // Components
+import scanTechniquesData from './json/ScanTechniques/data.json'
+import hostDiscovery from './json/HostDiscovery/data.json'
+import osDetection from './json/OSDetection/data.json'
+import outputOpt from './json/Output/data.json'
+
 
 // Mobx
 import settingsStatus from '../../Mobx/Models/homeSettingsStatus'
@@ -29,6 +36,7 @@ import SetFlags from './SetFlags'
 import { automation, cveDetection } from './homeSettingsData'
 import { targetData } from '../target'
 import { settings } from 'cluster';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -83,12 +91,7 @@ export default () => {
 
   const handleSetRange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSetRange((event.target as HTMLInputElement).value);
-  };
-
-  const [setRangeEveryHosts, setSetRangeEveryHosts] = useState('');
-
-  const handleSetRangeEveryHosts = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSetRangeEveryHosts((event.target as HTMLInputElement).value);
+    settingsStatus.setRange((event.target as HTMLInputElement).value);
   };
 
   return (
@@ -115,34 +118,39 @@ export default () => {
             <Grid item xs={12}>
               <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>
                 <FormControl component="fieldset">
-                  <FormLabel component="legend">Sen Range</FormLabel>
-                  <RadioGroup aria-label="gender" name="gender1" value={setRange} onChange={handleSetRange} style={{marginLeft: 45,marginTop:15}}>
-                    <FormControlLabel value="oddOnly" control={<Radio />} label="Odd Numbers Only" />
-                    <FormControlLabel value="even" control={<Radio />} label="Even Numbers Only" />
-                    <FormControlLabel value="everyhosts" control={<Radio />} label="Every x hosts" />
-                  </RadioGroup>
-                </FormControl>
-                <FormControl>
-                  <RadioGroup style={{marginLeft: 45}} value={setRangeEveryHosts} onChange={handleSetRangeEveryHosts}>
+                  <FormLabel component="legend">Set Range</FormLabel>
+                  <RadioGroup aria-label="gender" name="gender1" value={setRange} onChange={handleSetRange} style={{marginLeft: 65,marginTop:15}}>
                     <table>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <FormControlLabel value="fiveHosts" disabled={setRange === 'everyhosts' ? false : true} control={<Radio color="primary" />} label="Every 5 hosts" />
-                          </td>
-                          <td>
-                            <FormControlLabel value="tenHosts" disabled={setRange === 'everyhosts' ? false : true} control={<Radio color="primary" />} label="Every 10 hosts" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <FormControlLabel value="FifteenHosts" disabled={setRange === 'everyhosts' ? false : true} control={<Radio color="primary" />} label="Every 15 hosts" />
-                          </td>
-                          <td>
-                            <FormControlLabel value="TwentyHosts" disabled={setRange === 'everyhosts' ? false : true} control={<Radio color="primary" />} label="Every 20 hosts" />
-                          </td>
-                        </tr>
-                      </tbody>
+                      <tr>
+                        <td>
+                          <FormControlLabel value="oddOnly" control={<Radio />} label="Odd Numbers Only" />
+                        </td>
+                        <td>
+                          <FormControlLabel value="even" control={<Radio />} label="Even Numbers Only" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <FormControlLabel value="every5hosts" control={<Radio />} label="Every 5 hosts" />
+                        </td>
+                        <td>
+                          <FormControlLabel value="every10hosts" control={<Radio />} label="Every 10 hosts" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <FormControlLabel value="every15hosts" control={<Radio />} label="Every 15 hosts" />
+                        </td>
+                        <td>
+                          <FormControlLabel value="every20hosts" control={<Radio />} label="Every 20 hosts" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <FormControlLabel value="none" control={<Radio />} label="None" />
+                          
+                        </td>
+                      </tr>
                     </table>
                   </RadioGroup>
                 </FormControl>
@@ -150,7 +158,75 @@ export default () => {
             </Grid>
             {/* Set Flags */}
             <Grid item xs={12}>
-              <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>xs=12</Paper>
+              <Paper style={{background: "#f9f9f9", padding: "15px 15px", textAlign: "center"}} elevation={0}>
+                <Typography style={{textAlign: "left",marginBottom: 12,}}>Scan Techniques</Typography>
+                {scanTechniquesData.map((data, index) => 
+                  <Tooltip title={data.tooltip} arrow placement="top">
+                      <FormControlLabel
+                          value="end"
+                          control={
+                              <Checkbox 
+                                  color="primary" 
+                              />
+                          }
+                          label={data.flag}
+                          labelPlacement="end"
+                      />
+                  </Tooltip>
+                )}
+                <Divider variant="middle" style={{marginTop: 10, marginBottom: 20,}}/>
+                
+                <Typography style={{textAlign: "left",marginBottom: 12,}}>Host Discovery</Typography>
+                {hostDiscovery.map((data, index) => 
+                  <Tooltip title={data.tooltip} arrow placement="top">
+                      <FormControlLabel
+                          value="end"
+                          control={
+                              <Checkbox 
+                                  color="primary" 
+                              />
+                          }
+                          label={data.flag}
+                          labelPlacement="end"
+                      />
+                  </Tooltip>
+                )}
+                <Divider variant="middle" style={{marginTop: 10, marginBottom: 20,}}/>
+
+                <Typography style={{textAlign: "left",marginBottom: 12,}}>OS Detection</Typography>
+                {osDetection.map((data, index) => 
+                  <Tooltip title={data.tooltip} arrow placement="top">
+                      <FormControlLabel
+                          value="end"
+                          control={
+                              <Checkbox 
+                                  color="primary" 
+                              />
+                          }
+                          label={data.flag}
+                          labelPlacement="end"
+                      />
+                  </Tooltip>
+                )}
+                <Divider variant="middle" style={{marginTop: 10, marginBottom: 20,}}/>
+
+                <Typography style={{textAlign: "left",marginBottom: 12,}}>Output</Typography>
+                {outputOpt.map((data, index) => 
+                  <Tooltip title={data.tooltip} arrow placement="top">
+                      <FormControlLabel
+                          value="end"
+                          control={
+                              <Checkbox 
+                                  color="primary" 
+                              />
+                          }
+                          label={data.flag}
+                          labelPlacement="end"
+                      />
+                  </Tooltip>
+                )}
+                <Divider variant="middle" style={{marginTop: 10, marginBottom: 20,}}/>
+              </Paper>
             </Grid>
             {/* Others */}
             <Grid item xs={6}>

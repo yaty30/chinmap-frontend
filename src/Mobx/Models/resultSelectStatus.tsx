@@ -15,6 +15,3 @@ const store = selectResult.create({
 });
 
 export default store;
-
-
-
