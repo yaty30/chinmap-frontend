@@ -48,10 +48,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     appBar: {
         position: 'relative',
+        background: "#333",
       },
       title: {
         marginLeft: theme.spacing(2),
         flex: 1,
+      
     },
     avatarText: {
         background: "#4A92FF",
@@ -117,7 +119,7 @@ export default observer (({index}:{index: number}) => {
         Settings
       </Button>
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
+        <AppBar className={classes.appBar} style={{backgroundColor: "#333"}}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
