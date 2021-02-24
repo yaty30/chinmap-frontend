@@ -307,4 +307,52 @@ createData('uRIzRzVpMfRoZKxmnlPqt','5000', 'tcp', 'open', 'upnp'),
 createData('uRIzRzVpMfRoZKxmnlPqt','8200', 'tcp', 'open', 'trivnet1'),
 createData('uRIzRzVpMfRoZKxmnlPqt','20005', 'tcp', 'open', 'btx'),
 // ===================== END of 192.168.1.1 =================================
+
+// ===================== Target: scanme.nmap.org ================================
+createData('odeRmNAyopbJXeMmywvnY','22', 'tcp', 'open', 'ssh'),
+createData('odeRmNAyopbJXeMmywvnY','25', 'tcp', 'filtered', 'smtp'),
+createData('odeRmNAyopbJXeMmywvnY','80', 'tcp', 'open', 'http'),
+createData('odeRmNAyopbJXeMmywvnY','135', 'tcp', 'filtered', 'msrpc'),
+createData('odeRmNAyopbJXeMmywvnY','139', 'tcp', 'filtered', 'netbios-ssn'),
+createData('odeRmNAyopbJXeMmywvnY','445', 'tcp', 'filtered', 'microsoft-ds'),
+createData('odeRmNAyopbJXeMmywvnY','3372', 'tcp', 'filtered', 'msdtc'),
+createData('odeRmNAyopbJXeMmywvnY','9929', 'tcp', 'open', 'nping-echo'),
+createData('odeRmNAyopbJXeMmywvnY','31337', 'tcp', 'open', 'Elite'),
+// ===================== END of scanme.nmap.org =================================
+
+// ===================== Target: scanme.nmap.org ================================
+createData('gSwlbTwxVjqgVPoWkanRf','22', 'tcp', 'open', 'ssh'),
+createData('gSwlbTwxVjqgVPoWkanRf','25', 'tcp', 'filtered', 'smtp'),
+createData('gSwlbTwxVjqgVPoWkanRf','80', 'tcp', 'open', 'http'),
+createData('gSwlbTwxVjqgVPoWkanRf','135', 'tcp', 'filtered', 'msrpc'),
+createData('gSwlbTwxVjqgVPoWkanRf','139', 'tcp', 'filtered', 'netbios-ssn'),
+createData('gSwlbTwxVjqgVPoWkanRf','445', 'tcp', 'filtered', 'microsoft-ds'),
+createData('gSwlbTwxVjqgVPoWkanRf','3372', 'tcp', 'filtered', 'msdtc'),
+createData('gSwlbTwxVjqgVPoWkanRf','9929', 'tcp', 'open', 'nping-echo'),
+createData('gSwlbTwxVjqgVPoWkanRf','31337', 'tcp', 'open', 'Elite'),
+// ===================== END of scanme.nmap.org =================================
+
+// ===================== Target: scanme.nmap.org ================================
+createData('LjabSLtzGggkbCBjOvCOD','22', 'tcp', 'open', 'ssh'),
+createData('LjabSLtzGggkbCBjOvCOD','25', 'tcp', 'filtered', 'smtp'),
+createData('LjabSLtzGggkbCBjOvCOD','80', 'tcp', 'open', 'http'),
+createData('LjabSLtzGggkbCBjOvCOD','135', 'tcp', 'filtered', 'msrpc'),
+createData('LjabSLtzGggkbCBjOvCOD','139', 'tcp', 'filtered', 'netbios-ssn'),
+createData('LjabSLtzGggkbCBjOvCOD','445', 'tcp', 'filtered', 'microsoft-ds'),
+createData('LjabSLtzGggkbCBjOvCOD','3372', 'tcp', 'filtered', 'msdtc'),
+createData('LjabSLtzGggkbCBjOvCOD','9929', 'tcp', 'open', 'nping-echo'),
+createData('LjabSLtzGggkbCBjOvCOD','31337', 'tcp', 'open', 'Elite'),
+// ===================== END of scanme.nmap.org =================================
+
+// ===================== Target: scanme.nmap.org ================================
+createData('DoenReAakbRfvsWtPluem','22', 'tcp', 'open', 'ssh'),
+createData('DoenReAakbRfvsWtPluem','25', 'tcp', 'filtered', 'smtp'),
+createData('DoenReAakbRfvsWtPluem','80', 'tcp', 'open', 'http'),
+createData('DoenReAakbRfvsWtPluem','135', 'tcp', 'filtered', 'msrpc'),
+createData('DoenReAakbRfvsWtPluem','139', 'tcp', 'filtered', 'netbios-ssn'),
+createData('DoenReAakbRfvsWtPluem','445', 'tcp', 'filtered', 'microsoft-ds'),
+createData('DoenReAakbRfvsWtPluem','3372', 'tcp', 'filtered', 'msdtc'),
+createData('DoenReAakbRfvsWtPluem','9929', 'tcp', 'open', 'nping-echo'),
+createData('DoenReAakbRfvsWtPluem','31337', 'tcp', 'open', 'Elite'),
+// ===================== END of scanme.nmap.org =================================
 ]

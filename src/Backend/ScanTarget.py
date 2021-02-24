@@ -10,13 +10,13 @@ import fileinput
 # ========================== Get from front-end user input ================================== #
 # Scan Information
 # test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
-target = '192.168.1.1'
+target = 'scanme.nmap.org'
 scanMode = ''
 flags = ' '
 
 # Extra freatures
 automation = True
-cveDetection = False
+cveDetection = True
 avoidPingBlocking = True
 
 # if target is an independent IP, set scan range will not be able to apply
@@ -210,6 +210,23 @@ def GetScanDetails(result):
 
     return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(foundTarget) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + str(foundTime) + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '"\n}}'
     
+def GetCVE():
+    runCVEScan = os.popen('nmap -sS -sV --script=vulscan/vulscan ' + target)
+    cveScanOutput = runCVEScan.read()
+
+    with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
+        for line in file:
+            print(line.replace("]", ""), end='')
+    cveScanOutputTsx = open("cveScanOutput.tsx", "a")
+
+    cveScanOutputTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
+    cveScanOutputTsx.writelines(cveScanOutput)
+    cveScanOutputTsx.writelines("\n`},\n")
+
+    cveScanOutputTsx.writelines("\n]")
+    cveScanOutputTsx.close()
+
+
 def AvoidPingBlock():
    bypassBlocking = " -Pn "
    return bypassBlocking
@@ -226,6 +243,11 @@ def RunNormalScan():
     #     runNormalScan = os.popen('nmap ' + flags + target)
     #     normalScanOutput = runNormalScan.read()
     #     return normalScanOutput
+
+    # CVE Detection
+    if cveDetection == True:
+        GetCVE()
+
     runNormalScan = os.popen('nmap ' + flags + target)
     normalScanOutput = runNormalScan.read()
 
