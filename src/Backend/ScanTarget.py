@@ -6,8 +6,11 @@ import random
 import string
 import tempfile
 import fileinput
-from flask import Flask
+from flask import Flask, request
+from flask import render_template
+from flask_cors import CORS
 from datetime import datetime
+import platform
 import pexpect
 
 # ============================================================================================ #
@@ -18,15 +21,39 @@ import pexpect
 
 # Scan Information
 # test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
-target = '168.235.89.44'
-flags = ''
-scanMode = 'topOneHundredScanMode'
 
 # Extra freatures
 automation = False
 cveDetection = False
 avoidPingBlocking = False
 whois = False
+
+# Flask API
+app = Flask(__name__) # Current model
+CORS(app)
+
+@app.route('/initiateTargetScan', methods=['GET'])
+def InitiateApp():
+    global target, flags, scanMode
+    target = ''
+    flags = ''
+    scanMode = 'topOneHundredScanMode'
+
+    if len(target) < 1:
+        sys.exit()
+        return False
+    else:
+        newtarget = request.args.get('target')
+        RunScan(newtarget)
+
+    # if len(target) < 1:
+    #     sys.exit()
+    # else:
+    #     RunScan(scanCommand)
+
+if __name__ == "__main__":
+    app.debug = True
+    app.run() 
 
 # ============================================================================================ #
 # =========================[ ||||||||||||||||||||||||||||||||| ]============================== #
@@ -58,19 +85,23 @@ else:
     mode = ''
 
 # Nmap Command
+command = 'nmap ' + target
+
+if platform.system() == 'Windows':
+    command = 'nmap ' + target
+elif platform.system() == 'Darwin':
+    command = 'sudo nmap ' + target
+
 if scanMode == '':
     if avoidPingBlocking == True:
-        scanCommand = os.popen('nmap -Pn ' + flags + target)
+        scanCommand = os.popen(command + flags + " -Pn ")
     else:
-        scanCommand = os.popen('nmap ' + flags + target)
+        scanCommand = os.popen(command + flags)
 else:
     if avoidPingBlocking == True:
-        scanCommand = os.popen('nmap -Pn ' + mode + target)
+        scanCommand = os.popen(command + mode + " -Pn ")
     else:
-        scanCommand = os.popen('nmap ' + mode + target)
-
-# Flask API
-app = Flask(__name__) # Current model
+        scanCommand = os.popen(command + mode)
 
 # if target is an independent IP, set scan range will not be able to apply
 if re.findall(r'.0\/\d+$', target):
@@ -327,7 +358,7 @@ def GetWhoIs():
         whoisScanTsx.writelines("\n]")
         whoisScanTsx.close()
 
-def RunScan(scanCommand):
+def RunScan(target):
     StartScan()
 
     # CVE Detection
@@ -376,15 +407,3 @@ def RunScan(scanCommand):
     feNomralScanPureOutputTxt.close()
 
     EndScan()
-
-@app.route('/')
-def InitiateApp():
-    if len(target) < 1:
-        sys.exit()
-        return False
-    else:
-        RunScan(scanCommand)
-
-if __name__ == "__main__":
-    app.debug = True
-    app.run() 

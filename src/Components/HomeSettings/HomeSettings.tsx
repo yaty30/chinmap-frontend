@@ -340,18 +340,20 @@ export default () => {
             {/* Others */}
             <Grid item xs={6}>
               <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>
-                <FormControlLabel
-                  label="Automation"
-                  control={
-                    <Switch
-                      checked={others.automation}
-                      onChange={handleOthersChange}
-                      onClick={() => settingsStatus.setAuto(!settingsStatus.automation)}
-                      name="automation"
-                      inputProps={{ 'aria-label': 'Automation' }}
-                    />
-                  }
-                />
+                <Tooltip title="When the system scan find out the result output as no host is alive, automation will allow the scan run again until there is at least one host is alive or all the hosts in desinated range is scanned." arrow placement="top">
+                  <FormControlLabel
+                    label="Automation"
+                    control={
+                      <Switch
+                        checked={others.automation}
+                        onChange={handleOthersChange}
+                        onClick={() => settingsStatus.setAuto(!settingsStatus.automation)}
+                        name="automation"
+                        inputProps={{ 'aria-label': 'Automation' }}
+                      />
+                    }
+                  />
+                </Tooltip>
               </Paper>
             </Grid>
             <Grid item xs={6}>
