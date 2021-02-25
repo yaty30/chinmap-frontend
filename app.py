@@ -1,6 +1,6 @@
 
 ###### FOR TESTING Flask, Not the actual app!!!
-###### The real core python is => ScanTarget.py
+###### The real core python is => src/Backend/ScanTarget.py
 
 
 import time
