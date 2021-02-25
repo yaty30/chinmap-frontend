@@ -49,206 +49,78 @@
         "flags": "",
 
         "nmapVer": ""
+
     }
+
 ,{
-"id": "jbCqrXQoeJhLyIlHUBVDI",
-"cm": "nmap -Pn 168.235.74.9",
-"target": "168.235.74.9",
-"targetForSelect": "168.235.74.9",
-"date": "2021-02-24",
-"time": "23:25 HKT",
-"upHost": "",
-"runTime": "1.67 seconds",
-"latency": "",
-"notShown": "",
-"os": "",
-"uptime": "",
-"deviceType": "",
-"rawPacket": "",
-"rcvd": "",
-"scanMode": "",
-"hop": "",
-"macAddr": "",
-"difficulty": "",
-"auto": "False",
-"cveDetect": "False",
-"setRange": "Target have no range",
-"flags": " -Pn ",
-"nmapVer": "7.91"
-}
-,{
-"id": "cQFsMbHyqLCfStWulvFhP",
-"cm": "nmap -Pn scanme.nmap.org",
+
+"id": "RMTrkQYiTHXxkXAMMqrLS",
+
+"cm": "nmapscanme.nmap.org; with scan mode: topOneHundredScanMode",
+
 "target": "scanme.nmap.org",
+
 "targetForSelect": "scanme.nmap.org",
-"date": "2021-02-24",
-"time": "23:26 HKT",
-"upHost": "",
-"runTime": "1.61 seconds",
-"latency": "",
-"notShown": "",
-"os": "",
-"uptime": "",
-"deviceType": "",
-"rawPacket": "",
-"rcvd": "",
-"scanMode": "",
-"hop": "",
-"macAddr": "",
-"difficulty": "",
-"auto": "False",
-"cveDetect": "False",
-"setRange": "Target have no range",
-"flags": " -Pn ",
-"nmapVer": "7.91"
-}
-,{
-"id": "YQPXnZUBEnoStFxjFnCBZ",
-"cm": "nmap192.168.1.1",
-"target": "192.168.1.1",
-"targetForSelect": "192.168.1.1",
-"date": "2021-02-24",
-"time": "23:26 HKT",
-"upHost": "1 host up",
-"runTime": "0.60 seconds",
-"latency": "0.0043s ",
-"notShown": "993 closed ports",
-"os": "",
-"uptime": "",
-"deviceType": "",
-"rawPacket": "",
-"rcvd": "",
-"scanMode": "",
-"hop": "",
-"macAddr": "CC:40:D0:F4:D9:1D (Netgear)",
-"difficulty": "",
-"auto": "False",
-"cveDetect": "False",
-"setRange": "Target have no range",
-"flags": "",
-"nmapVer": "7.91"
-}
-,{
-"id": "qgiYyrQLmcCfsHvgKmTqr",
-"cm": "nmap192.168.1.1",
-"target": "192.168.1.1",
-"targetForSelect": "192.168.1.1",
-"date": "2021-02-24",
-"time": "23:29 HKT",
-"upHost": "1 host up",
-"runTime": "1.54 seconds",
-"latency": "0.0024s ",
-"notShown": "993 closed ports",
-"os": "",
-"uptime": "",
-"deviceType": "",
-"rawPacket": "",
-"rcvd": "",
-"scanMode": "",
-"hop": "",
-"macAddr": "CC:40:D0:F4:D9:1D (Netgear)",
-"difficulty": "",
-"auto": "False",
-"cveDetect": "False",
-"setRange": "Target have no range",
-"flags": "",
-"nmapVer": "7.91"
-}
-,{
-"id": "yEoIdLZHmehEifEIojVxR",
-"cm": "nmapscanme.nmap.org",
-"target": "scanme.nmap.org",
-"targetForSelect": "scanme.nmap.org",
-"date": "2021-02-24",
-"time": "23:30 HKT",
-"upHost": "",
-"runTime": "1.70 seconds",
-"latency": "",
-"notShown": "",
-"os": "",
-"uptime": "",
-"deviceType": "",
-"rawPacket": "",
-"rcvd": "",
-"scanMode": "",
-"hop": "",
-"macAddr": "",
-"difficulty": "",
-"auto": "False",
-"cveDetect": "False",
-"setRange": "Target have no range",
-"flags": "",
-"nmapVer": "7.91"
-}
-,{
-"id": "rofZGmXSXgsZUNPulmsHZ",
-"cm": "nmapwww.vtc.edu.hk",
-"target": "www.vtc.edu.hk",
-"targetForSelect": "www.vtc.edu.hk",
-"date": "2021-02-24",
-"time": "23:35 HKT",
-"upHost": "",
-"runTime": "1.75 seconds",
-"latency": "",
-"notShown": "",
-"os": "",
-"uptime": "",
-"deviceType": "",
-"rawPacket": "",
-"rcvd": "",
-"scanMode": "",
-"hop": "",
-"macAddr": "",
-"difficulty": "",
-"auto": "False",
-"cveDetect": "False",
-"setRange": "Target have no range",
-"flags": "",
-"nmapVer": "7.91"
-}
-,{
-"id": "SuENLzufFrKLIMjMchOLd",
-"cm": "nmapwww.vtc.edu.hk; with scan mode: topOneHundredScanMode",
-"target": "www.vtc.edu.hk",
-"targetForSelect": "www.vtc.edu.hk",
-"date": "2021-02-24",
-"time": "23:37 HKT",
-"upHost": "",
-"runTime": "1.64 seconds",
-"latency": "",
-"notShown": "",
-"os": "",
-"uptime": "",
-"deviceType": "",
-"rawPacket": "2 (56B)",
-"rcvd": "0 (0B)",
-"scanMode": "Top One Hundred Scan Mode",
-"hop": "",
-"macAddr": "",
-"difficulty": "",
-"auto": "False",
-"cveDetect": "False",
-"setRange": "Target have no range",
-"flags": "",
-"nmapVer": "7.91"
-}
-],{
-"id": "ISEXYIsqsURolkmUXoDQK",
-"cm": "nmapwww.vtc.edu.hk; with scan mode: fullPortsScanMode",
-"target": "www.vtc.edu.hk",
-"targetForSelect": "www.vtc.edu.hk",
+
 "date": "2021-02-25",
-"time": "00:00 HKT",
+
+"time": "16:22 HKT",
+
+"upHost": "1 host up",
+
+"runTime": "6.81 seconds",
+
+"latency": "0.16s ",
+
+"notShown": "94 closed ports",
+
+"os": "",
+
+"uptime": "",
+
+"deviceType": "",
+
+"rawPacket": "",
+
+"rcvd": "",
+
+"scanMode": "Top One Hundred Scan Mode",
+
+"hop": "",
+
+"macAddr": "",
+
+"difficulty": "",
+
+"auto": "False",
+
+"cveDetect": "False",
+
+"setRange": "Target have no range",
+
+"flags": "",
+
+"nmapVer": "7.91"
+
+}
+
+],{
+"id": "RgriGDAbdLocMhsxtTaSq",
+"cm": "nmap168.235.89.44; with scan mode: topOneHundredScanMode",
+"target": "168.235.89.44",
+"targetForSelect": "168.235.89.44",
+"date": "2021-02-25",
+"time": "16:27 HKT",
 "upHost": "",
-"runTime": "1.91 seconds",
+"runTime": "2.20 seconds",
 "latency": "",
 "notShown": "",
 "os": "",
 "uptime": "",
 "deviceType": "",
-"rawPacket": "2 (56B)",
-"rcvd": "0 (0B)",
-"scanMode": "Full Ports Scan Mode",
+"rawPacket": "",
+"rcvd": "",
+"scanMode": "Top One Hundred Scan Mode",
 "hop": "",
 "macAddr": "",
 "difficulty": "",

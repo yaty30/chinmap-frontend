@@ -8,40 +8,16 @@ function createData(scanId: string, portno: string, port: string, status: string
 
 export const rows = [
 
-createData('','','','','',),
+    createData('','','','','',),
 
-// ===================== Target: 168.235.74.9 ================================
-// ===================== END of 168.235.74.9 =================================
 
-// ===================== Target: scanme.nmap.org ================================
-// ===================== END of scanme.nmap.org =================================
-
-// ===================== Target: 192.168.1.1 ================================
-createData('YQPXnZUBEnoStFxjFnCBZ','53', 'tcp', 'open', 'domain'),
-createData('YQPXnZUBEnoStFxjFnCBZ','80', 'tcp', 'open', 'http'),
-createData('YQPXnZUBEnoStFxjFnCBZ','548', 'tcp', 'open', 'afp'),
-createData('YQPXnZUBEnoStFxjFnCBZ','631', 'tcp', 'open', 'ipp'),
-createData('YQPXnZUBEnoStFxjFnCBZ','5000', 'tcp', 'open', 'upnp'),
-createData('YQPXnZUBEnoStFxjFnCBZ','8200', 'tcp', 'open', 'trivnet1'),
-createData('YQPXnZUBEnoStFxjFnCBZ','20005', 'tcp', 'open', 'btx'),
-// ===================== END of 192.168.1.1 =================================
-
-// ===================== Target: 192.168.1.1 ================================
-createData('qgiYyrQLmcCfsHvgKmTqr','53', 'tcp', 'open', 'domain'),
-createData('qgiYyrQLmcCfsHvgKmTqr','80', 'tcp', 'open', 'http'),
-createData('qgiYyrQLmcCfsHvgKmTqr','548', 'tcp', 'open', 'afp'),
-createData('qgiYyrQLmcCfsHvgKmTqr','631', 'tcp', 'open', 'ipp'),
-createData('qgiYyrQLmcCfsHvgKmTqr','5000', 'tcp', 'open', 'upnp'),
-createData('qgiYyrQLmcCfsHvgKmTqr','8200', 'tcp', 'open', 'trivnet1'),
-createData('qgiYyrQLmcCfsHvgKmTqr','20005', 'tcp', 'open', 'btx'),
-// ===================== END of 192.168.1.1 =================================
 
 // ===================== Target: scanme.nmap.org ================================
+createData('RMTrkQYiTHXxkXAMMqrLS','22', 'tcp', 'open', 'ssh'),
+createData('RMTrkQYiTHXxkXAMMqrLS','25', 'tcp', 'filtered', 'smtp'),
+createData('RMTrkQYiTHXxkXAMMqrLS','80', 'tcp', 'open', 'http'),
+createData('RMTrkQYiTHXxkXAMMqrLS','135', 'tcp', 'filtered', 'msrpc'),
+createData('RMTrkQYiTHXxkXAMMqrLS','139', 'tcp', 'filtered', 'netbios-ssn'),
+createData('RMTrkQYiTHXxkXAMMqrLS','445', 'tcp', 'filtered', 'microsoft-ds'),
 // ===================== END of scanme.nmap.org =================================
-
-// ===================== Target: www.vtc.edu.hk ================================
-// ===================== END of www.vtc.edu.hk =================================
-
-// ===================== Target: www.vtc.edu.hk ================================
-// ===================== END of www.vtc.edu.hk =================================
 ]

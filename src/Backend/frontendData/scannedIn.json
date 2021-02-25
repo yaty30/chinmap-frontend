@@ -1,53 +1,28 @@
 [
-
     {
-
         "id": "",
-
         "cm": "",
-
         "target": "",
-
         "targetForSelect": "",
-
         "date": "",
-
         "time": "",
-
         "upHost": "",
-
         "runTime": "",
-
         "latency": "",
-
         "notShown": "",
-
         "os": "",
-
         "uptime": "",
-
         "deviceType": "",
-
         "rawPacket": "",
-
         "rcvd": "",
-
         "scanMode": "",
-
         "hop": "",
-
         "macAddr": "",
-
         "difficulty": "",
-
         "auto": "",
-
         "cveDetect": "",
-
         "setRange": "",
-
         "flags": "",
-
         "nmapVer": ""
     }
 ]

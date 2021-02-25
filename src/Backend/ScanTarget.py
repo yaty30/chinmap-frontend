@@ -8,13 +8,31 @@ import tempfile
 import fileinput
 from flask import Flask
 from datetime import datetime
+import pexpect
 
-# ========================== Get from front-end user input ================================== #
+# ============================================================================================ #
+# =========================[ ================================= ]============================== #
+# =========================[   Get from front-end user input   ]============================== #
+# =========================[ ================================= ]============================== #
+# ============================================================================================ #
+
 # Scan Information
 # test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
-target = 'www.vtc.edu.hk'
+target = '168.235.89.44'
 flags = ''
-scanMode = 'fullPortsScanMode'
+scanMode = 'topOneHundredScanMode'
+
+# Extra freatures
+automation = False
+cveDetection = False
+avoidPingBlocking = False
+whois = False
+
+# ============================================================================================ #
+# =========================[ ||||||||||||||||||||||||||||||||| ]============================== #
+# =========================[ END Get from front-end user input ]============================== #
+# =========================[ ||||||||||||||||||||||||||||||||| ]============================== #
+# ============================================================================================ #
 
 # Default Scan Modes
 pingScanMode = ' -v -sU -sT -p -U:161, T:80 -T0 '
@@ -39,22 +57,26 @@ elif scanMode == 'fullPortsScanMode':
 else:
     mode = ''
 
-# Extra freatures
-automation = False
-cveDetection = False
-avoidPingBlocking = False
-whois = False
+# Nmap Command
+if scanMode == '':
+    if avoidPingBlocking == True:
+        scanCommand = os.popen('nmap -Pn ' + flags + target)
+    else:
+        scanCommand = os.popen('nmap ' + flags + target)
+else:
+    if avoidPingBlocking == True:
+        scanCommand = os.popen('nmap -Pn ' + mode + target)
+    else:
+        scanCommand = os.popen('nmap ' + mode + target)
 
 # Flask API
-# app = Flask(__name__) # Current model
+app = Flask(__name__) # Current model
 
 # if target is an independent IP, set scan range will not be able to apply
 if re.findall(r'.0\/\d+$', target):
     scanRange = "oddNumbersOnly"
 else:
     scanRange = "Target have no range"
-
-# ========================= END Get from front-end user input ================================ #
 
 # Python-nmap scanner
 # nm = nmap.PortScanner()
@@ -88,7 +110,7 @@ def GetPortStatus(result):
 
     with fileinput.FileInput("getPortStatus.tsx", inplace=True, backup='.bak') as file:
         for line in file:
-            print(line.replace("]", ""), end='')
+            print(line.replace("]", ""), end="")
     fePortStatusTxt = open("getPortStatus.tsx", "a")
     fePortStatusTxt.writelines("\n// ===================== Target: " + target + " ================================")
     for ports in re.findall(pattern, result):
@@ -96,7 +118,7 @@ def GetPortStatus(result):
         if automation == True:
             while len(ports) < 1:
                 if len(scanMode) < 1:
-                    InitiateScan(scanCommand)
+                    RunScan(scanCommand)
                 i += 1
             
         fePortStatusTxt.writelines("\ncreateData('" + str(scanID) + "'," + str(ports)[1:] + ",")
@@ -104,6 +126,8 @@ def GetPortStatus(result):
     fePortStatusTxt.writelines("\n// ===================== END of " + target + " =================================")
     fePortStatusTxt.writelines("\n]")
     fePortStatusTxt.close()
+
+    fileinput.close()
 
 def GetScanDetails(result):
     #scanID =  ''.join(random.choices(string.ascii_uppercase + string.digits, k=21)) 
@@ -215,7 +239,7 @@ def GetScanDetails(result):
     # for result display comparison, Select => MenuItem
     with fileinput.FileInput("scannedTargetForSelect.json", inplace=True, backup='.bak') as file:
         for line in file:
-            print(line.replace("]", ""), end='')
+            print(line.replace("]", ""), end="")
 
     # Append-adds at last 
     targetForSelectTxt = open("scannedTargetForSelect.json", "a")  # append mode 
@@ -229,20 +253,40 @@ def GetScanDetails(result):
     return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(target) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + foundTime + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '"\n}}'
     
 def GetCVE():
-    runCVEScan = os.popen('nmap -sS -sV --script=vulscan/vulscan ' + target)
-    cveScanOutput = runCVEScan.read()
+    if cveDetection == True:
+        runCVEScan = os.popen('nmap -sS -sV --script=vulscan/vulscan ' + target)
+        cveScanOutput = runCVEScan.read()
 
-    with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
-        for line in file:
-            print(line.replace("]", ""), end='')
-    cveScanOutputTsx = open("cveScanOutput.tsx", "a")
+        with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
+            for line in file:
+                print(line.replace("]", ""), end="")
+        cveScanOutputTsx = open("cveScanOutput.tsx", "a")
 
-    cveScanOutputTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
-    cveScanOutputTsx.writelines(cveScanOutput)
-    cveScanOutputTsx.writelines("\n`},\n")
+        cveScanOutputTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
 
-    cveScanOutputTsx.writelines("\n]")
-    cveScanOutputTsx.close()
+        if len(cveScanOutput) < 1:
+            cveScanOutputTsx.writelines("No CVE result found, either the CVE function is disabled, or the target is currently down.")
+        else:
+            cveScanOutputTsx.writelines(cveScanOutput)
+
+        cveScanOutputTsx.writelines("\n`},\n")
+
+        cveScanOutputTsx.writelines("\n]")
+        cveScanOutputTsx.close()
+    else:
+        cveScanOutput = runCVEScan.read()
+
+        with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
+            for line in file:
+                print(line.replace("]", ""), end="")
+        cveScanOutputTsx = open("cveScanOutput.tsx", "a")
+
+        cveScanOutputTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
+        cveScanOutputTsx.writelines("Enable CVE detection to discover.")
+        cveScanOutputTsx.writelines("\n`},\n")
+
+        cveScanOutputTsx.writelines("\n]")
+        cveScanOutputTsx.close()
 
 def GetWhoIs():
     if whois == True:
@@ -254,7 +298,7 @@ def GetWhoIs():
 
         with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
             for line in file:
-                print(line.replace("]", ""), end='')
+                print(line.replace("]", ""), end="")
         whoisScanTsx = open("whoisScan.tsx", "a")
 
         whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
@@ -268,10 +312,12 @@ def GetWhoIs():
 
         whoisScanTsx.writelines("\n]")
         whoisScanTsx.close()
+
+        fileinput.close()
     else:
         with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
             for line in file:
-                print(line.replace("]", ""), end='')
+                print(line.replace("]", ""), end="")
         whoisScanTsx = open("whoisScan.tsx", "a")
 
         whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
@@ -281,30 +327,12 @@ def GetWhoIs():
         whoisScanTsx.writelines("\n]")
         whoisScanTsx.close()
 
-
-def AvoidPingBlock():
-   bypassBlocking = " -Pn "
-   return bypassBlocking
-
-# @app.route('/')
-def InitiateScan(scanCommand):
+def RunScan(scanCommand):
     StartScan()
-    
-    # Check if Avoid Ping Blocking feature is on
-    # if avoidPingBlocking == True:
-    #     runNormalScan = os.popen('nmap ' + flags + AvoidPingBlock() + target)
-    #     normalScanOutput = runNormalScan.read()
-    #     return normalScanOutput
-    # else:
-    #     runNormalScan = os.popen('nmap ' + flags + target)
-    #     normalScanOutput = runNormalScan.read()
-    #     return normalScanOutput
 
     # CVE Detection
 
-    if cveDetection == True:
-        GetCVE()
-    
+    GetCVE()
     
     GetWhoIs()
 
@@ -327,7 +355,7 @@ def InitiateScan(scanCommand):
      # remove ] in json and insert new data with a ]
     with fileinput.FileInput("scannedIn.json", inplace=True, backup='.bak') as file:
         for line in file:
-            print(line.replace("]", ""), end='')
+            print(line.replace("]", ""), end="")
     fileInputFixBracket = open("scannedIn.json", "a")
     fileInputFixBracket.write('\n]')
     fileInputFixBracket.close()
@@ -342,20 +370,21 @@ def InitiateScan(scanCommand):
     # Frontend Nmap Output
     with fileinput.FileInput("Result.tsx", inplace=True, backup='.bak') as file:
         for line in file:
-            print(line.replace("]", ""), end='')
+            print(line.replace("]", ""), end="")
     feNomralScanPureOutputTxt = open("Result.tsx", "a")
     feNomralScanPureOutputTxt.writelines("\n{\nid: '" + str(scanID) + "',\noutput: `" + normalScanTxtResult + "`,},\n]")
     feNomralScanPureOutputTxt.close()
 
     EndScan()
 
-if scanMode == '':
-    scanCommand = os.popen('sudo nmap ' + flags + target)
-    InitiateScan(scanCommand)
-else:
-    scanCommand = os.popen('sudo nmap ' + mode + target)
-    InitiateScan(scanCommand)
+@app.route('/')
+def InitiateApp():
+    if len(target) < 1:
+        sys.exit()
+        return False
+    else:
+        RunScan(scanCommand)
 
-# if __name__ == "__main__":
-#     app.debug = True
-#     app.run() 
+if __name__ == "__main__":
+    app.debug = True
+    app.run() 

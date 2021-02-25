@@ -1,11 +1,6 @@
 export const pureOutput = [
-
-    {
-
-        id: "",
-
-        output: "",
-
-    },
-
+{
+id: '',
+output: ``
+,},
 ]

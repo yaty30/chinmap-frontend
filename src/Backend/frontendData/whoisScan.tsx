@@ -1,10 +1,6 @@
 export const whoisScanOutput = [
-
-    {
-
-        scanId: "",
-
-        output: "",
-
+    {   
+        scanId: '',
+        output:``
     },
 ]

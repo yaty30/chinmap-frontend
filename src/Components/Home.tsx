@@ -143,6 +143,7 @@ export default observer (() => {
                         size="small"
                         style={{
                             width: "70%",
+                            textAlignLast: "center",
                         }}
                         onChange={handleScanTarget}
                         value={homeSettingsStatus.target}

@@ -1,60 +1,6 @@
 export const whoisScanOutput = [
-
-    {
-
-        scanId: "",
-
-        output: "",
-
+    {   
+        scanId: '',
+        output:``
     },
-
-
-{
-scanId: 'jbCqrXQoeJhLyIlHUBVDI',
-output:`
-Host script results:
-`},
-
-
-{
-scanId: 'cQFsMbHyqLCfStWulvFhP',
-output:`
-Host script results:
-`},
-
-
-{
-scanId: 'YQPXnZUBEnoStFxjFnCBZ',
-output:`
-
-`},
-
-
-{
-scanId: 'qgiYyrQLmcCfsHvgKmTqr',
-output:`
-No WhoIs result found, either the target is a local network address, or the target is currently down.
-`},
-
-
-{
-scanId: 'yEoIdLZHmehEifEIojVxR',
-output:`
-Host script results:
-`},
-
-
-{
-scanId: 'rofZGmXSXgsZUNPulmsHZ',
-output:`
-Host script results:
-`},
-
-
-{
-scanId: 'SuENLzufFrKLIMjMchOLd',
-output:`
-Enable WhoIs feature to discover.
-`},
-
 ]

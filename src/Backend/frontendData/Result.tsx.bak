@@ -1,102 +1,44 @@
 export const pureOutput = [
 
-    {
+{
 
-        id: "",
+id: '',
 
-        output: "",
+output: ``
 
-    },
+,},
+
 
 
 {
-id: 'jbCqrXQoeJhLyIlHUBVDI',
-output: `Command: nmap  -Pn 168.235.74.9
-======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-24 23:25 HKT
-Nmap done: 1 IP address (0 hosts up) scanned in 1.67 seconds
-`,},
-
-{
-id: 'cQFsMbHyqLCfStWulvFhP',
-output: `Command: nmap  -Pn scanme.nmap.org
-======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-24 23:25 HKT
-Nmap done: 1 IP address (0 hosts up) scanned in 1.61 seconds
-`,},
-
-{
-id: 'YQPXnZUBEnoStFxjFnCBZ',
-output: `Command: nmap 192.168.1.1
-======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-24 23:26 HKT
-Nmap scan report for 192.168.1.1
-Host is up (0.0043s latency).
-Not shown: 993 closed ports
-PORT      STATE SERVICE
-53/tcp    open  domain
-80/tcp    open  http
-548/tcp   open  afp
-631/tcp   open  ipp
-5000/tcp  open  upnp
-8200/tcp  open  trivnet1
-20005/tcp open  btx
-MAC Address: CC:40:D0:F4:D9:1D (Netgear)
-
-Nmap done: 1 IP address (1 host up) scanned in 0.60 seconds
-`,},
-
-{
-id: 'qgiYyrQLmcCfsHvgKmTqr',
-output: `Command: nmap 192.168.1.1
-======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-24 23:29 HKT
-Nmap scan report for 192.168.1.1
-Host is up (0.0024s latency).
-Not shown: 993 closed ports
-PORT      STATE SERVICE
-53/tcp    open  domain
-80/tcp    open  http
-548/tcp   open  afp
-631/tcp   open  ipp
-5000/tcp  open  upnp
-8200/tcp  open  trivnet1
-20005/tcp open  btx
-MAC Address: CC:40:D0:F4:D9:1D (Netgear)
-
-Nmap done: 1 IP address (1 host up) scanned in 1.54 seconds
-`,},
-
-{
-id: 'yEoIdLZHmehEifEIojVxR',
+id: 'RMTrkQYiTHXxkXAMMqrLS',
 output: `Command: nmap scanme.nmap.org
 ======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-24 23:30 HKT
-Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
-Nmap done: 1 IP address (0 hosts up) scanned in 1.70 seconds
-`,},
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-25 16:22 HKT
+Initiating Ping Scan at 16:22
+Scanning scanme.nmap.org (45.33.32.156) [2 ports]
+Completed Ping Scan at 16:22, 0.16s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 16:22
+Completed Parallel DNS resolution of 1 host. at 16:22, 0.01s elapsed
+Initiating Connect Scan at 16:22
+Scanning scanme.nmap.org (45.33.32.156) [100 ports]
+Discovered open port 80/tcp on 45.33.32.156
+Discovered open port 22/tcp on 45.33.32.156
+Completed Connect Scan at 16:22, 6.45s elapsed (100 total ports)
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up, received syn-ack (0.16s latency).
+Scanned at 2021-02-25 16:22:11 HKT for 7s
+Not shown: 94 closed ports
+Reason: 94 conn-refused
+PORT    STATE    SERVICE      REASON
+22/tcp  open     ssh          syn-ack
+25/tcp  filtered smtp         no-response
+80/tcp  open     http         syn-ack
+135/tcp filtered msrpc        no-response
+139/tcp filtered netbios-ssn  no-response
+445/tcp filtered microsoft-ds no-response
 
-{
-id: 'rofZGmXSXgsZUNPulmsHZ',
-output: `Command: nmap www.vtc.edu.hk
-======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-24 23:35 HKT
-Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
-Nmap done: 1 IP address (0 hosts up) scanned in 1.75 seconds
-`,},
-
-{
-id: 'SuENLzufFrKLIMjMchOLd',
-output: `Command: nmap www.vtc.edu.hk
-======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-24 23:37 HKT
-Initiating ARP Ping Scan at 23:37
-Scanning www.vtc.edu.hk (202.75.91.117) [1 port]
-Completed ARP Ping Scan at 23:37, 1.44s elapsed (1 total hosts)
-Nmap scan report for www.vtc.edu.hk (202.75.91.117) [host down, received no-response]
 Read data files from: /usr/local/bin/../share/nmap
-Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
-Nmap done: 1 IP address (0 hosts up) scanned in 1.64 seconds
-           Raw packets sent: 2 (56B) | Rcvd: 0 (0B)
+Nmap done: 1 IP address (1 host up) scanned in 6.81 seconds
 `,},
 ]
