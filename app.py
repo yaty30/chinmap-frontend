@@ -13,13 +13,11 @@ CORS(app)
 
 target = ''
 
-x = os.popen("nmap 192.168.1.1 -T4")
-t = x.read()
-
-@app.route("/initiateTargetScan", methods=['GET'])
-def index():
-    name = request.args.get('target')
-    print("Hello " + str(name))
+@app.route("/initiateTargetScan")
+def home():
+    x = os.popen("nmzap 192.168.1.1 -T4")
+    t = x.read()
+    return str(t)
 
 if __name__ == "__main__":
     app.debug = True

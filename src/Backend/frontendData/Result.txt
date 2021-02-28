@@ -1,10 +1,16 @@
-Command: nmap 168.235.89.44
+Command: nmap 192.168.1.1 -Pn 
 ======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-25 16:27 HKT
-Initiating Ping Scan at 16:27
-Scanning 168.235.89.44 [2 ports]
-Completed Ping Scan at 16:27, 2.01s elapsed (1 total hosts)
-Nmap scan report for 168.235.89.44 [host down, received no-response]
-Read data files from: /usr/local/bin/../share/nmap
-Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
-Nmap done: 1 IP address (0 hosts up) scanned in 2.20 seconds
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-28 17:45 HKT
+Nmap scan report for 192.168.1.1
+Host is up (0.0047s latency).
+Not shown: 993 closed ports
+PORT      STATE SERVICE
+53/tcp    open  domain
+80/tcp    open  http
+548/tcp   open  afp
+631/tcp   open  ipp
+5000/tcp  open  upnp
+8200/tcp  open  trivnet1
+20005/tcp open  btx
+
+Nmap done: 1 IP address (1 host up) scanned in 1.19 seconds

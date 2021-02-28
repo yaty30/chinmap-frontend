@@ -118,17 +118,25 @@ export default observer (() => {
   const handleScanTarget = (event: React.ChangeEvent<{ value: unknown }>) => {
     homeSettingsStatus.setTarget(event.target.value as string)
     homeSettingsStatus.target.length < 1 || scanMode == "" ? setIsEmpty(true) : setIsEmpty(false);
+    setTargetVal(event.target.value as string)
   }
 
   const [reset, setReset] = useState(false);
-  const handleReset = () => (
-    setTarget("")
-  )
+  const handleReset = () => {
+    homeSettingsStatus.setAuto(false);
+    homeSettingsStatus.setCve(false);
+    homeSettingsStatus.setPn(false);
+    homeSettingsStatus.setWhoIs(false);
+    homeSettingsStatus.setTarget('');
+    setTargetVal('');
+  }
+
+  const [targetVal, setTargetVal] = useState('');
 
 
   return (
     <div className={classes.root}>
-      <form method='post' action="/initiateTargetScan">
+      <form method='post' action="http://localhost:5000/runAPI">
         <Grid container spacing={5} justify="center" alignItems="center">
           <Grid item xs={10}>
             <Paper className={classes.paper}>
@@ -139,8 +147,8 @@ export default observer (() => {
                 <div style={{marginTop: 25, textAlign: "center"}}>
                   <Tooltip title="Example: scanme.nmap.org, 209.168.29.115, 192.168.1.0/24" aria-label="add" arrow placement="top">
                       <TextField 
-                          id="homeTargetField" 
-                          label="Target IP or Domain" 
+                          id="homeTargetField"
+                          label="Target IP or Domain"
                           variant="outlined" 
                           size="small"
                           name="target"
@@ -306,7 +314,19 @@ export default observer (() => {
                 </Paper>
             </Grid>
             
+          
+          {/* Scan data temporary storing */}
+    
           <div style={{position: 'fixed', width: 865, bottom: 10}}>
+          <div style={{display: "none"}}>
+            <input type="text" readOnly name="nm" value={targetVal} />
+            <input type="text" readOnly name="auto" value={homeSettingsStatus.automation === true ? "true" : "false"} />
+            <input type="text" readOnly name="cve" value={homeSettingsStatus.cve === true ? "true" : "false"} />
+            <input type="text" readOnly name="pbb" value={homeSettingsStatus.pn === true ? "true" : "false"} />
+            <input type="text" readOnly name="whois" value={homeSettingsStatus.whoIs === true ? "true" : "false"} />
+            <input type="text" readOnly name="scanMode" value={scanMode}/>
+          </div>
+
             <Paper className={classes.paper} style={{minHeight: 0,}}>
                   <Button 
                     color="primary"
@@ -339,36 +359,30 @@ export default observer (() => {
                       homeSettingsStatus.target === "" ?
                       <>
                         <Tooltip title="Please Enter the Target." arrow placement="top">
-                          <Typography 
+                          <span 
+                            color="primary" 
                             style={{
-                              display: "inline-block",
-                              position: "relative",
-                              top: 6,
-                              right: 5,
-                              color: "lightgrey",
                               float: "right",
-                              cursor: "default",
-                              userSelect: "none",
-                              textTransform: "uppercase",
                             }}
+                            id="scanBtnDisabled"
                           >
                             Scan
-                          </Typography>
+                          </span>
                         </Tooltip>
                       </>
                       :
                       <>
-                        <Link to='/scanResult'>
-                          <Button 
+                        {/* <Link to='/scanResult'> */}
+                          <input 
                             color="primary" 
                             style={{
                               float: "right",
                             }}
                             type="submit"
-                          >
-                            Scan
-                          </Button>
-                        </Link>
+                            value="Scan"
+                            id="scanBtn"
+                          />
+                        {/* </Link> */}
                       </> 
                   ))}
               </Paper>
