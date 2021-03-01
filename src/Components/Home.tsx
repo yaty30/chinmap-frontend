@@ -24,6 +24,7 @@ import Chip from '@material-ui/core/Chip';
 import { observer } from 'mobx-react-lite'
 
 import AutomationIcon from '@material-ui/icons/BrightnessAuto';
+import ScanRangeDisplay from './HomeSettings/ScanRangeDisplay'
 
 import Settings from './HomeSettings/HomeSettings'
 import { customisedScanModes } from './NewScanModeArray'
@@ -232,27 +233,7 @@ export default observer (() => {
                         </tr>
                         <tr>
                           <td colSpan={2}>
-                            <Button 
-                              variant="outlined" 
-                              style={{
-                                width: "100%", 
-                                whiteSpace: "nowrap",
-                                cursor: 'default',
-                              }}
-                              size="small"
-                              color="primary"
-                              disabled={homeSettingsStatus.range == '' || homeSettingsStatus.range == 'none' ? true : false}
-                            >
-                              Set Range:&nbsp;
-                                {
-                                  homeSettingsStatus.range == '' ? 'none' :
-                                  homeSettingsStatus.range == 'oddOnly' ?  'Odd Numbers Only' :
-                                  homeSettingsStatus.range == 'evenOnly' ?  'Even Numbers Only' :
-                                  homeSettingsStatus.range == 'every5hosts' ?  'Every 5 Hosts' :
-                                  homeSettingsStatus.range == 'every10hosts' ?  'Every 10 Hosts' :
-                                  homeSettingsStatus.range == 'every15hosts' ?  'Every 15 Hosts' : 'Every 20 Hosts'
-                                }
-                            </Button>
+                            <ScanRangeDisplay />
                           </td>
                           <td colSpan={3}>
                             <Button 
@@ -325,6 +306,7 @@ export default observer (() => {
             <input type="text" readOnly name="pbb" value={homeSettingsStatus.pn === true ? "true" : "false"} />
             <input type="text" readOnly name="whois" value={homeSettingsStatus.whoIs === true ? "true" : "false"} />
             <input type="text" readOnly name="scanMode" value={scanMode}/>
+            <input type="text" readOnly name="scanRange" value={homeSettingsStatus.range}/>
           </div>
 
             <Paper className={classes.paper} style={{minHeight: 0,}}>

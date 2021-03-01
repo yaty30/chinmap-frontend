@@ -15,10 +15,6 @@ import platform
 # Elements
 divider = "\n======================================================\n"
 
-# creating scan identity string
-letters = string.ascii_letters
-scanID = ''.join(random.choice(letters) for i in range(21))
-
 # ============================================================================================ #
 # =========================[ ================================= ]============================== #
 # =========================[   Get from front-end user input   ]============================== #
@@ -28,12 +24,6 @@ scanID = ''.join(random.choice(letters) for i in range(21))
 # Scan Information
 # test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
 flags = ''
-
-# Extra freatures
-automation = False
-cveDetection = False
-avoidPingBlocking = False
-whois = False
 
 # ============================================================================================ #
 # =========================[ ================================= ]============================== #
@@ -56,7 +46,7 @@ def EndScan():
     )
     scanDetailsTxt.close()
 
-def GetPortStatus(result, target, scanMode):
+def GetPortStatus(scanID, result, target, scanMode, whois, automation, cveDetection, avoidPingBlocking):
     # portStatusScanID =  ''.join(random.choices(string.ascii_uppercase + string.digits, k=21))
     pattern = re.compile(r'(?P<ports>[\d]+)\/(?P<protocol>tcp|udp)\s+(?P<state>open|filtered|closed)\s+(?P<service>[\w\S]*)')
 
@@ -70,7 +60,7 @@ def GetPortStatus(result, target, scanMode):
         if automation == True:
             while len(ports) < 1:
                 if len(scanMode) < 1:
-                    RunScan(target, scanMode)
+                    RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking)
             i += 1
             
         fePortStatusTxt.writelines("\ncreateData('" + str(scanID) + "'," + str(ports)[1:] + ",")
@@ -81,7 +71,7 @@ def GetPortStatus(result, target, scanMode):
 
     fileinput.close()
 
-def GetScanDetails(result, target, scanMode, scanRange):
+def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, scanRange):
     #scanID =  ''.join(random.choices(string.ascii_uppercase + string.digits, k=21)) 
 
     f = open(result, "r")
@@ -251,6 +241,80 @@ def GetWhoIs(target):
 
     fileinput.close()
  
+def CalcScanRange(target, setRange):
+    x = str(target)[-2:]
+
+    if x == '24':
+        s, e = 0, 256
+    elif x == '25':
+        s, e = 0, 128
+    elif x == '26':
+        s, e = 0, 64
+    elif x == '27':
+        s, e = 0, 32
+    elif x == '28':
+        s, e = 0, 16
+    elif x == '29':
+        s, e = 0, 8
+    elif x == '30':
+        s, e = 0, 4
+
+    s += 1
+    e -= 2
+
+    if setRange == 'every5hosts':
+        xnum = 5
+    elif setRange == 'every10hosts':
+        xnum = 10
+    elif setRange == 'every15hosts':
+        xnum = 15
+    elif setRange == 'every20hosts':
+        xnum = 20
+    else:
+        xnum = 404
+
+
+     # Get even number
+    if setRange == 'evenOnly':
+        print("\n################### [  even only ] #############################\n")
+        for num in range(s, e + 1):
+            if num % 2 == 0:
+                print(num, end=" ")
+        print("\n################### [ END even only ] #############################\n")
+
+    # Get odd number
+    elif setRange == 'oddOnly':
+        print("\n################### [ odd only ] #############################\n")
+        for num in range(s, e + 1):
+            if num % 2 == 1:
+                print(num, end=" ")
+        print("\n################### [ END odd only ] #############################\n")
+
+    elif setRange == 'every5hosts':
+        while xnum in range(s, e):
+            if xnum % 5 == 0:
+                print(xnum, end=' ')  # print must be inside the condition
+            xnum += 1  # the increase must be done on every iteration
+
+    elif setRange == 'every10hosts':
+        while xnum in range(s, e):
+            if xnum % 10 == 0:
+                print(xnum, end=' ')  # print must be inside the condition
+            xnum += 1  # the increase must be done on every iteration
+
+    elif setRange == 'every15hosts':
+        while xnum in range(s, e):
+            if xnum % 15 == 0:
+                print(xnum, end=' ')  # print must be inside the condition
+            xnum += 1  # the increase must be done on every iteration
+
+    else:
+        while xnum in range(s, e):
+            if xnum % 20 == 0:
+                print(xnum, end=' ')  # print must be inside the condition
+            xnum += 1  # the increase must be done on every iteration
+    
+    return True
 
 # ============================================================================================ #
 # =========================[ ================================= ]============================== #
@@ -261,8 +325,13 @@ def GetWhoIs(target):
 app = Flask(__name__) # Current model
 CORS(app)
 
-@app.route('/RunScan/<target>/<scanMode>')      
-def RunScan(target, scanMode):
+@app.route('/RunScan/<target>/<scanMode>/<whois>/<automation>/<cveDetection>/<avoidPingBlocking>')      
+def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking):
+
+    # creating scan identity string
+    letters = string.ascii_letters
+    scanID = ''.join(random.choice(letters) for i in range(21))
+
     StartScan()
 
     # Nmap Command
@@ -349,6 +418,12 @@ def RunScan(target, scanMode):
         whoisScanTsx.writelines("\n]")
         whoisScanTsx.close()
 
+    # Scan Range
+    if scanRange == "non":
+        return True
+    elif scanRange == "oddOnly":
+        return False
+    
     normalScanOutput = scanCommand.read()
 
 
@@ -368,7 +443,7 @@ def RunScan(target, scanMode):
     feNormalScanTxt = open("scannedIn.json", "a")
     # Appending new data to scannedIn.json
     feNormalScanResult = "Result.txt"
-    getScanDetailsOutput = str(GetScanDetails(feNormalScanResult, target, scanMode, scanRange))[:-1]
+    getScanDetailsOutput = str(GetScanDetails(feNormalScanResult, scanID, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, scanRange))[:-1]
     feNormalScanTxt.writelines(getScanDetailsOutput)
     feNormalScanTxt.close()
 
@@ -378,7 +453,7 @@ def RunScan(target, scanMode):
     # Port Status
     f = open("Result.txt", "r")
     portStatusToRead = f.read()
-    GetPortStatus(portStatusToRead, target, scanMode)
+    GetPortStatus(scanID, portStatusToRead, target, scanMode, whois, automation, cveDetection, avoidPingBlocking)
     f.close()
 
     # Frontend Nmap Output
@@ -393,23 +468,47 @@ def RunScan(target, scanMode):
 
     return redirect("http://localhost:3001/ScanResult", code=302)
 
-
 @app.route('/runAPI',methods = ['POST', 'GET'])
-def login():
+def startApp():
    if request.method == 'POST':
         target = request.form['target']
         scanMode = request.form['scanMode']
+        # Extra freatures
+        automation = request.form['auto']
+        cveDetection = request.form['cve']
+        avoidPingBlocking = request.form['pbb']
+        whois = request.form['whois']
+        scanRange = request.form['scanRange']
+
         if len(target) < 1:
             return False
         else:
-            return redirect(url_for('RunScan', target = target, scanMode = scanMode))
+            return redirect(url_for(
+                'RunScan', 
+                whois=whois,
+                target=target, 
+                scanMode=scanMode, 
+                scanRange=scanRange,
+                automation=automation, 
+                cveDetection=cveDetection, 
+                avoidPingBlocking=avoidPingBlocking, 
+            ))
    else:
         target = request.args.get('target')
         scanMode = request.args.get['scanMode']
         if len(target) < 1:
             return False
         else:
-            return redirect(url_for('RunScan', target = target, scanMode = scanMode))
+            return redirect(url_for(
+                'RunScan', 
+                whois=whois,
+                target=target, 
+                scanMode=scanMode, 
+                scanRange=scanRange,
+                automation=automation, 
+                cveDetection=cveDetection, 
+                avoidPingBlocking=avoidPingBlocking, 
+            ))
 
 
 if __name__ == "__main__":

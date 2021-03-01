@@ -1,8 +1,8 @@
 Command: nmap 192.168.1.1 -Pn 
 ======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-28 17:45 HKT
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-01 00:59 HKT
 Nmap scan report for 192.168.1.1
-Host is up (0.0047s latency).
+Host is up (0.012s latency).
 Not shown: 993 closed ports
 PORT      STATE SERVICE
 53/tcp    open  domain
@@ -13,4 +13,4 @@ PORT      STATE SERVICE
 8200/tcp  open  trivnet1
 20005/tcp open  btx
 
-Nmap done: 1 IP address (1 host up) scanned in 1.19 seconds
+Nmap done: 1 IP address (1 host up) scanned in 2.38 seconds

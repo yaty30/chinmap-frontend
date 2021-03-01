@@ -31,35 +31,14 @@ Enable CVE detection to discover.
 
 
 {
-scanId: 'YmJHDIiOULRojXEbWDiSG',
+scanId: 'WtrbzyJxImqsmlHJeLEKC',
 output:`
 Enable CVE detection to discover.
 `},
 
 
 {
-scanId: 'IYKFFNeLkJRJtMBQzyHaZ',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'GCuOwzJWNGyOBtUhVxqGE',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'mjRQIYqisiMRboVKbQhxn',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'olEjVWbJGVEYkzeyCTZJI',
+scanId: 'HKRAdXnqfxalYmPjUGzic',
 output:`
 Enable CVE detection to discover.
 `},

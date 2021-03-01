@@ -39,44 +39,29 @@ Enable WhoIs feature to discover.
 `},
 
 
-
 {
-scanId: 'YmJHDIiOULRojXEbWDiSG',
+scanId: 'nFUeBzyfRvKZgEmNaMHsu',
 output:`
 Enable WhoIs feature to discover.
 `},
 
 
 {
-scanId: 'IYKFFNeLkJRJtMBQzyHaZ',
+scanId: 'WtrbzyJxImqsmlHJeLEKC',
 output:`
 Enable WhoIs feature to discover.
 `},
 
 
 {
-scanId: 'GCuOwzJWNGyOBtUhVxqGE',
+scanId: 'HKRAdXnqfxalYmPjUGzic',
 output:`
 Enable WhoIs feature to discover.
 `},
 
 
 {
-scanId: 'mjRQIYqisiMRboVKbQhxn',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'olEjVWbJGVEYkzeyCTZJI',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'nhEHJuovJTHSpztmgbWcI',
+scanId: 'UZDSlyNTxzpkaiKeCJHOs',
 output:`
 Enable WhoIs feature to discover.
 `},

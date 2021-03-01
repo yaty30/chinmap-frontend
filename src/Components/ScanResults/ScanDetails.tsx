@@ -400,7 +400,7 @@ export default () => {
                               label="Automation" 
                               variant="outlined" 
                               value={
-                                data.auto == "True" ? "Enabled" : "Disabled"
+                                data.auto === "true" ? "Enabled" : "Disabled"
                               }
                               inputProps={{
                                   readOnly: true,
@@ -414,7 +414,7 @@ export default () => {
                               label="CVE Detection" 
                               variant="outlined" 
                               value={
-                                data.cveDetect == "True" ? "Enabled" : "Disabled"
+                                data.cveDetect === "true" ? "Enabled" : "Disabled"
                               }
                               inputProps={{
                                   readOnly: true,

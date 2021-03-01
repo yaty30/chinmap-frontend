@@ -136,31 +136,101 @@ export default () => {
                       <tr>
                       {/* disabled={'.0\/\d+$'.test(homeSettings.target) === true ? false : true} */}
                         <td>
-                          <FormControlLabel value="oddOnly" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Odd Numbers Only" />
+                          <FormControlLabel 
+                            value="oddOnly" 
+                            control={
+                              <Radio 
+                                disabled={
+                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                }
+                              />
+                            } 
+                            label="Odd Numbers Only" 
+                          />
                         </td>
                         <td>
-                          <FormControlLabel value="even" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Even Numbers Only" />
+                          <FormControlLabel 
+                            value="even" 
+                            control={
+                              <Radio 
+                                disabled={
+                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                }
+                              />
+                            } 
+                            label="Even Numbers Only" 
+                          />
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <FormControlLabel value="every5hosts" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Every 5 hosts" />
+                          <FormControlLabel 
+                            value="every5hosts" 
+                            control={
+                              <Radio 
+                                disabled={
+                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                }
+                              />
+                            } 
+                            label="Every 5 hosts" 
+                          />
                         </td>
                         <td>
-                          <FormControlLabel value="every10hosts" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Every 10 hosts" />
+                          <FormControlLabel 
+                            value="every10hosts" 
+                            control={
+                              <Radio 
+                                disabled={
+                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                }
+                              />
+                            } 
+                            label="Every 10 hosts" 
+                          />
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <FormControlLabel value="every15hosts" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Every 15 hosts" />
+                          <FormControlLabel 
+                            value="every15hosts" 
+                            control={
+                              <Radio 
+                                disabled={
+                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                }
+                              />
+                            } 
+                            label="Every 15 hosts" 
+                          />
                         </td>
                         <td>
-                          <FormControlLabel value="every20hosts" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="Every 20 hosts" />
+                          <FormControlLabel 
+                            value="every20hosts" 
+                            control={
+                              <Radio 
+                                disabled={
+                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                }
+                              />
+                            } 
+                            label="Every 20 hosts" 
+                          />
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <FormControlLabel value="none" control={<Radio  disabled={/.0\/\d\d$/.test(settingsStatus.target) === true ? false : true}/>} label="None" />
+                          <FormControlLabel 
+                            value="none" 
+                            control={
+                              <Radio 
+                                disabled={
+                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                }
+                              />
+                            } 
+                            label="None" 
+                          />
 
                         </td>
                       </tr>

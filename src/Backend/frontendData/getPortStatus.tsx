@@ -29,48 +29,30 @@ createData('SCHrdbVfxQfKtIqwsPJcn','631', 'tcp', 'open', 'ipp'),
 createData('SCHrdbVfxQfKtIqwsPJcn','5000', 'tcp', 'open', 'upnp'),
 // ===================== END of 192.168.1.1 =================================
 
-
-// ===================== Target: 192.168.1.7 ================================
-createData('YmJHDIiOULRojXEbWDiSG','53', 'tcp', 'open', 'domain'),
-createData('YmJHDIiOULRojXEbWDiSG','3001', 'tcp', 'open', 'nessus'),
-createData('YmJHDIiOULRojXEbWDiSG','3306', 'tcp', 'open', 'mysql'),
-// ===================== END of 192.168.1.7 =================================
-
-// ===================== Target: 192.168.1.7 ================================
-createData('IYKFFNeLkJRJtMBQzyHaZ','53', 'tcp', 'open', 'domain'),
-createData('IYKFFNeLkJRJtMBQzyHaZ','3001', 'tcp', 'open', 'nessus'),
-createData('IYKFFNeLkJRJtMBQzyHaZ','3306', 'tcp', 'open', 'mysql'),
-// ===================== END of 192.168.1.7 =================================
-
-// ===================== Target: 192.168.1.7 ================================
-createData('GCuOwzJWNGyOBtUhVxqGE','53', 'tcp', 'open', 'domain'),
-createData('GCuOwzJWNGyOBtUhVxqGE','3001', 'tcp', 'open', 'nessus'),
-createData('GCuOwzJWNGyOBtUhVxqGE','3306', 'tcp', 'open', 'mysql'),
-// ===================== END of 192.168.1.7 =================================
+// ===================== Target: scanme.nmap.org ================================
+createData('fWhdMxLFQjsqmAKORTNWr','22', 'tcp', 'open', 'ssh'),
+createData('fWhdMxLFQjsqmAKORTNWr','80', 'tcp', 'open', 'http'),
+createData('fWhdMxLFQjsqmAKORTNWr','9929', 'tcp', 'open', 'nping-echo'),
+createData('fWhdMxLFQjsqmAKORTNWr','31337', 'tcp', 'open', 'Elite'),
+// ===================== END of scanme.nmap.org =================================
 
 // ===================== Target: 192.168.1.1 ================================
-createData('mjRQIYqisiMRboVKbQhxn','53', 'tcp', 'open', 'domain'),
-createData('mjRQIYqisiMRboVKbQhxn','80', 'tcp', 'open', 'http'),
-createData('mjRQIYqisiMRboVKbQhxn','548', 'tcp', 'open', 'afp'),
-createData('mjRQIYqisiMRboVKbQhxn','631', 'tcp', 'open', 'ipp'),
-createData('mjRQIYqisiMRboVKbQhxn','5000', 'tcp', 'open', 'upnp'),
-createData('mjRQIYqisiMRboVKbQhxn','8200', 'tcp', 'open', 'trivnet1'),
-createData('mjRQIYqisiMRboVKbQhxn','20005', 'tcp', 'open', 'btx'),
+createData('HKRAdXnqfxalYmPjUGzic','53', 'tcp', 'open', 'domain'),
+createData('HKRAdXnqfxalYmPjUGzic','80', 'tcp', 'open', 'http'),
+createData('HKRAdXnqfxalYmPjUGzic','548', 'tcp', 'open', 'afp'),
+createData('HKRAdXnqfxalYmPjUGzic','631', 'tcp', 'open', 'ipp'),
+createData('HKRAdXnqfxalYmPjUGzic','5000', 'tcp', 'open', 'upnp'),
+createData('HKRAdXnqfxalYmPjUGzic','8200', 'tcp', 'open', 'trivnet1'),
+createData('HKRAdXnqfxalYmPjUGzic','20005', 'tcp', 'open', 'btx'),
 // ===================== END of 192.168.1.1 =================================
 
-// ===================== Target: 192.168.1.7 ================================
-createData('olEjVWbJGVEYkzeyCTZJI','53', 'tcp', 'open', 'domain'),
-createData('olEjVWbJGVEYkzeyCTZJI','3001', 'tcp', 'open', 'nessus'),
-createData('olEjVWbJGVEYkzeyCTZJI','3306', 'tcp', 'open', 'mysql'),
-// ===================== END of 192.168.1.7 =================================
-
 // ===================== Target: 192.168.1.1 ================================
-createData('nhEHJuovJTHSpztmgbWcI','53', 'tcp', 'open', 'domain'),
-createData('nhEHJuovJTHSpztmgbWcI','80', 'tcp', 'open', 'http'),
-createData('nhEHJuovJTHSpztmgbWcI','548', 'tcp', 'open', 'afp'),
-createData('nhEHJuovJTHSpztmgbWcI','631', 'tcp', 'open', 'ipp'),
-createData('nhEHJuovJTHSpztmgbWcI','5000', 'tcp', 'open', 'upnp'),
-createData('nhEHJuovJTHSpztmgbWcI','8200', 'tcp', 'open', 'trivnet1'),
-createData('nhEHJuovJTHSpztmgbWcI','20005', 'tcp', 'open', 'btx'),
+createData('UZDSlyNTxzpkaiKeCJHOs','53', 'tcp', 'open', 'domain'),
+createData('UZDSlyNTxzpkaiKeCJHOs','80', 'tcp', 'open', 'http'),
+createData('UZDSlyNTxzpkaiKeCJHOs','548', 'tcp', 'open', 'afp'),
+createData('UZDSlyNTxzpkaiKeCJHOs','631', 'tcp', 'open', 'ipp'),
+createData('UZDSlyNTxzpkaiKeCJHOs','5000', 'tcp', 'open', 'upnp'),
+createData('UZDSlyNTxzpkaiKeCJHOs','8200', 'tcp', 'open', 'trivnet1'),
+createData('UZDSlyNTxzpkaiKeCJHOs','20005', 'tcp', 'open', 'btx'),
 // ===================== END of 192.168.1.1 =================================
 ]
