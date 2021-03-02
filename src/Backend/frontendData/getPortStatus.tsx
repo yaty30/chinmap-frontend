@@ -55,4 +55,24 @@ createData('UZDSlyNTxzpkaiKeCJHOs','5000', 'tcp', 'open', 'upnp'),
 createData('UZDSlyNTxzpkaiKeCJHOs','8200', 'tcp', 'open', 'trivnet1'),
 createData('UZDSlyNTxzpkaiKeCJHOs','20005', 'tcp', 'open', 'btx'),
 // ===================== END of 192.168.1.1 =================================
+
+// ===================== Target: 192.168.1.1 ================================
+createData('RabgNWtoTfTBUijynUNGN','53', 'tcp', 'open', 'domain'),
+createData('RabgNWtoTfTBUijynUNGN','80', 'tcp', 'open', 'http'),
+createData('RabgNWtoTfTBUijynUNGN','548', 'tcp', 'open', 'afp'),
+createData('RabgNWtoTfTBUijynUNGN','631', 'tcp', 'open', 'ipp'),
+createData('RabgNWtoTfTBUijynUNGN','5000', 'tcp', 'open', 'upnp'),
+createData('RabgNWtoTfTBUijynUNGN','8200', 'tcp', 'open', 'trivnet1'),
+createData('RabgNWtoTfTBUijynUNGN','20005', 'tcp', 'open', 'btx'),
+// ===================== END of 192.168.1.1 =================================
+
+// ===================== Target: 192.168.1.0 ================================
+// ===================== END of 192.168.1.0 =================================
+
+// ===================== Target: 192.168.1.2,3,4,5 ================================
+createData('gazREnULpkYbVOHDtqrLW','4321', 'tcp', 'open', 'rwhois'),
+createData('gazREnULpkYbVOHDtqrLW','5000', 'tcp', 'open', 'upnp'),
+createData('gazREnULpkYbVOHDtqrLW','7000', 'tcp', 'open', 'afs3-fileserver'),
+createData('gazREnULpkYbVOHDtqrLW','10000', 'tcp', 'open', 'snet-sensor-mgmt'),
+// ===================== END of 192.168.1.2,3,4,5 =================================
 ]

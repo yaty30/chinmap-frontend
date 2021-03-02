@@ -9,6 +9,7 @@ const homeSettings = types
         pn: types.boolean,
         whoIs: types.boolean,
         flag: types.number,
+        rangeTarget: types.string,
     })
     .actions(self => ({
         setTarget(target: string) {
@@ -31,7 +32,10 @@ const homeSettings = types
         },
         setFlag(flag: any) {
             self.flag = flag
-        }
+        },
+        setRangeTarget(rangeTarget: any) {
+            self.rangeTarget = rangeTarget
+        },
     }))
 
 const store = homeSettings.create({
@@ -42,6 +46,7 @@ const store = homeSettings.create({
     pn: false,
     whoIs: false,
     flag: 0,
+    rangeTarget: "",
 });
 
 export default store;

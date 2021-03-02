@@ -141,7 +141,7 @@ export default () => {
                             control={
                               <Radio 
                                 disabled={
-                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                  /.0\/2\d$/.test(settingsStatus.target) === true ? false : true
                                 }
                               />
                             } 
@@ -154,7 +154,7 @@ export default () => {
                             control={
                               <Radio 
                                 disabled={
-                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                  /.0\/2\d$/.test(settingsStatus.target) === true ? false : true
                                 }
                               />
                             } 
@@ -169,7 +169,7 @@ export default () => {
                             control={
                               <Radio 
                                 disabled={
-                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                  /.0\/2\d$/.test(settingsStatus.target) === true ? false : true
                                 }
                               />
                             } 
@@ -182,7 +182,7 @@ export default () => {
                             control={
                               <Radio 
                                 disabled={
-                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                  /.0\/2\d$/.test(settingsStatus.target) === true ? false : true
                                 }
                               />
                             } 
@@ -197,7 +197,7 @@ export default () => {
                             control={
                               <Radio 
                                 disabled={
-                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                  /.0\/2\d$/.test(settingsStatus.target) === true ? false : true
                                 }
                               />
                             } 
@@ -210,7 +210,7 @@ export default () => {
                             control={
                               <Radio 
                                 disabled={
-                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                  /.0\/2\d$/.test(settingsStatus.target) === true ? false : true
                                 }
                               />
                             } 
@@ -225,7 +225,7 @@ export default () => {
                             control={
                               <Radio 
                                 disabled={
-                                  /.0\/\d\d$/.test(settingsStatus.target) === true ? false : true
+                                  /.0\/2\d$/.test(settingsStatus.target) === true ? false : true
                                 }
                               />
                             } 

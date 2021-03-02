@@ -50,4 +50,25 @@ output:`
 Enable CVE detection to discover.
 `},
 
+
+{
+scanId: 'RabgNWtoTfTBUijynUNGN',
+output:`
+Enable CVE detection to discover.
+`},
+
+
+{
+scanId: 'xKMTuDjGQUMMbwvludywp',
+output:`
+Enable CVE detection to discover.
+`},
+
+
+{
+scanId: 'gazREnULpkYbVOHDtqrLW',
+output:`
+Enable CVE detection to discover.
+`},
+
 ]

@@ -66,4 +66,25 @@ output:`
 Enable WhoIs feature to discover.
 `},
 
+
+{
+scanId: 'RabgNWtoTfTBUijynUNGN',
+output:`
+Enable WhoIs feature to discover.
+`},
+
+
+{
+scanId: 'xKMTuDjGQUMMbwvludywp',
+output:`
+Enable WhoIs feature to discover.
+`},
+
+
+{
+scanId: 'gazREnULpkYbVOHDtqrLW',
+output:`
+Enable WhoIs feature to discover.
+`},
+
 ]

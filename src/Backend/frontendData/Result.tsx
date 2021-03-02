@@ -200,4 +200,54 @@ PORT      STATE SERVICE
 
 Nmap done: 1 IP address (1 host up) scanned in 2.38 seconds
 `,},
+
+{
+id: 'RabgNWtoTfTBUijynUNGN',
+output: `Command: nmap 192.168.1.1 -Pn 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-02 00:56 HKT
+Nmap scan report for 192.168.1.1
+Host is up (0.0018s latency).
+Not shown: 993 closed ports
+PORT      STATE SERVICE
+53/tcp    open  domain
+80/tcp    open  http
+548/tcp   open  afp
+631/tcp   open  ipp
+5000/tcp  open  upnp
+8200/tcp  open  trivnet1
+20005/tcp open  btx
+
+Nmap done: 1 IP address (1 host up) scanned in 0.63 seconds
+`,},
+
+{
+id: 'xKMTuDjGQUMMbwvludywp',
+output: `Command: nmap 192.168.1.0 -Pn 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-02 10:40 HKT
+Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
+Nmap done: 1 IP address (0 hosts up) scanned in 0.19 seconds
+`,},
+
+{
+id: 'gazREnULpkYbVOHDtqrLW',
+output: `Command: nmap 192.168.1.2,3,4,5 -Pn 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-02 10:40 HKT
+Nmap scan report for 192.168.1.3
+Host is up (0.0045s latency).
+All 1000 scanned ports on 192.168.1.3 are closed
+
+Nmap scan report for 192.168.1.4
+Host is up (0.0050s latency).
+Not shown: 996 closed ports
+PORT      STATE SERVICE
+4321/tcp  open  rwhois
+5000/tcp  open  upnp
+7000/tcp  open  afs3-fileserver
+10000/tcp open  snet-sensor-mgmt
+
+Nmap done: 4 IP addresses (2 hosts up) scanned in 5.02 seconds
+`,},
 ]

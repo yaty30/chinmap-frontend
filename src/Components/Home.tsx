@@ -119,6 +119,8 @@ export default observer (() => {
   const handleScanTarget = (event: React.ChangeEvent<{ value: unknown }>) => {
     homeSettingsStatus.setTarget(event.target.value as string)
     homeSettingsStatus.target.length < 1 || scanMode == "" ? setIsEmpty(true) : setIsEmpty(false);
+    homeSettingsStatus.setRange('none');
+    homeSettingsStatus.setRangeTarget('');
     setTargetVal(event.target.value as string)
   }
 
@@ -128,7 +130,9 @@ export default observer (() => {
     homeSettingsStatus.setCve(false);
     homeSettingsStatus.setPn(false);
     homeSettingsStatus.setWhoIs(false);
+    homeSettingsStatus.setRange('none');
     homeSettingsStatus.setTarget('');
+    homeSettingsStatus.setRangeTarget('');
     setTargetVal('');
   }
 
@@ -299,8 +303,8 @@ export default observer (() => {
           {/* Scan data temporary storing */}
     
           <div style={{position: 'fixed', width: 865, bottom: 10}}>
-          <div style={{display: "none"}}>
-            <input type="text" readOnly name="nm" value={targetVal} />
+          <div style={{display: ""}}>
+            <input type="text" readOnly name="nm" value={homeSettingsStatus.rangeTarget === '' ? targetVal : homeSettingsStatus.rangeTarget} />
             <input type="text" readOnly name="auto" value={homeSettingsStatus.automation === true ? "true" : "false"} />
             <input type="text" readOnly name="cve" value={homeSettingsStatus.cve === true ? "true" : "false"} />
             <input type="text" readOnly name="pbb" value={homeSettingsStatus.pn === true ? "true" : "false"} />
@@ -354,17 +358,15 @@ export default observer (() => {
                       </>
                       :
                       <>
-                        {/* <Link to='/scanResult'> */}
-                          <input 
-                            color="primary" 
-                            style={{
-                              float: "right",
-                            }}
-                            type="submit"
-                            value="Scan"
-                            id="scanBtn"
-                          />
-                        {/* </Link> */}
+                        <input 
+                          color="primary" 
+                          style={{
+                            float: "right",
+                          }}
+                          type="submit"
+                          value="Scan"
+                          id="scanBtn"
+                        />
                       </> 
                   ))}
               </Paper>
