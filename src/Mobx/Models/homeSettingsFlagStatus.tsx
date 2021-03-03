@@ -1,19 +1,28 @@
-import { types } from "mobx-state-tree";
+import { types, Instance } from "mobx-state-tree";
 
-const defaultScanMode = types
+type  flagDataModel = Instance<typeof flagData>
+
+const flagData = types
     .model({
-        flag: types.string,
+        flags: types.string,
     })
 
 const data = types
     .model({
-        data: types.array(defaultScanMode)
+        data: types.array(flagData)
     })
+    .actions(self => ({
+        pushFlags(){
+            self.data.push({
+                flags: "",
+            })
+        }
+    }))
 
 const store = data.create({
     data: [
         {
-            flag: "",
+            flags: "",
         },
     ]
 })

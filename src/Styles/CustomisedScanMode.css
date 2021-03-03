@@ -1,0 +1,30 @@
+#deleteBtn{
+    background: none;
+    border: none;
+    border-radius: 4px !important;
+    color: #F60257;
+    cursor: pointer;
+    padding: 7px 14px;
+    font-size: 15px;
+}
+
+#deleteBtn:hover{
+    background: #FFF7F9;
+}
+
+#deleteBtn:focus{
+    border: none !important;
+    outline: none !important;
+}
+
+#deleteBtn span{
+    position: relative;
+    bottom: 5px;
+    left: 3px;
+}
+
+#deleteBtn #delIcon{
+    position: relative;
+    top: 1px;
+    left: 3px;
+}

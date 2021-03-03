@@ -22,12 +22,12 @@ import Popover from '@material-ui/core/Popover';
 import LiveHelpOutlinedIcon from '@material-ui/icons/LiveHelpOutlined';
 import Chip from '@material-ui/core/Chip';
 import { observer } from 'mobx-react-lite'
+import WhatismyIP from './Whatismyip'
 
 import AutomationIcon from '@material-ui/icons/BrightnessAuto';
 import ScanRangeDisplay from './HomeSettings/ScanRangeDisplay'
 
 import Settings from './HomeSettings/HomeSettings'
-import { customisedScanModes } from './NewScanModeArray'
 
 import { scanTarget, targetData, targetTime, chosenMode, scanDate } from './target'
 
@@ -37,6 +37,8 @@ import scanModeData from '../Backend/frontendData/scanModes/default.json'
 
 // Mobx
 import homeSettingsStatus from '../Mobx/Models/homeSettingsStatus'
+import customised from '../Backend/frontendData/customisedScanModeStatus'
+// import homeSettingsFlagsStatus from '../Mobx/Models/homeSettingsFlagStatus'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'left',
       backgroundColor: "#fefefe",
       color: "#333333",
-      minHeight: 155,
+      minHeight: 115,
     },
     centerGrid: {
         textAlign: "center",
@@ -119,7 +121,7 @@ export default observer (() => {
   const handleScanTarget = (event: React.ChangeEvent<{ value: unknown }>) => {
     homeSettingsStatus.setTarget(event.target.value as string)
     homeSettingsStatus.target.length < 1 || scanMode == "" ? setIsEmpty(true) : setIsEmpty(false);
-    homeSettingsStatus.setRange('none');
+    homeSettingsStatus.setRange('');
     homeSettingsStatus.setRangeTarget('');
     setTargetVal(event.target.value as string)
   }
@@ -130,7 +132,7 @@ export default observer (() => {
     homeSettingsStatus.setCve(false);
     homeSettingsStatus.setPn(false);
     homeSettingsStatus.setWhoIs(false);
-    homeSettingsStatus.setRange('none');
+    homeSettingsStatus.setRange('');
     homeSettingsStatus.setTarget('');
     homeSettingsStatus.setRangeTarget('');
     setTargetVal('');
@@ -250,10 +252,16 @@ export default observer (() => {
                               }}
                               size="small"
                               color="primary"
-                              disabled={homeSettingsStatus.flag > 0 ? false : true}
+                              disabled={homeSettingsStatus.flag === '' ? false : true}
                             >
-                              Flags: &nbsp;{homeSettingsStatus.flag}
+                              Flags: &nbsp;
+                              
                             </Button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colSpan={4}>
+                            <WhatismyIP />
                           </td>
                         </tr>
                       </tbody>
@@ -289,10 +297,13 @@ export default observer (() => {
                                   ))
                                 ))}
                                 
-                                {/* <ListSubheader>Customised Scan Modes</ListSubheader>
-                                {customisedScanModes.map((modes) => (
-                                  <MenuItem value={modes.value} className="customised">{modes.name}</MenuItem>
-                                ))} */}
+                                <ListSubheader>Customised Scan Modes</ListSubheader>
+                                {customised.rows.map((modes, index) => (
+                                  modes.profile.map((data, index) => (
+                                    data.modeID === '' ? null :
+                                    <MenuItem value={data.modeID} className="customised">{data.name}</MenuItem>
+                                  ))
+                                ))}
                             </Select>
                         </FormControl>
                     </div>
@@ -303,7 +314,7 @@ export default observer (() => {
           {/* Scan data temporary storing */}
     
           <div style={{position: 'fixed', width: 865, bottom: 10}}>
-          <div style={{display: ""}}>
+          <div style={{display: "none"}}>
             <input type="text" readOnly name="nm" value={homeSettingsStatus.rangeTarget === '' ? targetVal : homeSettingsStatus.rangeTarget} />
             <input type="text" readOnly name="auto" value={homeSettingsStatus.automation === true ? "true" : "false"} />
             <input type="text" readOnly name="cve" value={homeSettingsStatus.cve === true ? "true" : "false"} />

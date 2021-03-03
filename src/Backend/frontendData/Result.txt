@@ -1,17 +1,16 @@
-Command: nmap 192.168.1.2,3,4,5 -Pn 
+Command: nmap scanme.nmap.org -Pn 
 ======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-02 10:40 HKT
-Nmap scan report for 192.168.1.3
-Host is up (0.0045s latency).
-All 1000 scanned ports on 192.168.1.3 are closed
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-03 13:35 HKT
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.16s latency).
+Not shown: 993 closed ports
+PORT      STATE    SERVICE
+22/tcp    filtered ssh
+23/tcp    filtered telnet
+80/tcp    open     http
+445/tcp   filtered microsoft-ds
+515/tcp   filtered printer
+9929/tcp  open     nping-echo
+31337/tcp open     Elite
 
-Nmap scan report for 192.168.1.4
-Host is up (0.0050s latency).
-Not shown: 996 closed ports
-PORT      STATE SERVICE
-4321/tcp  open  rwhois
-5000/tcp  open  upnp
-7000/tcp  open  afs3-fileserver
-10000/tcp open  snet-sensor-mgmt
-
-Nmap done: 4 IP addresses (2 hosts up) scanned in 5.02 seconds
+Nmap done: 1 IP address (1 host up) scanned in 40.06 seconds

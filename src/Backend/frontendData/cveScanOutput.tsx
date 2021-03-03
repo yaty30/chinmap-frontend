@@ -10,63 +10,21 @@ export const cveScanOutput = [
 
 
 {
-scanId: 'wzWSaCvLiFghaXkTcLxCS',
+scanId: 'BuGFZdhNqoMlzRdVfpUmL',
 output:`
 Enable CVE detection to discover.
 `},
 
 
 {
-scanId: 'SCHrdbVfxQfKtIqwsPJcn',
+scanId: 'ZfnDLPDBeMqkLRQCZaiav',
 output:`
 Enable CVE detection to discover.
 `},
 
 
 {
-scanId: 'fWhdMxLFQjsqmAKORTNWr',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'WtrbzyJxImqsmlHJeLEKC',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'HKRAdXnqfxalYmPjUGzic',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'UZDSlyNTxzpkaiKeCJHOs',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'RabgNWtoTfTBUijynUNGN',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'xKMTuDjGQUMMbwvludywp',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'gazREnULpkYbVOHDtqrLW',
+scanId: 'iayVeFSFLgGUHWZQTtnIk',
 output:`
 Enable CVE detection to discover.
 `},

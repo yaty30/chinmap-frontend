@@ -180,7 +180,7 @@ export default () => {
         >
             Set Range:&nbsp;
             {
-                homeSettingsStatus.range === 'none' ? 'none':
+                homeSettingsStatus.range === '' ? 'none':
                 homeSettingsStatus.range === 'oddOnly' ?  'Odd Numbers Only' :
                 homeSettingsStatus.range === 'evenOnly' ?  'Even Numbers Only' :
                 homeSettingsStatus.range === 'every5hosts' ?  'Every 5 Hosts' :

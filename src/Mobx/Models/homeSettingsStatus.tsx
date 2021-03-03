@@ -8,7 +8,7 @@ const homeSettings = types
         cve: types.boolean,
         pn: types.boolean,
         whoIs: types.boolean,
-        flag: types.number,
+        flag: types.string,
         rangeTarget: types.string,
     })
     .actions(self => ({
@@ -37,7 +37,7 @@ const homeSettings = types
             self.rangeTarget = rangeTarget
         },
     }))
-
+    
 const store = homeSettings.create({
     target: "",
     range: "",
@@ -45,7 +45,7 @@ const store = homeSettings.create({
     cve: false,
     pn: false,
     whoIs: false,
-    flag: 0,
+    flag: "0",
     rangeTarget: "",
 });
 

@@ -1,0 +1,21 @@
+#isCheckBtn{
+    background: none;
+    border: 1px solid #9FA8DA;
+    box-shadow: none;
+    border-radius: 4px !important;
+    color: #4050B5;
+    cursor: pointer;
+    padding: 7px 14px;
+    font-size: 15px;
+    width: 100%;
+    transition: 0.1s ease-in-out;
+}
+
+#isCheckBtn:hover{
+    background: #F7F7FB;
+}
+
+#isCheckBtn:focus{
+    border: none !important;
+    outline: none !important;
+}

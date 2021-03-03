@@ -1,0 +1,84 @@
+[
+    {
+        "profile": [
+            {
+                "modeID": "IWJDIOQPTxzpkaiKeCJHOs",                
+                "name": "testing",
+                "des": "testffff",
+                "freq": 4,
+                "tcp": "",
+                "nonTcp": ""
+            }
+        ],
+        "ping": [
+            {
+                "flags": ""
+            }
+        ],
+        "nse": [
+            {
+                "flags": ""
+            }
+        ],
+        "target": [
+            {
+                "flags": ""
+            }
+        ],
+        "source": [
+            {
+                "flags": ""
+            }
+        ],
+        "timing": [
+            {
+                "flags": ""
+            }
+        ],
+        "other": [
+            {
+                "flags": ""
+            }
+        ]
+    },{
+        "profile": [
+            {
+                "modeID": "IWJDIOQPTxdawjkjdozpkaiKeCJHOs",                
+                "name": "testing",
+                "des": "testffff",
+                "freq": 4,
+                "tcp": "",
+                "nonTcp": ""
+            }
+        ],
+        "ping": [
+            {
+                "flags": ""
+            }
+        ],
+        "nse": [
+            {
+                "flags": ""
+            }
+        ],
+        "target": [
+            {
+                "flags": ""
+            }
+        ],
+        "source": [
+            {
+                "flags": ""
+            }
+        ],
+        "timing": [
+            {
+                "flags": ""
+            }
+        ],
+        "other": [
+            {
+                "flags": ""
+            }
+        ]
+    }]

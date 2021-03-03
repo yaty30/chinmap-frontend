@@ -5,84 +5,21 @@ export const whoisScanOutput = [
     },
 
 {
-scanId: 'wzWSaCvLiFghaXkTcLxCS',
+scanId: 'BuGFZdhNqoMlzRdVfpUmL',
 output:`
 Enable WhoIs feature to discover.
 `},
 
 
 {
-scanId: 'SCHrdbVfxQfKtIqwsPJcn',
+scanId: 'ZfnDLPDBeMqkLRQCZaiav',
 output:`
 Enable WhoIs feature to discover.
 `},
 
 
 {
-scanId: 'fWhdMxLFQjsqmAKORTNWr',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'RhIsIwnuhMZvzrIGSDWuE',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'nFUeBzyfRvKZgEmNaMHsu',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'nFUeBzyfRvKZgEmNaMHsu',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'WtrbzyJxImqsmlHJeLEKC',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'HKRAdXnqfxalYmPjUGzic',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'UZDSlyNTxzpkaiKeCJHOs',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'RabgNWtoTfTBUijynUNGN',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'xKMTuDjGQUMMbwvludywp',
-output:`
-Enable WhoIs feature to discover.
-`},
-
-
-{
-scanId: 'gazREnULpkYbVOHDtqrLW',
+scanId: 'iayVeFSFLgGUHWZQTtnIk',
 output:`
 Enable WhoIs feature to discover.
 `},

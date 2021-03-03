@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
+import IPIcon from '@material-ui/icons/LocationSearching';
 
 import HomeIcon from '@material-ui/icons/Home';
 import DefaultScanModeIcon from '@material-ui/icons/GpsNotFixed';
@@ -30,6 +31,7 @@ import CustomisedScanMode from '../Views/CustomisedScanMode'
 import ScanResult from '../Views/ScanResult'
 import ScanComparison from '../Views/ScanComparison'
 import ScanHistory from '../Views/ScanHistory'
+import Whatismyip from '../Views/Whatismyip'
 
 // Default Scan Modes
 import PingScanMode from '../Components/defaultScanModes/pingScanMode'
@@ -122,7 +124,7 @@ export default () => {
                 <ListItemText primary="Home" />
             </ListItem>
         </Link>
-
+        
         <Link to='/defaultScanMode'>
             <ListItem button key="defaultScanMode">
                 <ListItemIcon><DefaultScanModeIcon className={classes.itemIcon}/></ListItemIcon>
@@ -136,7 +138,7 @@ export default () => {
                 <ListItemText primary="Customised Scan Modes" />
             </ListItem>
         </Link>
-
+            <Divider />
         <Link to='/scanResult'>
             <ListItem button key="scanResult">
                 <ListItemIcon><ScanResultIcon className={classes.itemIcon}/></ListItemIcon>
@@ -157,7 +159,6 @@ export default () => {
                 <ListItemText primary="Scan History" />
             </ListItem>
         </Link>
-        
       </List>
     </div>
   );
@@ -266,7 +267,13 @@ export default () => {
                             } 
                         />
                         {/* Customised Scan Mode Routes */ }
-                        
+
+                        <Route 
+                            path="/whatismyip" 
+                            render={ 
+                                () => <Whatismyip />
+                            } 
+                        />
                     </Switch>
                 </Suspense>
             </main>

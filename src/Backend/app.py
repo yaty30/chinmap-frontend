@@ -11,6 +11,7 @@ from flask import render_template
 from flask_cors import CORS
 from datetime import datetime
 import platform
+import socket
 
 # Elements
 divider = "\n======================================================\n"
@@ -316,14 +317,148 @@ def CalcScanRange(target, setRange):
     
     return True
 
+app = Flask(__name__) # Current model
+CORS(app)
+
+# ============================================================================================ #
+# =========================[ ================================= ]============================== #
+# =========================[        Add Customised Modes       ]============================== #
+# =========================[ ================================= ]============================== #
+# ============================================================================================ #
+
+# Scan Information
+# test cases: 168.235.74.9 | 168.235.89.44 | scanme.nmap.org | 192.168.1.1 | 127.0.0.1
+@app.route('/addMode', methods = ['POST', 'GET'])
+def addModeFetching():
+    if request.method == 'POST':
+        name = request.form['name']
+        des = request.form['des']
+        freq = request.form['freq']
+        tcp = request.form['tcp']
+        nontcp = request.form['nontcp']
+        if len(name) < 1:
+            return False
+        else:
+            return redirect(url_for(
+                'AddMode', 
+                name=name, 
+                des=des, 
+                freq=freq, 
+                tcp=tcp, 
+                nontcp=nontcp,
+            ))
+    else:
+        name = request.args.get('name')
+        des = request.args.get['des']
+        freq = request.args.get['freq']
+        tcp = request.args.get['tcp']
+        nontcp = request.args.get['nontcp']
+        if len(name) < 1:
+            return False
+        else:
+            return redirect(url_for(
+                'AddMode', 
+                name=name, 
+                des=des, 
+                freq=freq, 
+                tcp=tcp, 
+                nontcp=nontcp,
+            ))
+
+@app.route('/addMode/<name>/<des>/<freq>/<tcp>/<nontcp>')
+def AddMode(name, des, freq, tcp, nontcp):
+     # creating scan identity string
+    letters = string.ascii_letters
+    modeID = ''.join(random.choice(letters) for i in range(21))
+
+    # remove ] in json and insert new data with a ]
+    with fileinput.FileInput("customisedScanModeStatus.tsx", inplace=True, backup='.bak') as file:
+        for line in file:
+            print(line.replace("]})", ""), end="")
+    fileinput.close()
+
+    with fileinput.FileInput("customisedScanModeStatus.tsx", inplace=True, backup='.bak') as file:
+        for line in file:
+            print(line.replace("export default store;", ""), end="")
+        
+    # Generating normal scan output for Frontend
+    addModeTxt = open("customisedScanModeStatus.tsx", "a")
+    # Appending new data to scannedIn.json
+    addModeTxt.writelines('\n{\n"profile": [\n{\n"modeID": "' + modeID +'",\n"name": "' + name +'",\n"des": "' + des + '",\n"freq": ' + freq + ',\n"tcp": "' + tcp + '",\n"nonTcp": "' + nontcp + '"\n}\n],\n"ping": [\n{\n"flags": ""\n}\n],\n"nse": [\n{\n"flags": ""\n}\n],\n"target": [\n{\n"flags": ""\n}\n],\n"source": [\n{\n"flags": ""\n}\n],\n"timing": [\n{\n"flags": ""\n}\n],\n"other": [\n{\n"flags": ""\n}\n]\n},')
+    addModeTxt.writelines('\n]})')
+    addModeTxt.writelines('\nexport default store;')
+    addModeTxt.close()
+
+    fileinput.close()
+
+    return redirect("http://localhost:3001/customisedScanMode", code=302)
+
+
+@app.route('/deleteMode', methods=['POST', 'GET'])
+def deleteModeFetching():
+    if request.method == 'POST':
+        modeID = request.form['modeID']
+        return redirect(url_for('DeleteMode', modeID=modeID))
+    else:
+        modeID = request.form['modeID']
+        return redirect(url_for('DeleteMode', modeID=modeID))
+
+@app.route('/deleteMode/<modeID>')
+def DeleteMode(modeID):
+    modes = open("customisedScanModeStatus.tsx", "r")
+    x = modes.read()
+    target = 'IWJDIOQPTxzpkaiKeCJHOs'
+    
+    return str(x)
+
+# ============================================================================================ #
+# =========================[ ================================= ]============================== #
+# =========================[     END Add Customised Modes      ]============================== #
+# =========================[ ================================= ]============================== #
+# ============================================================================================ #
+
+
+
+
+# ============================================================================================ #
+# =========================[ ================================= ]============================== #
+# =========================[           WHAT IS MY IP           ]============================== #
+# =========================[ ================================= ]============================== #
+# ============================================================================================ #
+
+@app.route('/whatismyip', methods=['POST', 'GET'])
+def whatismyIP():
+    if request.method == 'POST':
+        isCheck = request.form['isCheck']
+        return redirect(url_for('WhatIsMyIP', isCheck=isCheck))
+    else:
+        isCheck = request.form['isCheck']
+        return redirect(url_for('WhatIsMyIP', isCheck=isCheck))
+
+@app.route('/whatismyip/<isCheck>')
+def WhatIsMyIP(isCheck):
+    getIP = socket.gethostbyname(socket.gethostname())
+
+    outputTxt = open("whatismyip.tsx", "w+")
+    outputTxt.writelines('export const whatismyip = [{output:`' + str(getIP) + '`}]')
+    outputTxt.close()
+    
+    return redirect("http://localhost:3001/", code=302)
+
+# ============================================================================================ #
+# =========================[ ================================= ]============================== #
+# =========================[         END WHAT IS MY IP         ]============================== #
+# =========================[ ================================= ]============================== #
+# ============================================================================================ #
+
+
+
+
 # ============================================================================================ #
 # =========================[ ================================= ]============================== #
 # =========================[             Flask API             ]============================== #
 # =========================[ ================================= ]============================== #
 # ============================================================================================ #
-
-app = Flask(__name__) # Current model
-CORS(app)
 
 @app.route('/RunScan/<target>/<scanMode>/<whois>/<automation>/<cveDetection>/<avoidPingBlocking>')      
 def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking):
@@ -468,7 +603,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
     return redirect("http://localhost:3001/ScanResult", code=302)
 
-@app.route('/runAPI',methods = ['POST', 'GET'])
+@app.route('/runAPI', methods = ['POST', 'GET'])
 def startApp():
    if request.method == 'POST':
         target = request.form['target']

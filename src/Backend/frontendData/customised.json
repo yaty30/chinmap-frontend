@@ -2,6 +2,7 @@
     {
         "profile": [
             {
+                "modeID": "IWJDIOQPTxzpkaiKeCJHOs",                
                 "name": "testing",
                 "des": "testffff",
                 "freq": 4,
@@ -39,12 +40,12 @@
                 "flags": ""
             }
         ]
-    },
-    {
+    },{
         "profile": [
             {
-                "name": "123",
-                "des": "s",
+                "modeID": "IWJDIOQPTxdawjkjdozpkaiKeCJHOs",                
+                "name": "testing",
+                "des": "testffff",
                 "freq": 4,
                 "tcp": "",
                 "nonTcp": ""
@@ -80,5 +81,45 @@
                 "flags": ""
             }
         ]
-    }
+    },{
+"profile": [
+{
+"modeID": "mAnIgOqxSQDCEhwJXVnXr",
+"name": "freq, tcp, nontcp testing",
+"des": "testing description",
+"freq": 2,
+"tcp": "-sS",
+"nonTcp": "-sY"
+}
+],
+"ping": [
+{
+"flags": ""
+}
+],
+"nse": [
+{
+"flags": ""
+}
+],
+"target": [
+{
+"flags": ""
+}
+],
+"source": [
+{
+"flags": ""
+}
+],
+"timing": [
+{
+"flags": ""
+}
+],
+"other": [
+{
+"flags": ""
+}
 ]
+}]

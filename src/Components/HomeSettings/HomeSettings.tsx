@@ -32,6 +32,7 @@ import serviceAndVersionDetectiony from './json/ServiceAndVersionDetectiony/data
 
 // Mobx
 import settingsStatus from '../../Mobx/Models/homeSettingsStatus'
+// import settingsFlagsStatus from '../../Mobx/Models/homeSettingsFlagStatus'
 
 import SetFlags from './SetFlags'
 import { automation, cveDetection } from './homeSettingsData'
@@ -259,6 +260,7 @@ export default () => {
                                     settingsStatus.setFlag(settingsStatus.flag + 1); 
                                     console.log(settingsStatus.flag);
                                     setOpt(event.target.checked);
+                                    // settingsFlagsStatus.pushFlags()
                                   }}
                               />
                           }
