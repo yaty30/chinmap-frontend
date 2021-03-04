@@ -291,6 +291,7 @@ export default observer (() => {
                                 }}
                             >
                                 <ListSubheader>Default Scan Modes</ListSubheader>
+                                <MenuItem value='defaultScanMode' className="default">Regular Scan</MenuItem>
                                 {scanModeData.map((data, index) => (
                                   data.cardInfo.map((data, index) => (
                                     <MenuItem value={data.name} key={index} className="default">{data.name}</MenuItem>
@@ -300,7 +301,9 @@ export default observer (() => {
                                 <ListSubheader>Customised Scan Modes</ListSubheader>
                                 {customised.rows.map((modes, index) => (
                                   modes.profile.map((data, index) => (
-                                    data.modeID === '' ? null :
+                                    data.modeID === '' ? 
+                                     null
+                                     :
                                     <MenuItem value={data.modeID} className="customised">{data.name}</MenuItem>
                                   ))
                                 ))}
@@ -314,7 +317,7 @@ export default observer (() => {
           {/* Scan data temporary storing */}
     
           <div style={{position: 'fixed', width: 865, bottom: 10}}>
-          <div style={{display: "none"}}>
+          <div style={{display: ""}}>
             <input type="text" readOnly name="nm" value={homeSettingsStatus.rangeTarget === '' ? targetVal : homeSettingsStatus.rangeTarget} />
             <input type="text" readOnly name="auto" value={homeSettingsStatus.automation === true ? "true" : "false"} />
             <input type="text" readOnly name="cve" value={homeSettingsStatus.cve === true ? "true" : "false"} />

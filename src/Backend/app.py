@@ -195,8 +195,8 @@ def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetec
 
     return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(target) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + foundTime + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '"\n}}'
     
-def GetCVE(target):
-    runCVEScan = os.popen('nmap -sS -sV --script=vulscan/vulscan ' + target)
+def GetCVE(target, scanID, cveCommand):
+    runCVEScan = os.popen(cveCommand)
     cveScanOutput = runCVEScan.read()
 
     with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
@@ -216,8 +216,8 @@ def GetCVE(target):
     cveScanOutputTsx.writelines("\n]")
     cveScanOutputTsx.close()
         
-def GetWhoIs(target):
-    runWhois = os.popen('sudo nmap --script whois-domain.nse -d ' + target)
+def GetWhoIs(target, scanID, whoisCommand):
+    runWhois = os.popen(whoisCommand)
     whoisScan = runWhois.read()
 
     # Finding WhoIs script result
@@ -393,7 +393,6 @@ def AddMode(name, des, freq, tcp, nontcp):
 
     return redirect("http://localhost:3001/customisedScanMode", code=302)
 
-
 @app.route('/deleteMode', methods=['POST', 'GET'])
 def deleteModeFetching():
     if request.method == 'POST':
@@ -467,10 +466,6 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     letters = string.ascii_letters
     scanID = ''.join(random.choice(letters) for i in range(21))
 
-    StartScan()
-
-    # Nmap Command
-    command = 'nmap ' + target
 
     if platform.system() == 'Windows':
         command = 'nmap ' + target
@@ -478,43 +473,21 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
         command = 'nmap ' + target
 
     ######### Default Scan Modes #########
-    pingScanMode = ' -v -sU -sT -p -U:161, T:80 -T0 '
-    lightningScanMode = ' -v -sU -sT -p U:161,T:80 -T0 '
-    intenseScanMode = ' -T4 -A -v '
-    nonPingScanMode = ' -v -sU -sT -p U:161,T:80 -T0 '
-    topOneHundredScanMode = ' -T4 -F -vv '
-    fullPortsScanMode = ' -T4 -p- -v -v '
-
     if scanMode == 'Ping Scan Mode':
-        mode = pingScanMode
+        mode = ' -v -sU -sT -p -U:161, T:80 -T0 '
     elif scanMode == 'Lightning Scan Mode':
-        mode = lightningScanMode
+        mode = ' -v -sU -sT -p U:161,T:80 -T0 '
     elif scanMode == 'Intense Scan Mode':
-        mode = intenseScanMode
+        mode = ' -T4 -A -v '
     elif scanMode == 'Non-Ping Scan Mode':
-        mode = nonPingScanMode
+        mode = ' -v -sU -sT -p U:161,T:80 -T0 '
     elif scanMode == 'Top 100 Scan Mode':
-        mode = topOneHundredScanMode
+        mode = ' -T4 -F -vv '
     elif scanMode == 'Full Ports Scan Mode':
-        mode = fullPortsScanMode
-    else:
-        mode = ''
+        mode = ' -T4 -p- -v -v '
+    elif scanMode == 'Default Scan Mode':
+        mode = ' -sY '
     ######### END Default Scan Modes #########
-
-    if scanMode == '':
-        if avoidPingBlocking == True:
-            scanCommand = os.popen(command + flags + " -Pn ")
-            scanCommandString = command + flags + " -Pn "
-        else:
-            scanCommand = os.popen(command + flags)
-            scanCommandString = command + flags
-    else:
-        if avoidPingBlocking == True:
-            scanCommand = os.popen(command + mode + " -Pn ")
-            scanCommandString = command + mode + " -Pn "
-        else:
-            scanCommand = os.popen(command + mode)
-            scanCommandString = command + mode + " -Pn "
 
     # if target is an independent IP, set scan range will not be able to apply
     if re.findall(r'.0\/\d+$', target):
@@ -522,51 +495,91 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     else:
         scanRange = "Target have no range"
 
-    # CVE Detection
-    if cveDetection ==  True:
-        GetCVE(target)
-    else:
-        with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
-            for line in file:
-                print(line.replace("]", ""), end="")
-        cveScanOutputTsx = open("cveScanOutput.tsx", "a")
+    cveCommand = 'nmap -sS -sV --script=vulscan/vulscan ' + target
+    whoisCommand = 'nmap --script whois-domain.nse -d ' + target
 
-        cveScanOutputTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
-        cveScanOutputTsx.writelines("Enable CVE detection to discover.")
-        cveScanOutputTsx.writelines("\n`},\n")
+    command = 'nmap ' + target
+    # Determin if scan with mode or not
+    if scanMode != '':
+        command =  command + mode
+        if avoidPingBlocking == 'true':
+            command =  command + '-Pn '
 
-        cveScanOutputTsx.writelines("\n]")
-        cveScanOutputTsx.close()
+        if cveDetection == 'true':
+            GetCVE(target, scanID, cveCommand)
+        else:
+            with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
+                for line in file:
+                    print(line.replace("]", ""), end="")
+            cveScanOutputTsx = open("cveScanOutput.tsx", "a")
 
-    if whois == True:
-        GetWhoIs(target)
-    else:
-        with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
-            for line in file:
-                print(line.replace("]", ""), end="")
-        whoisScanTsx = open("whoisScan.tsx", "a")
+            cveScanOutputTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
+            cveScanOutputTsx.writelines("Enable CVE detection to discover.")
+            cveScanOutputTsx.writelines("\n`},\n")
 
-        whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
-        whoisScanTsx.writelines("Enable WhoIs feature to discover.")
-        whoisScanTsx.writelines("\n`},\n")
+            cveScanOutputTsx.writelines("\n]")
+            cveScanOutputTsx.close()
 
-        whoisScanTsx.writelines("\n]")
-        whoisScanTsx.close()
+        if whois == 'true':
+            GetWhoIs(target, scanID, whoisCommand)
+        else:
+            with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
+                for line in file:
+                    print(line.replace("]", ""), end="")
+            whoisScanTsx = open("whoisScan.tsx", "a")
 
-    # Scan Range
-    if scanRange == "non":
-        return True
-    elif scanRange == "oddOnly":
-        return False
+            whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
+            whoisScanTsx.writelines("Enable WhoIs feature to discover.")
+            whoisScanTsx.writelines("\n`},\n")
+
+            whoisScanTsx.writelines("\n]")
+            whoisScanTsx.close()
+    if scanMode == '':
+        command =  command + flags
+        if avoidPingBlocking == 'true':
+            command =  command + '-Pn '
+        if cveDetection == 'true':
+            GetCVE(target, scanID, cveCommand)
+        else:
+            with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
+                for line in file:
+                    print(line.replace("]", ""), end="")
+            cveScanOutputTsx = open("cveScanOutput.tsx", "a")
+
+            cveScanOutputTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
+            cveScanOutputTsx.writelines("Enable CVE detection to discover.")
+            cveScanOutputTsx.writelines("\n`},\n")
+
+            cveScanOutputTsx.writelines("\n]")
+            cveScanOutputTsx.close()
+
+        if whois == 'true':
+            GetWhoIs(target, scanID, whoisCommand)
+        else:
+            with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
+                for line in file:
+                    print(line.replace("]", ""), end="")
+            whoisScanTsx = open("whoisScan.tsx", "a")
+
+            whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
+            whoisScanTsx.writelines("Enable WhoIs feature to discover.")
+            whoisScanTsx.writelines("\n`},\n")
+
+            whoisScanTsx.writelines("\n]")
+            whoisScanTsx.close()
     
-    normalScanOutput = scanCommand.read()
+    StartScan()
+
+    scanCommand = os.popen(command) # Sending nmap command to shell
+    scanOutputTxt = scanCommand.read() # Retrieving output from shell and read
+    scanCommandString = str(command) # For print out the command to front-end
 
 
     # Export normal scan output to text file
-    normalScanTxt = open("Result.txt", "w+")
-    normalScanTxtResult = "Command: " + str(scanCommandString) + str(divider) + str(normalScanOutput)
-    normalScanTxt.writelines(normalScanTxtResult)
-    normalScanTxt.close()
+    scanTxt = open("Result.txt", "w+")
+    scanTxtResult = "Command: " + str(scanCommandString) + str(divider) + str(scanOutputTxt)
+    scanTxt.writelines(scanTxtResult)
+    scanTxt.close()
 
     # remove ] in json and insert new data with a ]
     with fileinput.FileInput("scannedIn.json", inplace=True, backup='.bak') as file:
@@ -575,12 +588,12 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     fileInputFixBracket = open("scannedIn.json", "a")
     
     # Generating normal scan output for Frontend
-    feNormalScanTxt = open("scannedIn.json", "a")
+    fescanTxt = open("scannedIn.json", "a")
     # Appending new data to scannedIn.json
-    feNormalScanResult = "Result.txt"
-    getScanDetailsOutput = str(GetScanDetails(feNormalScanResult, scanID, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, scanRange))[:-1]
-    feNormalScanTxt.writelines(getScanDetailsOutput)
-    feNormalScanTxt.close()
+    fescanResult = "Result.txt"
+    getScanDetailsOutput = str(GetScanDetails(fescanResult, scanID, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, scanRange))[:-1]
+    fescanTxt.writelines(getScanDetailsOutput)
+    fescanTxt.close()
 
     fileInputFixBracket.write('\n]')
     fileInputFixBracket.close()
@@ -596,7 +609,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
         for line in file:
             print(line.replace("]", ""), end="")
     feNomralScanPureOutputTxt = open("Result.tsx", "a")
-    feNomralScanPureOutputTxt.writelines("\n{\nid: '" + str(scanID) + "',\noutput: `" + normalScanTxtResult + "`,},\n]")
+    feNomralScanPureOutputTxt.writelines("\n{\nid: '" + str(scanID) + "',\noutput: `" + scanTxtResult + "`,},\n]")
     feNomralScanPureOutputTxt.close()
     
     EndScan()
@@ -644,7 +657,6 @@ def startApp():
                 cveDetection=cveDetection, 
                 avoidPingBlocking=avoidPingBlocking, 
             ))
-
 
 if __name__ == "__main__":
     app.debug = True

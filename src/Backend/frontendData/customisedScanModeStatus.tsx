@@ -116,12 +116,56 @@ const store = modeArray.create({
 {
 "profile": [
 {
-"modeID": "upxelVsKrmeCNVgXmdeSj",
-"name": "123123",
-"des": "123123123",
+"modeID": "WubpGxdoBRiLoYcvufkXH",
+"name": "test",
+"des": "test => description",
 "freq": 4,
 "tcp": "-sA",
-"nonTcp": "-sL"
+"nonTcp": "-sO"
+}
+],
+"ping": [
+{
+"flags": ""
+}
+],
+"nse": [
+{
+"flags": ""
+}
+],
+"target": [
+{
+"flags": ""
+}
+],
+"source": [
+{
+"flags": ""
+}
+],
+"timing": [
+{
+"flags": ""
+}
+],
+"other": [
+{
+"flags": ""
+}
+]
+},
+
+
+{
+"profile": [
+{
+"modeID": "txNCGIObylxCQAVuTrWES",
+"name": "nse",
+"des": "nse",
+"freq": 4,
+"tcp": "-sN",
+"nonTcp": "-sO"
 }
 ],
 "ping": [
