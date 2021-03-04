@@ -443,7 +443,38 @@ export default () => {
                               variant="outlined" 
                               multiline
                               value={
-                                data.flags == " " ? "Null" : data.flags
+                                // data.flags == " " ? "Null" : data.flags
+                                '-sF'
+                              }
+                              inputProps={{
+                                  readOnly: true,
+                              }}
+                            />
+                        </Grid>
+                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
+                          <TextField
+                              className={classes.centering} 
+                              id="outlined-basic" 
+                              label="WhoIS" 
+                              variant="outlined" 
+                              multiline
+                              value={
+                                data.whois === "true" ? "Enabled" : "Disabled"
+                              }
+                              inputProps={{
+                                  readOnly: true,
+                              }}
+                            />
+                        </Grid>
+                        <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
+                          <TextField
+                              className={classes.centering} 
+                              id="outlined-basic" 
+                              label="Ping Probes Blocking Bypass" 
+                              variant="outlined" 
+                              multiline
+                              value={
+                                data.pbb === "true" ? "Enabled" : "Disabled"
                               }
                               inputProps={{
                                   readOnly: true,

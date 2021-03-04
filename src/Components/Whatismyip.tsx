@@ -17,6 +17,7 @@ export default function AlertDialog() {
     setOpen(false);
   };
 
+
   return (
     <div>
       <Button
@@ -43,7 +44,6 @@ export default function AlertDialog() {
         <DialogTitle id="alert-dialog-title">{"What is my IP?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            [ IP Result ]
           </DialogContentText>
         </DialogContent>
         <DialogActions>

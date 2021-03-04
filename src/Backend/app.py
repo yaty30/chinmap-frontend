@@ -172,6 +172,8 @@ def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetec
     foundAutomation = str(automation)
     foundCveDetection = str(cveDetection)
     foundSetFlags = str(flags)
+    foundWhoIS = str(whois)
+    foundPBB = str(avoidPingBlocking)
 
     # find current Nmap version
     nmapVer = re.findall(r'Nmap \d+.\d+', data)
@@ -193,7 +195,7 @@ def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetec
     targetForSelectTxt.close() 
     
 
-    return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(target) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + foundTime + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '"\n}}'
+    return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(target) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + foundTime + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '",\n' + '"whois": "'+  foundWhoIS + '",\n"pbb": "' + foundPBB + '" \n}}'
     
 def GetCVE(target, scanID, cveCommand):
     runCVEScan = os.popen(cveCommand)
@@ -221,7 +223,7 @@ def GetWhoIs(target, scanID, whoisCommand):
     whoisScan = runWhois.read()
 
     # Finding WhoIs script result
-    whoisResult = re.findall(r'(Host script results:(.*))', whoisScan)
+    whoisResult = re.findall(r'(.*)', whoisScan)
 
     with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
         for line in file:
@@ -461,6 +463,7 @@ def WhatIsMyIP(isCheck):
 
 @app.route('/RunScan/<target>/<scanMode>/<whois>/<automation>/<cveDetection>/<avoidPingBlocking>')      
 def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking):
+    StartScan()
 
     # creating scan identity string
     letters = string.ascii_letters
@@ -474,14 +477,14 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
     ######### Default Scan Modes #########
     if scanMode == 'Ping Scan Mode':
-        mode = ' -v -sU -sT -p -U:161, T:80 -T0 '
+        mode = ' -v -sU -sT -p -U:161,T:80 -T0 '
     elif scanMode == 'Lightning Scan Mode':
         mode = ' -v -sU -sT -p U:161,T:80 -T0 '
     elif scanMode == 'Intense Scan Mode':
         mode = ' -T4 -A -v '
     elif scanMode == 'Non-Ping Scan Mode':
         mode = ' -v -sU -sT -p U:161,T:80 -T0 '
-    elif scanMode == 'Top 100 Scan Mode':
+    elif scanMode == 'Top 100 Ports Scan Mode':
         mode = ' -T4 -F -vv '
     elif scanMode == 'Full Ports Scan Mode':
         mode = ' -T4 -p- -v -v '
@@ -498,12 +501,12 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     cveCommand = 'nmap -sS -sV --script=vulscan/vulscan ' + target
     whoisCommand = 'nmap --script whois-domain.nse -d ' + target
 
-    command = 'nmap ' + target
+    command = 'sudo nmap ' + target
     # Determin if scan with mode or not
     if scanMode != '':
-        command =  command + mode
+        command = command + mode
         if avoidPingBlocking == 'true':
-            command =  command + '-Pn '
+            command = command + '-Pn '
 
         if cveDetection == 'true':
             GetCVE(target, scanID, cveCommand)
@@ -520,7 +523,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
             cveScanOutputTsx.writelines("\n]")
             cveScanOutputTsx.close()
 
-        if whois == 'true':
+        if whois == 'true': 
             GetWhoIs(target, scanID, whoisCommand)
         else:
             with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
@@ -534,6 +537,8 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
             whoisScanTsx.writelines("\n]")
             whoisScanTsx.close()
+        if avoidPingBlocking == 'true':
+            command = command + '-Pn '
     if scanMode == '':
         command =  command + flags
         if avoidPingBlocking == 'true':
@@ -567,12 +572,12 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
             whoisScanTsx.writelines("\n]")
             whoisScanTsx.close()
+        if avoidPingBlocking == 'true':
+            command = command + '-Pn '
     
-    StartScan()
-
     scanCommand = os.popen(command) # Sending nmap command to shell
     scanOutputTxt = scanCommand.read() # Retrieving output from shell and read
-    scanCommandString = str(command) # For print out the command to front-end
+    scanCommandString = str(command)[:-4] # For print out the command to front-end
 
 
     # Export normal scan output to text file

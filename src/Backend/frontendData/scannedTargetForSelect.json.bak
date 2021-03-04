@@ -5,53 +5,33 @@
         "runTime": "",
         "date": ""
     }
+
 ,
 {
-"id": "BuGFZdhNqoMlzRdVfpUmL",
-"target": "10.107.208.157",
+"id": "ftSycuPSzZyxHKCJEVmiJ",
+"target": "192.168.1.1",
 "runTime": "0.23 seconds",
-"date": "2021-03-03"
+"date": "2021-03-04"
 }
 ,
 {
-"id": "ZfnDLPDBeMqkLRQCZaiav",
+"id": "YNJerqNtRqFMIixqpvFQg",
+"target": "vtc.edu.hk",
+"runTime": "0.08 seconds",
+"date": "2021-03-04"
+}
+,
+{
+"id": "bdDSbjWcMBzKCFwhLhpBj",
 "target": "scanme.nmap.org",
-"runTime": "40.06 seconds",
-"date": "2021-03-03"
+"runTime": "4.81 seconds",
+"date": "2021-03-04"
 }
 ,
 {
-"id": "quRhTSwyFdvdOwxcqBhMT",
-"target": "127.0.0.1",
-"runTime": "1.31 seconds",
-"date": "2021-03-03"
-}
-,
-{
-"id": "QltQpoJxkYErQKiPnpomU",
-"target": "10.107.208.157",
-"runTime": "0.31 seconds",
-"date": "2021-03-03"
-}
-,
-{
-"id": "ZMaQvhOKLtErrzNsWejYd",
-"target": "127.0.0.1",
-"runTime": "0.22 seconds",
-"date": "2021-03-03"
-}
-,
-{
-"id": "euLzVJfJskLutpzmdJybX",
+"id": "rMLUnZTdbmpEpuuLvtKxs",
 "target": "scanme.nmap.org",
-"runTime": "40.25 seconds",
-"date": "2021-03-03"
-}
-,
-{
-"id": "tSPsoHHfOTYCEwxBrPjOq",
-"target": "127.0.0.1",
-"runTime": "12.51 seconds",
-"date": "2021-03-03"
+"runTime": "4.83 seconds",
+"date": "2021-03-04"
 }
 ]

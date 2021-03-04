@@ -10,63 +10,42 @@ export const cveScanOutput = [
 
 
 {
-scanId: 'BuGFZdhNqoMlzRdVfpUmL',
+scanId: 'ftSycuPSzZyxHKCJEVmiJ',
 output:`
 Enable CVE detection to discover.
 `},
 
 
 {
-scanId: 'ZfnDLPDBeMqkLRQCZaiav',
+scanId: 'YNJerqNtRqFMIixqpvFQg',
 output:`
 Enable CVE detection to discover.
 `},
 
 
 {
-scanId: 'iayVeFSFLgGUHWZQTtnIk',
+scanId: 'osXWWDpDFTHEhKbBlEgpG',
 output:`
 Enable CVE detection to discover.
 `},
 
 
 {
-scanId: 'quRhTSwyFdvdOwxcqBhMT',
+scanId: 'bdDSbjWcMBzKCFwhLhpBj',
 output:`
 Enable CVE detection to discover.
 `},
 
 
 {
-scanId: 'QltQpoJxkYErQKiPnpomU',
+scanId: 'rMLUnZTdbmpEpuuLvtKxs',
 output:`
 Enable CVE detection to discover.
 `},
 
 
 {
-scanId: 'ZMaQvhOKLtErrzNsWejYd',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'euLzVJfJskLutpzmdJybX',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'tSPsoHHfOTYCEwxBrPjOq',
-output:`
-Enable CVE detection to discover.
-`},
-
-
-{
-scanId: 'slbSwXVOEiEtDablAWrsZ',
+scanId: 'HCOzXgxMdeLNPeaRSycYX',
 output:`
 Enable CVE detection to discover.
 `},

@@ -23,6 +23,7 @@ import LiveHelpOutlinedIcon from '@material-ui/icons/LiveHelpOutlined';
 import Chip from '@material-ui/core/Chip';
 import { observer } from 'mobx-react-lite'
 import WhatismyIP from './Whatismyip'
+import AdvancedMode from './AdvancedMode'
 
 import AutomationIcon from '@material-ui/icons/BrightnessAuto';
 import ScanRangeDisplay from './HomeSettings/ScanRangeDisplay'
@@ -260,8 +261,11 @@ export default observer (() => {
                           </td>
                         </tr>
                         <tr>
-                          <td colSpan={4}>
+                          <td colSpan={2}>
                             <WhatismyIP />
+                          </td>
+                          <td colSpan={2}>
+                            <AdvancedMode />
                           </td>
                         </tr>
                       </tbody>
@@ -317,7 +321,7 @@ export default observer (() => {
           {/* Scan data temporary storing */}
     
           <div style={{position: 'fixed', width: 865, bottom: 10}}>
-          <div style={{display: ""}}>
+          <div style={{display: "none"}}>
             <input type="text" readOnly name="nm" value={homeSettingsStatus.rangeTarget === '' ? targetVal : homeSettingsStatus.rangeTarget} />
             <input type="text" readOnly name="auto" value={homeSettingsStatus.automation === true ? "true" : "false"} />
             <input type="text" readOnly name="cve" value={homeSettingsStatus.cve === true ? "true" : "false"} />

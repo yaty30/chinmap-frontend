@@ -16,6 +16,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import IPIcon from '@material-ui/icons/LocationSearching';
+import AdvancedModeIcon from '@material-ui/icons/BlurOn';
 
 import HomeIcon from '@material-ui/icons/Home';
 import DefaultScanModeIcon from '@material-ui/icons/GpsNotFixed';
@@ -32,6 +33,7 @@ import ScanResult from '../Views/ScanResult'
 import ScanComparison from '../Views/ScanComparison'
 import ScanHistory from '../Views/ScanHistory'
 import Whatismyip from '../Views/Whatismyip'
+import AdvancedMode from '../Views/AdvancedMode'
 
 // Default Scan Modes
 import PingScanMode from '../Components/defaultScanModes/pingScanMode'
@@ -269,9 +271,9 @@ export default () => {
                         {/* Customised Scan Mode Routes */ }
 
                         <Route 
-                            path="/whatismyip" 
+                            path="/advancedMode" 
                             render={ 
-                                () => <Whatismyip />
+                                () => <AdvancedMode />
                             } 
                         />
                     </Switch>

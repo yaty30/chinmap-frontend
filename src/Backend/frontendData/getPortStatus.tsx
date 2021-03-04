@@ -6,62 +6,36 @@ export const rows = [
     createData('','','','','',),
 
 
-// ===================== Target: 10.107.208.157 ================================
-createData('BuGFZdhNqoMlzRdVfpUmL','3001', 'tcp', 'open', 'nessus'),
-createData('BuGFZdhNqoMlzRdVfpUmL','3306', 'tcp', 'open', 'mysql'),
-// ===================== END of 10.107.208.157 =================================
+// ===================== Target: 192.168.1.1 ================================
+createData('ftSycuPSzZyxHKCJEVmiJ','53', 'tcp', 'open', 'domain'),
+createData('ftSycuPSzZyxHKCJEVmiJ','80', 'tcp', 'open', 'http'),
+createData('ftSycuPSzZyxHKCJEVmiJ','548', 'tcp', 'open', 'afp'),
+createData('ftSycuPSzZyxHKCJEVmiJ','631', 'tcp', 'open', 'ipp'),
+createData('ftSycuPSzZyxHKCJEVmiJ','5000', 'tcp', 'open', 'upnp'),
+// ===================== END of 192.168.1.1 =================================
+
+// ===================== Target: vtc.edu.hk ================================
+// ===================== END of vtc.edu.hk =================================
 
 // ===================== Target: scanme.nmap.org ================================
-createData('ZfnDLPDBeMqkLRQCZaiav','22', 'tcp', 'filtered', 'ssh'),
-createData('ZfnDLPDBeMqkLRQCZaiav','23', 'tcp', 'filtered', 'telnet'),
-createData('ZfnDLPDBeMqkLRQCZaiav','80', 'tcp', 'open', 'http'),
-createData('ZfnDLPDBeMqkLRQCZaiav','445', 'tcp', 'filtered', 'microsoft-ds'),
-createData('ZfnDLPDBeMqkLRQCZaiav','515', 'tcp', 'filtered', 'printer'),
-createData('ZfnDLPDBeMqkLRQCZaiav','9929', 'tcp', 'open', 'nping-echo'),
-createData('ZfnDLPDBeMqkLRQCZaiav','31337', 'tcp', 'open', 'Elite'),
+createData('bdDSbjWcMBzKCFwhLhpBj','22', 'tcp', 'open', 'ssh'),
+createData('bdDSbjWcMBzKCFwhLhpBj','25', 'tcp', 'filtered', 'smtp'),
+createData('bdDSbjWcMBzKCFwhLhpBj','80', 'tcp', 'open', 'http'),
+createData('bdDSbjWcMBzKCFwhLhpBj','135', 'tcp', 'filtered', 'msrpc'),
+createData('bdDSbjWcMBzKCFwhLhpBj','139', 'tcp', 'filtered', 'netbios-ssn'),
+createData('bdDSbjWcMBzKCFwhLhpBj','445', 'tcp', 'filtered', 'microsoft-ds'),
 // ===================== END of scanme.nmap.org =================================
-
-// ===================== Target: 127.0.0.1 ================================
-createData('quRhTSwyFdvdOwxcqBhMT','631', 'tcp', 'open', 'ipp'),
-createData('quRhTSwyFdvdOwxcqBhMT','3001', 'tcp', 'open', 'nessus'),
-createData('quRhTSwyFdvdOwxcqBhMT','3306', 'tcp', 'open', 'mysql'),
-createData('quRhTSwyFdvdOwxcqBhMT','5000', 'tcp', 'open', 'upnp'),
-// ===================== END of 127.0.0.1 =================================
-
-// ===================== Target: 10.107.208.157 ================================
-createData('QltQpoJxkYErQKiPnpomU','3001', 'tcp', 'open', 'nessus'),
-createData('QltQpoJxkYErQKiPnpomU','3306', 'tcp', 'open', 'mysql'),
-// ===================== END of 10.107.208.157 =================================
-
-// ===================== Target: 127.0.0.1 ================================
-createData('ZMaQvhOKLtErrzNsWejYd','3001', 'tcp', 'open', 'nessus'),
-createData('ZMaQvhOKLtErrzNsWejYd','3306', 'tcp', 'open', 'mysql'),
-createData('ZMaQvhOKLtErrzNsWejYd','5000', 'tcp', 'open', 'upnp'),
-// ===================== END of 127.0.0.1 =================================
 
 // ===================== Target: scanme.nmap.org ================================
-createData('euLzVJfJskLutpzmdJybX','22', 'tcp', 'filtered', 'ssh'),
-createData('euLzVJfJskLutpzmdJybX','23', 'tcp', 'filtered', 'telnet'),
-createData('euLzVJfJskLutpzmdJybX','80', 'tcp', 'open', 'http'),
-createData('euLzVJfJskLutpzmdJybX','445', 'tcp', 'filtered', 'microsoft-ds'),
-createData('euLzVJfJskLutpzmdJybX','515', 'tcp', 'filtered', 'printer'),
-createData('euLzVJfJskLutpzmdJybX','9929', 'tcp', 'open', 'nping-echo'),
-createData('euLzVJfJskLutpzmdJybX','31337', 'tcp', 'open', 'Elite'),
+createData('rMLUnZTdbmpEpuuLvtKxs','22', 'tcp', 'open', 'ssh'),
+createData('rMLUnZTdbmpEpuuLvtKxs','25', 'tcp', 'filtered', 'smtp'),
+createData('rMLUnZTdbmpEpuuLvtKxs','80', 'tcp', 'open', 'http'),
+createData('rMLUnZTdbmpEpuuLvtKxs','135', 'tcp', 'filtered', 'msrpc'),
+createData('rMLUnZTdbmpEpuuLvtKxs','139', 'tcp', 'filtered', 'netbios-ssn'),
+createData('rMLUnZTdbmpEpuuLvtKxs','445', 'tcp', 'filtered', 'microsoft-ds'),
+createData('rMLUnZTdbmpEpuuLvtKxs','5009', 'tcp', 'filtered', 'airport-admin'),
 // ===================== END of scanme.nmap.org =================================
-
-// ===================== Target: 127.0.0.1 ================================
-createData('tSPsoHHfOTYCEwxBrPjOq','3001', 'tcp', 'open', 'http'),
-createData('tSPsoHHfOTYCEwxBrPjOq','3306', 'tcp', 'open', 'mysql'),
-createData('tSPsoHHfOTYCEwxBrPjOq','5000', 'tcp', 'open', 'http'),
-// ===================== END of 127.0.0.1 =================================
 
 // ===================== Target: 192.168.1.1 ================================
-createData('slbSwXVOEiEtDablAWrsZ','53', 'tcp', 'open', 'domain'),
-createData('slbSwXVOEiEtDablAWrsZ','80', 'tcp', 'open', 'tcpwrapped'),
-createData('slbSwXVOEiEtDablAWrsZ','548', 'tcp', 'open', 'afp'),
-createData('slbSwXVOEiEtDablAWrsZ','631', 'tcp', 'open', 'ipp?'),
-createData('slbSwXVOEiEtDablAWrsZ','5000', 'tcp', 'open', 'tcpwrapped'),
-createData('slbSwXVOEiEtDablAWrsZ','8200', 'tcp', 'open', 'tcpwrapped'),
-createData('slbSwXVOEiEtDablAWrsZ','20005', 'tcp', 'open', 'btx?'),
 // ===================== END of 192.168.1.1 =================================
 ]
