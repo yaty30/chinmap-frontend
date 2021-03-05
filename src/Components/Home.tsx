@@ -39,6 +39,7 @@ import scanModeData from '../Backend/frontendData/scanModes/default.json'
 // Mobx
 import homeSettingsStatus from '../Mobx/Models/homeSettingsStatus'
 import customised from '../Backend/frontendData/customisedScanModeStatus'
+import advancedModeStatus from '../Mobx/Models/advancedModeStatus'
 // import homeSettingsFlagsStatus from '../Mobx/Models/homeSettingsFlagStatus'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -144,9 +145,10 @@ export default observer (() => {
 
   return (
     <div className={classes.root}>
+      {/* <div style={{display: advancedModeStatus.isClick === true ? 'block' : 'none',position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: '#111', zIndex: 0}}></div> */}
       <form method='post' action="http://localhost:5000/runAPI">
         <Grid container spacing={5} justify="center" alignItems="center">
-          <Grid item xs={10}>
+          <Grid item xs={10} style={{display: advancedModeStatus.isClick === true ? 'none' : 'block'}}>
             <Paper className={classes.paper}>
                 <Typography variant="h6">
                     Scan Information
@@ -265,7 +267,23 @@ export default observer (() => {
                             <WhatismyIP />
                           </td>
                           <td colSpan={2}>
-                            <AdvancedMode />
+                            <Button 
+                                variant="outlined" 
+                                style={{
+                                    width: "100%", 
+                                    whiteSpace: "nowrap",
+                                    fontWeight: 'bold',
+                                    background: '#343434',
+                                    borderColor: '#191919',
+                                    color: '#DFC500',
+                                }}
+                                size="small"
+                                color="primary"
+                                onClick={()=> advancedModeStatus.setIsClick(!advancedModeStatus.isClick)}
+                            >
+                                {advancedModeStatus.isClick === true ? "Standard Mode" : "Advanced Mode"}
+                                
+                            </Button>
                           </td>
                         </tr>
                       </tbody>
@@ -275,7 +293,7 @@ export default observer (() => {
             </Paper>
           </Grid>
 
-          <Grid item xs={10}>
+          <Grid item xs={10} style={{display: advancedModeStatus.isClick === true ? 'none' : 'block'}}>
               <Paper className={classes.paper}>
                   <Typography variant="h6">
                       Scan Mode
@@ -315,6 +333,49 @@ export default observer (() => {
                         </FormControl>
                     </div>
                 </Paper>
+            </Grid>
+
+            <Grid item xs={10} style={{display: advancedModeStatus.isClick === false ? 'none' : 'block'}}>
+              <Paper className={classes.paper} style={{textAlign: "center", background: '#111'}}>
+                  <Typography variant="h6" style={{textAlign: 'left', color: '#E0C500'}}>
+                    Advanced Scan Mode
+                  </Typography>
+                  <div style={{marginTop: 25, textAlign: "center"}} id='advancedModeInput'>
+                  <Tooltip title="Nmap scan terminal" aria-label="add" arrow placement="top">
+                      <TextField 
+                          label="Scan Command"
+                          variant="outlined" 
+                          size="small"
+                          multiline
+                          rows={6}
+                          name="target"
+                          style={{
+                              width: "90%",
+                              marginBottom: 25,
+                          }}
+                          onChange={handleScanTarget}
+                          value={homeSettingsStatus.target}
+                      />
+                  </Tooltip>
+                </div>
+                <Button 
+                    variant="outlined" 
+                    style={{
+                        width: "90%", 
+                        whiteSpace: "nowrap",
+                        fontWeight: 'bold',
+                        background: '#343434',
+                        borderColor: '#191919',
+                        color: '#DFC500',
+                    }}
+                    size="small"
+                    color="primary"
+                    onClick={()=> advancedModeStatus.setIsClick(!advancedModeStatus.isClick)}
+                >
+                    {advancedModeStatus.isClick === true ? "Standard Mode" : "Advanced Mode"}
+                    
+                </Button>
+              </Paper>
             </Grid>
             
           

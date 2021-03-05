@@ -110,4 +110,84 @@ output: `Command: sudo nmap 192.168.1.1 -v -sU -sT -p -U:161,T:80
 ======================================================
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-04 16:31 HKT
 `,},
+
+{
+id: 'nSevMftgodyIwXVxsEocE',
+output: `Command: sudo nmap 192.168.1.1 -T4 -F 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-05 11:12 HKT
+Initiating ARP Ping Scan at 11:12
+Scanning 192.168.1.1 [1 port
+Completed ARP Ping Scan at 11:12, 0.04s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 11:12
+Completed Parallel DNS resolution of 1 host. at 11:12, 0.00s elapsed
+Initiating SYN Stealth Scan at 11:12
+Scanning 192.168.1.1 [100 ports
+Discovered open port 80/tcp on 192.168.1.1
+Discovered open port 53/tcp on 192.168.1.1
+Discovered open port 631/tcp on 192.168.1.1
+Discovered open port 5000/tcp on 192.168.1.1
+Discovered open port 548/tcp on 192.168.1.1
+Completed SYN Stealth Scan at 11:12, 0.02s elapsed (100 total ports)
+Nmap scan report for 192.168.1.1
+Host is up, received arp-response (0.0030s latency).
+Scanned at 2021-03-05 11:12:24 HKT for 0s
+Not shown: 95 closed ports
+Reason: 95 resets
+PORT     STATE SERVICE REASON
+53/tcp   open  domain  syn-ack ttl 64
+80/tcp   open  http    syn-ack ttl 64
+548/tcp  open  afp     syn-ack ttl 64
+631/tcp  open  ipp     syn-ack ttl 64
+5000/tcp open  upnp    syn-ack ttl 64
+MAC Address: CC:40:D0:F4:D9:1D (Netgear)
+
+Read data files from: /usr/local/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 0.24 seconds
+           Raw packets sent: 101 (4.428KB) | Rcvd: 101 (4.048KB)
+`,},
+
+{
+id: 'puTeXnAfNfCwhaEOgfHrH',
+output: `Command: sudo nmap 192.168.1.1 -T4 -F 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-05 11:16 HKT
+Initiating ARP Ping Scan at 11:16
+Scanning 192.168.1.1 [1 port
+Completed ARP Ping Scan at 11:16, 0.04s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 11:16
+Completed Parallel DNS resolution of 1 host. at 11:16, 0.00s elapsed
+Initiating SYN Stealth Scan at 11:16
+Scanning 192.168.1.1 [100 ports
+Discovered open port 80/tcp on 192.168.1.1
+Discovered open port 53/tcp on 192.168.1.1
+Discovered open port 631/tcp on 192.168.1.1
+Discovered open port 5000/tcp on 192.168.1.1
+Discovered open port 548/tcp on 192.168.1.1
+Completed SYN Stealth Scan at 11:16, 0.02s elapsed (100 total ports)
+Nmap scan report for 192.168.1.1
+Host is up, received arp-response (0.0032s latency).
+Scanned at 2021-03-05 11:16:02 HKT for 0s
+Not shown: 95 closed ports
+Reason: 95 resets
+PORT     STATE SERVICE REASON
+53/tcp   open  domain  syn-ack ttl 64
+80/tcp   open  http    syn-ack ttl 64
+548/tcp  open  afp     syn-ack ttl 64
+631/tcp  open  ipp     syn-ack ttl 64
+5000/tcp open  upnp    syn-ack ttl 64
+MAC Address: CC:40:D0:F4:D9:1D (Netgear)
+
+Read data files from: /usr/local/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 0.22 seconds
+           Raw packets sent: 101 (4.428KB) | Rcvd: 101 (4.048KB)
+`,},
+
+{
+id: 'tvpjWHADyrMFVPChRiaKl',
+output: `Command: sudo nmap 192.168.1.1-v -sU -sT -p U:161,T:80 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-05 14:43 HKT
+Nmap done: 0 IP addresses (0 hosts up) scanned in 0.12 seconds
+`,},
 ]

@@ -50,4 +50,39 @@ output:`
 Enable CVE detection to discover.
 `},
 
+
+{
+scanId: 'nSevMftgodyIwXVxsEocE',
+output:`
+Enable CVE detection to discover.
+`},
+
+
+{
+scanId: 'bvARHusXbYDgPBabvZQKt',
+output:`
+Enable CVE detection to discover.
+`},
+
+
+{
+scanId: 'gEfFzxdxccPDuTuTUxldU',
+output:`
+Enable CVE detection to discover.
+`},
+
+
+{
+scanId: 'puTeXnAfNfCwhaEOgfHrH',
+output:`
+Enable CVE detection to discover.
+`},
+
+
+{
+scanId: 'tvpjWHADyrMFVPChRiaKl',
+output:`
+Enable CVE detection to discover.
+`},
+
 ]

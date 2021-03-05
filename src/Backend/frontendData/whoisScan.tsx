@@ -150,4 +150,39 @@ output:`
 Enable WhoIs feature to discover.
 `},
 
+
+{
+scanId: 'nSevMftgodyIwXVxsEocE',
+output:`
+Enable WhoIs feature to discover.
+`},
+
+
+{
+scanId: 'bvARHusXbYDgPBabvZQKt',
+output:`
+Enable WhoIs feature to discover.
+`},
+
+
+{
+scanId: 'gEfFzxdxccPDuTuTUxldU',
+output:`
+Enable WhoIs feature to discover.
+`},
+
+
+{
+scanId: 'puTeXnAfNfCwhaEOgfHrH',
+output:`
+Enable WhoIs feature to discover.
+`},
+
+
+{
+scanId: 'tvpjWHADyrMFVPChRiaKl',
+output:`
+Enable WhoIs feature to discover.
+`},
+
 ]

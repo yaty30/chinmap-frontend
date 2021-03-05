@@ -38,4 +38,23 @@ createData('rMLUnZTdbmpEpuuLvtKxs','5009', 'tcp', 'filtered', 'airport-admin'),
 
 // ===================== Target: 192.168.1.1 ================================
 // ===================== END of 192.168.1.1 =================================
+
+// ===================== Target: 192.168.1.1 ================================
+createData('nSevMftgodyIwXVxsEocE','53', 'tcp', 'open', 'domain'),
+createData('nSevMftgodyIwXVxsEocE','80', 'tcp', 'open', 'http'),
+createData('nSevMftgodyIwXVxsEocE','548', 'tcp', 'open', 'afp'),
+createData('nSevMftgodyIwXVxsEocE','631', 'tcp', 'open', 'ipp'),
+createData('nSevMftgodyIwXVxsEocE','5000', 'tcp', 'open', 'upnp'),
+// ===================== END of 192.168.1.1 =================================
+
+// ===================== Target: 192.168.1.1 ================================
+createData('puTeXnAfNfCwhaEOgfHrH','53', 'tcp', 'open', 'domain'),
+createData('puTeXnAfNfCwhaEOgfHrH','80', 'tcp', 'open', 'http'),
+createData('puTeXnAfNfCwhaEOgfHrH','548', 'tcp', 'open', 'afp'),
+createData('puTeXnAfNfCwhaEOgfHrH','631', 'tcp', 'open', 'ipp'),
+createData('puTeXnAfNfCwhaEOgfHrH','5000', 'tcp', 'open', 'upnp'),
+// ===================== END of 192.168.1.1 =================================
+
+// ===================== Target: 192.168.1.1 ================================
+// ===================== END of 192.168.1.1 =================================
 ]

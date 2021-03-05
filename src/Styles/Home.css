@@ -9,3 +9,23 @@
 #settingDialog{
     text-align: center;
 }
+
+#advancedModeInput .MuiInputBase-input{
+    color: rgb(240, 240, 240) !important;
+}
+
+#advancedModeInput .MuiFormLabel-root{
+    color: #DEC401;
+}
+
+#advancedModeInput .MuiOutlinedInput-notchedOutline{
+    border-color: #DEC401 !important;
+}
+
+#advancedModeInput .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+    border-color: #DEC401;
+}
+
+#advancedModeInput .MuiFormLabel-root.Mui-focused{
+    color: #DEC401;
+}

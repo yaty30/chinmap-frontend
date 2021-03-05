@@ -1,3 +1,4 @@
-Command: sudo nmap 192.168.1.1 -v -sU -sT -p -U:161,T:80 
+Command: sudo nmap 192.168.1.1-v -sU -sT -p U:161,T:80 
 ======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-04 16:31 HKT
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-05 14:43 HKT
+Nmap done: 0 IP addresses (0 hosts up) scanned in 0.12 seconds
