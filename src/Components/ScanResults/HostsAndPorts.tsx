@@ -12,7 +12,6 @@ import PortFiltered from '@material-ui/icons/VisibilityOff';
 
 // import { targetData, chosenMode, scanTarget } from './target'
 
-
 // Backend
 import { rows } from '../../Backend/frontendData/getPortStatus'
 

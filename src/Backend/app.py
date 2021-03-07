@@ -64,7 +64,7 @@ def GetPortStatus(scanID, result, target, scanMode, whois, automation, cveDetect
                     RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking)
             i += 1
             
-        fePortStatusTxt.writelines("\ncreateData('" + str(scanID) + "'," + str(ports)[1:] + ",")
+        fePortStatusTxt.writelines("\ncreateData('" + str(target) + "', '" + foundRunTime + "', '" + str(scanID) + "'," + str(ports)[1:] + ",")
 
     fePortStatusTxt.writelines("\n// ===================== END of " + target + " =================================")
     fePortStatusTxt.writelines("\n]")
@@ -108,6 +108,7 @@ def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetec
     foundHostUp = str(hostUp)[2:-2]
 
     # find run time
+    global foundRunTime
     runTime = re.findall(r'(\d+.\d+ seconds)', data)
     foundRunTime = str(runTime)[2:-2]
 
@@ -477,19 +478,19 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
     ######### Default Scan Modes #########
     if scanMode == 'Ping Scan Mode':
-        mode = '-T4 -sn -v '
+        mode = ' -T4 -sn -v '
     elif scanMode == 'Lightning Scan Mode':
-        mode = '-v -sU -sT -p U:161,T:80 -T0 '
+        mode = ' -v -sU -sT -p U:161,T:80    '
     elif scanMode == 'Intense Scan Mode':
-        mode = '-T4 -A -v '
+        mode = ' -T4 -A -v '
     elif scanMode == 'Non-Ping Scan Mode':
-        mode = '-v -sU -sT -p U:161,T:80 -T0 '
+        mode = ' -T4 -Pn -v -v '
     elif scanMode == 'Top 100 Ports Scan Mode':
-        mode = '-T4 -F -vv '
+        mode = ' -T4 -F -vv '
     elif scanMode == 'Full Ports Scan Mode':
-        mode = '-T4 -p- -v -v '
+        mode = ' -T4 -p- -v -v '
     elif scanMode == 'Default Scan Mode':
-        mode = '-sY '
+        mode = ' -sY '
     ######### END Default Scan Modes #########
 
     # if target is an independent IP, set scan range will not be able to apply

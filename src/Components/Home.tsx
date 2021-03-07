@@ -40,7 +40,7 @@ import scanModeData from '../Backend/frontendData/scanModes/default.json'
 import homeSettingsStatus from '../Mobx/Models/homeSettingsStatus'
 import customised from '../Backend/frontendData/customisedScanModeStatus'
 import advancedModeStatus from '../Mobx/Models/advancedModeStatus'
-// import homeSettingsFlagsStatus from '../Mobx/Models/homeSettingsFlagStatus'
+import homeSettingsFlagsStatus from '../Mobx/Models/homeSettingsFlagStatus'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -255,10 +255,9 @@ export default observer (() => {
                               }}
                               size="small"
                               color="primary"
-                              disabled={homeSettingsStatus.flag === '' ? false : true}
+                              // disabled={homeSettingsStatus.flag === '' ? false : true}
                             >
-                              Flags: &nbsp;
-                              
+                              Flags: {homeSettingsFlagsStatus.pingFlags}
                             </Button>
                           </td>
                         </tr>

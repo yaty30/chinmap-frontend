@@ -45,7 +45,7 @@ const store = homeSettings.create({
     cve: false,
     pn: false,
     whoIs: false,
-    flag: "0",
+    flag: "",
     rangeTarget: "",
 });
 

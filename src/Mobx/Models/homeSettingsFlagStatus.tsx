@@ -1,30 +1,18 @@
-import { types, Instance } from "mobx-state-tree";
+import { types } from "mobx-state-tree";
 
-type  flagDataModel = Instance<typeof flagData>
-
-const flagData = types
+const pingData = types
     .model({
-        flags: types.string,
-    })
-
-const data = types
-    .model({
-        data: types.array(flagData)
+        pingFlags: types.string,
     })
     .actions(self => ({
-        pushFlags(){
-            self.data.push({
-                flags: "",
-            })
+        setPingFlags(pingFlags: string){
+            self.pingFlags = pingFlags
+            console.log(pingFlags)
         }
     }))
 
-const store = data.create({
-    data: [
-        {
-            flags: "",
-        },
-    ]
-})
+const store = pingData.create({
+    pingFlags: '',
+});
 
 export default store;

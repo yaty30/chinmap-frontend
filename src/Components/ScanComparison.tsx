@@ -1,30 +1,34 @@
 import React, {useState} from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField';
+import Chip from '@material-ui/core/Chip';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Tooltip from '@material-ui/core/Tooltip';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
-import Chip from '@material-ui/core/Chip';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import PortOpened from '@material-ui/icons/Visibility';
+import PortFiltered from '@material-ui/icons/VisibilityOff';
+
 
 import { scanTarget, targetData, targetTime } from './target'
 
@@ -44,6 +48,17 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'left',
       backgroundColor: "#fefefe",
       color: "#333333",
+    },
+    portPaper: {
+      padding: theme.spacing(2),
+      textAlign: 'left',
+      backgroundColor: "#fefefe",
+      color: "#333333",
+      minHeight: 170,
+    },
+    portChip: {
+      textAlign: 'left',
+      margin: 5,
     },
     centerGrid: {
         textAlign: "center",
@@ -74,6 +89,21 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     cardGrid: {
         marginRight: 30,
+    },
+    portList: {
+      width: '100%',
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper,
+      position: 'relative',
+      overflow: 'auto',
+      height: 320,
+    },
+    listSection: {
+      backgroundColor: 'inherit',
+    },
+    ul: {
+      backgroundColor: 'inherit',
+      padding: 0,
     },
   }),
 );
@@ -110,6 +140,7 @@ interface TabPanelProps {
       'aria-controls': `simple-tabpanel-${index}`,
     };
   }
+  
 
 export default () => {
   const classes = useStyles();
@@ -122,6 +153,8 @@ export default () => {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setTarget(event.target.value as string);
     targetToCompare == " " ? setIsDisabled(true) : setIsDisabled(false) ;
+    setTimestampOne('');
+    setTimestampTwo('');
   };
 
   const handleTimestampOneChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -131,10 +164,480 @@ export default () => {
   const handleTimestampTwoChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setTimestampTwo(event.target.value as string);
   };
-
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+
+  const [scanModeC1, setScanModeC1] = useState('');
+  const [scanModeC2, setScanModeC2] = useState('');
+  const [dateC1, setDateC1] = useState('');
+  const [dateC2, setDateC2] = useState('');
+  const [timeC1, settimeC1] = useState('');
+  const [timeC2, settimeC2] = useState('');
+  const [latencyC1, setlatencyC1] = useState('');
+  const [latencyC2, setlatencyC2] = useState('');
+  const [notShownC1, setnotShownC1] = useState('');
+  const [notShownC2, setnotShownC2] = useState('');
+  const [rawSentC1, setrawSentC1] = useState('');
+  const [rawSentC2, setrawSentC2] = useState('');
+  const [rawRcvtC1, setrawRcvtC1] = useState('');
+  const [rawRcvtC2, setrawRcvtC2] = useState('');
+
+  const ShowSame = () => {
+    return(
+        <Grid container justify="center">
+            <Grid item xs={12} className={classes.cardGrid}>
+                <TableContainer>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                        <TableRow>
+                            <TableCell align="left">Output</TableCell>
+                            <TableCell align="left"></TableCell>
+                            <TableCell align="left">Scan A</TableCell>
+                            <TableCell align="left">Scan B</TableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow style={{background: scanModeC1 === scanModeC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Scan Mode
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setScanModeC1(output.scanMode)}
+                                        <TableCell align="left" key={index}>{output.scanMode}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setScanModeC2(output.scanMode)}
+                                        <TableCell align="left" key={index}>{output.scanMode}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: dateC1 === dateC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Date
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setDateC1(output.date)}
+                                        <TableCell align="left" key={index}>{output.date}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setDateC2(output.date)}
+                                        <TableCell align="left" key={index}>{output.date}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: timeC1 === timeC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Time
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {settimeC1(output.time)}
+                                        <TableCell align="left" key={index}>{output.time}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {settimeC2(output.time)}
+                                        <TableCell align="left" key={index}>{output.time}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: latencyC1 === latencyC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Latency
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setlatencyC1(output.latency)}
+                                        <TableCell align="left" key={index}>{output.latency}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setlatencyC2(output.latency)}
+                                        <TableCell align="left" key={index}>{output.latency}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: notShownC1 === notShownC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Not Shown Ports
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setnotShownC1(output.notShown)}
+                                        <TableCell align="left" key={index}>{output.notShown}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setnotShownC2(output.notShown)}
+                                        <TableCell align="left" key={index}>{output.notShown}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: rawSentC1 === rawSentC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Raw Packets Sent
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setrawSentC1(output.rawPacket)}
+                                        <TableCell align="left" key={index}>{output.rawPacket}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setrawSentC2(output.rawPacket)}
+                                        <TableCell align="left" key={index}>{output.rawPacket}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: rawRcvtC1 === rawRcvtC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Raw Packets Received
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setrawRcvtC1(output.rcvd)}
+                                        <TableCell align="left" key={index}>{output.rcvd}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setrawRcvtC2(output.rcvd)}
+                                        <TableCell align="left" key={index}>{output.rcvd}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+                            
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Grid>
+        </Grid>
+    )  
+  }
+
+  const ShowDiff = () => {
+    return(
+        <Grid container justify="center">
+            <Grid item xs={12} className={classes.cardGrid}>
+                <TableContainer>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                        <TableRow>
+                            <TableCell align="left">Output</TableCell>
+                            <TableCell align="left"></TableCell>
+                            <TableCell align="left">Scan A</TableCell>
+                            <TableCell align="left">Scan B</TableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow style={{background: scanModeC1 != scanModeC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Scan Mode
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setScanModeC1(output.scanMode)}
+                                        <TableCell align="left" key={index}>{output.scanMode}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setScanModeC2(output.scanMode)}
+                                        <TableCell align="left" key={index}>{output.scanMode}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: dateC1 != dateC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Date
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setDateC1(output.date)}
+                                        <TableCell align="left" key={index}>{output.date}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setDateC2(output.date)}
+                                        <TableCell align="left" key={index}>{output.date}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: timeC1 != timeC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Time
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {settimeC1(output.time)}
+                                        <TableCell align="left" key={index}>{output.time}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {settimeC2(output.time)}
+                                        <TableCell align="left" key={index}>{output.time}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: latencyC1 != latencyC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Latency
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setlatencyC1(output.latency)}
+                                        <TableCell align="left" key={index}>{output.latency}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setlatencyC2(output.latency)}
+                                        <TableCell align="left" key={index}>{output.latency}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: notShownC1 != notShownC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Not Shown Ports
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setnotShownC1(output.notShown)}
+                                        <TableCell align="left" key={index}>{output.notShown}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setnotShownC2(output.notShown)}
+                                        <TableCell align="left" key={index}>{output.notShown}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: rawSentC1 != rawSentC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Raw Packets Sent
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setrawSentC1(output.rawPacket)}
+                                        <TableCell align="left" key={index}>{output.rawPacket}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setrawSentC2(output.rawPacket)}
+                                        <TableCell align="left" key={index}>{output.rawPacket}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: rawRcvtC1 != rawRcvtC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Raw Packets Received
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setrawRcvtC1(output.rcvd)}
+                                        <TableCell align="left" key={index}>{output.rcvd}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setrawRcvtC2(output.rcvd)}
+                                        <TableCell align="left" key={index}>{output.rcvd}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+                            
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Grid>
+        </Grid>
+    )  
+  }
+
+  const PortComparison = () => {
+      
+    return(
+        <Grid container spacing={3} justify='center' style={{marginTop: 15,}}>
+            <Grid item xs={6}>
+                <Paper className={classes.portPaper}>
+                    <List className={classes.portList} subheader={<li />}>
+                        <li key="TCP" className={classes.listSection}>
+                            <ul className={classes.ul}>
+                                <ListSubheader>TCP</ListSubheader>
+                                {rows.map((output, index) => (
+                                    output.target != targetToCompare ? null :
+                                    output.timestamp != timestampOne ? null :
+                                    output.port === 'tcp' ?
+                                    <>
+                                        <Tooltip title={`Port: ${output.portno}/${output.port} | Status: ${output.status} | Service: ${output.service}`} arrow placement='top-end'>
+                                            <ListItem key={output.port} button style={{cursor: 'default'}}>
+                                                <ListItemIcon>
+                                                    {/* <StatusIcon style={{color: output.status === 'open' ? '#198BF7' : '#BA3B28'}} /> */}
+                                                    {output.status === 'open' ? <PortOpened style={{color: '#198BF7'}}/> : <PortFiltered style={{color: '#BA3B28'}}/>}
+                                                </ListItemIcon>
+                                                <ListItemText 
+                                                    primary={`${output.portno}/${output.port}`} 
+                                                    secondary={output.service}
+                                                />
+                                            </ListItem>
+                                        </Tooltip>
+                                    </>  : null
+                                ))}
+                            </ul>
+                        </li>
+                        <li key="UDP" className={classes.listSection}>
+                            <ul className={classes.ul}>
+                                <ListSubheader>UDP</ListSubheader>
+                                {rows.map((output, index) => (
+                                    output.target != targetToCompare ? null :
+                                    output.timestamp != timestampOne ? null :
+                                    output.port === 'udp' ?
+                                    <>
+                                        <Tooltip title={`Port: ${output.portno}/${output.port} | Status: ${output.status} | Service: ${output.service}`} arrow placement='top-end'>
+                                            <ListItem key={output.port} button style={{cursor: 'default'}}>
+                                                <ListItemIcon>
+                                                    {/* <StatusIcon style={{color: output.status === 'open' ? '#198BF7' : '#BA3B28'}} /> */}
+                                                    {output.status === 'open' ? <PortOpened style={{color: '#198BF7'}}/> : <PortFiltered style={{color: '#BA3B28'}}/>}
+                                                </ListItemIcon>
+                                                <ListItemText 
+                                                    primary={`${output.portno}/${output.port}`} 
+                                                    secondary={output.service}
+                                                />
+                                            </ListItem>
+                                        </Tooltip>
+                                    </>  : null
+                                ))}
+                            </ul>
+                        </li>
+                    </List>
+                 </Paper>
+            </Grid>
+            <Grid item xs={6}>
+                <Paper className={classes.portPaper}>
+                    <List className={classes.portList} subheader={<li />}>
+                        <li key="TCP" className={classes.listSection}>
+                            <ul className={classes.ul}>
+                                <ListSubheader>TCP</ListSubheader>
+                                {rows.map((output, index) => (
+                                    output.target != targetToCompare ? null :
+                                    output.timestamp != timestampTwo ? null :
+                                    output.port === 'tcp' ?
+                                    <>
+                                        <Tooltip title={`Port: ${output.portno}/${output.port} | Status: ${output.status} | Service: ${output.service}`} arrow placement='top-end'>
+                                            <ListItem key={output.port} button style={{cursor: 'default'}}>
+                                                <ListItemIcon>
+                                                    {/* <StatusIcon style={{color: output.status === 'open' ? '#198BF7' : '#BA3B28'}} /> */}
+                                                    {output.status === 'open' ? <PortOpened style={{color: '#198BF7'}}/> : <PortFiltered style={{color: '#BA3B28'}}/>}
+                                                </ListItemIcon>
+                                                <ListItemText 
+                                                    primary={`${output.portno}/${output.port}`} 
+                                                    secondary={output.service}
+                                                />
+                                            </ListItem>
+                                        </Tooltip>
+                                    </> : null
+                                ))}
+                            </ul>
+                        </li>
+                        <li key="UDP" className={classes.listSection}>
+                            <ul className={classes.ul}>
+                                <ListSubheader>UDP</ListSubheader>
+                                {rows.map((output, index) => (
+                                    output.target != targetToCompare ? null :
+                                    output.timestamp != timestampTwo ? null :
+                                    output.port === 'udp' ?
+                                    <>
+                                        <Tooltip title={`Port: ${output.portno}/${output.port} | Status: ${output.status} | Service: ${output.service}`} arrow placement='top-end'>
+                                            <ListItem key={output.port} button style={{cursor: 'default'}}>
+                                                <ListItemIcon>
+                                                    {/* <StatusIcon style={{color: output.status === 'open' ? '#198BF7' : '#BA3B28'}} /> */}
+                                                    {output.status === 'open' ? <PortOpened style={{color: '#198BF7'}}/> : <PortFiltered style={{color: '#BA3B28'}}/>}
+                                                </ListItemIcon>
+                                                <ListItemText 
+                                                    primary={`${output.portno}/${output.port}`} 
+                                                    secondary={output.service}
+                                                />
+                                            </ListItem>
+                                        </Tooltip>
+                                    </>  : null
+                                ))}
+                            </ul>
+                        </li>
+                    </List>
+                 </Paper>
+            </Grid>
+        </Grid>
+    )
+  }
 
   return (
     <div className={classes.root}>
@@ -175,7 +678,8 @@ export default () => {
                         >
                             
                             {scannedIn.map((target, index) => (
-                                <MenuItem 
+                               target.target === '' ? null :
+                               <MenuItem 
                                     value={target.target} 
                                     key={index}
                                 >
@@ -258,135 +762,42 @@ export default () => {
             </Paper>
         </Grid>
 
-            <Grid item xs={10}>
-                <Paper className={classes.paper}>
-                    <Grid item xs={12}>
-                        <div id="scanComparisonTab">
-                            <AppBar position="static">
-                                <Tabs 
-                                    value={value} 
-                                    onChange={handleTabChange} 
-                                    indicatorColor="primary"
-                                    textColor="primary"
-                                    centered>
-                                    <Tab label="Show Same" {...a11yProps(0)} style={{textTransform: "capitalize"}} />
-                                    <Tab label="Show Different" {...a11yProps(1)} style={{textTransform: "capitalize"}} />
-                                </Tabs>
-                            </AppBar>
-                                <Divider variant="middle" />
-                                <br/>
-                            {
-                                timestampOne == "" || timestampTwo == "" ?
-                                null
-                                    :
-                                <>
-                                    <Typography style={{textAlign: "center"}} color="textSecondary">Scan Result of [{targetToCompare}]</Typography>
-                                    <TabPanel value={value} index={0}>
-                                        <Grid container justify="center">
-                                            <Grid item xs={12} className={classes.cardGrid}>
-                                                <TableContainer>
-                                                    <Table aria-label="simple table">
-                                                        <TableHead>
-                                                        <TableRow>
-                                                            <TableCell align="left">Output</TableCell>
-                                                            <TableCell align="left"></TableCell>
-                                                            <TableCell align="left">Scan A</TableCell>
-                                                            <TableCell align="left">Scan B</TableCell>
-                                                        </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                            <TableRow>
-                                                                <TableCell align="left">
-                                                                    Scan Mode
-                                                                </TableCell>
-                                                                <TableCell />
-                                                                {scannedIn.map((output, index) => (
-                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
-                                                                    <TableCell align="left" key={index}>{output.scanMode}</TableCell> : null
-                                                                ))}
-                                                            </TableRow>
-
-                                                            <TableRow>
-                                                                <TableCell align="left">
-                                                                    Date
-                                                                </TableCell>
-                                                                <TableCell />
-                                                                {scannedIn.map((output, index) => (
-                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
-                                                                    <TableCell align="left" key={index}>{output.date}</TableCell> : null
-                                                                ))}
-                                                            </TableRow>
-
-                                                            <TableRow>
-                                                                <TableCell align="left">
-                                                                    Time
-                                                                </TableCell>
-                                                                <TableCell />
-                                                                {scannedIn.map((output, index) => (
-                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
-                                                                    <TableCell align="left" key={index}>{output.time}</TableCell> : null
-                                                                ))}
-                                                            </TableRow>
-
-                                                            <TableRow>
-                                                                <TableCell align="left">
-                                                                    Latency
-                                                                </TableCell>
-                                                                <TableCell />
-                                                                {scannedIn.map((output, index) => (
-                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
-                                                                    <TableCell align="left" key={index}>{output.latency}</TableCell> : null
-                                                                ))}
-                                                            </TableRow>
-
-                                                            <TableRow>
-                                                                <TableCell align="left">
-                                                                    Not Shown Ports
-                                                                </TableCell>
-                                                                <TableCell />
-                                                                {scannedIn.map((output, index) => (
-                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
-                                                                    <TableCell align="left" key={index}>{output.notShown}</TableCell> : null
-                                                                ))}
-                                                            </TableRow>
-
-                                                            <TableRow>
-                                                                <TableCell align="left">
-                                                                    Raw Packets Sent
-                                                                </TableCell>
-                                                                <TableCell />
-                                                                {scannedIn.map((output, index) => (
-                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
-                                                                    <TableCell align="left" key={index}>{output.rawPacket}</TableCell> : null
-                                                                ))}
-                                                            </TableRow>
-
-                                                            <TableRow>
-                                                                <TableCell align="left">
-                                                                    Raw Packets Received
-                                                                </TableCell>
-                                                                <TableCell />
-                                                                {scannedIn.map((output, index) => (
-                                                                    output.runTime == timestampOne || output.runTime == timestampTwo ? 
-                                                                    <TableCell align="left" key={index}>{output.rcvd}</TableCell> : null
-                                                                ))}
-                                                            </TableRow>
-                                                            
-                                                            
-                                                            
-                                                        </TableBody>
-                                                    </Table>
-                                                </TableContainer>
-                                            </Grid>
-                                        </Grid>
-                                    </TabPanel>    
-                                </>
-                            }
-                        </div>
-                    </Grid>
-                </Paper>
-            </Grid>
-      </Grid>
+        <Grid item xs={10}>
+            <Paper className={classes.paper}>
+                <Grid item xs={12}>
+                    <div id="scanComparisonTab">
+                        <AppBar position="static">
+                            <Tabs 
+                                value={value} 
+                                onChange={handleTabChange} 
+                                indicatorColor="primary"
+                                textColor="primary"
+                                centered>
+                                <Tab label="Show Same" {...a11yProps(0)} style={{textTransform: "capitalize"}} />
+                                <Tab label="Show Different" {...a11yProps(1)} style={{textTransform: "capitalize"}} />
+                            </Tabs>
+                        </AppBar>
+                            <Divider variant="middle" />
+                            <br/>
+                        {
+                            timestampOne == "" || timestampTwo == "" ?
+                            null
+                                :
+                            <>
+                                <Typography style={{textAlign: "center"}} color="textSecondary">Scan Result of [{targetToCompare}]</Typography>
+                                <TabPanel value={value} index={0}>
+                                    <ShowSame /><PortComparison />
+                                </TabPanel>    
+                                <TabPanel value={value} index={1}>
+                                    <ShowDiff /><PortComparison />
+                                </TabPanel>    
+                            </>
+                        }
+                    </div>
+                </Grid>
+            </Paper>
+        </Grid>
+        </Grid>
       <br/><br/>
     </div>
   );

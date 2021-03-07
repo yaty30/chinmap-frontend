@@ -16,6 +16,10 @@ import Grid from '@material-ui/core/Grid';
 // json
 import Data from './json/ScanTechniques/data.json'
 
+// Mobx
+import homeStatus from '../../Mobx/Models/homeSettingsStatus'
+import status from '../../Mobx/Models/homeSettingsFlagStatus'
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -65,11 +69,13 @@ export default function OutlinedCard() {
                                         value="end"
                                         control={
                                             <Checkbox 
-                                                color="primary" 
+                                                color="primary"
+                                                value={obj.flag}
                                             />
                                         }
                                         label={obj.flag}
                                         labelPlacement="end"
+                                        onChange={(e) => status.setPingFlags('0')}
                                     />
                                 </Tooltip>
                             </Grid>
