@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     portList: {
       width: '100%',
-      maxWidth: 360,
+      maxWidth: '100%',
       backgroundColor: theme.palette.background.paper,
       position: 'relative',
       overflow: 'auto',
