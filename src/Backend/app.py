@@ -11,6 +11,7 @@ from flask import render_template
 from flask_cors import CORS
 from datetime import datetime
 import platform
+import time
 import socket
 
 # Elements
@@ -34,6 +35,11 @@ flags = ''
 
 # Core Scan Functions
 def StartScan():
+    global scanStart
+    scanStart = time.time()
+    for i in range(1000000):
+        pass
+ 
     scanDetailsTxt = open("isScanning.tsx", "w+")
     scanDetailsTxt.writelines(
         'export const isScanning = [true]'
@@ -41,6 +47,8 @@ def StartScan():
     scanDetailsTxt.close()
 
 def EndScan():
+    global scanEnd
+    scanEnd = time.time()
     scanDetailsTxt = open("isScanning.tsx", "w+")
     scanDetailsTxt.writelines(
         'export const isScanning = [false]'
@@ -73,8 +81,6 @@ def GetPortStatus(scanID, result, target, scanMode, whois, automation, cveDetect
     fileinput.close()
 
 def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, scanRange):
-    #scanID =  ''.join(random.choices(string.ascii_uppercase + string.digits, k=21)) 
-
     f = open(result, "r")
     data = f.read()
 
@@ -202,22 +208,22 @@ def GetCVE(target, scanID, cveCommand):
     runCVEScan = os.popen(cveCommand)
     cveScanOutput = runCVEScan.read()
 
+    cveAndInfo = re.compile(r'(?P<cves>\[CVE\-\d+\-\d+\])(.*)')
+
     with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
         for line in file:
-            print(line.replace("]", ""), end="")
-    cveScanOutputTsx = open("cveScanOutput.tsx", "a")
+            print(line.replace("].sort((a, b) => (a.cve < b.cve ? -1 : 1));", ""), end="")
+    cveDetectTxt = open("cveScanOutput.tsx", "a")
+    cveDetectTxt.writelines("\n// ===================== Target: " + target + " ================================")
+    
+    for cveAndInfo in re.findall(cveAndInfo, cveScanOutput):
+        cveDetectTxt.writelines("\ncreateData('" + str(scanID) + "', " + str(cveAndInfo)[1:-1] + "),")
 
-    cveScanOutputTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
+    cveDetectTxt.writelines("\n// ===================== END of " + target + " =================================")
+    cveDetectTxt.writelines("\n].sort((a, b) => (a.cve < b.cve ? -1 : 1));")
+    cveDetectTxt.close()
 
-    if len(cveScanOutput) < 1:
-        cveScanOutputTsx.writelines("No CVE result found, either the CVE function is disabled, or the target is currently down.")
-    else:
-        cveScanOutputTsx.writelines(cveScanOutput)
-
-    cveScanOutputTsx.writelines("\n`},\n")
-
-    cveScanOutputTsx.writelines("\n]")
-    cveScanOutputTsx.close()
+    fileinput.close()
         
 def GetWhoIs(target, scanID, whoisCommand):
     runWhois = os.popen(whoisCommand)
@@ -440,7 +446,7 @@ def whatismyIP():
 @app.route('/whatismyip/<isCheck>')
 def WhatIsMyIP(isCheck):
     getIP = socket.gethostbyname(socket.gethostname())
-
+ 
     outputTxt = open("whatismyip.tsx", "w+")
     outputTxt.writelines('export const whatismyip = [{output:`' + str(getIP) + '`}]')
     outputTxt.close()
@@ -470,7 +476,6 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     letters = string.ascii_letters
     scanID = ''.join(random.choice(letters) for i in range(21))
 
-
     if platform.system() == 'Windows':
         command = 'nmap ' + target
     elif platform.system() == 'Darwin':
@@ -499,8 +504,10 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     else:
         scanRange = "Target have no range"
 
-    cveCommand = 'nmap -sS -sV --script=vulscan/vulscan ' + target
-    whoisCommand = 'nmap --script whois-domain.nse -d ' + target
+    # PATH to nmap on macOS => /usr/local/share/nmap/
+    # PATH to nmap on Windos => C:\Program File(x86)\Nmap\
+    cveCommand = 'sudo nmap -sS -sV --script=vulscan/ ' + target
+    whoisCommand = 'sudo nmap --script whois-domain.nse -d ' + target
 
     command = 'sudo nmap ' + target
     # Determin if scan with mode or not
@@ -511,18 +518,6 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
         if cveDetection == 'true':
             GetCVE(target, scanID, cveCommand)
-        else:
-            with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
-                for line in file:
-                    print(line.replace("]", ""), end="")
-            cveScanOutputTsx = open("cveScanOutput.tsx", "a")
-
-            cveScanOutputTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
-            cveScanOutputTsx.writelines("Enable CVE detection to discover.")
-            cveScanOutputTsx.writelines("\n`},\n")
-
-            cveScanOutputTsx.writelines("\n]")
-            cveScanOutputTsx.close()
 
         if whois == 'true': 
             GetWhoIs(target, scanID, whoisCommand)

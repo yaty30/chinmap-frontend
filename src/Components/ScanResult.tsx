@@ -128,33 +128,11 @@ export default observer (() => {
     storeTarget.setTarget(event.target.value as any)
   };
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
-
-  const handleClickJO = () => {
-    console.log(scannedIn)
-  }
-
-  const [open, setOpen] = React.useState(true);
-  const [checked, setChecked] = React.useState(true);
-
-  const handleClose = () => {
-    setOpen(false);
-    setChecked((prev) => !prev);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
-
-  function FadeOutTime() {
-    var min = 1500;
-    var max = 4000;
-    
-    return Math.random() * (max - min) + min;
-  }
 
   return (
     <div className={classes.root}>

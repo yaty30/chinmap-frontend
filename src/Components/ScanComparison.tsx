@@ -29,7 +29,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import PortOpened from '@material-ui/icons/Visibility';
 import PortFiltered from '@material-ui/icons/VisibilityOff';
 
-
 import { scanTarget, targetData, targetTime } from './target'
 
 // Backend
@@ -896,7 +895,7 @@ export default () => {
                             >
                                 {scannedIn.map((target) => (
                                     <MenuItem 
-                                        value={target.runTime} 
+                                        value={`${target.runTime}_${target.id}`} 
                                         key={target.runTime}
                                         className={
                                             target.runTime == timestampTwo || target.target != targetToCompare ? classes.defaultHide : classes.defaultShow
