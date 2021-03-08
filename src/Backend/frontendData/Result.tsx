@@ -208,15 +208,15 @@ output: `Command: sudo nmap scanme.nmap.org -v -sU -sT -p U:161,T:80
 ======================================================
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-07 23:50 HKT
 Initiating Ping Scan at 23:50
-Scanning scanme.nmap.org (45.33.32.156) [4 ports]
+Scanning scanme.nmap.org (45.33.32.156) [4 ports
 Completed Ping Scan at 23:50, 0.16s elapsed (1 total hosts)
 Initiating Parallel DNS resolution of 1 host. at 23:50
 Completed Parallel DNS resolution of 1 host. at 23:50, 0.00s elapsed
 Initiating UDP Scan at 23:50
-Scanning scanme.nmap.org (45.33.32.156) [1 port]
+Scanning scanme.nmap.org (45.33.32.156) [1 port
 Completed UDP Scan at 23:50, 0.16s elapsed (1 total ports)
 Initiating Connect Scan at 23:50
-Scanning scanme.nmap.org (45.33.32.156) [1 port]
+Scanning scanme.nmap.org (45.33.32.156) [1 port
 Discovered open port 80/tcp on 45.33.32.156
 Completed Connect Scan at 23:50, 0.16s elapsed (1 total ports)
 Nmap scan report for scanme.nmap.org (45.33.32.156)
@@ -229,5 +229,31 @@ PORT    STATE  SERVICE
 Read data files from: /usr/local/bin/../share/nmap
 Nmap done: 1 IP address (1 host up) scanned in 0.64 seconds
            Raw packets sent: 5 (240B) | Rcvd: 2 (144B)
+`,},
+
+{
+id: 'SkswQTcuxFtrrEgIcArXQ',
+output: `Command: sudo nmap scanme.nmap.org -v -sU -sT -p U:161,T:80    -Pn 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-08 09:31 HKT
+Initiating Parallel DNS resolution of 1 host. at 09:31
+Completed Parallel DNS resolution of 1 host. at 09:31, 4.00s elapsed
+Initiating UDP Scan at 09:31
+Scanning scanme.nmap.org (45.33.32.156) [1 port]
+Completed UDP Scan at 09:31, 0.16s elapsed (1 total ports)
+Initiating Connect Scan at 09:31
+Scanning scanme.nmap.org (45.33.32.156) [1 port]
+Discovered open port 80/tcp on 45.33.32.156
+Completed Connect Scan at 09:31, 0.16s elapsed (1 total ports)
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.16s latency).
+
+PORT    STATE  SERVICE
+80/tcp  open   http
+161/udp closed snmp
+
+Read data files from: /usr/local/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 4.52 seconds
+           Raw packets sent: 1 (88B) | Rcvd: 1 (116B)
 `,},
 ]

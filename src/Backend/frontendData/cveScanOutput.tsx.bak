@@ -42,4 +42,11 @@ output:`
 Enable CVE detection to discover.
 `},
 
+
+{
+scanId: 'uLzlIzhmLZSJKDwtzhMyt',
+output:`
+Enable CVE detection to discover.
+`},
+
 ]

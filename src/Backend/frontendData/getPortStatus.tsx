@@ -60,4 +60,9 @@ createData('scanme.nmap.org', '4.65 seconds', 'dnebKLxEHLjiNXQqVDLbn','445', 'tc
 createData('scanme.nmap.org', '0.64 seconds', 'uLzlIzhmLZSJKDwtzhMyt','80', 'tcp', 'open', 'http'),
 createData('scanme.nmap.org', '0.64 seconds', 'uLzlIzhmLZSJKDwtzhMyt','161', 'udp', 'closed', 'snmp'),
 // ===================== END of scanme.nmap.org =================================
+
+// ===================== Target: scanme.nmap.org ================================
+createData('scanme.nmap.org', '4.52 seconds', 'SkswQTcuxFtrrEgIcArXQ','80', 'tcp', 'open', 'http'),
+createData('scanme.nmap.org', '4.52 seconds', 'SkswQTcuxFtrrEgIcArXQ','161', 'udp', 'closed', 'snmp'),
+// ===================== END of scanme.nmap.org =================================
 ]

@@ -195,4 +195,32 @@
 "whois": "false",
 "pbb": "false" 
 }
+,{
+"id": "SkswQTcuxFtrrEgIcArXQ",
+"cm": "nmapscanme.nmap.org; with scan mode: Lightning Scan Mode",
+"target": "scanme.nmap.org",
+"targetForSelect": "scanme.nmap.org",
+"date": "2021-03-08",
+"time": "09:31 HKT",
+"upHost": "1 host up",
+"runTime": "4.52 seconds",
+"latency": "0.16s ",
+"notShown": "",
+"os": "",
+"uptime": "",
+"deviceType": "",
+"rawPacket": "1 (88B)",
+"rcvd": "1 (116B)",
+"scanMode": "Lightning Scan Mode",
+"hop": "",
+"macAddr": "",
+"difficulty": "",
+"auto": "true",
+"cveDetect": "false",
+"setRange": "Target have no range",
+"flags": "",
+"nmapVer": "7.91",
+"whois": "true",
+"pbb": "true" 
+}
 ]

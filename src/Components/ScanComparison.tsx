@@ -182,12 +182,20 @@ export default () => {
   const [rawSentC2, setrawSentC2] = useState('');
   const [rawRcvtC1, setrawRcvtC1] = useState('');
   const [rawRcvtC2, setrawRcvtC2] = useState('');
+  const [autoC1, setautoC1] = useState('');
+  const [autoC2, setautoC2] = useState('');
+  const [cveDetectC1, setcveDetectC1] = useState('');
+  const [cveDetectC2, setcveDetectC2] = useState('');
+  const [whoisC1, setwhoisC1] = useState('');
+  const [whoisC2, setwhoisC2] = useState('');
+  const [pbbC1, setpbbC1] = useState('');
+  const [pbbC2, setpbbC2] = useState('');
 
   const ShowSame = () => {
     return(
         <Grid container justify="center">
             <Grid item xs={12} className={classes.cardGrid}>
-                <TableContainer>
+                <TableContainer style={{width: '100%', marginLeft: 15,}}>
                     <Table aria-label="simple table">
                         <TableHead>
                         <TableRow>
@@ -345,6 +353,90 @@ export default () => {
                                 ))}
                             </TableRow>
                             
+                            <TableRow style={{background: autoC1 === autoC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Automation
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setautoC1(output.auto)}
+                                        <TableCell align="left" key={index}>{output.auto === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setautoC2(output.auto)}
+                                        <TableCell align="left" key={index}>{output.auto === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: cveDetectC1 === cveDetectC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    CVE Detection
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setcveDetectC1(output.cveDetect)}
+                                        <TableCell align="left" key={index}>{output.cveDetect === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setcveDetectC2(output.cveDetect)}
+                                        <TableCell align="left" key={index}>{output.cveDetect === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+                            
+                            <TableRow style={{background: whoisC1 === whoisC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    WhoIs
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setwhoisC1(output.whois)}
+                                        <TableCell align="left" key={index}>{output.whois === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setwhoisC2(output.whois)}
+                                        <TableCell align="left" key={index}>{output.whois === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: pbbC1 === pbbC2 ? '#F0FBF8' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Ping Probes Blocking Bypass
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setpbbC1(output.pbb)}
+                                        <TableCell align="left" key={index}>{output.pbb === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setpbbC2(output.pbb)}
+                                        <TableCell align="left" key={index}>{output.pbb === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+                        
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -357,7 +449,7 @@ export default () => {
     return(
         <Grid container justify="center">
             <Grid item xs={12} className={classes.cardGrid}>
-                <TableContainer>
+                <TableContainer style={{width: '100%', marginLeft: 15,}}>
                     <Table aria-label="simple table">
                         <TableHead>
                         <TableRow>
@@ -515,6 +607,90 @@ export default () => {
                                 ))}
                             </TableRow>
                             
+                            <TableRow style={{background: autoC1 != autoC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Automation
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setautoC1(output.auto)}
+                                        <TableCell align="left" key={index}>{output.auto === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setautoC2(output.auto)}
+                                        <TableCell align="left" key={index}>{output.auto === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: cveDetectC1 != cveDetectC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    CVE Detection
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setcveDetectC1(output.cveDetect)}
+                                        <TableCell align="left" key={index}>{output.cveDetect === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setcveDetectC2(output.cveDetect)}
+                                        <TableCell align="left" key={index}>{output.cveDetect === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+                            
+                            <TableRow style={{background: whoisC1 != whoisC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    WhoIs
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setwhoisC1(output.whois)}
+                                        <TableCell align="left" key={index}>{output.whois === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setwhoisC2(output.whois)}
+                                        <TableCell align="left" key={index}>{output.whois === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+
+                            <TableRow style={{background: pbbC1 != pbbC2 ? '#FFF1F1' : 'transparent'}}>
+                                <TableCell align="left">
+                                    Ping Probes Blocking Bypass
+                                </TableCell>
+                                <TableCell />
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampOne ?
+                                    <>
+                                        {setpbbC1(output.pbb)}
+                                        <TableCell align="left" key={index}>{output.pbb === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                                {scannedIn.map((output, index) => (
+                                    output.runTime == timestampTwo ? 
+                                    <>
+                                        {setpbbC2(output.pbb)}
+                                        <TableCell align="left" key={index}>{output.pbb === 'false' ? 'Disabled' : 'Enabled'}</TableCell> 
+                                    </> : null
+                                ))}
+                            </TableRow>
+                        
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -527,6 +703,14 @@ export default () => {
       
     return(
         <Grid container spacing={3} justify='center' style={{marginTop: 15,}}>
+            <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                    <Typography>
+                        Date:
+                    </Typography>
+                </Paper>
+            </Grid>
+
             <Grid item xs={6}>
                 <Paper className={classes.portPaper}>
                     <List className={classes.portList} subheader={<li />}>
@@ -773,8 +957,8 @@ export default () => {
                                 indicatorColor="primary"
                                 textColor="primary"
                                 centered>
-                                <Tab label="Show Same" {...a11yProps(0)} style={{textTransform: "capitalize"}} />
-                                <Tab label="Show Different" {...a11yProps(1)} style={{textTransform: "capitalize"}} />
+                                <Tab label="Show Same" {...a11yProps(0)} style={{textTransform: "capitalize"}} disabled={isDisabled}/>
+                                <Tab label="Show Different" {...a11yProps(1)} style={{textTransform: "capitalize"}} disabled={isDisabled}/>
                             </Tabs>
                         </AppBar>
                             <Divider variant="middle" />
