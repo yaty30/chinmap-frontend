@@ -1,3 +1,4 @@
+# Please PIP INSTALL all missing libraries
 import os
 import sys
 import subprocess
