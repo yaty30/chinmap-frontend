@@ -470,6 +470,9 @@ export default () => {
                       onChange={handleOthersChange}
                       onClick={() => settingsStatus.setWhoIs(!settingsStatus.whoIs)}
                       name="whoIs"
+                      disabled={
+                        /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(settingsStatus.target) === true ? true : false
+                      }
                       inputProps={{ 'aria-label': 'WhoIs' }}
                     />
                   }

@@ -80,6 +80,7 @@ const classes = mainStyles();
               <TableCell align="center">PORT</TableCell>
               <TableCell align="center">STATUS</TableCell>
               <TableCell align="center">SERVICE</TableCell>
+              <TableCell align="center">VERSION/REASON</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -109,6 +110,9 @@ const classes = mainStyles();
                           />
                         </TableCell>
                         <TableCell align="center">{row.service}</TableCell>
+                        <TableCell align="center">
+                          {/\d+\/(tcp|udp)$/.test(row.version) === true ? 'N/A' : row.version}
+                        </TableCell>
                       </TableRow>
                     </>
                       : null

@@ -729,7 +729,7 @@ export default () => {
                                                 </ListItemIcon>
                                                 <ListItemText 
                                                     primary={`${output.portno}/${output.port}`} 
-                                                    secondary={output.service}
+                                                    secondary={`service: ${output.service}, version: ${/\d+\/(tcp|udp)$/.test(output.version) === true ? 'N/A' : output.version}`}
                                                 />
                                             </ListItem>
                                         </Tooltip>
@@ -753,7 +753,7 @@ export default () => {
                                                 </ListItemIcon>
                                                 <ListItemText 
                                                     primary={`${output.portno}/${output.port}`} 
-                                                    secondary={output.service}
+                                                    secondary={`service: ${output.service}, version: ${/\d+\/(tcp|udp)$/.test(output.version) === true ? 'N/A' : output.version}`}
                                                 />
                                             </ListItem>
                                         </Tooltip>
@@ -783,7 +783,7 @@ export default () => {
                                                 </ListItemIcon>
                                                 <ListItemText 
                                                     primary={`${output.portno}/${output.port}`} 
-                                                    secondary={output.service}
+                                                    secondary={`service: ${output.service}, version: ${/\d+\/(tcp|udp)$/.test(output.version) === true ? 'N/A' : output.version}`}
                                                 />
                                             </ListItem>
                                         </Tooltip>
@@ -807,7 +807,7 @@ export default () => {
                                                 </ListItemIcon>
                                                 <ListItemText 
                                                     primary={`${output.portno}/${output.port}`} 
-                                                    secondary={output.service}
+                                                    secondary={`service: ${output.service}, version: ${/\d+\/(tcp|udp)$/.test(output.version) === true ? 'N/A' : output.version}`}
                                                 />
                                             </ListItem>
                                         </Tooltip>
@@ -895,7 +895,7 @@ export default () => {
                             >
                                 {scannedIn.map((target) => (
                                     <MenuItem 
-                                        value={`${target.runTime}_${target.id}`} 
+                                        value={`${target.runTime}`} 
                                         key={target.runTime}
                                         className={
                                             target.runTime == timestampTwo || target.target != targetToCompare ? classes.defaultHide : classes.defaultShow
@@ -929,7 +929,7 @@ export default () => {
                             >
                                 {scannedIn.map((target) => (
                                     <MenuItem 
-                                        value={target.runTime} 
+                                        value={`${target.runTime}`} 
                                         key={target.runTime}
                                         className={
                                             target.runTime == timestampOne || target.target != targetToCompare ? classes.defaultHide : classes.defaultShow

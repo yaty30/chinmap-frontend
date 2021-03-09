@@ -6,9 +6,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import LinkIcon from '@material-ui/icons/Link';
 import InfoIcon from '@material-ui/icons/Info';
 import CVEicon from '@material-ui/icons/Extension';
@@ -71,6 +73,7 @@ const mainStyles = makeStyles((theme: Theme) =>
 
 export default () => {
 const classes = mainStyles();
+var [dataQty, setDataQty] = useState(50)
   
     return (
       <TableContainer>
@@ -83,27 +86,27 @@ const classes = mainStyles();
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.map((row, index) => (
               <>
                 {
                   row.scanId === storeTarget.target ?
-                    <>
-                      <TableRow key={row.cve} hover>
-                        <TableCell>
-                            <Tooltip title='Click for more information' placement='top'>
-                                <a href={`https://nvd.nist.gov/vuln/detail/${row.cve.substring(1, row.cve.length-1)}`} target='_blank'>
-                                    <IconButton>
-                                        <LinkIcon style={{color: '#416CEC'}} />
-                                    </IconButton>
-                                </a>
-                            </Tooltip>
-                        </TableCell>
-                        <TableCell align="left" style={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>
-                            {row.cve.substring(1, row.cve.length-1)}
-                        </TableCell>
-                        <TableCell align="left">{row.info}</TableCell>
-                      </TableRow>
-                    </>
+                      <>
+                        <TableRow key={index} hover>
+                          <TableCell>
+                              <Tooltip title='Click for more information' placement='top'>
+                                  <a href={`https://nvd.nist.gov/vuln/detail/${row.cve.substring(1, row.cve.length-1)}`} target='_blank'>
+                                      <IconButton>
+                                          <LinkIcon style={{color: '#416CEC'}} />
+                                      </IconButton>
+                                  </a>
+                              </Tooltip>
+                          </TableCell>
+                          <TableCell align="left" style={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>
+                              {row.cve.substring(1, row.cve.length-1)}
+                          </TableCell>
+                          <TableCell align="left">{row.info}</TableCell>
+                        </TableRow>
+                      </>
                       : 
                    null
                 }

@@ -155,21 +155,27 @@ export default observer (() => {
                 </Typography>
                 <br/>
                 <div style={{marginTop: 25, textAlign: "center"}}>
-                  <Tooltip title="Example: scanme.nmap.org, 209.168.29.115, 192.168.1.0/24" aria-label="add" arrow placement="top">
-                      <TextField 
-                          id="homeTargetField"
-                          label="Target IP or Domain"
-                          variant="outlined" 
-                          size="small"
-                          name="target"
-                          style={{
-                              width: "70%",
-                              textAlignLast: "center",
-                          }}
-                          onChange={handleScanTarget}
-                          value={homeSettingsStatus.target}
-                      />
-                  </Tooltip>
+                  {isScanning.map((ing) => 
+                    <Tooltip title="Example: scanme.nmap.org, 209.168.29.115, 192.168.1.0/24" aria-label="add" arrow placement="top">
+                        <TextField 
+                            id="homeTargetField"
+                            label="Target IP or Domain"
+                            variant="outlined" 
+                            size="small"
+                            name="target"
+                            style={{
+                                width: "70%",
+                                textAlignLast: "center",
+                            }}
+                            disabled={
+                              ing === true ? true : false
+                            }
+                            onChange={handleScanTarget}
+                            value={homeSettingsStatus.target}
+                        />
+                    </Tooltip>
+                  )}
+                  
                 </div>
                 <Grid container spacing={3}>
                   <Grid item xs={12} className={classes.centerGrid}>
@@ -434,6 +440,19 @@ export default observer (() => {
                           </span>
                         </Tooltip>
                       </>
+                        :
+                      scanMode === '' ?
+                      <Tooltip title="Please Enter the Target." arrow placement="top">
+                          <span 
+                            color="primary" 
+                            style={{
+                              float: "right",
+                            }}
+                            id="scanBtnDisabled"
+                          >
+                            Scan
+                          </span>
+                        </Tooltip>
                       :
                       <>
                         <input 

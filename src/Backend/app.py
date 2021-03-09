@@ -12,7 +12,10 @@ from flask_cors import CORS
 from datetime import datetime
 import platform
 import time
+from ip2geotools.databases.noncommercial import DbIpCity
 import socket
+import whois
+import dns.resolver
 
 # Elements
 divider = "\n======================================================\n"
@@ -57,7 +60,7 @@ def EndScan():
 
 def GetPortStatus(scanID, result, target, scanMode, whois, automation, cveDetection, avoidPingBlocking):
     # portStatusScanID =  ''.join(random.choices(string.ascii_uppercase + string.digits, k=21))
-    pattern = re.compile(r'(?P<ports>[\d]+)\/(?P<protocol>tcp|udp)\s+(?P<state>open|filtered|closed)\s+(?P<service>[\w\S]*)')
+    pattern = re.compile(r'(?P<ports>[\d]+)\/(?P<protocol>tcp|udp)\s+(?P<state>open|filtered|closed)\s+(?P<service>[\w\S]*)\s+(?P<version>[\w\S]*)')
 
     with fileinput.FileInput("getPortStatus.tsx", inplace=True, backup='.bak') as file:
         for line in file:
@@ -203,7 +206,29 @@ def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetec
     
 
     return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(target) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + foundTime + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '",\n' + '"whois": "'+  foundWhoIS + '",\n"pbb": "' + foundPBB + '" \n}}'
+
+def Traceroute(scanID, target):
+    targetTraceroute = re.compile(r'(?P<rtt>\d+\.\d+ ms) (.*)')
+
+    with fileinput.FileInput("tracerouteOutput.tsx", inplace=True, backup='.bak') as file:
+        for line in file:
+            print(line.replace("]", ""), end="")
     
+    traceroute = os.popen('sudo nmap -sn --traceroute ' + target)
+    tracerouteScanOutput = traceroute.read()
+
+    tracerouteTxt = open("tracerouteOutput.tsx", "a")
+    tracerouteTxt.writelines("\n// ===================== Target: " + target + " ================================")
+    
+    for targetTraceroute in re.findall(targetTraceroute, tracerouteScanOutput):
+        tracerouteTxt.writelines("\ncreateData('" + str(scanID) + "', " + str(targetTraceroute)[1:-1] + "),")
+
+    tracerouteTxt.writelines("\n// ===================== END of " + target + " =================================")
+    tracerouteTxt.writelines("\n]")
+    tracerouteTxt.close()
+
+    fileinput.close()
+
 def GetCVE(target, scanID, cveCommand):
     runCVEScan = os.popen(cveCommand)
     cveScanOutput = runCVEScan.read()
@@ -226,31 +251,53 @@ def GetCVE(target, scanID, cveCommand):
     fileinput.close()
         
 def GetWhoIs(target, scanID, whoisCommand):
-    runWhois = os.popen(whoisCommand)
-    whoisScan = runWhois.read()
+    domain = whois.query(target)
+    
+    name = domain.name
+    creationDate = domain.creation_date
+    expirationDate = domain.expiration_date
+    lastUpdated = domain.last_updated
+    registrar = domain.registrar
 
     # Finding WhoIs script result
-    whoisResult = re.findall(r'(.*)', whoisScan)
 
     with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
         for line in file:
             print(line.replace("]", ""), end="")
     whoisScanTsx = open("whoisScan.tsx", "a")
 
-    whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
-    
-    if len(whoisResult) < 1:
-        whoisScanTsx.writelines("No WhoIs result found, either the target is a local network address, or the target is currently down.")
-    else:
-        whoisScanTsx.writelines(str(whoisResult)[3:-7])
-
-    whoisScanTsx.writelines("\n`},\n")
+    whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "', name: '" + name + "', creationDate: '" + str(creationDate) + "', expirationDate: '" + str(expirationDate) + "', lastUpdated: '" + str(lastUpdated) + "', registrar: '" + registrar + "', ")
+    whoisScanTsx.writelines("\n},\n")
 
     whoisScanTsx.writelines("\n]")
     whoisScanTsx.close()
 
     fileinput.close()
- 
+
+    GetGeo(target, scanID)
+
+def GetGeo(target, scanID):
+    targetInIP = socket.gethostbyname(target)
+
+    response = DbIpCity.get(targetInIP, api_key='free')
+    city = str(response.city)
+    region = str(response.region)
+    latitude = str(response.latitude)
+    longitude = str(response.longitude)
+
+    with fileinput.FileInput("targetGeo.tsx", inplace=True, backup='.bak') as file:
+        for line in file:
+            print(line.replace("]", ""), end="")
+    targetGeoOutput = open("targetGeo.tsx", "a")
+
+    targetGeoOutput.writelines("\n{\nscanId: '" + str(scanID) + "', target: '" + targetInIP + "', city: '" + city + "', region: '" + region + "', latitude: '" + latitude + "', longitude: '" + longitude + "', ")
+    targetGeoOutput.writelines("\n},\n")
+
+    targetGeoOutput.writelines("\n]")
+    targetGeoOutput.close()
+
+    fileinput.close()
+
 def CalcScanRange(target, setRange):
     x = str(target)[-2:]
 
@@ -479,7 +526,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     if platform.system() == 'Windows':
         command = 'nmap ' + target
     elif platform.system() == 'Darwin':
-        command = 'nmap ' + target
+        command = 'sudo nmap ' + target
 
     ######### Default Scan Modes #########
     if scanMode == 'Ping Scan Mode':
@@ -506,8 +553,12 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
     # PATH to nmap on macOS => /usr/local/share/nmap/
     # PATH to nmap on Windos => C:\Program File(x86)\Nmap\
-    cveCommand = 'sudo nmap -sS -sV --script=vulscan/ ' + target
-    whoisCommand = 'sudo nmap --script whois-domain.nse -d ' + target
+    if platform.system() == 'Windows':
+        cveCommand = 'nmap -sS -sV --script=vulscan/ ' + target
+        whoisCommand = 'nmap --script whois-domain.nse -d ' + target
+    else:
+        cveCommand = 'sudo nmap -sS -sV --script=vulscan/ ' + target
+        whoisCommand = 'sudo nmap --script whois-domain.nse -d ' + target
 
     command = 'sudo nmap ' + target
     # Determin if scan with mode or not
@@ -521,18 +572,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
         if whois == 'true': 
             GetWhoIs(target, scanID, whoisCommand)
-        else:
-            with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
-                for line in file:
-                    print(line.replace("]", ""), end="")
-            whoisScanTsx = open("whoisScan.tsx", "a")
-
-            whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
-            whoisScanTsx.writelines("Enable WhoIs feature to discover.")
-            whoisScanTsx.writelines("\n`},\n")
-
-            whoisScanTsx.writelines("\n]")
-            whoisScanTsx.close()
+            
         if avoidPingBlocking == 'true':
             command = command + '-Pn '
     if scanMode == '':
@@ -556,18 +596,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
         if whois == 'true':
             GetWhoIs(target, scanID, whoisCommand)
-        else:
-            with fileinput.FileInput("whoisScan.tsx", inplace=True, backup='.bak') as file:
-                for line in file:
-                    print(line.replace("]", ""), end="")
-            whoisScanTsx = open("whoisScan.tsx", "a")
-
-            whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
-            whoisScanTsx.writelines("Enable WhoIs feature to discover.")
-            whoisScanTsx.writelines("\n`},\n")
-
-            whoisScanTsx.writelines("\n]")
-            whoisScanTsx.close()
+            
         if avoidPingBlocking == 'true':
             command = command + '-Pn '
     
@@ -575,6 +604,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     scanOutputTxt = scanCommand.read() # Retrieving output from shell and read
     scanCommandString = str(command)[:-4] # For print out the command to front-end
 
+    Traceroute(scanID, target)
 
     # Export normal scan output to text file
     scanTxt = open("Result.txt", "w+")

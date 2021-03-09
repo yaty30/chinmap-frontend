@@ -5,6 +5,17 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import FormLabel from '@material-ui/core/FormLabel';
 import Tooltip from '@material-ui/core/Tooltip';
+import Timeline from '@material-ui/lab/Timeline';
+import TimelineItem from '@material-ui/lab/TimelineItem';
+import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import TimelineConnector from '@material-ui/lab/TimelineConnector';
+import TimelineContent from '@material-ui/lab/TimelineContent';
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import Chip from '@material-ui/core/Chip';
+import TimelineDot from '@material-ui/lab/TimelineDot';
+import TracerouteIcon from '@material-ui/icons/SelectAll';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 import { scanTarget, targetData, targetTime, chosenMode, scanDate } from '../target'
 
@@ -14,6 +25,7 @@ import { pureOutput } from '../../Backend/frontendData/Result'
 import scannedIn from '../../Backend/frontendData/scannedIn.json'
 import scannedTarget from '../../Backend/frontendData/scannedTargetForSelect.json'
 import { rows } from '../../Backend/frontendData/getPortStatus'
+import { traceroute } from '../../Backend/frontendData/tracerouteOutput'
 
 // Mobx Global Status
 import storeTarget from '../../Mobx/Models/resultSelectStatus'
@@ -61,6 +73,9 @@ const mainStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
       width: 200,
+    },
+    secondaryTail: {
+      backgroundColor: theme.palette.secondary.main,
     },
   }),
 );
@@ -392,7 +407,6 @@ export default () => {
                       <Divider /><br/>
                       <div style={{textAlign: "left"}}><FormLabel component="legend">Scan Settings</FormLabel></div>
                     </Grid>
-
                         <Grid item xs={6} style={{width: "100%", marginBottom: 55}}>
                           <TextField
                               className={classes.centering} 
@@ -481,6 +495,57 @@ export default () => {
                               }}
                             />
                         </Grid>
+
+                        <Grid item xs={12} style={{width: "100%", marginBottom: 15, marginTop: 25,}}>
+                          <Divider /><br/>
+                          <div style={{textAlign: "left"}}><FormLabel component="legend">Traceroute</FormLabel></div>
+                        </Grid>
+
+                        <Grid item xs={12} style={{width: "100%", marginBottom: 55, textAlign: 'left'}}>
+                          
+                          <Timeline align="alternate">
+                            {traceroute.map((tr, index) => 
+                              data.id !=  storeTarget.target ||  storeTarget.target === "" || data.target === "" || tr.rtt === "" ? null :
+                              <>
+                                <TimelineItem key={index}>
+                                  <TimelineSeparator>
+                                    <TimelineDot color="primary" variant="outlined">
+                                      <TracerouteIcon />
+                                    </TimelineDot>
+                                    <TimelineConnector className={classes.secondaryTail} />
+                                  </TimelineSeparator>
+                                  <TimelineContent style={{background: '#F5F5F5', borderRadius: 6,}}>
+                                    <Chip 
+                                        label={tr.addr}
+                                        variant="outlined"
+                                        clickable
+                                        size='small'
+                                        color='primary'
+                                        style={{
+                                          marginTop: 5,
+                                          width: 'auto',
+                                        }}
+                                      />
+                                        <br/>
+                                      <Chip 
+                                        label={tr.rtt}
+                                        variant="outlined"
+                                        clickable
+                                        size='small'
+                                        color='primary'
+                                        style={{
+                                          width: 'auto',
+                                          marginTop: 10,
+                                          marginBottom: 5,
+                                        }}
+                                      />
+                                  </TimelineContent>
+                                </TimelineItem>
+                              </>
+                            )}
+                          </Timeline>
+                        </Grid>
+
                       </>
                     
                   </Grid>
