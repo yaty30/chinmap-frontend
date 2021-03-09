@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -504,45 +505,51 @@ export default () => {
                         <Grid item xs={12} style={{width: "100%", marginBottom: 55, textAlign: 'left'}}>
                           
                           <Timeline align="alternate">
-                            {traceroute.map((tr, index) => 
-                              data.id !=  storeTarget.target ||  storeTarget.target === "" || data.target === "" || tr.rtt === "" ? null :
-                              <>
-                                <TimelineItem key={index}>
-                                  <TimelineSeparator>
-                                    <TimelineDot color="primary" variant="outlined">
-                                      <TracerouteIcon />
-                                    </TimelineDot>
-                                    <TimelineConnector className={classes.secondaryTail} />
-                                  </TimelineSeparator>
-                                  <TimelineContent style={{background: '#F5F5F5', borderRadius: 6,}}>
-                                    <Chip 
-                                        label={tr.addr}
-                                        variant="outlined"
-                                        clickable
-                                        size='small'
-                                        color='primary'
-                                        style={{
-                                          marginTop: 5,
-                                          width: 'auto',
-                                        }}
-                                      />
-                                        <br/>
-                                      <Chip 
-                                        label={tr.rtt}
-                                        variant="outlined"
-                                        clickable
-                                        size='small'
-                                        color='primary'
-                                        style={{
-                                          width: 'auto',
-                                          marginTop: 10,
-                                          marginBottom: 5,
-                                        }}
-                                      />
-                                  </TimelineContent>
-                                </TimelineItem>
-                              </>
-                            )}
+                            {traceroute.map((tr, index) => {
+                              return(
+                                data.id !=  storeTarget.target ||  storeTarget.target === "" || data.target === "" || tr.rtt === "" ? null :
+                                <>
+                                  <TimelineItem key={index}>
+                                    <TimelineSeparator>
+                                      <Tooltip title={`HOP: ${index}`} placement='top' arrow>
+                                        <TimelineDot color="primary" variant="outlined" style={{marginLeft: 5, marginRight: 5}}>
+                                          <TracerouteIcon />
+                                        </TimelineDot>
+                                      </Tooltip>
+                                      <TimelineConnector className={classes.secondaryTail} />
+                                    </TimelineSeparator>
+                                    <Tooltip title={`HOP: ${index}`} placement='top' arrow>
+                                      <TimelineContent style={{background: '#F5F5F5', borderRadius: 6,}}>
+                                        <Chip 
+                                            label={tr.addr}
+                                            variant="outlined"
+                                            clickable
+                                            size='small'
+                                            color='primary'
+                                            style={{
+                                              marginTop: 5,
+                                              width: 'auto',
+                                            }}
+                                          />
+                                            <br/>
+                                          <Chip 
+                                            label={tr.rtt}
+                                            variant="outlined"
+                                            clickable
+                                            size='small'
+                                            color='primary'
+                                            style={{
+                                              width: 'auto',
+                                              marginTop: 10,
+                                              marginBottom: 5,
+                                            }}
+                                          />
+                                      </TimelineContent>
+                                    </Tooltip>
+                                  </TimelineItem>
+                                </>
+                              )
+                            })}
                           </Timeline>
                         </Grid>
 
