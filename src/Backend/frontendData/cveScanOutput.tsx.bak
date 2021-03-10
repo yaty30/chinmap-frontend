@@ -4,4 +4,5 @@ function createData(scanId: string, cve: string, info: string): Data {return {sc
 
 export const rows = [
     createData('','', '',),
+
 ].sort((a, b) => (a.cve < b.cve ? -1 : 1));

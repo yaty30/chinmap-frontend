@@ -7,6 +7,9 @@ import Grid from '@material-ui/core/Grid'
 import Tooltip from '@material-ui/core/Tooltip'
 import { observer } from 'mobx-react-lite'
 import HelpIcon from '@material-ui/icons/Help';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 
 import { scanTarget, targetData, targetTime } from '../target'
 
@@ -41,6 +44,17 @@ export default () => {
       second: 'foobar'
     }];
 
+    const [state, setState] = React.useState({
+        cve: false,
+        whois: false,
+        traceroute: false,
+      });
+    
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+    };
+    
+
     return (
       <>
           {scannedIn.map((obj) => (
@@ -64,7 +78,7 @@ export default () => {
                                       }}
                                       style={{
                                           textAlignLast: "center",
-                                          width: "60%",
+                                          width: "100%",
                                       }}
                                   />
                                   
@@ -85,14 +99,14 @@ export default () => {
                                       }}
                                       style={{
                                           textAlignLast: "center",
-                                          width: "60%",
+                                          width: "100%",
                                       }}
                                   />
                                   
                               </form>
                           </Grid>
                           <Grid item xs={6} style={{textAlign: "center"}}>
-                          <Tooltip title="" arrow placement="top">
+                            <Tooltip title="" arrow placement="top">
                               <form 
                                   noValidate 
                                   autoComplete="off"
@@ -108,11 +122,36 @@ export default () => {
                                         }}
                                         style={{
                                             textAlignLast: "center",
-                                            width: "60%",
+                                            width: "100%",
                                         }}
                                     />
                               </form>
                               </Tooltip>
+                          </Grid>
+
+                          <Grid item xs={6} style={{textAlign: "center"}}>
+                              <table style={{width: '100%'}}>
+                                  <tr>
+                                      <td style={{width: '33.3%'}}>
+                                            <FormControlLabel
+                                                control={<Checkbox checked={state.cve} color="primary" onChange={handleChange} name="cve" />}
+                                                label="CVE"
+                                            /> 
+                                      </td>
+                                      <td style={{width: '33.3%'}}>
+                                            <FormControlLabel
+                                                control={<Checkbox checked={state.whois} color="primary" onChange={handleChange} name="whois" />}
+                                                label="WhoIS"
+                                            />
+                                      </td>
+                                      <td style={{width: '33.3%'}}>
+                                            <FormControlLabel
+                                                control={<Checkbox checked={state.traceroute} color="primary" onChange={handleChange} name="traceroute" />}
+                                                label="Tracenroute"
+                                            />
+                                      </td>
+                                  </tr>
+                              </table>
                           </Grid>
   
                             <Grid item xs={12} style={{textAlign: "center", position: "relative", left: 12,}}>

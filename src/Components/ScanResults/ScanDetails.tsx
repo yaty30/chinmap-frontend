@@ -516,7 +516,7 @@ export default () => {
                                           <TracerouteIcon />
                                         </TimelineDot>
                                       </Tooltip>
-                                      <TimelineConnector className={classes.secondaryTail} />
+                                      <TimelineConnector className={classes.secondaryTail}/>
                                     </TimelineSeparator>
                                     <Tooltip title={`HOP: ${index}`} placement='top' arrow>
                                       <TimelineContent style={{background: '#F5F5F5', borderRadius: 6,}}>

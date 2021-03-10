@@ -5,18 +5,5 @@
         "runTime": "",
         "date": ""
     }
-,
-{
-"id": "JmGDWcOuhrHObTDfnPxJA",
-"target": "scanme.nmap.org",
-"runTime": "35.14 seconds",
-"date": "2021-03-10"
-}
-,
-{
-"id": "NgRnqdJZBsIWLBEvWoxKf",
-"target": "scanme.nmap.org",
-"runTime": "33.34 seconds",
-"date": "2021-03-10"
-}
+
 ]

@@ -12,4 +12,18 @@
 "runTime": "35.14 seconds",
 "date": "2021-03-10"
 }
+,
+{
+"id": "NgRnqdJZBsIWLBEvWoxKf",
+"target": "scanme.nmap.org",
+"runTime": "33.34 seconds",
+"date": "2021-03-10"
+}
+,
+{
+"id": "HEGVuxzIdSKUFWsKnYzeN",
+"target": "vtc.edu.hk",
+"runTime": "2.34 seconds",
+"date": "2021-03-10"
+}
 ]

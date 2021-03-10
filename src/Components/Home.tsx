@@ -306,35 +306,41 @@ export default observer (() => {
                   <div style={{textAlign: "center",marginTop: 15,marginLeft: 70}}>
                       <FormControl variant="outlined" style={{width: "100%"}}>
                           <InputLabel id="demo-simple-select-outlined-label">Scan Mode</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                value={scanMode}
-                                onChange={handleChange}
-                                label="Scan Mode"
-                                style={{
-                                    width: "85%",
-                                    textAlign: "center",
-                                }}
+                            {isScanning.map((check) => (
+                              <Select
+                              labelId="demo-simple-select-outlined-label"
+                              id="demo-simple-select-outlined"
+                              value={scanMode}
+                              onChange={handleChange}
+                              label="Scan Mode"
+                              disabled={
+                                check === true ? true : false
+                              }
+                              style={{
+                                  width: "85%",
+                                  textAlign: "center",
+                              }}
                             >
-                                <ListSubheader>Default Scan Modes</ListSubheader>
-                                <MenuItem value='defaultScanMode' className="default">Regular Scan</MenuItem>
-                                {scanModeData.map((data, index) => (
-                                  data.cardInfo.map((data, index) => (
-                                    <MenuItem value={data.name} key={index} className="default">{data.name}</MenuItem>
-                                  ))
-                                ))}
+                              <ListSubheader>Default Scan Modes</ListSubheader>
+                                  <MenuItem value='defaultScanMode' className="default">Regular Scan</MenuItem>
+                                  {scanModeData.map((data, index) => (
+                                    data.cardInfo.map((data, index) => (
+                                      <MenuItem value={data.name} key={index} className="default">{data.name}</MenuItem>
+                                    ))
+                                  ))}
+                                  
+                                  <ListSubheader>Customised Scan Modes</ListSubheader>
+                                  {customised.rows.map((modes, index) => (
+                                    modes.profile.map((data, index) => (
+                                      data.modeID === '' ? 
+                                      null
+                                      :
+                                      <MenuItem value={data.modeID} className="customised">{data.name}</MenuItem>
+                                    ))
+                                  ))}
+                              </Select>
+                            ))}
                                 
-                                <ListSubheader>Customised Scan Modes</ListSubheader>
-                                {customised.rows.map((modes, index) => (
-                                  modes.profile.map((data, index) => (
-                                    data.modeID === '' ? 
-                                     null
-                                     :
-                                    <MenuItem value={data.modeID} className="customised">{data.name}</MenuItem>
-                                  ))
-                                ))}
-                            </Select>
                         </FormControl>
                     </div>
                 </Paper>
