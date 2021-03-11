@@ -33,6 +33,7 @@ import NmapOutput from './ScanResults/NmapOutput'
 import HostsAndPorts from './ScanResults/HostsAndPorts'
 import ScanDetails from './ScanResults/ScanDetails'
 import CVEResult from './ScanResults/CVEResult'
+import ExploitCVE from './ScanResults/ExploitCVE'
 import WhoIs from './ScanResults/WhoIs'
 import ExportResult from './ScanResults/ExportResult'
 
@@ -200,21 +201,24 @@ export default observer (() => {
                         null
                             :
                         <>
-                            <br/><Divider variant="middle" />
+                            <br/>
                             <div id="scanResultTab">
-                                <AppBar position="static">
+                                <AppBar position="static" color="default">
                                     <Tabs 
                                         value={value} 
                                         onChange={handleTabChange} 
                                         indicatorColor="primary"
                                         textColor="primary"
+                                        variant="scrollable"
+                                        scrollButtons="on"
                                         centered>
                                       <Tab label="Nmap Output" {...a11yProps(0)} style={{textTransform: "capitalize"}} />
                                       <Tab label="Hosts and Ports" {...a11yProps(1)} style={{textTransform: "capitalize"}} />
                                       <Tab label="Scan Details" {...a11yProps(2)} style={{textTransform: "capitalize"}} />
                                       <Tab label="CVE" {...a11yProps(3)} style={{textTransform: "capitalize"}} />
-                                      <Tab label="WhoIs" {...a11yProps(4)} style={{textTransform: "capitalize"}} />
-                                      <Tab label="Export Results" {...a11yProps(5)} style={{textTransform: "capitalize"}} />
+                                      <Tab label="Exploit" {...a11yProps(4)} style={{textTransform: "capitalize"}} />
+                                      <Tab label="WhoIs" {...a11yProps(5)} style={{textTransform: "capitalize"}} />
+                                      <Tab label="Export Results" {...a11yProps(6)} style={{textTransform: "capitalize"}} />
                                     </Tabs>
                                 </AppBar>
                                 <Paper className={classes.paper}>
@@ -233,9 +237,12 @@ export default observer (() => {
                                         <CVEResult />
                                     </TabPanel>
                                     <TabPanel value={value} index={4}>
-                                        <WhoIs />
+                                        <ExploitCVE />
                                     </TabPanel>
                                     <TabPanel value={value} index={5}>
+                                        <WhoIs />
+                                    </TabPanel>
+                                    <TabPanel value={value} index={6}>
                                         <ExportResult />
                                     </TabPanel>
                                 </Paper>

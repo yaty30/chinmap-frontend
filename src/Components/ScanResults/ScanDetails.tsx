@@ -271,8 +271,27 @@ export default () => {
                             multiline={
                               data.os.length > 5 ? true : false
                             }
+                            value={data.os == "" ? "No OS matches for host. If target is alive, check out aggressive os guessing" : data.os}
+                            inputProps={{
+                                readOnly: true,
+                            }}
+                          />
+                      </Grid>
+
+                      <Grid item xs={12} style={{width: "100%", marginBottom: 55}}>
+                        <TextField
+                            className={classes.centering} 
+                            id="outlined-basic" 
+                            label="Aggressive OS Guessing" 
+                            variant="outlined" 
+                            style={{
+                              width: "85%",
+                            }}
+                            multiline={
+                              data.aggrOS.length > 5 ? true : false
+                            }
                             value={
-                              data.os == "" ? "No OS found or target is currently down" : data.os
+                              data.aggrOS == "" ? "No OS matches for host" : data.aggrOS
                             }
                             inputProps={{
                                 readOnly: true,
@@ -507,18 +526,15 @@ export default () => {
                           <Timeline align="alternate">
                             {traceroute.map((tr, index) => {
                               return(
-                                data.id !=  storeTarget.target ||  storeTarget.target === "" || data.target === "" || tr.rtt === "" ? null :
+                                tr.scanId !=  storeTarget.target ||  storeTarget.target === "" || data.target === "" || tr.rtt === "" ? null :
                                 <>
                                   <TimelineItem key={index}>
                                     <TimelineSeparator>
-                                      <Tooltip title={`HOP: ${index}`} placement='top' arrow>
-                                        <TimelineDot color="primary" variant="outlined" style={{marginLeft: 5, marginRight: 5}}>
-                                          <TracerouteIcon />
-                                        </TimelineDot>
-                                      </Tooltip>
+                                      <TimelineDot color="primary" variant="outlined" style={{marginLeft: 5, marginRight: 5}}>
+                                        <TracerouteIcon />
+                                      </TimelineDot>
                                       <TimelineConnector className={classes.secondaryTail}/>
                                     </TimelineSeparator>
-                                    <Tooltip title={`HOP: ${index}`} placement='top' arrow>
                                       <TimelineContent style={{background: '#F5F5F5', borderRadius: 6,}}>
                                         <Chip 
                                             label={tr.addr}
@@ -545,7 +561,7 @@ export default () => {
                                             }}
                                           />
                                       </TimelineContent>
-                                    </Tooltip>
+                                   
                                   </TimelineItem>
                                 </>
                               )

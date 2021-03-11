@@ -9,4 +9,8 @@ export const targetGeo = [
     },
 
 
+{
+scanId: 'QvVCoWKIczhLxkDWXtBNX', target: '172.217.174.206', city: 'Hong Kong', region: 'Central and Western', latitude: '22.2850394', longitude: '114.1583819', 
+},
+
 ]

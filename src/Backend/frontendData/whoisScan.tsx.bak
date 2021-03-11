@@ -7,4 +7,5 @@ export const whoisScanOutput = [
         lastUpdated: '',
         registrar: '',
     },
+
 ]

@@ -84,7 +84,7 @@ def GetPortStatus(scanID, result, target, scanMode, whois, automation, cveDetect
 
     fileinput.close()
 
-def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, scanRange):
+def GetScanDetails(command, result, scanID, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, scanRange):
     f = open(result, "r")
     data = f.read()
 
@@ -101,7 +101,6 @@ def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetec
     scanTargetsecondRoundReplace = re.sub("'", "", str(scanTargetfirstRoundReplace))
     # removing comma between targets, i.e. x.x.x.x, x.x.x.x => x.x.x.x \n\n x.x.x.x
     scanTargetThirdRoundReplace = re.sub(",", " ", str(scanTargetsecondRoundReplace))
-    foundTarget = str(scanTargetThirdRoundReplace)[2:-2]
 
     # plain target for dropdown select menu option
     targetForSelect = str(target)
@@ -136,10 +135,18 @@ def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetec
     foundNotShown = str(notShownsecondRoundReplace)[2:-2]
 
     # find target running os
-    os = re.findall(r'OS details: (.*)', data)
-    osfirstRoundReplace = re.sub("'", " ", str(os))
+    osscan = os.popen(command + ' -O --osscan-guess ' + target)
+    osscanOutput = osscan.read()
+    osCatch = re.findall(r'OS details: (.*)', osscanOutput)
+    osfirstRoundReplace = re.sub("'", " ", str(osCatch))
     ossecondRoundReplace = re.sub(",", ", ", str(osfirstRoundReplace))
     foundOS = str(ossecondRoundReplace)[2:-2]
+
+    aggrOSCatch = re.findall(r'Aggressive OS guesses: (.*)', osscanOutput)
+    aggrOSfirstRoundReplace = re.sub("'", " ", str(aggrOSCatch))
+    aggrOSsecondRoundReplace = re.sub(",", ", ", str(aggrOSfirstRoundReplace))
+    foundAggrOS = str(aggrOSsecondRoundReplace)[2:-2]
+    
 
     # find target up time, day + period
     uptime = re.findall(r'Uptime guess: (.*)', data)
@@ -206,7 +213,7 @@ def GetScanDetails(result, scanID, target, scanMode, whois, automation, cveDetec
     targetForSelectTxt.close() 
     
 
-    return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(target) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + foundTime + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '",\n' + '"whois": "'+  foundWhoIS + '",\n"pbb": "' + foundPBB + '" \n}}'
+    return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(target) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + foundTime + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n' + '"aggrOS": "' + str(foundAggrOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '",\n' + '"whois": "'+  foundWhoIS + '",\n"pbb": "' + foundPBB + '" \n}}'
 
 def Traceroute(scanID, target):
     targetTraceroute = re.compile(r'(?P<rtt>\d+\.\d+ ms) (.*)')
@@ -249,8 +256,29 @@ def GetCVE(target, scanID, cveCommand):
     cveDetectTxt.writelines("\n].sort((a, b) => (a.cve < b.cve ? -1 : 1));")
     cveDetectTxt.close()
 
+    ExploitCVE(target, scanID, cveScanOutput)
+
     fileinput.close()
-        
+
+def ExploitCVE(target, scanID, cveScanOutput):    
+    exploitPattern = re.compile(r'(?P<cves>\[CVE\-\d+\-\d+\])(.*)')
+
+    with fileinput.FileInput("exploitCVEoutput.tsx", inplace=True, backup='.bak') as file:
+        for line in file:
+            print(line.replace("].sort((a, b) => (a.eid < b.eid ? -1 : 1));", ""), end="")
+    exploitTxt = open("exploitCVEoutput.tsx", "a")
+    exploitTxt.writelines("\n// ===================== Target: " + target + " ================================")
+    
+    for exploitData in re.findall(exploitPattern, cveScanOutput):
+        exploitTxt.writelines("\ncreateData('" + str(scanID) + "', " + str(exploitData)[1:-1] + "),")
+
+    exploitTxt.writelines("\n// ===================== END of " + target + " =================================")
+    exploitTxt.writelines("\n].sort((a, b) => (a.eid < b.eid ? -1 : 1));")
+    exploitTxt.close()
+
+    fileinput.close()
+
+
 def GetWhoIs(target, scanID, whoisCommand):
     domain = whois.query(target)
     
@@ -623,7 +651,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     fescanTxt = open("scannedIn.json", "a")
     # Appending new data to scannedIn.json
     fescanResult = "Result.txt"
-    getScanDetailsOutput = str(GetScanDetails(fescanResult, scanID, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, scanRange))[:-1]
+    getScanDetailsOutput = str(GetScanDetails(command, fescanResult, scanID, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, scanRange))[:-1]
     fescanTxt.writelines(getScanDetailsOutput)
     fescanTxt.close()
 
