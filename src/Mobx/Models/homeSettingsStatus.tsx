@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree";
+import { boolean } from "mobx-state-tree/dist/internal";
 
 const homeSettings = types
     .model({
@@ -8,6 +9,8 @@ const homeSettings = types
         cve: types.boolean,
         pn: types.boolean,
         whoIs: types.boolean,
+        firewalk: types.boolean,
+        hostmap: types.boolean,
         flag: types.string,
         rangeTarget: types.string,
     })
@@ -30,6 +33,12 @@ const homeSettings = types
         setWhoIs(whoIs: any) {
             self.whoIs = whoIs
         },
+        setFirewalk(firewalk: any) {
+            self.firewalk = firewalk
+        },
+        setHostmap(hostmap: any) {
+            self.hostmap = hostmap
+        },
         setFlag(flag: any) {
             self.flag = flag
         },
@@ -45,6 +54,8 @@ const store = homeSettings.create({
     cve: false,
     pn: false,
     whoIs: false,
+    firewalk: false,
+    hostmap: false,
     flag: "",
     rangeTarget: "",
 });

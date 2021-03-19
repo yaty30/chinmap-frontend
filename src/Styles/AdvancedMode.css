@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap');
+
 #advancedModeBody{
+    /* font-family: 'Inconsolata', monospace !important; */
     background: #161616 !important;
 }
 
@@ -25,3 +28,4 @@
 .advancedTextField .MuiFormLabel-root.Mui-focused{
     color: #DEC401;
 }
+

@@ -10,6 +10,7 @@ import HelpIcon from '@material-ui/icons/Help';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
+import { CSVLink } from "react-csv";
 
 import { scanTarget, targetData, targetTime } from '../target'
 
@@ -35,25 +36,30 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default () => {
-    const datas = [{
-      first: 'foo',
-      second: 'bar'
-    }, {
-      first: 'foobar',
-      second: 'foobar'
-    }];
 
+export default () => {
     const [state, setState] = React.useState({
         cve: false,
         whois: false,
         traceroute: false,
-      });
+    });
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, [event.target.name]: event.target.checked });
     };
     
+    const resultTarget = scannedIn.map((data) => data.id === storeTarget.target ? data.target : null)
+    const resultDate = scannedIn.map((data) => data.id === storeTarget.target ? data.date : null)
+    const resultTime = scannedIn.map((data) => data.id === storeTarget.target ? data.time : null)
+    const mapResult = pureOutput.map((data) => data.id === storeTarget.target ? data.output : null)
+
+    const data = [
+        { colOne: 'Target', colTwo: 'Date', colThree: 'Time', colFour: 'Result' },
+        { colOne: resultTarget, colTwo: resultDate, colThree: resultTime, colFour: mapResult },
+        { colOne: 'CVE', colTwo: 'CVE Info' }
+    ]
+    
+    console.log(data)
 
     return (
       <>
@@ -147,7 +153,7 @@ export default () => {
                                       <td style={{width: '33.3%'}}>
                                             <FormControlLabel
                                                 control={<Checkbox checked={state.traceroute} color="primary" onChange={handleChange} name="traceroute" />}
-                                                label="Tracenroute"
+                                                label="Traceroute"
                                             />
                                       </td>
                                   </tr>
@@ -162,7 +168,9 @@ export default () => {
                                     <Button 
                                       style={{width: "50%"}}
                                     >
-                                        CSV
+                                        <CSVLink data={data} filename='scanResult.csv' style={{color: '#4050B5'}}>
+                                            CSV
+                                        </CSVLink>
                                     </Button>
                                     
                                     <Button style={{width: "50%"}}>

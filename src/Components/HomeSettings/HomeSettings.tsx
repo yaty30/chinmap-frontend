@@ -75,6 +75,8 @@ export default () => {
       cveDetect: false,
       pn: false,
       whoIs: false,
+      firewalk: false,
+      hostmap: false,
     })
   }
 
@@ -83,6 +85,8 @@ export default () => {
     cveDetect: false,
     pn: false,
     whoIs: false,
+    firewalk: false,
+    hostmap: false,
   });
 
   const handleOthersChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -409,6 +413,56 @@ export default () => {
                 
               </Paper>
             </Grid>
+
+            {/* NSE */}
+            <Grid item xs={12}>
+              <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>
+                <table style={{width: '100%', textAlign: 'center'}}>
+                  <tbody>
+                    <tr>
+                      <td style={{textAlign: 'left'}}>
+                        <FormLabel component="legend" style={{marginBottom: 10}}>NSE Quick Access</FormLabel>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style={{width: '50%'}}>
+                        <Tooltip title="When the system scan find out the result output as no host is alive, automation will allow the scan run again until there is at least one host is alive or all the hosts in desinated range is scanned." arrow placement="top">
+                          <FormControlLabel
+                            label="Hostmap - Subdomains"
+                            control={
+                              <Switch
+                                checked={others.hostmap}
+                                onChange={handleOthersChange}
+                                onClick={() => settingsStatus.setAuto(!settingsStatus.hostmap)}
+                                name="hostmap"
+                                inputProps={{ 'aria-label': 'hostmap' }}
+                              />
+                            }
+                          />
+                        </Tooltip>
+                      </td>
+                      <td style={{width: '50%'}}>
+                        <Tooltip arrow placement='top' title='Tries to discover firewall rules using an IP TTL expiration technique known as firewalking.'>
+                          <FormControlLabel
+                            label="Firewalk"
+                            control={
+                              <Switch
+                                checked={others.firewalk}
+                                onChange={handleOthersChange}
+                                onClick={() => settingsStatus.setFirewalk(!settingsStatus.firewalk)}
+                                name="firewalk"
+                                inputProps={{ 'aria-label': 'Firewalk' }}
+                              />
+                            }
+                          />
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </Paper>
+            </Grid>
+
             {/* Others */}
             <Grid item xs={6}>
               <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>

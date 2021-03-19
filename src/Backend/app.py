@@ -2,6 +2,7 @@
 import os
 import sys
 import subprocess
+from pyfiglet import Figlet
 import re
 import random
 import string
@@ -59,7 +60,7 @@ def EndScan():
     )
     scanDetailsTxt.close()
 
-def GetPortStatus(scanID, result, target, scanMode, whois, automation, cveDetection, avoidPingBlocking):
+def GetPortStatus(scanID, result, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, firewalk, hostmap):
     # portStatusScanID =  ''.join(random.choices(string.ascii_uppercase + string.digits, k=21))
     pattern = re.compile(r'(?P<ports>[\d]+)\/(?P<protocol>tcp|udp)\s+(?P<state>open|filtered|closed)\s+(?P<service>[\w\S]*)\s+(?P<version>[\w\S]*)')
 
@@ -73,7 +74,7 @@ def GetPortStatus(scanID, result, target, scanMode, whois, automation, cveDetect
         if automation == True:
             while len(ports) < 1:
                 if len(scanMode) < 1:
-                    RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking)
+                    RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking, firewalk, hostmap)
             i += 1
             
         fePortStatusTxt.writelines("\ncreateData('" + str(target) + "', '" + foundRunTime + "', '" + str(scanID) + "'," + str(ports)[1:] + ",")
@@ -216,14 +217,15 @@ def GetScanDetails(command, result, scanID, target, scanMode, whois, automation,
     return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(target) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + foundTime + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n' + '"aggrOS": "' + str(foundAggrOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '",\n' + '"whois": "'+  foundWhoIS + '",\n"pbb": "' + foundPBB + '" \n}}'
 
 def Traceroute(scanID, target):
+    # sudo nmap --traceroute --script traceroute-geo <= Enhanced version of traceroute, TBC
+    traceroute = os.popen('sudo nmap -sn --traceroute ' + target)
+    tracerouteScanOutput = traceroute.read()
+
     targetTraceroute = re.compile(r'(?P<rtt>\d+\.\d+ ms) (.*)')
 
     with fileinput.FileInput("tracerouteOutput.tsx", inplace=True, backup='.bak') as file:
         for line in file:
             print(line.replace("]", ""), end="")
-    
-    traceroute = os.popen('sudo nmap -sn --traceroute ' + target)
-    tracerouteScanOutput = traceroute.read()
 
     tracerouteTxt = open("tracerouteOutput.tsx", "a")
     tracerouteTxt.writelines("\n// ===================== Target: " + target + " ================================")
@@ -261,7 +263,7 @@ def GetCVE(target, scanID, cveCommand):
     fileinput.close()
 
 def ExploitCVE(target, scanID, cveScanOutput):    
-    exploitPattern = re.compile(r'(?P<cves>\[CVE\-\d+\-\d+\])(.*)')
+    exploitPattern = re.compile(r'(?P<exploit>\[\d+\])(.*)')
 
     with fileinput.FileInput("exploitCVEoutput.tsx", inplace=True, backup='.bak') as file:
         for line in file:
@@ -278,8 +280,35 @@ def ExploitCVE(target, scanID, cveScanOutput):
 
     fileinput.close()
 
-
 def GetWhoIs(target, scanID, whoisCommand):
+    # Useing NSE whois
+    nse = os.popen(whoisCommand + target)
+    nseOutput = nse.read()
+
+    netrange = re.findall(r'netrange: (.*)', nseOutput)
+    foundNetrange = str(netrange)[2:-2]
+
+    netname = re.findall(r'netname: (.*)', nseOutput)
+    foundNetname = str(netname)[2:-2]
+
+    orgname = re.findall(r'orgname: (.*)', nseOutput)
+    foundOrgname = str(orgname)[2:-2]
+
+    orgid = re.findall(r'orgid: (.*)', nseOutput)
+    foundOrgid = str(orgid)[2:-2]
+
+    country = re.findall(r'country: [^\W\d_]+', nseOutput)
+    foundCountry = str(country)[2:-2]
+
+    stateprov = re.findall(r'stateprov: [^\W\d_]+', nseOutput)
+    foundStateProv = str(stateprov)[2:-2]
+
+    orgtechname = re.findall(r'orgtechname: (.*)', nseOutput)
+    foundOrgTechName = str(orgtechname)[2:-2]
+
+    _orgtechemail = re.findall(r'orgtechemail: (.*)', nseOutput)
+    foundOrgTechEmail = str(_orgtechemail)[2:-2]
+
     domain = whois.query(target)
     
     name = domain.name
@@ -295,7 +324,7 @@ def GetWhoIs(target, scanID, whoisCommand):
             print(line.replace("]", ""), end="")
     whoisScanTsx = open("whoisScan.tsx", "a")
 
-    whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "', name: '" + name + "', creationDate: '" + str(creationDate) + "', expirationDate: '" + str(expirationDate) + "', lastUpdated: '" + str(lastUpdated) + "', registrar: '" + registrar + "', ")
+    whoisScanTsx.writelines("\n{\nscanId: '" + str(scanID) + "', name: '" + name + "', creationDate: '" + str(creationDate) + "', expirationDate: '" + str(expirationDate) + "', lastUpdated: '" + str(lastUpdated) + "', registrar: '" + registrar + "', netrange: '" + foundNetrange + "', netname: '" + foundNetname + "', orgname: '" + foundOrgname + "', orgid: '" + foundOrgid + "', country: '" + foundCountry + "', stateprov: '" + foundStateProv + "', orgtechname: '" + foundOrgTechName + "', orgtechemail: '" + foundOrgTechEmail + "', ")
     whoisScanTsx.writelines("\n},\n")
 
     whoisScanTsx.writelines("\n]")
@@ -401,6 +430,51 @@ def CalcScanRange(target, setRange):
             xnum += 1  # the increase must be done on every iteration
     
     return True
+
+def Firewalk(target, scanID, firewalkCommand):
+    firewalkScan = os.popen(firewalkCommand)
+    firewalkOutput = firewalkScan.read()
+
+    firewalkPattern = re.compile(r'(?P<hop>\_\d+)(\s*)(?P<host>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(\s*)(?P<protocol>tcp|udp)(\s*)(.*)')
+
+    with fileinput.FileInput("firewalkOutput.tsx", inplace=True, backup='.bak') as file:
+        for line in file:
+            print(line.replace("].sort((a, b) => (a.hop < b.hop ? -1 : 1));", ""), end="")
+    firewalkData = open("firewalkOutput.tsx", "a")
+    firewalkData.writelines("\n// ===================== Target: " + target + " ================================")
+    
+    for firewalkCatch in re.findall(firewalkPattern, firewalkOutput):
+        first = re.sub(" ", "", str(firewalkCatch))
+        out = re.sub("'',", "", str(first))
+        firewalkData.writelines("\ncreateData('" + str(scanID) + "', " + str(out)[1:-1] + "),")
+
+    firewalkData.writelines("\n// ===================== END of " + target + " =================================")
+    firewalkData.writelines("\n].sort((a, b) => (a.hop < b.hop ? -1 : 1));")
+    firewalkData.close()
+
+    fileinput.close()
+
+def Hostmap(target, scanID, hostmapCommand):
+    hostmapScan = os.popen(hostmapCommand)
+    hostmapOutput = hostmapScan.read()
+
+    hostmapPattern = re.compile(r'(?P<subdomain>\|)(.*)')
+
+    with fileinput.FileInput("hostmapOutput.tsx", inplace=True, backup='.bak') as file:
+        for line in file:
+            print(line.replace("]", ""), end="")
+    hostmapData = open("hostmapOutput.tsx", "a")
+    hostmapData.writelines("\n// ===================== Target: " + target + " ================================")
+    
+    for hostmapCatch in re.findall(hostmapPattern, hostmapOutput):
+        hostmapData.writelines("\ncreateData('" + str(scanID) + "', " + str(hostmapCatch)[1:-1] + "),")
+
+    hostmapData.writelines("\n// ===================== END of " + target + " =================================")
+    hostmapData.writelines("\n]")
+    hostmapData.close()
+
+    fileinput.close()
+
 
 app = Flask(__name__) # Current model
 CORS(app)
@@ -544,8 +618,8 @@ def WhatIsMyIP(isCheck):
 # =========================[ ================================= ]============================== #
 # ============================================================================================ #
 
-@app.route('/RunScan/<target>/<scanMode>/<whois>/<automation>/<cveDetection>/<avoidPingBlocking>')      
-def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking):
+@app.route('/RunScan/<target>/<scanMode>/<whois>/<automation>/<cveDetection>/<avoidPingBlocking>/<firewalk>/<hostmap>')      
+def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking, firewalk, hostmap):
     StartScan()
 
     # creating scan identity string
@@ -583,11 +657,16 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     # PATH to nmap on macOS => /usr/local/share/nmap/
     # PATH to nmap on Windos => C:\Program File(x86)\Nmap\
     if platform.system() == 'Windows':
-        cveCommand = 'nmap -sS -sV --script=vulscan/ ' + target
-        whoisCommand = 'nmap --script whois-domain.nse -d ' + target
+        cveCommand = 'nmap -sS -sV --script=vulscan/vulscan.nse ' + target
+        whoisCommand = 'nmap --script whois-ip --script-args whois.whodb=nofile ' + target
+        firewalkCommand = 'nmap --script=firewalk --traceroute --script-args=firewalk.max-retries=1 ' + target
     else:
-        cveCommand = 'sudo nmap -sS -sV --script=vulscan/ ' + target
-        whoisCommand = 'sudo nmap --script whois-domain.nse -d ' + target
+        cveCommand = 'sudo nmap -sS -sV --script=vulscan/vulscan.nse ' + target
+        whoisCommand = 'sudo nmap --script whois-ip --script-args whois.whodb=nofile ' + target
+        firewalkCommand = 'sudo nmap --script=firewalk --traceroute --script-args=firewalk.max-retries=1 ' + target
+
+    hostmapCommand = "nmap --script hostmap-crtsh --script-args 'hostmap-crtsh.prefix=hostmap-' " + target
+    #  http-sitemap-generator.nse => nmap --script http-sitemap-generator -p 80 scanme.nmap.org TBC
 
     command = 'sudo nmap ' + target
     # Determin if scan with mode or not
@@ -601,6 +680,12 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
         if whois == 'true': 
             GetWhoIs(target, scanID, whoisCommand)
+
+        if firewalk == 'true': 
+            Firewalk(target, scanID, firewalkCommand)
+            
+        if hostmap == 'true': 
+            Hostmap(target, scanID, hostmapCommand)
             
         if avoidPingBlocking == 'true':
             command = command + '-Pn '
@@ -610,21 +695,15 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
             command =  command + '-Pn '
         if cveDetection == 'true':
             GetCVE(target, scanID, cveCommand)
-        else:
-            with fileinput.FileInput("cveScanOutput.tsx", inplace=True, backup='.bak') as file:
-                for line in file:
-                    print(line.replace("]", ""), end="")
-            cveScanOutputTsx = open("cveScanOutput.tsx", "a")
-
-            cveScanOutputTsx.writelines("\n{\nscanId: '" + str(scanID) + "',\noutput:`\n")
-            cveScanOutputTsx.writelines("Enable CVE detection to discover.")
-            cveScanOutputTsx.writelines("\n`},\n")
-
-            cveScanOutputTsx.writelines("\n]")
-            cveScanOutputTsx.close()
-
+        
         if whois == 'true':
             GetWhoIs(target, scanID, whoisCommand)
+
+        if firewalk == 'true': 
+            Firewalk(target, scanID, firewalkCommand)
+
+        if hostmap == 'true': 
+            Hostmap(target, scanID, hostmapCommand)
             
         if avoidPingBlocking == 'true':
             command = command + '-Pn '
@@ -661,7 +740,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     # Port Status
     f = open("Result.txt", "r")
     portStatusToRead = f.read()
-    GetPortStatus(scanID, portStatusToRead, target, scanMode, whois, automation, cveDetection, avoidPingBlocking)
+    GetPortStatus(scanID, portStatusToRead, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, firewalk, hostmap)
     f.close()
 
     # Frontend Nmap Output
@@ -678,6 +757,12 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
 @app.route('/runAPI', methods = ['POST', 'GET'])
 def startApp():
+   cText = Figlet(font='slant')
+   os.system('clear')
+   os.system('mode con: cols=75 lines=30')
+
+   print(cText.renderText('ChiNmap API'))
+
    if request.method == 'POST':
         target = request.form['target']
         scanMode = request.form['scanMode']
@@ -685,7 +770,9 @@ def startApp():
         automation = request.form['auto']
         cveDetection = request.form['cve']
         avoidPingBlocking = request.form['pbb']
+        firewalk = request.form['firewalk']
         whois = request.form['whois']
+        hostmap = request.form['hostmap']
         scanRange = request.form['scanRange']
 
         if len(target) < 1:
@@ -695,7 +782,9 @@ def startApp():
                 'RunScan', 
                 whois=whois,
                 target=target, 
+                hostmap=hostmap,
                 scanMode=scanMode, 
+                firewalk=firewalk,
                 scanRange=scanRange,
                 automation=automation, 
                 cveDetection=cveDetection, 
@@ -711,7 +800,9 @@ def startApp():
                 'RunScan', 
                 whois=whois,
                 target=target, 
+                hostmap=hostmap,
                 scanMode=scanMode, 
+                firewalk=firewalk,
                 scanRange=scanRange,
                 automation=automation, 
                 cveDetection=cveDetection, 

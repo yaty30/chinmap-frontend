@@ -8,9 +8,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid';
 
-// Components
-import GoogleMap from './GoogleMapAPI'
-
 // Mobx
 import storeTarget from '../../Mobx/Models/resultSelectStatus'
 
@@ -43,24 +40,24 @@ export default () => {
                                 data.scanId === storeTarget.target ?
                                 <>
                                     <TableRow hover>
-                                        <TableCell style={{width: 120, fontWeight: 'bold'}}>Domain Name</TableCell>
-                                        <TableCell>{data.name}</TableCell>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Domain Name</TableCell>
+                                        <TableCell align='right'>{data.name}</TableCell>
                                     </TableRow>
                                     <TableRow hover>
-                                        <TableCell style={{width: 120, fontWeight: 'bold'}}>Creation Date</TableCell>
-                                        <TableCell>{data.creationDate}</TableCell>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Creation Date</TableCell>
+                                        <TableCell align='right'>{data.creationDate}</TableCell>
                                     </TableRow>
                                     <TableRow hover>
-                                        <TableCell style={{width: 120, fontWeight: 'bold'}}>Expiration Date</TableCell>
-                                        <TableCell>{data.expirationDate}</TableCell>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Expiration Date</TableCell>
+                                        <TableCell align='right'>{data.expirationDate}</TableCell>
                                     </TableRow>
                                     <TableRow hover>
-                                        <TableCell style={{width: 120, fontWeight: 'bold'}}>Last Updated</TableCell>
-                                        <TableCell>{data.lastUpdated}</TableCell>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Last Updated</TableCell>
+                                        <TableCell align='right'>{data.lastUpdated}</TableCell>
                                     </TableRow>
                                     <TableRow hover>
-                                        <TableCell style={{width: 120, fontWeight: 'bold'}}>Registrar</TableCell>
-                                        <TableCell>{data.registrar}</TableCell>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Registrar</TableCell>
+                                        <TableCell align='right'>{data.registrar}</TableCell>
                                     </TableRow>
                                 </> : null
                             ))}
@@ -76,24 +73,69 @@ export default () => {
                                 geo.scanId === storeTarget.target ?
                                 <>
                                     <TableRow hover>
-                                        <TableCell style={{width: 120, fontWeight: 'bold'}}>IP</TableCell>
-                                        <TableCell>{geo.target}</TableCell>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>IP</TableCell>
+                                        <TableCell align='right'>{geo.target}</TableCell>
                                     </TableRow>
                                     <TableRow hover>
-                                        <TableCell style={{width: 120, fontWeight: 'bold'}}>Region</TableCell>
-                                        <TableCell>{geo.region}</TableCell>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Region</TableCell>
+                                        <TableCell align='right'>{geo.region}</TableCell>
                                     </TableRow>
                                     <TableRow hover>
-                                        <TableCell style={{width: 120, fontWeight: 'bold'}}>City</TableCell>
-                                        <TableCell>{geo.city}</TableCell>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>City</TableCell>
+                                        <TableCell align='right'>{geo.city}</TableCell>
                                     </TableRow>
                                     <TableRow hover>
-                                        <TableCell style={{width: 120, fontWeight: 'bold'}}>Longitude</TableCell>
-                                        <TableCell>{geo.longitude}</TableCell>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Longitude</TableCell>
+                                        <TableCell align='right'>{geo.longitude}</TableCell>
                                     </TableRow>
                                     <TableRow hover>
-                                        <TableCell style={{width: 120, fontWeight: 'bold'}}>Latitude</TableCell>
-                                        <TableCell>{geo.latitude}</TableCell>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Latitude</TableCell>
+                                        <TableCell align='right'>{geo.latitude}</TableCell>
+                                    </TableRow>
+                                </> : null
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Grid>
+            <Grid item xs={12}>
+                <TableContainer>
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableBody>
+                            {whoisScanOutput.map((data) => (
+                                data.scanId === storeTarget.target ?
+                                <>
+                                    <TableRow hover>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Netrange</TableCell>
+                                        <TableCell align='right'>{data.netrange}</TableCell>
+                                    </TableRow>
+                                    <TableRow hover>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Netname</TableCell>
+                                        <TableCell align='right'>{data.netname}</TableCell>
+                                    </TableRow>
+                                    <TableRow hover>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Organisation Name</TableCell>
+                                        <TableCell align='right'>{data.orgname}</TableCell>
+                                    </TableRow>
+                                    <TableRow hover>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Organisation ID</TableCell>
+                                        <TableCell align='right'>{data.orgid}</TableCell>
+                                    </TableRow>
+                                    <TableRow hover>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Country</TableCell>
+                                        <TableCell align='right'>{data.country.substring(9)}</TableCell>
+                                    </TableRow>
+                                    <TableRow hover>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>State and Province</TableCell>
+                                        <TableCell align='right'>{data.stateprov.substring(11)}</TableCell>
+                                    </TableRow>
+                                    <TableRow hover>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Organisation Tech Name</TableCell>
+                                        <TableCell align='right'>{data.orgtechname}</TableCell>
+                                    </TableRow>
+                                    <TableRow hover>
+                                        <TableCell style={{width: 200, fontWeight: 'bold'}}>Organisation Tech E-mail</TableCell>
+                                        <TableCell align='right'>{data.orgtechemail}</TableCell>
                                     </TableRow>
                                 </> : null
                             ))}

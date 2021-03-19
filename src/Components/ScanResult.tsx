@@ -34,6 +34,7 @@ import HostsAndPorts from './ScanResults/HostsAndPorts'
 import ScanDetails from './ScanResults/ScanDetails'
 import CVEResult from './ScanResults/CVEResult'
 import ExploitCVE from './ScanResults/ExploitCVE'
+import Firewalk from './ScanResults/Firewalk'
 import WhoIs from './ScanResults/WhoIs'
 import ExportResult from './ScanResults/ExportResult'
 
@@ -135,6 +136,7 @@ export default observer (() => {
     setValue(newValue);
   };
 
+
   return (
     <div className={classes.root}>
        {isScanning.map((status) => (
@@ -217,8 +219,9 @@ export default observer (() => {
                                       <Tab label="Scan Details" {...a11yProps(2)} style={{textTransform: "capitalize"}} />
                                       <Tab label="CVE" {...a11yProps(3)} style={{textTransform: "capitalize"}} />
                                       <Tab label="Exploit" {...a11yProps(4)} style={{textTransform: "capitalize"}} />
-                                      <Tab label="WhoIs" {...a11yProps(5)} style={{textTransform: "capitalize"}} />
-                                      <Tab label="Export Results" {...a11yProps(6)} style={{textTransform: "capitalize"}} />
+                                      <Tab label="Firewalk" {...a11yProps(5)} style={{textTransform: "capitalize"}} />
+                                      <Tab label="WhoIs" {...a11yProps(6)} style={{textTransform: "capitalize"}} />
+                                      <Tab label="Export Results" {...a11yProps(7)} style={{textTransform: "capitalize"}} />
                                     </Tabs>
                                 </AppBar>
                                 <Paper className={classes.paper}>
@@ -240,13 +243,16 @@ export default observer (() => {
                                         <ExploitCVE />
                                     </TabPanel>
                                     <TabPanel value={value} index={5}>
-                                        <WhoIs />
+                                        <Firewalk />
                                     </TabPanel>
                                     <TabPanel value={value} index={6}>
+                                        <WhoIs />
+                                    </TabPanel>
+                                    <TabPanel value={value} index={7}>
                                         <ExportResult />
                                     </TabPanel>
                                 </Paper>
-                                <Button
+                                {/* <Button
                                   style={{
                                     width: "100%",
                                     marginTop: 15,
@@ -255,7 +261,7 @@ export default observer (() => {
                                   color="secondary"
                                 >
                                   Delete Result
-                                </Button>
+                                </Button> */}
                             </div>
                         </>
                     }

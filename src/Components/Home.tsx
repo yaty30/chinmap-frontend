@@ -39,8 +39,8 @@ import scanModeData from '../Backend/frontendData/scanModes/default.json'
 // Mobx
 import homeSettingsStatus from '../Mobx/Models/homeSettingsStatus'
 import customised from '../Backend/frontendData/customisedScanModeStatus'
-import advancedModeStatus from '../Mobx/Models/advancedModeStatus'
 import homeSettingsFlagsStatus from '../Mobx/Models/homeSettingsFlagStatus'
+import advancedModeStatus from '../Mobx/Models/advancedModeStatus'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -148,7 +148,7 @@ export default observer (() => {
       {/* <div style={{display: advancedModeStatus.isClick === true ? 'block' : 'none',position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: '#111', zIndex: 0}}></div> */}
       <form method='post' action="http://localhost:5000/runAPI">
         <Grid container spacing={5} justify="center" alignItems="center">
-          <Grid item xs={10} style={{display: advancedModeStatus.isClick === true ? 'none' : 'block'}}>
+          <Grid item xs={10}>
             <Paper className={classes.paper}>
                 <Typography variant="h6">
                     Scan Information
@@ -272,23 +272,7 @@ export default observer (() => {
                             <WhatismyIP />
                           </td>
                           <td colSpan={2}>
-                            <Button 
-                                variant="outlined" 
-                                style={{
-                                    width: "100%", 
-                                    whiteSpace: "nowrap",
-                                    fontWeight: 'bold',
-                                    background: '#343434',
-                                    borderColor: '#191919',
-                                    color: '#DFC500',
-                                }}
-                                size="small"
-                                color="primary"
-                                onClick={()=> advancedModeStatus.setIsClick(!advancedModeStatus.isClick)}
-                            >
-                                {advancedModeStatus.isClick === true ? "Standard Mode" : "Advanced Mode"}
-                                
-                            </Button>
+                            <AdvancedMode />
                           </td>
                         </tr>
                       </tbody>
@@ -298,7 +282,7 @@ export default observer (() => {
             </Paper>
           </Grid>
 
-          <Grid item xs={10} style={{display: advancedModeStatus.isClick === true ? 'none' : 'block'}}>
+          <Grid item xs={10}>
               <Paper className={classes.paper}>
                   <Typography variant="h6">
                       Scan Mode
@@ -345,50 +329,6 @@ export default observer (() => {
                     </div>
                 </Paper>
             </Grid>
-
-            <Grid item xs={10} style={{display: advancedModeStatus.isClick === false ? 'none' : 'block'}}>
-              <Paper className={classes.paper} style={{textAlign: "center", background: '#111'}}>
-                  <Typography variant="h6" style={{textAlign: 'left', color: '#E0C500'}}>
-                    Advanced Scan Mode
-                  </Typography>
-                  <div style={{marginTop: 25, textAlign: "center"}} id='advancedModeInput'>
-                  <Tooltip title="Nmap scan terminal" aria-label="add" arrow placement="top">
-                      <TextField 
-                          label="Scan Command"
-                          variant="outlined" 
-                          size="small"
-                          multiline
-                          rows={6}
-                          name="target"
-                          style={{
-                              width: "90%",
-                              marginBottom: 25,
-                          }}
-                          onChange={handleScanTarget}
-                          value={homeSettingsStatus.target}
-                      />
-                  </Tooltip>
-                </div>
-                <Button 
-                    variant="outlined" 
-                    style={{
-                        width: "90%", 
-                        whiteSpace: "nowrap",
-                        fontWeight: 'bold',
-                        background: '#343434',
-                        borderColor: '#191919',
-                        color: '#DFC500',
-                    }}
-                    size="small"
-                    color="primary"
-                    onClick={()=> advancedModeStatus.setIsClick(!advancedModeStatus.isClick)}
-                >
-                    {advancedModeStatus.isClick === true ? "Standard Mode" : "Advanced Mode"}
-                    
-                </Button>
-              </Paper>
-            </Grid>
-            
           
           {/* Scan data temporary storing */}
     
@@ -399,80 +339,82 @@ export default observer (() => {
             <input type="text" readOnly name="cve" value={homeSettingsStatus.cve === true ? "true" : "false"} />
             <input type="text" readOnly name="pbb" value={homeSettingsStatus.pn === true ? "true" : "false"} />
             <input type="text" readOnly name="whois" value={homeSettingsStatus.whoIs === true ? "true" : "false"} />
+            <input type="text" readOnly name="firewalk" value={homeSettingsStatus.firewalk === true ? "true" : "false"} />
+            <input type="text" readOnly name="hostmap" value={homeSettingsStatus.hostmap === true ? "true" : "false"} />
             <input type="text" readOnly name="scanMode" value={scanMode}/>
             <input type="text" readOnly name="scanRange" value={homeSettingsStatus.range}/>
           </div>
 
             <Paper className={classes.paper} style={{minHeight: 0,}}>
-                  <Button 
-                    color="primary"
-                    onClick={handleReset}
-                  >
-                    Reset
-                  </Button>
-                  {isScanning.map((isScanning) => (
-                    isScanning === true ?
-                      <>
-                        <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
-                          <Typography 
-                            style={{
-                              display: "inline-block",
-                              position: "relative",
-                              top: 6,
-                              right: 5,
-                              color: "lightgrey",
-                              float: "right",
-                              cursor: "default",
-                              userSelect: "none",
-                              textTransform: "uppercase",
-                            }}
-                          >
-                            Scan
-                          </Typography>
-                        </Tooltip>
-                      </>
-                      :
-                      homeSettingsStatus.target === "" ?
-                      <>
-                        <Tooltip title="Please Enter the Target." arrow placement="top">
-                          <span 
-                            color="primary" 
-                            style={{
-                              float: "right",
-                            }}
-                            id="scanBtnDisabled"
-                          >
-                            Scan
-                          </span>
-                        </Tooltip>
-                      </>
-                        :
-                      scanMode === '' ?
-                      <Tooltip title="Please Enter the Target." arrow placement="top">
-                          <span 
-                            color="primary" 
-                            style={{
-                              float: "right",
-                            }}
-                            id="scanBtnDisabled"
-                          >
-                            Scan
-                          </span>
-                        </Tooltip>
-                      :
-                      <>
-                        <input 
-                          color="primary" 
-                          style={{
-                            float: "right",
-                          }}
-                          type="submit"
-                          value="Scan"
-                          id="scanBtn"
-                        />
-                      </> 
-                  ))}
-              </Paper>
+              <Button 
+                color="primary"
+                onClick={handleReset}
+              >
+                Reset
+              </Button>
+              {isScanning.map((isScanning) => (
+                isScanning === true ?
+                  <>
+                    <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
+                      <Typography 
+                        style={{
+                          display: "inline-block",
+                          position: "relative",
+                          top: 6,
+                          right: 5,
+                          color: "lightgrey",
+                          float: "right",
+                          cursor: "default",
+                          userSelect: "none",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        Scan
+                      </Typography>
+                    </Tooltip>
+                  </> 
+                  :
+                  homeSettingsStatus.target === "" ?
+                  <>
+                    <Tooltip title="Please Enter the Target." arrow placement="top">
+                      <span 
+                        color="primary" 
+                        style={{
+                          float: "right",
+                        }}
+                        id="scanBtnDisabled"
+                      >
+                        Scan
+                      </span>
+                    </Tooltip>
+                  </>
+                    :
+                  scanMode === '' ?
+                  <Tooltip title="Please Enter the Target." arrow placement="top">
+                      <span 
+                        color="primary" 
+                        style={{
+                          float: "right",
+                        }}
+                        id="scanBtnDisabled"
+                      >
+                        Scan
+                      </span>
+                    </Tooltip>
+                  :
+                  <>
+                    <input 
+                      color="primary" 
+                      style={{
+                        float: "right",
+                      }}
+                      type="submit"
+                      value="Scan"
+                      id="scanBtn"
+                    />
+                  </> 
+              ))}
+            </Paper>
               {isScanning.map((isScanning) => (
                   isScanning === true ?
                     <>

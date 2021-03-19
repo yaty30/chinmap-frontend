@@ -24,6 +24,7 @@
     "mobx-react": "^7.1.0",
     "mobx-state-tree": "^5.0.1",
     "react": "^17.0.1",
+    "react-csv": "^2.0.3",
     "react-csv-downloader": "^2.2.0",
     "react-csv-export": "0.0.3",
     "react-data-export": "^0.6.0",

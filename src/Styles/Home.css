@@ -29,3 +29,8 @@
 #advancedModeInput .MuiFormLabel-root.Mui-focused{
     color: #DEC401;
 }
+
+iframe{
+    display: none;
+    background: 'black' !important;
+}
