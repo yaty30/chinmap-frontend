@@ -58,4 +58,33 @@
 "whois": "false",
 "pbb": "false" 
 }
+,{
+"id": "AKzWlggrLgUUrjEfnERVC",
+"cm": "nmapscanme.nmap.org; with scan mode: Top 100 Ports Scan Mode",
+"target": "scanme.nmap.org",
+"targetForSelect": "scanme.nmap.org",
+"date": "2021-03-21",
+"time": "02:10 HKT",
+"upHost": "1 host up",
+"runTime": "3.69 seconds",
+"latency": "0.16s ",
+"notShown": "94 closed ports",
+"os": "Linux 5.0 - 5.4 ,   Linux 5.0 - 5.4",
+"aggrOS": "",
+"uptime": "",
+"deviceType": "",
+"rawPacket": "114 (4.992KB)",
+"rcvd": "98 (3.916KB)",
+"scanMode": "Top 100 Ports Scan Mode",
+"hop": "",
+"macAddr": "",
+"difficulty": "",
+"auto": "true",
+"cveDetect": "true",
+"setRange": "Target have no range",
+"flags": "",
+"nmapVer": "7.91",
+"whois": "true",
+"pbb": "false" 
+}
 ]

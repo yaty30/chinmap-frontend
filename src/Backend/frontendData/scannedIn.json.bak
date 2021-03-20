@@ -29,4 +29,33 @@
         "pbb": ""
     }
 
+,{
+"id": "xiQdAjchcMeRPDzGbfdSn",
+"cm": "nmap192.168.1.1; with scan mode: Top 100 Ports Scan Mode",
+"target": "192.168.1.1",
+"targetForSelect": "192.168.1.1",
+"date": "2021-03-20",
+"time": "15:40 HKT",
+"upHost": "",
+"runTime": "2.20 seconds",
+"latency": "",
+"notShown": "",
+"os": "",
+"aggrOS": "",
+"uptime": "",
+"deviceType": "",
+"rawPacket": "8 (304B)",
+"rcvd": "0 (0B)",
+"scanMode": "Top 100 Ports Scan Mode",
+"hop": "",
+"macAddr": "",
+"difficulty": "",
+"auto": "false",
+"cveDetect": "false",
+"setRange": "Target have no range",
+"flags": "",
+"nmapVer": "7.91",
+"whois": "false",
+"pbb": "false" 
+}
 ]
