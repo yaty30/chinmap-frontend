@@ -1,67 +1,74 @@
-import React from 'react';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
+import React, {useState} from 'react';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
+// Backend
+import { result } from '../Backend/frontendData/advancedScan'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper,
+      position: 'relative',
+      overflow: 'auto',
+      maxHeight: 300,
     },
-    heading: {
-      fontSize: theme.typography.pxToRem(15),
-      fontWeight: theme.typography.fontWeightRegular,
+    listSection: {
+      backgroundColor: 'inherit',
     },
+    ul: {
+      backgroundColor: 'inherit',
+      padding: 0,
+    },
+    paper: {
+      marginBottom: 15,
+    }
   }),
 );
 
-export default function SimpleAccordion() {
+export default function PinnedSubheaderList() {
   const classes = useStyles();
+  const [selectedResult, setSelectedResult] = useState(0);
 
   return (
-    <div className={classes.root}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>Accordion 1</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography className={classes.heading}>Accordion 2</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
-          <Typography className={classes.heading}>Disabled Accordion</Typography>
-        </AccordionSummary>
-      </Accordion>
-    </div>
+    <>
+      <Grid container spacing={2} justify='center'>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>
+            <List className={classes.root} subheader={<li />}>
+              {result.map((output, index) => (
+                <li className={classes.listSection}>
+                  <ul className={classes.ul}>
+                    {output.scanID === '' ? null :
+                      <ListItem key={index} button selected={index === selectedResult ? true : false}>
+                        <ListItemText primary={output.scanID} onClick={() => setSelectedResult(index)} />
+                      </ListItem>
+                    }
+                  </ul>
+                </li>
+              ))}
+            </List>
+          </Paper>
+        </Grid>
+
+        <Grid item xs={8}>
+          <Paper className={classes.paper}>
+            {result.map((output, index) => (
+              index === selectedResult ? 
+                <Typography style={{padding: '15px 15px', whiteSpace: 'pre-line'}}>{output.output}</Typography> 
+                  : 
+                null
+            ))}
+          </Paper>
+        </Grid>
+      </Grid>
+    </>
   );
 }

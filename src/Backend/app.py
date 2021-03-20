@@ -39,6 +39,13 @@ flags = ''
 # ============================================================================================ #
 
 # Core Scan Functions
+def ScanID():
+    # creating scan identity string
+    letters = string.ascii_letters
+    scanID = ''.join(random.choice(letters) for i in range(21))
+
+    return scanID
+
 def StartScan():
     global scanStart
     scanStart = time.time()
@@ -623,8 +630,9 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     StartScan()
 
     # creating scan identity string
-    letters = string.ascii_letters
-    scanID = ''.join(random.choice(letters) for i in range(21))
+    # letters = string.ascii_letters
+    # scanID = ''.join(random.choice(letters) for i in range(21))
+    scanID = ScanID()
 
     if platform.system() == 'Windows':
         command = 'nmap ' + target
@@ -755,7 +763,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
     return redirect("http://localhost:3001/ScanResult", code=302)
 
-@app.route('/runAPI', methods = ['POST', 'GET'])
+@app.route('/runAPI', methods=['POST', 'GET'])
 def startApp():
    cText = Figlet(font='slant')
    os.system('clear')
@@ -808,6 +816,61 @@ def startApp():
                 cveDetection=cveDetection, 
                 avoidPingBlocking=avoidPingBlocking, 
             ))
+
+@app.route('/RunAdvancedMode/<command>')
+def RunAdvancedMode(command):
+    StartScan()
+
+    scan = os.popen(command)
+    scanOutput = scan.read()
+
+    scanID = ScanID() + 'advmd'
+
+    with fileinput.FileInput("advancedScan.tsx", inplace=True, backup='.bak') as file:
+        for line in file:
+            print(line.replace("]", ""), end="")
+    advancedScanOutput = open("advancedScan.tsx", "a")
+
+    advancedScanOutput.writelines("\n{\nscanID: '" + str(scanID) + "',\noutput: `" + scanOutput + "`, ")
+    advancedScanOutput.writelines("\n},\n")
+
+    advancedScanOutput.writelines("\n]")
+    advancedScanOutput.close()
+
+    fileinput.close()
+
+    EndScan()
+
+    return redirect("http://localhost:3001/", code=302)
+
+@app.route('/runAdvancedAPI', methods=['POST', 'GET'])
+def AdvancedMode():
+   cText = Figlet(font='slant')
+   os.system('clear')
+   os.system('mode con: cols=75 lines=30')
+
+   print(cText.renderText('ChiNmap API => ADVANCED'))
+   
+   if request.method == 'POST':
+        command = request.form['command']
+
+        if len(command) < 1:
+            return False
+        else:
+            return redirect(url_for(
+                'RunAdvancedMode', 
+                command=command, 
+            ))
+   else:
+        command = request.args.get('command')
+        if len(command) < 1:
+            return False
+        else:
+            return redirect(url_for(
+                'RunAdvancedMode', 
+                command=command, 
+            ))
+
 
 if __name__ == "__main__":
     app.debug = True

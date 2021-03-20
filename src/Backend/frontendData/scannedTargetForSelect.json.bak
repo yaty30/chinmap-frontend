@@ -6,32 +6,4 @@
         "date": ""
     }
 
-,
-{
-"id": "wJaXMnPKEVRlDGbRGSvnS",
-"target": "scanme.nmap.org",
-"runTime": "1.99 seconds",
-"date": "2021-03-12"
-}
-,
-{
-"id": "AkwrUGSYfLMzVAHTVfuCh",
-"target": "192.168.86.29",
-"runTime": "0.30 seconds",
-"date": "2021-03-18"
-}
-,
-{
-"id": "eAtxrxUIXSQAhXzIKizJY",
-"target": "192.168.86.29",
-"runTime": "0.30 seconds",
-"date": "2021-03-18"
-}
-,
-{
-"id": "SgkKDivNVPiOVErScVfGu",
-"target": "scanme.nmap.org",
-"runTime": "2.40 seconds",
-"date": "2021-03-18"
-}
 ]

@@ -9,6 +9,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+
+
+// Components
+import Content from './AdvancedModeContent'
 
 // Backend
 import { isScanning } from '../Backend/frontendData/isScanning'
@@ -26,25 +31,32 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+
 export default () => {
   const classes = useStyles()
+  const [open, setOpen] = useState(false)
 
   const handleClose = () => {
     advancedModeStatus.setOpen(false);
     advancedModeStatus.setIsClick(false);
+    setOpen(false)
+    setTerminal('')
   };
 
-  const [terminal, setTerminal] = useState('');
 
+  const [terminal, setTerminal] = useState('');
+  
   const CancelAlert = () => {
-    const [open, setOpen] = React.useState(false);
+    const [alertOpen, setAlertOpen] = React.useState(false);
 
     const handleClickOpen = () => {
-      setOpen(true);
+      setAlertOpen(true);
     };
 
     const handleClose = () => {
-      advancedModeStatus.setOpen(false);
+      setOpen(false);
+      setAlertOpen(false);
+      setTerminal('')
     };
 
     return (
@@ -53,24 +65,23 @@ export default () => {
           Cancel
         </Button>
         <Dialog
-          open={open}
+          open={alertOpen}
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+              Are you sure you want to leave this page?  You will lose all content in this mode.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Disagree
+            <Button onClick={() => setAlertOpen(false)} color="primary">
+              Cancel
             </Button>
             <Button onClick={handleClose} color="primary" autoFocus>
-              Agree
+              Yes, I'm sure
             </Button>
           </DialogActions>
         </Dialog>
@@ -95,95 +106,108 @@ export default () => {
           onClick={() => {
             advancedModeStatus.setOpen(true); 
             advancedModeStatus.setIsClick(true);
+            setOpen(true)
           }}
       >
           Advanced Mode
           
       </Button>
-      <form method='post' action="http://localhost:5000/runAPI">
-        <Dialog open={advancedModeStatus.dialogStatus} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth maxWidth='md' className={classes.root} id='advancedModeBody'>
-          <input type="text" readOnly name="advanced" value={advancedModeStatus.isClick === true ? 'true' : 'false'} style={{display: 'none'}} />
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth maxWidth='md' className={classes.root} id='advancedModeBody'>
           <DialogTitle id="form-dialog-title">Advanced Scan Mode</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Pure command-line mode for advanced Nmap user.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Command Line"
-              variant='outlined'
-              spellCheck={false}
-              value={terminal}
-              onChange={(evt) => setTerminal(evt.target.value as string)}
-              multiline
-              rows={20}
-              fullWidth
-            />
-          </DialogContent>
-          <DialogActions>
-            {terminal.length > 1 ? 
-              <CancelAlert /> 
-                :
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-            }
-            <div style={{position: 'relative', bottom: 2}}>
-              {isScanning.map((isScanning) => (
-                  isScanning === true ?
-                    <>
-                      <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
-                        <Typography 
-                          style={{
-                            display: "inline-block",
-                            position: "relative",
-                            top: 6,
-                            right: 5,
-                            color: "lightgrey",
-                            float: "right",
-                            cursor: "default",
-                            userSelect: "none",
-                            textTransform: "uppercase",
-                          }}
-                        >
-                          Scan
-                        </Typography>
-                      </Tooltip>
-                    </> 
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <DialogContent>
+              <DialogContentText>
+                Pure command-line mode for advanced Nmap user.
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Command Line"
+                variant='outlined'
+                spellCheck={false}
+                value={terminal}
+                onChange={(evt) => setTerminal(evt.target.value as string)}
+                multiline
+                rows={5}
+                fullWidth
+              />
+            </DialogContent>
+              <DialogActions>
+                {terminal.length > 0 ? 
+                  <CancelAlert /> 
                     :
-                    terminal === "" ?
-                    <>
-                      <Tooltip title="Please Enter the Target." arrow placement="top">
-                        <span 
-                          color="primary" 
-                          style={{
-                            float: "right",
-                          }}
-                          id="scanBtnDisabled"
-                        >
-                          Scan
-                        </span>
-                      </Tooltip>
-                    </>
-                      :
-                    <>
-                      <input 
-                        color="primary" 
-                        style={{
-                          float: "right",
-                        }}
-                        type="submit"
-                        value="Scan"
-                        id="scanBtn"
-                      />
-                    </> 
-              ))}
-            </div>
-          </DialogActions>
+                  <Button onClick={handleClose} color="primary">
+                    Cancel
+                  </Button>
+                }
+                <div style={{position: 'relative', bottom: 2}}>
+                  {isScanning.map((isScanning) => (
+                      isScanning === true ?
+                        <>
+                          <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
+                            <Typography 
+                              style={{
+                                display: "inline-block",
+                                position: "relative",
+                                top: 6,
+                                right: 5,
+                                color: "lightgrey",
+                                float: "right",
+                                cursor: "default",
+                                userSelect: "none",
+                                textTransform: "uppercase",
+                              }}
+                            >
+                              Scan
+                            </Typography>
+                          </Tooltip>
+                        </> 
+                        :
+                        terminal === "" ?
+                        <>
+                          <Tooltip title="Please Enter the Target." arrow placement="top">
+                            <span 
+                              color="primary" 
+                              style={{
+                                float: "right",
+                              }}
+                              id="scanBtnDisabled"
+                            >
+                              Scan
+                            </span>
+                          </Tooltip>
+                        </>
+                          :
+                        <>
+                          <form method='post' action="http://localhost:5000/runAdvancedAPI">
+                            <input type="text" readOnly name="command" value={terminal} style={{display: 'none'}} />
+                            <input 
+                              color="primary" 
+                              style={{
+                                float: "right",
+                              }}
+                              type="submit"
+                              value="Scan"
+                              id="scanBtn"
+                            />
+                          </form>
+                        </> 
+                  ))}
+                </div>
+              </DialogActions>
+            </Grid>
+            
+            <Grid item xs={12}>
+              <div style={{padding: '25px 25px'}}>
+                <Content />
+              </div>
+            </Grid>
+          </Grid>
+          
+
         </Dialog>
-      </form>
     </div>
   );
 }

@@ -1,30 +1,11 @@
-Command: sudo nmap 192.168.1.250 -T4 -F 
+Command: sudo nmap 192.168.1.1 -T4 -F 
 ======================================================
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-18 23:52 HKT
-Initiating ARP Ping Scan at 23:52
-Scanning 192.168.1.250 [1 port]
-Completed ARP Ping Scan at 23:52, 0.04s elapsed (1 total hosts)
-Initiating Parallel DNS resolution of 1 host. at 23:52
-Completed Parallel DNS resolution of 1 host. at 23:52, 0.00s elapsed
-Initiating SYN Stealth Scan at 23:52
-Scanning 192.168.1.250 [100 ports]
-Discovered open port 80/tcp on 192.168.1.250
-Discovered open port 53/tcp on 192.168.1.250
-Discovered open port 443/tcp on 192.168.1.250
-Discovered open port 49152/tcp on 192.168.1.250
-Completed SYN Stealth Scan at 23:52, 0.05s elapsed (100 total ports)
-Nmap scan report for 192.168.1.250
-Host is up, received arp-response (0.0074s latency).
-Scanned at 2021-03-18 23:52:48 HKT for 0s
-Not shown: 96 closed ports
-Reason: 96 resets
-PORT      STATE SERVICE REASON
-53/tcp    open  domain  syn-ack ttl 64
-80/tcp    open  http    syn-ack ttl 64
-443/tcp   open  https   syn-ack ttl 64
-49152/tcp open  unknown syn-ack ttl 64
-MAC Address: 02:0F:B5:E2:4A:18 (Unknown)
-
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-20 15:39 HKT
+Initiating Ping Scan at 15:39
+Scanning 192.168.1.1 [4 ports]
+Completed Ping Scan at 15:39, 2.03s elapsed (1 total hosts)
+Nmap scan report for 192.168.1.1 [host down, received no-response]
 Read data files from: /usr/local/bin/../share/nmap
-Nmap done: 1 IP address (1 host up) scanned in 0.27 seconds
-           Raw packets sent: 101 (4.428KB) | Rcvd: 101 (4.044KB)
+Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
+Nmap done: 1 IP address (0 hosts up) scanned in 2.20 seconds
+           Raw packets sent: 8 (304B) | Rcvd: 0 (0B)
