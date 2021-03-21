@@ -2,7 +2,7 @@
 import os
 import sys
 import subprocess
-from pyfiglet import Figlet
+# from pyfiglet import Figlet
 import re
 import random
 import string
@@ -765,11 +765,11 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
 @app.route('/runAPI', methods=['POST', 'GET'])
 def startApp():
-   cText = Figlet(font='slant')
-   os.system('clear')
-   os.system('mode con: cols=75 lines=30')
+#    cText = Figlet(font='slant')
+#    os.system('clear')
+#    os.system('mode con: cols=75 lines=30')
 
-   print(cText.renderText('ChiNmap API'))
+#    print(cText.renderText('ChiNmap API'))
 
    if request.method == 'POST':
         target = request.form['target']
@@ -845,11 +845,11 @@ def RunAdvancedMode(command):
 
 @app.route('/runAdvancedAPI', methods=['POST', 'GET'])
 def AdvancedMode():
-   cText = Figlet(font='slant')
-   os.system('clear')
-   os.system('mode con: cols=75 lines=30')
+    #cText = Figlet(font='slant')
+    #os.system('clear')
+    #os.system('mode con: cols=75 lines=30')
 
-   print(cText.renderText('ChiNmap API => ADVANCED'))
+    #print(cText.renderText('ChiNmap API => ADVANCED'))
    
    if request.method == 'POST':
         command = request.form['command']
