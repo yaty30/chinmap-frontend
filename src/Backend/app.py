@@ -817,11 +817,12 @@ def startApp():
                 avoidPingBlocking=avoidPingBlocking, 
             ))
 
-@app.route('/RunAdvancedMode/<command>')
-def RunAdvancedMode(command):
+@app.route('/RunAdvancedMode/<command>/<target>')
+def RunAdvancedMode(command, target):
+    
     StartScan()
 
-    scan = os.popen(command)
+    scan = os.popen('nmap ' + command)
     scanOutput = scan.read()
 
     scanID = ScanID() + 'advmd'
@@ -831,7 +832,7 @@ def RunAdvancedMode(command):
             print(line.replace("]", ""), end="")
     advancedScanOutput = open("advancedScan.tsx", "a")
 
-    advancedScanOutput.writelines("\n{\nscanID: '" + str(scanID) + "',\noutput: `" + scanOutput + "`, ")
+    advancedScanOutput.writelines("\n{\nscanID: '" + str(scanID) + "',\ntarget: '" + str(target) + "',\noutput: `" + scanOutput + "`, ")
     advancedScanOutput.writelines("\n},\n")
 
     advancedScanOutput.writelines("\n]")
@@ -853,6 +854,7 @@ def AdvancedMode():
    
    if request.method == 'POST':
         command = request.form['command']
+        target = request.form['target']
 
         if len(command) < 1:
             return False
@@ -860,15 +862,18 @@ def AdvancedMode():
             return redirect(url_for(
                 'RunAdvancedMode', 
                 command=command, 
+                target=target
             ))
    else:
         command = request.args.get('command')
+        target = request.args.get('target')
         if len(command) < 1:
             return False
         else:
             return redirect(url_for(
                 'RunAdvancedMode', 
                 command=command, 
+                target=target
             ))
 
 

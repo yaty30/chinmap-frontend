@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 // Components
 import Content from './AdvancedModeContent'
@@ -126,6 +126,9 @@ export default () => {
                 id="name"
                 label="Command Line"
                 variant='outlined'
+                InputProps={{
+                  startAdornment: <InputAdornment position="start" style={{position: 'relative', bottom: 38,}}> nmap </InputAdornment>,
+                }}
                 spellCheck={false}
                 value={terminal}
                 onChange={(evt) => setTerminal(evt.target.value as string)}
@@ -183,6 +186,7 @@ export default () => {
                         <>
                           <form method='post' action="http://localhost:5000/runAdvancedAPI">
                             <input type="text" readOnly name="command" value={terminal} style={{display: 'none'}} />
+                            <input type='text' readOnly name='target' value={String(terminal.match(/[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+/))} style={{display: 'none'}} />
                             <input 
                               color="primary" 
                               style={{
