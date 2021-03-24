@@ -346,12 +346,22 @@ export default observer (() => {
           </div>
 
             <Paper className={classes.paper} style={{minHeight: 0,}}>
-              <Button 
-                color="primary"
-                onClick={handleReset}
-              >
-                Reset
-              </Button>
+              {isScanning.map((isScanning) =>
+                isScanning === true ?
+                    <Button 
+                      color="primary"
+                      onClick={handleReset}
+                    >
+                      Scan Abort
+                    </Button>
+                      :
+                    <Button 
+                      color="primary"
+                      onClick={handleReset}
+                    >
+                      Reset
+                    </Button>
+              )}
               {isScanning.map((isScanning) => (
                 isScanning === true ?
                   <>

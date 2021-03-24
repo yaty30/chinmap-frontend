@@ -11,12 +11,78 @@ output: `Command: sudo nmap 192.168.1.1 -T4 -F
 ======================================================
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-20 15:39 HKT
 Initiating Ping Scan at 15:39
-Scanning 192.168.1.1 [4 ports]
+Scanning 192.168.1.1 [4 ports
 Completed Ping Scan at 15:39, 2.03s elapsed (1 total hosts)
-Nmap scan report for 192.168.1.1 [host down, received no-response]
+Nmap scan report for 192.168.1.1 [host down, received no-response
 Read data files from: /usr/local/bin/../share/nmap
 Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
 Nmap done: 1 IP address (0 hosts up) scanned in 2.20 seconds
            Raw packets sent: 8 (304B) | Rcvd: 0 (0B)
+`,},
+
+{
+id: 'TRlLFNZjQSbADHLFFstzv',
+output: `Command: sudo nmap scanme.nmap.org -T4 -F 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-23 22:13 HKT
+Initiating Ping Scan at 22:13
+Scanning scanme.nmap.org (45.33.32.156) [4 ports
+Completed Ping Scan at 22:13, 0.16s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 22:13
+Completed Parallel DNS resolution of 1 host. at 22:13, 0.02s elapsed
+Initiating SYN Stealth Scan at 22:13
+Scanning scanme.nmap.org (45.33.32.156) [100 ports
+Discovered open port 80/tcp on 45.33.32.156
+Discovered open port 22/tcp on 45.33.32.156
+Completed SYN Stealth Scan at 22:13, 1.61s elapsed (100 total ports)
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up, received reset ttl 51 (0.17s latency).
+Scanned at 2021-03-23 22:13:46 HKT for 2s
+Not shown: 94 closed ports
+Reason: 94 resets
+PORT    STATE    SERVICE      REASON
+22/tcp  open     ssh          syn-ack ttl 50
+25/tcp  filtered smtp         no-response
+80/tcp  open     http         syn-ack ttl 51
+135/tcp filtered msrpc        no-response
+139/tcp filtered netbios-ssn  no-response
+445/tcp filtered microsoft-ds no-response
+
+Read data files from: /usr/local/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 1.95 seconds
+           Raw packets sent: 108 (4.728KB) | Rcvd: 97 (3.888KB)
+`,},
+
+{
+id: 'fEwEerhfWueUCNXAyGGqE',
+output: `Command: sudo nmap scanme.nmap.org -T4 -F 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-23 22:16 HKT
+Initiating Ping Scan at 22:16
+Scanning scanme.nmap.org (45.33.32.156) [4 ports]
+Completed Ping Scan at 22:16, 0.37s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 22:16
+Completed Parallel DNS resolution of 1 host. at 22:17, 0.41s elapsed
+Initiating SYN Stealth Scan at 22:17
+Scanning scanme.nmap.org (45.33.32.156) [100 ports]
+Discovered open port 22/tcp on 45.33.32.156
+Discovered open port 80/tcp on 45.33.32.156
+Completed SYN Stealth Scan at 22:17, 2.97s elapsed (100 total ports)
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up, received echo-reply ttl 51 (0.17s latency).
+Scanned at 2021-03-23 22:16:59 HKT for 4s
+Not shown: 94 closed ports
+Reason: 94 resets
+PORT    STATE    SERVICE      REASON
+22/tcp  open     ssh          syn-ack ttl 51
+25/tcp  filtered smtp         no-response
+80/tcp  open     http         syn-ack ttl 51
+135/tcp filtered msrpc        no-response
+139/tcp filtered netbios-ssn  no-response
+445/tcp filtered microsoft-ds no-response
+
+Read data files from: /usr/local/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 3.93 seconds
+           Raw packets sent: 113 (4.948KB) | Rcvd: 98 (3.916KB)
 `,},
 ]

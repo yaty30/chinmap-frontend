@@ -819,7 +819,6 @@ def startApp():
 
 @app.route('/RunAdvancedMode/<command>/<target>')
 def RunAdvancedMode(command, target):
-    
     StartScan()
 
     scan = os.popen('nmap ' + command)
@@ -846,12 +845,6 @@ def RunAdvancedMode(command, target):
 
 @app.route('/runAdvancedAPI', methods=['POST', 'GET'])
 def AdvancedMode():
-    #cText = Figlet(font='slant')
-    #os.system('clear')
-    #os.system('mode con: cols=75 lines=30')
-
-    #print(cText.renderText('ChiNmap API => ADVANCED'))
-   
    if request.method == 'POST':
         command = request.form['command']
         target = request.form['target']

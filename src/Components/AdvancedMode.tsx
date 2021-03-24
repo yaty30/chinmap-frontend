@@ -45,7 +45,35 @@ export default () => {
 
 
   const [terminal, setTerminal] = useState('');
-  
+  const TargetValidator = () => {
+    var dm:string = String(terminal.match(/[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+/));
+    var ip:string = String(terminal.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/));
+    var subnet:string = String(terminal.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.0\/\d+$/));
+    var subnetReplaced: string = String(subnet.replace('/', '%slash%'))
+
+    var target:string = '';
+
+    if(dm != 'null'){
+      target = dm
+    } else if(ip != 'null'){
+      target = ip
+    } else if(subnetReplaced != 'null') {
+      target = "'" + subnetReplaced + "'"
+    } else { target = ' '}
+
+    console.log(target)
+      
+    return(
+      <input 
+        type='text'  
+        readOnly 
+        name='target' 
+        value={target} 
+        style={{display: ''}}
+      />
+    );
+  }
+
   const CancelAlert = () => {
     const [alertOpen, setAlertOpen] = React.useState(false);
 
@@ -186,7 +214,7 @@ export default () => {
                         <>
                           <form method='post' action="http://localhost:5000/runAdvancedAPI">
                             <input type="text" readOnly name="command" value={terminal} style={{display: 'none'}} />
-                            <input type='text' readOnly name='target' value={String(terminal.match(/[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+/))} style={{display: 'none'}} />
+                            <TargetValidator />
                             <input 
                               color="primary" 
                               style={{
