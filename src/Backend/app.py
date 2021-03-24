@@ -224,8 +224,8 @@ def GetScanDetails(command, result, scanID, target, scanMode, whois, automation,
     return ',{\n"id": "' + str(scanID) + '",\n'  + '"cm": "' + cm + '",\n'  + '"target": "' + str(target) + '",\n'  + '"targetForSelect": "' + str(targetForSelect) + '",\n'  + '"date": "' + str(foundDate) + '",\n'  + '"time": "' + foundTime + " HKT" + '",\n'  + '"upHost": "' + str(foundHostUp) + '",\n'  + '"runTime": "' + str(foundRunTime) + '",\n'  + '"latency": "' + str(foundLatency) + '",\n'  + '"notShown": "' + str(foundNotShown) + '",\n'  + '"os": "' + str(foundOS) + '",\n' + '"aggrOS": "' + str(foundAggrOS) + '",\n'  + '"uptime": "' + str(foundUptime) + '",\n'  + '"deviceType": "' + str(foundDeviceType) + '",\n'  + '"rawPacket": "' + str(foundRawPacket) + '",\n'  + '"rcvd": "' + str(foundRcvd) + '",\n'  + '"scanMode": "' + str(foundScanMode).title() + '",\n'  + '"hop": "' + str(foundHop) + '",\n'  + '"macAddr": "' + str(foundMacAddr) + '",\n' + '"difficulty": "' + str(foundDifficulty) + '",\n' + '"auto": "' + foundAutomation + '",\n' + '"cveDetect": "' + foundCveDetection + '",\n' + '"setRange": "' + foundSetRange + '",\n' + '"flags": "' + foundSetFlags + '",\n' + '"nmapVer": "' + foundNmapVer + '",\n' + '"whois": "'+  foundWhoIS + '",\n"pbb": "' + foundPBB + '" \n}}'
 
 def Traceroute(scanID, target):
-    # sudo nmap --traceroute --script traceroute-geo <= Enhanced version of traceroute, TBC
-    traceroute = os.popen('sudo nmap -sn --traceroute ' + target)
+    # nmap --traceroute --script traceroute-geo <= Enhanced version of traceroute, TBC
+    traceroute = os.popen('nmap -sn --traceroute ' + target)
     tracerouteScanOutput = traceroute.read()
 
     targetTraceroute = re.compile(r'(?P<rtt>\d+\.\d+ ms) (.*)')
@@ -637,7 +637,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     if platform.system() == 'Windows':
         command = 'nmap ' + target
     elif platform.system() == 'Darwin':
-        command = 'sudo nmap ' + target
+        command = 'nmap ' + target
 
     ######### Default Scan Modes #########
     if scanMode == 'Ping Scan Mode':
@@ -669,14 +669,14 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
         whoisCommand = 'nmap --script whois-ip --script-args whois.whodb=nofile ' + target
         firewalkCommand = 'nmap --script=firewalk --traceroute --script-args=firewalk.max-retries=1 ' + target
     else:
-        cveCommand = 'sudo nmap -sS -sV --script=vulscan/vulscan.nse ' + target
-        whoisCommand = 'sudo nmap --script whois-ip --script-args whois.whodb=nofile ' + target
-        firewalkCommand = 'sudo nmap --script=firewalk --traceroute --script-args=firewalk.max-retries=1 ' + target
+        cveCommand = 'nmap -sS -sV --script=vulscan/vulscan.nse ' + target
+        whoisCommand = 'nmap --script whois-ip --script-args whois.whodb=nofile ' + target
+        firewalkCommand = 'nmap --script=firewalk --traceroute --script-args=firewalk.max-retries=1 ' + target
 
     hostmapCommand = "nmap --script hostmap-crtsh --script-args 'hostmap-crtsh.prefix=hostmap-' " + target
     #  http-sitemap-generator.nse => nmap --script http-sitemap-generator -p 80 scanme.nmap.org TBC
 
-    command = 'sudo nmap ' + target
+    command = 'nmap ' + target
     # Determin if scan with mode or not
     if scanMode != '':
         command = command + mode
@@ -871,7 +871,7 @@ def AdvancedMode():
 
 
 if __name__ == "__main__":
-    app.debug = True
+    app.debug = False
     app.run() 
 
 # ============================================================================================ #
