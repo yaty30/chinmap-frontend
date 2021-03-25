@@ -332,7 +332,7 @@ export default observer (() => {
           
           {/* Scan data temporary storing */}
     
-          <div style={{position: 'fixed', width: 865, bottom: 10}}>
+          <div style={{position: 'fixed', width: 865, bottom: 5}}>
           <div style={{display: "none"}}>
             <input type="text" readOnly name="nm" value={homeSettingsStatus.rangeTarget === '' ? targetVal : homeSettingsStatus.rangeTarget} />
             <input type="text" readOnly name="auto" value={homeSettingsStatus.automation === true ? "true" : "false"} />
@@ -347,22 +347,20 @@ export default observer (() => {
 
             <Paper className={classes.paper} style={{minHeight: 0,}}>
               {isScanning.map((isScanning) =>
-                isScanning === true ?
-                    <Button 
-                      color="primary"
-                      onClick={handleReset}
-                    >
-                      Scan Abort
-                    </Button>
-                      :
-                    <Button 
-                      color="primary"
-                      onClick={handleReset}
-                    >
-                      Reset
-                    </Button>
-              )}
-              {isScanning.map((isScanning) => (
+                  isScanning === true ?
+                  <form method='post' action="http://localhost:5000/scanAbort">
+                    <input type='text' readOnly value='true' name='abort' style={{display: 'none'}}/>
+                    <input type='submit' value='Scan Abort' id="scanBtn" />
+                  </form>
+                        :
+                      <Button 
+                        color="primary"
+                        onClick={handleReset}
+                      >
+                        Reset
+                      </Button>
+                )}
+               {isScanning.map((isScanning) => (
                 isScanning === true ?
                   <>
                     <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
@@ -370,7 +368,7 @@ export default observer (() => {
                         style={{
                           display: "inline-block",
                           position: "relative",
-                          top: 6,
+                          bottom: 25,
                           right: 5,
                           color: "lightgrey",
                           float: "right",
@@ -423,13 +421,13 @@ export default observer (() => {
                       id="scanBtn"
                     />
                   </> 
-              ))}
+                ))}
             </Paper>
               {isScanning.map((isScanning) => (
                   isScanning === true ?
                     <>
                       <Tooltip title="Previous scan is progressing, please wait..." arrow placement="top">
-                        <LinearProgress style={{height: 5, position:"relative",bottom:4}}/>
+                        <LinearProgress style={{height: 5, position:"relative",bottom:10, width: '100%'}}/>
                       </Tooltip>
                     </>
                       :

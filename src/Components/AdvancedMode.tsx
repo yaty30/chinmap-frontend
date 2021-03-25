@@ -43,13 +43,34 @@ export default () => {
     setTerminal('')
   };
 
-
   const [terminal, setTerminal] = useState('');
+  const CommandValidator = () => {
+    var command: string = ''
+    var subnet:string = String(terminal.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.0\/\d+$/));
+    var subnetReplaced: string = String(subnet.replace('/', 'sn\='))
+
+    if(subnetReplaced != 'null'){
+      command = subnetReplaced
+    } else {
+      command = terminal
+    }
+
+    return(
+      <input 
+        type='text'  
+        readOnly 
+        name='command' 
+        value={command} 
+        style={{display: ''}}
+      />
+    );
+  }
+
   const TargetValidator = () => {
     var dm:string = String(terminal.match(/[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+/));
     var ip:string = String(terminal.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/));
     var subnet:string = String(terminal.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.0\/\d+$/));
-    var subnetReplaced: string = String(subnet.replace('/', '%slash%'))
+    var subnetReplaced: string = String(subnet.replace('/', 'sn\='))
 
     var target:string = '';
 
@@ -58,7 +79,7 @@ export default () => {
     } else if(ip != 'null'){
       target = ip
     } else if(subnetReplaced != 'null') {
-      target = "'" + subnetReplaced + "'"
+      target = subnetReplaced
     } else { target = ' '}
 
     console.log(target)
@@ -159,7 +180,7 @@ export default () => {
                 }}
                 spellCheck={false}
                 value={terminal}
-                onChange={(evt) => setTerminal(evt.target.value as string)}
+                onChange={(evt) => {setTerminal(evt.target.value as string); }}
                 multiline
                 rows={5}
                 fullWidth
@@ -213,7 +234,7 @@ export default () => {
                           :
                         <>
                           <form method='post' action="http://localhost:5000/runAdvancedAPI">
-                            <input type="text" readOnly name="command" value={terminal} style={{display: 'none'}} />
+                            <CommandValidator />
                             <TargetValidator />
                             <input 
                               color="primary" 

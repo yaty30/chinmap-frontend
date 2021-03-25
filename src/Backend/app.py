@@ -765,11 +765,6 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
 
 @app.route('/runAPI', methods=['POST', 'GET'])
 def startApp():
-#    cText = Figlet(font='slant')
-#    os.system('clear')
-#    os.system('mode con: cols=75 lines=30')
-
-#    print(cText.renderText('ChiNmap API'))
 
    if request.method == 'POST':
         target = request.form['target']
@@ -821,6 +816,8 @@ def startApp():
 def RunAdvancedMode(command, target):
     StartScan()
 
+    command = re.sub("sn=", "/", str(command))
+    target = re.sub("sn=", "/", str(target))
     scan = os.popen('nmap ' + command)
     scanOutput = scan.read()
 
@@ -869,6 +866,40 @@ def AdvancedMode():
                 target=target
             ))
 
+@app.route('/RunAbort/<abort>')
+def RunAbort(abort):
+    scanDetailsTxt = open("isScanning.tsx", "w+")
+    scanDetailsTxt.writelines(
+        'export const isScanning = [false]'
+    )
+    scanDetailsTxt.close()
+
+    os.popen('echo kill')
+
+    return redirect("http://localhost:3001/", code=302)
+
+@app.route('/scanAbort', methods=['POST', 'GET'])
+def ScanAbort():
+    if request.method == 'POST':
+        abort = request.form['abort']
+
+        if abort == False:
+            return False
+        else:
+            return redirect(url_for(
+                'RunAbort', 
+                abort=abort
+            ))
+    else:
+        abort = request.args.get('abort')
+        if abort == False:
+            return False
+        else:
+            return redirect(url_for(
+                'RunAbort', 
+                abort=abort
+            ))
+    
 
 if __name__ == "__main__":
     app.debug = True
