@@ -40,4 +40,17 @@ createData('scanme.nmap.org', '199.28 seconds', 'qvuwXNuNfoUEJMMaWCxKh','1434', 
 createData('scanme.nmap.org', '199.28 seconds', 'qvuwXNuNfoUEJMMaWCxKh','9929', 'tcp', 'open', 'nping-echo', 'syn-ack'),
 createData('scanme.nmap.org', '199.28 seconds', 'qvuwXNuNfoUEJMMaWCxKh','31337', 'tcp', 'open', 'Elite', 'syn-ack'),
 // ===================== END of scanme.nmap.org =================================
+
+// ===================== Target: 192.168.1.1 ================================
+// ===================== END of 192.168.1.1 =================================
+
+// ===================== Target: 192.168.2.46 ================================
+// ===================== END of 192.168.2.46 =================================
+
+// ===================== Target: 192.168.2.46 ================================
+createData('192.168.2.46', '0.20 seconds', 'jAfZXdOISgCktQbOElhHU','135', 'tcp', 'open', 'msrpc', 'syn-ack'),
+createData('192.168.2.46', '0.20 seconds', 'jAfZXdOISgCktQbOElhHU','139', 'tcp', 'open', 'netbios-ssn', 'syn-ack'),
+createData('192.168.2.46', '0.20 seconds', 'jAfZXdOISgCktQbOElhHU','445', 'tcp', 'open', 'microsoft-ds', 'syn-ack'),
+createData('192.168.2.46', '0.20 seconds', 'jAfZXdOISgCktQbOElhHU','3000', 'tcp', 'open', 'ppp', 'syn-ack'),
+// ===================== END of 192.168.2.46 =================================
 ]

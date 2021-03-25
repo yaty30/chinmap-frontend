@@ -94,7 +94,7 @@ Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-24 01:24 HKT
 Initiating Parallel DNS resolution of 1 host. at 01:24
 Completed Parallel DNS resolution of 1 host. at 01:24, 0.29s elapsed
 Initiating SYN Stealth Scan at 01:24
-Scanning scanme.nmap.org (45.33.32.156) [65535 ports]
+Scanning scanme.nmap.org (45.33.32.156) [65535 ports
 Discovered open port 22/tcp on 45.33.32.156
 Discovered open port 80/tcp on 45.33.32.156
 Discovered open port 31337/tcp on 45.33.32.156
@@ -125,5 +125,47 @@ PORT      STATE    SERVICE      REASON
 Read data files from: /usr/local/bin/../share/nmap
 Nmap done: 1 IP address (1 host up) scanned in 199.28 seconds
            Raw packets sent: 65629 (2.888MB) | Rcvd: 65559 (2.622MB)
+`,},
+
+{
+id: 'akSiJJDXHDHdkbRzOFyMP',
+output: `Command: sudo nmap 192.168.1.1 -T4 -F 
+======================================================
+`,},
+
+{
+id: 'yooLDCfpCVWUfwtXoQGfs',
+output: `Command: sudo nmap 192.168.2.46 -T4 -F 
+======================================================
+`,},
+
+{
+id: 'jAfZXdOISgCktQbOElhHU',
+output: `Command: nmap 192.168.2.46 -T4 -F 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-24 23:27 ¢Dx¢D_?D¡PCRE?!
+Initiating Parallel DNS resolution of 1 host. at 23:27
+Completed Parallel DNS resolution of 1 host. at 23:27, 0.00s elapsed
+Initiating SYN Stealth Scan at 23:27
+Scanning DESKTOP-D8E1SIS (192.168.2.46) [100 ports]
+Discovered open port 445/tcp on 192.168.2.46
+Discovered open port 139/tcp on 192.168.2.46
+Discovered open port 135/tcp on 192.168.2.46
+Discovered open port 3000/tcp on 192.168.2.46
+Completed SYN Stealth Scan at 23:27, 0.01s elapsed (100 total ports)
+Nmap scan report for DESKTOP-D8E1SIS (192.168.2.46)
+Host is up, received localhost-response (0.00093s latency).
+Scanned at 2021-03-24 23:27:27 ¢Dx¢D_?D¡PCRE?! for 0s
+Not shown: 96 closed ports
+Reason: 96 resets
+PORT     STATE SERVICE      REASON
+135/tcp  open  msrpc        syn-ack ttl 128
+139/tcp  open  netbios-ssn  syn-ack ttl 128
+445/tcp  open  microsoft-ds syn-ack ttl 128
+3000/tcp open  ppp          syn-ack ttl 128
+
+Read data files from: C:\Program Files (x86)\Nmap
+Nmap done: 1 IP address (1 host up) scanned in 0.20 seconds
+           Raw packets sent: 100 (4.400KB) | Rcvd: 204 (8.576KB)
 `,},
 ]
