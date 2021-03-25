@@ -1,1 +1,1 @@
-export const isScanning = [false]
+export const isScanning = [true]

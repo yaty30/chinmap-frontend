@@ -5,4 +5,7 @@ function createData(scanId: string, hop: string, host: string, protocol: string,
 export const rows = [
     createData('','','','',''),
 
+
+// ===================== Target: scanme.nmap.org ================================
+// ===================== END of scanme.nmap.org =================================
 ].sort((a, b) => (a.hop < b.hop ? -1 : 1));
