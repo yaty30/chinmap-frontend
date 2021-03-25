@@ -15,34 +15,4 @@ export const whoisScanOutput = [
         orgtechname: '',
         orgtechemail: '',
     },
-
-{
-scanId: 'AKzWlggrLgUUrjEfnERVC', name: 'nmap.org', creationDate: '1999-01-18 05:00:00', expirationDate: '2028-01-18 05:00:00', lastUpdated: 'None', registrar: 'Sea Wasp, LLC', netrange: '45.33.0.0 - 45.33.127.255', netname: 'LINODE-US', orgname: 'Linode', orgid: 'LINOD', country: 'country: US', stateprov: 'stateprov: PA', orgtechname: 'Linode Network Operations', orgtechemail: 'support@linode.com', 
-},
-
-
-{
-scanId: 'lBsZUineakKTlIsSNmaHw', name: 'nmap.org', creationDate: '1999-01-18 05:00:00', expirationDate: '2028-01-18 05:00:00', lastUpdated: 'None', registrar: 'Sea Wasp, LLC', netrange: '45.33.0.0 - 45.33.127.255', netname: 'LINODE-US', orgname: 'Linode', orgid: 'LINOD', country: 'country: US', stateprov: 'stateprov: PA', orgtechname: 'Linode Network Operations', orgtechemail: 'support@linode.com', 
-},
-
-
-{
-scanId: 'BZjCFdrDonidqoXekmPrm', name: 'nmap.org', creationDate: '1999-01-18 05:00:00', expirationDate: '2028-01-18 05:00:00', lastUpdated: 'None', registrar: 'Sea Wasp, LLC', netrange: '45.33.0.0 - 45.33.127.255', netname: 'LINODE-US', orgname: 'Linode', orgid: 'LINOD', country: 'country: US', stateprov: 'stateprov: PA', orgtechname: 'Linode Network Operations', orgtechemail: 'support@linode.com', 
-},
-
-
-{
-scanId: 'TRlLFNZjQSbADHLFFstzv', name: 'nmap.org', creationDate: '1999-01-18 05:00:00', expirationDate: '2028-01-18 05:00:00', lastUpdated: 'None', registrar: 'Sea Wasp, LLC', netrange: '45.33.0.0 - 45.33.127.255', netname: 'LINODE-US', orgname: 'Linode', orgid: 'LINOD', country: 'country: US', stateprov: 'stateprov: PA', orgtechname: 'Linode Network Operations', orgtechemail: 'support@linode.com', 
-},
-
-
-{
-scanId: 'fEwEerhfWueUCNXAyGGqE', name: 'nmap.org', creationDate: '1999-01-18 05:00:00', expirationDate: '2028-01-18 05:00:00', lastUpdated: 'None', registrar: 'Sea Wasp, LLC', netrange: '45.33.0.0 - 45.33.127.255', netname: 'LINODE-US', orgname: 'Linode', orgid: 'LINOD', country: 'country: US', stateprov: 'stateprov: PA', orgtechname: 'Linode Network Operations', orgtechemail: 'support@linode.com', 
-},
-
-
-{
-scanId: 'qvuwXNuNfoUEJMMaWCxKh', name: 'nmap.org', creationDate: '1999-01-18 05:00:00', expirationDate: '2028-01-18 05:00:00', lastUpdated: 'None', registrar: 'Sea Wasp, LLC', netrange: '45.33.0.0 - 45.33.127.255', netname: 'LINODE-US', orgname: 'Linode', orgid: 'LINOD', country: 'country: US', stateprov: 'stateprov: PA', orgtechname: 'Linode Network Operations', orgtechemail: 'support@linode.com', 
-},
-
 ]

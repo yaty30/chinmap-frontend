@@ -121,11 +121,12 @@ export default observer (() => {
 
   const [target, setTarget] = useState("");
   const handleScanTarget = (event: React.ChangeEvent<{ value: unknown }>) => {
+    console.log(homeSettingsStatus.target)
     homeSettingsStatus.setTarget(event.target.value as string)
     homeSettingsStatus.target.length < 1 || scanMode == "" ? setIsEmpty(true) : setIsEmpty(false);
     homeSettingsStatus.setRange('');
     homeSettingsStatus.setRangeTarget('');
-    setTargetVal(event.target.value as string)
+    setTargetVal(event.target.value as string) 
   }
 
   const [reset, setReset] = useState(false);

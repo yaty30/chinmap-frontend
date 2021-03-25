@@ -78,7 +78,7 @@ export default () => {
                                       id="outlined-basic" 
                                       label="Current Target" 
                                       variant="outlined" 
-                                      value={obj.targetForSelect}
+                                      value={obj.targetForSelect.replace('sn\=', '\/')}
                                       inputProps={{
                                           readOnly: true,
                                       }}

@@ -48,7 +48,7 @@ export default function PinnedSubheaderList() {
                   <ul className={classes.ul}>
                     {output.scanID === '' ? null :
                       <ListItem key={index} button selected={index === selectedResult ? true : false}>
-                        <ListItemText primary={output.target} onClick={() => setSelectedResult(index)} />
+                        <ListItemText primary={output.target.replace('sn\=', '\/')} onClick={() => setSelectedResult(index)} />
                       </ListItem>
                     }
                   </ul>

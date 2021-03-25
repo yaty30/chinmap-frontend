@@ -192,7 +192,7 @@ export default observer (() => {
                                     key={target.id}
                                     value={target.id}
                                   >
-                                    {target.target} - {target.runTime}
+                                    {target.target.replace('sn\=', '\/')} - {target.runTime}
                                   </MenuItem>
                               ))}
                             </Select>

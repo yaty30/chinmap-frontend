@@ -118,7 +118,7 @@ export default () => {
                             style={{
                               width: "85%",
                             }}
-                            value={data.target}
+                            value={data.target.replace('sn\=', '\/')}
                             inputProps={{
                                 readOnly: true,
                             }}

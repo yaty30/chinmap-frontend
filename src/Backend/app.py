@@ -634,9 +634,11 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     # scanID = ''.join(random.choice(letters) for i in range(21))
     scanID = ScanID()
 
-    if platform.system() == 'Windows':
-        command = 'nmap ' + target
-    elif platform.system() == 'Darwin':
+    target = re.sub("sn=", "/", target)
+
+    if platform.system() == 'Darwin':
+        command = 'sudo nmap ' + target
+    elif platform.system() == 'Windows':
         command = 'nmap ' + target
 
     ######### Default Scan Modes #########

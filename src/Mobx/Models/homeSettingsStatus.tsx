@@ -16,7 +16,16 @@ const homeSettings = types
     })
     .actions(self => ({
         setTarget(target: string) {
-            self.target = target
+            var nTarget: string = ''
+            var subnet:string = String(target.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.0\/\d+$/));
+            var subnetReplaced: string = String(subnet.replace('/', 'sn\='))
+
+            if(subnetReplaced != 'null'){
+                nTarget = subnetReplaced
+            } else {
+                nTarget = target
+            }
+            self.target = nTarget
         },
         setRange(range: string) {
             self.range = range
