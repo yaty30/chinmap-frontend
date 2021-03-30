@@ -6,7 +6,6 @@ import subprocess
 import re
 import random
 import string
-import tempfile
 import fileinput
 from flask import Flask, redirect, url_for, request
 from flask import render_template
