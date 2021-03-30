@@ -5,10 +5,13 @@ function createData(scanId: string, hop: string, host: string, protocol: string,
 export const rows = [
     createData('','','','',''),
 
+<<<<<<< HEAD
 
 // ===================== Target: neopets.com ================================
 // ===================== END of neopets.com =================================
 
 // ===================== Target: scanme.nmap.org ================================
 // ===================== END of scanme.nmap.org =================================
+=======
+>>>>>>> 7448ad96e07759606c11b4537ee724d179b53376
 ].sort((a, b) => (a.hop < b.hop ? -1 : 1));

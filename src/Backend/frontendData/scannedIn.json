@@ -175,6 +175,7 @@
 "pbb": "false" 
 }
 ,{
+<<<<<<< HEAD
 "id": "kCCNTSfyNbTtiqPfuOHre",
 "cm": "nmapneopets.com; with scan mode: Top 100 Ports Scan Mode",
 "target": "neopets.com",
@@ -307,6 +308,24 @@
 "deviceType": "",
 "rawPacket": "",
 "rcvd": "",
+=======
+"id": "VTzPKyfshdhjkPnuaIOBC",
+"cm": "nmap192.168.86.35; with scan mode: Top 100 Ports Scan Mode",
+"target": "192.168.86.35",
+"targetForSelect": "192.168.86.35",
+"date": "2021-03-26",
+"time": "03:30 HKT",
+"upHost": "1 host up",
+"runTime": "2.08 seconds",
+"latency": "0.0023s ",
+"notShown": "94 closed ports",
+"os": "Microsoft Windows 10 1809 - 1909",
+"aggrOS": "Microsoft Windows 10 1809 - 1909 (99%),  Microsoft Windows 10 1709 - 1803 (95%),  Microsoft Windows 10 1607 (93%),  Microsoft Windows 10 1703 (93%),  Microsoft Windows 10 1709 - 1909 (93%),  Microsoft Windows 7 SP1 (92%),  Microsoft Windows Longhorn (92%),  Microsoft Windows 10 1511 (91%),  Microsoft Windows 7 or 8.1 R1 (91%),  Microsoft Windows 10 (91%)",
+"uptime": "",
+"deviceType": "",
+"rawPacket": "100 (4.400KB)",
+"rcvd": "206 (8.664KB)",
+>>>>>>> 7448ad96e07759606c11b4537ee724d179b53376
 "scanMode": "Top 100 Ports Scan Mode",
 "hop": "",
 "macAddr": "",
@@ -315,11 +334,16 @@
 "cveDetect": "false",
 "setRange": "Target have no range",
 "flags": "",
+<<<<<<< HEAD
 "nmapVer": "",
+=======
+"nmapVer": "7.91",
+>>>>>>> 7448ad96e07759606c11b4537ee724d179b53376
 "whois": "false",
 "pbb": "false" 
 }
 ,{
+<<<<<<< HEAD
 "id": "IYpUQDqeAQHPaonnEselp",
 "cm": "nmapscanme.nmap.org; with scan mode: Top 100 Ports Scan Mode",
 "target": "scanme.nmap.org",
@@ -336,6 +360,24 @@
 "deviceType": "",
 "rawPacket": "",
 "rcvd": "",
+=======
+"id": "SfqDTehOLKhStOtHZrnLX",
+"cm": "nmapscanme.nmap.org; with scan mode: Top 100 Ports Scan Mode",
+"target": "scanme.nmap.org",
+"targetForSelect": "scanme.nmap.org",
+"date": "2021-03-26",
+"time": "03:39 HKT",
+"upHost": "1 host up",
+"runTime": "5.16 seconds",
+"latency": "0.17s ",
+"notShown": "94 closed ports",
+"os": "Linux 5.0 - 5.4",
+"aggrOS": "Linux 5.4 (99%),  Linux 5.0 - 5.4 (99%),  Linux 4.15 - 5.6 (97%),  Linux 5.0 - 5.3 (96%),  Linux 2.6.32 - 3.13 (96%),  Linux 5.1 (95%),  Linux 2.6.22 - 2.6.36 (95%),  Linux 3.10 - 4.11 (95%),  Linux 5.0 (94%),  Linux 2.6.32 (94%)",
+"uptime": "",
+"deviceType": "",
+"rawPacket": "108 (4.728KB)",
+"rcvd": "99 (3.964KB)",
+>>>>>>> 7448ad96e07759606c11b4537ee724d179b53376
 "scanMode": "Top 100 Ports Scan Mode",
 "hop": "",
 "macAddr": "",
@@ -345,6 +387,7 @@
 "setRange": "Target have no range",
 "flags": "",
 "nmapVer": "7.91",
+<<<<<<< HEAD
 "whois": "true",
 "pbb": "false" 
 }
@@ -365,12 +408,38 @@
 "deviceType": "",
 "rawPacket": "",
 "rcvd": "",
+=======
+"whois": "false",
+"pbb": "false" 
+}
+,{
+"id": "SNorErFqtmhspkLmxXgqo",
+"cm": "nmapscanme.nmap.org; with scan mode: Top 100 Ports Scan Mode",
+"target": "scanme.nmap.org",
+"targetForSelect": "scanme.nmap.org",
+"date": "2021-03-26",
+"time": "03:42 HKT",
+"upHost": "1 host up",
+"runTime": "3.50 seconds",
+"latency": "0.17s ",
+"notShown": "94 closed ports",
+"os": "Linux 5.0 - 5.4 ,   Linux 5.0 - 5.4",
+"aggrOS": "",
+"uptime": "",
+"deviceType": "",
+"rawPacket": "108 (4.728KB)",
+"rcvd": "99 (3.964KB)",
+>>>>>>> 7448ad96e07759606c11b4537ee724d179b53376
 "scanMode": "Top 100 Ports Scan Mode",
 "hop": "",
 "macAddr": "",
 "difficulty": "",
 "auto": "false",
+<<<<<<< HEAD
 "cveDetect": "true",
+=======
+"cveDetect": "false",
+>>>>>>> 7448ad96e07759606c11b4537ee724d179b53376
 "setRange": "Target have no range",
 "flags": "",
 "nmapVer": "7.91",

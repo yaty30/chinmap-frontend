@@ -36,13 +36,20 @@
 }
 ,
 {
+<<<<<<< HEAD
 "id": "kCCNTSfyNbTtiqPfuOHre",
 "target": "neopets.com",
 "runTime": "24.04 seconds",
+=======
+"id": "VTzPKyfshdhjkPnuaIOBC",
+"target": "192.168.86.35",
+"runTime": "2.08 seconds",
+>>>>>>> 7448ad96e07759606c11b4537ee724d179b53376
 "date": "2021-03-26"
 }
 ,
 {
+<<<<<<< HEAD
 "id": "zTIywiLyngtcwedWOmVEj",
 "target": "neopets.com",
 "runTime": "62.03 seconds",
@@ -75,5 +82,11 @@
 "target": "scanme.nmap.org",
 "runTime": "8.07 seconds",
 "date": "2021-03-30"
+=======
+"id": "SfqDTehOLKhStOtHZrnLX",
+"target": "scanme.nmap.org",
+"runTime": "5.16 seconds",
+"date": "2021-03-26"
+>>>>>>> 7448ad96e07759606c11b4537ee724d179b53376
 }
 ]
