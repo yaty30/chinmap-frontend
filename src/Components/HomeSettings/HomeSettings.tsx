@@ -417,7 +417,7 @@ export default () => {
             {/* NSE */}
             <Grid item xs={12}>
               <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>
-                <table style={{width: '100%', textAlign: 'center'}}>
+                <table id='homeSettingNSETable'>
                   <tbody>
                     <tr>
                       <td style={{textAlign: 'left'}}>
@@ -425,23 +425,26 @@ export default () => {
                       </td>
                     </tr>
                     <tr>
-                      <td style={{width: '50%'}}>
-                        <Tooltip title="When the system scan find out the result output as no host is alive, automation will allow the scan run again until there is at least one host is alive or all the hosts in desinated range is scanned." arrow placement="top">
+                      <td>
+                        <div>
+                        <Tooltip title="The end result is that all-port Nmap scans against your servers may increase, as frustrated legitimate users try to find where essential services are hidden." arrow placement="top">
                           <FormControlLabel
-                            label="Hostmap - Subdomains"
+                            label="Clever Trickery"
                             control={
                               <Switch
                                 checked={others.hostmap}
                                 onChange={handleOthersChange}
                                 onClick={() => settingsStatus.setAuto(!settingsStatus.hostmap)}
                                 name="hostmap"
-                                inputProps={{ 'aria-label': 'hostmap' }}
+                                inputProps={{ 'aria-label': 'Clever Trickery' }}
                               />
                             }
                           />
                         </Tooltip>
+                        </div>
                       </td>
-                      <td style={{width: '50%'}}>
+                      <td>
+                        <div>
                         <Tooltip arrow placement='top' title='Tries to discover firewall rules using an IP TTL expiration technique known as firewalking.'>
                           <FormControlLabel
                             label="Firewalk"
@@ -456,81 +459,85 @@ export default () => {
                             }
                           />
                         </Tooltip>
+                        </div>
                       </td>
                     </tr>
+                    <tr>
+                      <td>
+                        <div>
+                        <Tooltip title="When the system scan find out the result output as no host is alive, automation will allow the scan run again until there is at least one host is alive or all the hosts in desinated range is scanned." arrow placement="top">
+                          <FormControlLabel
+                            label="Automation"
+                            control={
+                              <Switch
+                                checked={others.automation}
+                                onChange={handleOthersChange}
+                                onClick={() => settingsStatus.setAuto(!settingsStatus.automation)}
+                                name="automation"
+                                inputProps={{ 'aria-label': 'Automation' }}
+                              />
+                            }
+                          />
+                        </Tooltip>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                        <FormControlLabel
+                          label="CVE Detection"
+                          control={
+                            <Switch
+                              checked={others.cveDetect}
+                              onChange={handleOthersChange}
+                              onClick={() => settingsStatus.setCve(!settingsStatus.cve)}
+                              name="cveDetect"
+                              inputProps={{ 'aria-label': 'CVE Detection' }}
+                            />
+                          }
+                        />
+                      </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div>
+                        <FormControlLabel
+                          label="Ping Block Bypassing"
+                          control={
+                            <Switch
+                              checked={others.pn}
+                              onChange={handleOthersChange}
+                              onClick={() => settingsStatus.setPn(!settingsStatus.pn)}
+                              name="pn"
+                              inputProps={{ 'aria-label': 'Ping Block Bypassing' }}
+                            />
+                          }
+                        />
+                      </div>
+                      </td>
+                      <td>
+                        <div>
+                        <FormControlLabel
+                            label="WhoIs"
+                            control={
+                              <Switch
+                                checked={others.whoIs}
+                                onChange={handleOthersChange}
+                                onClick={() => settingsStatus.setWhoIs(!settingsStatus.whoIs)}
+                                name="whoIs"
+                                disabled={
+                                  /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(settingsStatus.target) === true ? true : false
+                                }
+                                inputProps={{ 'aria-label': 'WhoIs' }}
+                              />
+                            }
+                          />
+                          </div>
+                      </td>
+                    </tr>
+
                   </tbody>
                 </table>
-              </Paper>
-            </Grid>
-
-            {/* Others */}
-            <Grid item xs={6}>
-              <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>
-                <Tooltip title="When the system scan find out the result output as no host is alive, automation will allow the scan run again until there is at least one host is alive or all the hosts in desinated range is scanned." arrow placement="top">
-                  <FormControlLabel
-                    label="Automation"
-                    control={
-                      <Switch
-                        checked={others.automation}
-                        onChange={handleOthersChange}
-                        onClick={() => settingsStatus.setAuto(!settingsStatus.automation)}
-                        name="automation"
-                        inputProps={{ 'aria-label': 'Automation' }}
-                      />
-                    }
-                  />
-                </Tooltip>
-              </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>
-                <FormControlLabel
-                  label="CVE Detection"
-                  control={
-                    <Switch
-                      checked={others.cveDetect}
-                      onChange={handleOthersChange}
-                      onClick={() => settingsStatus.setCve(!settingsStatus.cve)}
-                      name="cveDetect"
-                      inputProps={{ 'aria-label': 'CVE Detection' }}
-                    />
-                  }
-                />
-              </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>
-                <FormControlLabel
-                  label="Ping Block Bypassing"
-                  control={
-                    <Switch
-                      checked={others.pn}
-                      onChange={handleOthersChange}
-                      onClick={() => settingsStatus.setPn(!settingsStatus.pn)}
-                      name="pn"
-                      inputProps={{ 'aria-label': 'Ping Block Bypassing' }}
-                    />
-                  }
-                />
-              </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              <Paper style={{background: "#f9f9f9", padding: "15px 15px"}} elevation={0}>
-                <FormControlLabel
-                  label="WhoIs"
-                  control={
-                    <Switch
-                      checked={others.whoIs}
-                      onChange={handleOthersChange}
-                      onClick={() => settingsStatus.setWhoIs(!settingsStatus.whoIs)}
-                      name="whoIs"
-                      disabled={
-                        /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(settingsStatus.target) === true ? true : false
-                      }
-                      inputProps={{ 'aria-label': 'WhoIs' }}
-                    />
-                  }
-                />
               </Paper>
             </Grid>
           </Grid>

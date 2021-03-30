@@ -34,3 +34,20 @@ iframe{
     display: none;
     background: 'black' !important;
 }
+
+#homeSettingNSETable{
+    width: 100%;
+    text-align: center;
+}
+
+#homeSettingNSETable tr{
+    width: 100%;
+}
+
+#homeSettingNSETable td{
+    width: 50%;
+}
+
+#homeSettingNSETable div{
+    text-align: left;
+}

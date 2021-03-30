@@ -901,7 +901,41 @@ def ScanAbort():
                 'RunAbort', 
                 abort=abort
             ))
-    
+
+@app.route('/ToDelete/<scanID>')
+def ToDelete(scanID):
+    with fileinput.FileInput("toDelete.tsx", inplace=True) as file:
+        for line in file:
+            print(line.replace("]", ""), end="")
+    toDeleteJSON = open("toDelete.tsx", "a")
+    toDeleteJSON.writelines('\n    "' + str(scanID) + '",\n]')
+    toDeleteJSON.close()
+
+    fileinput.close()
+
+    return redirect("http://localhost:3001/scanResult", code=302)
+
+@app.route('/deleteResult', methods=['POST', 'GET'])
+def DeleteResult():
+    if request.method == 'POST':
+        scanID = request.form['scanID']
+        
+        return redirect(url_for(
+            'ToDelete', 
+            scanID=scanID
+        ))
+            
+    else:
+        scanID = request.args.get('scanID')
+        
+        return redirect(url_for(
+            'ToDelete', 
+            scanID=scanID
+        ))
+            
+
+
+
 
 if __name__ == "__main__":
     app.debug = False

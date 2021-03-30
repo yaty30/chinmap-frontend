@@ -36,6 +36,7 @@ import { isScanning } from '../Backend/frontendData/isScanning'
 import { pureOutput } from '../Backend/frontendData/Result'
 import scannedIn from '../Backend/frontendData/scannedIn.json'
 import { rows } from '../Backend/frontendData/getPortStatus'
+import { toDel } from '../Backend/frontendData/toDelete'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -861,12 +862,12 @@ export default () => {
                         >
                             
                             {scannedIn.map((target, index) => (
-                               target.target === '' ? null :
+                               target.target === '' || toDel.indexOf(target.id) > -1 ? null :
                                <MenuItem 
                                     value={target.target} 
                                     key={index}
                                 >
-                                    {target.targetForSelect}
+                                    {target.targetForSelect.replace('sn\=', '\/')}
                                 </MenuItem>
                             ))}
                         </Select>
@@ -894,6 +895,7 @@ export default () => {
                                 disabled={isDisabled}
                             >
                                 {scannedIn.map((target) => (
+                                    toDel.indexOf(target.id) > -1 ? null :
                                     <MenuItem 
                                         value={`${target.runTime}`} 
                                         key={target.runTime}
@@ -928,6 +930,7 @@ export default () => {
                                 disabled={isDisabled}
                             >
                                 {scannedIn.map((target) => (
+                                    toDel.indexOf(target.id) > -1 ? null :
                                     <MenuItem 
                                         value={`${target.runTime}`} 
                                         key={target.runTime}

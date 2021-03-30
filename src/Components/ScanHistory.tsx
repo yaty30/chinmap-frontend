@@ -25,6 +25,7 @@ import ShowHistoryIcon from '@material-ui/icons/DoubleArrow';
 import history from '../Backend/frontendData/scannedTargetForSelect.json'
 import { isScanning } from '../Backend/frontendData/isScanning'
 import scannedIn from '../Backend/frontendData/scannedIn.json'
+import { toDel } from '../Backend/frontendData/toDelete'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -144,11 +145,11 @@ export default () => {
                         </TableHead>
                         <TableBody>
                             {history.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((target) => (
-                                target.target == "" ? 
+                                target.target == "" || toDel.indexOf(target.id) > -1 ? 
                                     null
                                         :
                                     <TableRow key={target.id} hover>
-                                        <TableCell align="center">{target.target}</TableCell>
+                                        <TableCell align="center">{target.target.replace('sn\=', '\/')}</TableCell>
                                         <TableCell align="center">{target.runTime}</TableCell>
                                         <TableCell align="center">{target.date}</TableCell>
                                         <TableCell align="center">
