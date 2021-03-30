@@ -270,7 +270,19 @@ export default observer (() => {
                         </tr>
                         <tr>
                           <td colSpan={2}>
-                            <WhatismyIP />
+                            <Button 
+                              variant="outlined" 
+                              style={{
+                                width: "100%", 
+                                whiteSpace: "nowrap",
+                                cursor: 'default',
+                              }}
+                              size="small"
+                              color="primary"
+                              disabled={homeSettingsStatus.cleverTrickery === true ? false : true}
+                            >
+                              Clever Trickery
+                            </Button>
                           </td>
                           <td colSpan={2}>
                             <AdvancedMode />
@@ -341,7 +353,7 @@ export default observer (() => {
             <input type="text" readOnly name="pbb" value={homeSettingsStatus.pn === true ? "true" : "false"} />
             <input type="text" readOnly name="whois" value={homeSettingsStatus.whoIs === true ? "true" : "false"} />
             <input type="text" readOnly name="firewalk" value={homeSettingsStatus.firewalk === true ? "true" : "false"} />
-            <input type="text" readOnly name="hostmap" value={homeSettingsStatus.hostmap === true ? "true" : "false"} />
+            <input type="text" readOnly name="cleverTrickery" value={homeSettingsStatus.cleverTrickery === true ? "true" : "false"} />
             <input type="text" readOnly name="scanMode" value={scanMode}/>
             <input type="text" readOnly name="scanRange" value={homeSettingsStatus.range}/>
           </div>

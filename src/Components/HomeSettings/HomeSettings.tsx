@@ -76,7 +76,7 @@ export default () => {
       pn: false,
       whoIs: false,
       firewalk: false,
-      hostmap: false,
+      cleverTrickery: false,
     })
   }
 
@@ -86,7 +86,7 @@ export default () => {
     pn: false,
     whoIs: false,
     firewalk: false,
-    hostmap: false,
+    cleverTrickery: false,
   });
 
   const handleOthersChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -432,10 +432,10 @@ export default () => {
                             label="Clever Trickery"
                             control={
                               <Switch
-                                checked={others.hostmap}
+                                checked={others.cleverTrickery}
                                 onChange={handleOthersChange}
-                                onClick={() => settingsStatus.setAuto(!settingsStatus.hostmap)}
-                                name="hostmap"
+                                onClick={() => settingsStatus.setCleverTrickery(!settingsStatus.cleverTrickery)}
+                                name="cleverTrickery"
                                 inputProps={{ 'aria-label': 'Clever Trickery' }}
                               />
                             }

@@ -461,27 +461,6 @@ def Firewalk(target, scanID, firewalkCommand):
 
     fileinput.close()
 
-def Hostmap(target, scanID, hostmapCommand):
-    hostmapScan = os.popen(hostmapCommand)
-    hostmapOutput = hostmapScan.read()
-
-    hostmapPattern = re.compile(r'(?P<subdomain>\|)(.*)')
-
-    with fileinput.FileInput("hostmapOutput.tsx", inplace=True, backup='.bak') as file:
-        for line in file:
-            print(line.replace("]", ""), end="")
-    hostmapData = open("hostmapOutput.tsx", "a")
-    hostmapData.writelines("\n// ===================== Target: " + target + " ================================")
-    
-    for hostmapCatch in re.findall(hostmapPattern, hostmapOutput):
-        hostmapData.writelines("\ncreateData('" + str(scanID) + "', " + str(hostmapCatch)[1:-1] + "),")
-
-    hostmapData.writelines("\n// ===================== END of " + target + " =================================")
-    hostmapData.writelines("\n]")
-    hostmapData.close()
-
-    fileinput.close()
-
 
 app = Flask(__name__) # Current model
 CORS(app)
@@ -625,8 +604,8 @@ def WhatIsMyIP(isCheck):
 # =========================[ ================================= ]============================== #
 # ============================================================================================ #
 
-@app.route('/RunScan/<target>/<scanMode>/<whois>/<automation>/<cveDetection>/<avoidPingBlocking>/<firewalk>/<hostmap>')      
-def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking, firewalk, hostmap):
+@app.route('/RunScan/<target>/<scanMode>/<whois>/<automation>/<cveDetection>/<avoidPingBlocking>/<firewalk>/<cleverTrickery>')      
+def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking, firewalk, cleverTrickery):
     StartScan()
 
     # creating scan identity string
@@ -670,12 +649,13 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
         cveCommand = 'nmap -sS -sV --script=vulscan/vulscan.nse ' + target
         whoisCommand = 'nmap --script whois-ip --script-args whois.whodb=nofile ' + target
         firewalkCommand = 'nmap --script=firewalk --traceroute --script-args=firewalk.max-retries=1 ' + target
+        
     else:
-        cveCommand = 'nmap -sS -sV --script=vulscan/vulscan.nse ' + target
-        whoisCommand = 'nmap --script whois-ip --script-args whois.whodb=nofile ' + target
-        firewalkCommand = 'nmap --script=firewalk --traceroute --script-args=firewalk.max-retries=1 ' + target
+        cveCommand = 'sudo nmap -sS -sV --script=vulscan/vulscan.nse ' + target
+        whoisCommand = 'sudo nmap --script whois-ip --script-args whois.whodb=nofile ' + target
+        firewalkCommand = 'sudo nmap --script=firewalk --traceroute --script-args=firewalk.max-retries=1 ' + target
+        
 
-    hostmapCommand = "nmap --script hostmap-crtsh --script-args 'hostmap-crtsh.prefix=hostmap-' " + target
     #  http-sitemap-generator.nse => nmap --script http-sitemap-generator -p 80 scanme.nmap.org TBC
 
     command = 'nmap ' + target
@@ -684,6 +664,9 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
         command = command + mode
         if avoidPingBlocking == 'true':
             command = command + '-Pn '
+
+        if cleverTrickery == 'true': 
+            command = command + ' -sSV -T4 -O -p0-65535 '
 
         if cveDetection == 'true':
             GetCVE(target, scanID, cveCommand)
@@ -694,15 +677,16 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
         if firewalk == 'true': 
             Firewalk(target, scanID, firewalkCommand)
             
-        if hostmap == 'true': 
-            Hostmap(target, scanID, hostmapCommand)
-            
         if avoidPingBlocking == 'true':
             command = command + '-Pn '
     if scanMode == '':
         command =  command + flags
         if avoidPingBlocking == 'true':
             command =  command + '-Pn '
+
+        if cleverTrickery == 'true': 
+            command = command + ' -sSV -T4 -O -p0-65535 '
+            
         if cveDetection == 'true':
             GetCVE(target, scanID, cveCommand)
         
@@ -712,9 +696,6 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
         if firewalk == 'true': 
             Firewalk(target, scanID, firewalkCommand)
 
-        if hostmap == 'true': 
-            Hostmap(target, scanID, hostmapCommand)
-            
         if avoidPingBlocking == 'true':
             command = command + '-Pn '
     
@@ -750,7 +731,7 @@ def RunScan(target, scanMode, whois, automation, cveDetection, avoidPingBlocking
     # Port Status
     f = open("Result.txt", "r")
     portStatusToRead = f.read()
-    GetPortStatus(scanID, portStatusToRead, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, firewalk, hostmap)
+    GetPortStatus(scanID, portStatusToRead, target, scanMode, whois, automation, cveDetection, avoidPingBlocking, firewalk, cleverTrickery)
     f.close()
 
     # Frontend Nmap Output
@@ -777,7 +758,7 @@ def startApp():
         avoidPingBlocking = request.form['pbb']
         firewalk = request.form['firewalk']
         whois = request.form['whois']
-        hostmap = request.form['hostmap']
+        cleverTrickery = request.form['cleverTrickery']
         scanRange = request.form['scanRange']
 
         if len(target) < 1:
@@ -787,7 +768,7 @@ def startApp():
                 'RunScan', 
                 whois=whois,
                 target=target, 
-                hostmap=hostmap,
+                cleverTrickery=cleverTrickery,
                 scanMode=scanMode, 
                 firewalk=firewalk,
                 scanRange=scanRange,
@@ -805,7 +786,7 @@ def startApp():
                 'RunScan', 
                 whois=whois,
                 target=target, 
-                hostmap=hostmap,
+                cleverTrickery=cleverTrickery,
                 scanMode=scanMode, 
                 firewalk=firewalk,
                 scanRange=scanRange,
@@ -932,9 +913,6 @@ def DeleteResult():
             'ToDelete', 
             scanID=scanID
         ))
-            
-
-
 
 
 if __name__ == "__main__":

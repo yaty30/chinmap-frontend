@@ -10,7 +10,7 @@ const homeSettings = types
         pn: types.boolean,
         whoIs: types.boolean,
         firewalk: types.boolean,
-        hostmap: types.boolean,
+        cleverTrickery: types.boolean,
         flag: types.string,
         rangeTarget: types.string,
     })
@@ -45,8 +45,8 @@ const homeSettings = types
         setFirewalk(firewalk: any) {
             self.firewalk = firewalk
         },
-        setHostmap(hostmap: any) {
-            self.hostmap = hostmap
+        setCleverTrickery(cleverTrickery: any) {
+            self.cleverTrickery = cleverTrickery
         },
         setFlag(flag: any) {
             self.flag = flag
@@ -64,7 +64,7 @@ const store = homeSettings.create({
     pn: false,
     whoIs: false,
     firewalk: false,
-    hostmap: false,
+    cleverTrickery: false,
     flag: "",
     rangeTarget: "",
 });

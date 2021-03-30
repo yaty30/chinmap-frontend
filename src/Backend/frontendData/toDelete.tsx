@@ -7,4 +7,8 @@ export const toDel = [
     "VEJsBDSfCWIXYVtrlYwkO",
 
     "zTIywiLyngtcwedWOmVEj",
+
+    "VvRpTPLVdQJIqAqBkWiSW",
+
+    "LRvowQTaxUcBWqjlOZHmc",
 ]

@@ -101,7 +101,7 @@ export default () => {
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(15);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
