@@ -209,6 +209,7 @@ PORT    STATE    SERVICE      REASON
 139/tcp filtered netbios-ssn  no-response
 445/tcp filtered microsoft-ds no-response
 
+<<<<<<< HEAD
 Read data files from: C:\Program Files (x86)\Nmap
 Nmap done: 1 IP address (1 host up) scanned in 5.16 seconds
            Raw packets sent: 108 (4.728KB) | Rcvd: 99 (3.964KB)
@@ -238,6 +239,36 @@ PORT    STATE    SERVICE      REASON
 22/tcp  open     ssh          syn-ack ttl 51
 25/tcp  filtered smtp         no-response
 80/tcp  open     http         syn-ack ttl 51
+=======
+Read data files from: /usr/local/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 8.07 seconds
+`,},
+
+{
+id: 'gPYHfIIAMoKvKixWsTnvu',
+output: `Command: nmap scanme.nmap.org -T4 -F 
+======================================================
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-30 13:33 HKT
+Initiating Ping Scan at 13:33
+Scanning scanme.nmap.org (45.33.32.156) [2 ports]
+Completed Ping Scan at 13:33, 0.16s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 13:33
+Completed Parallel DNS resolution of 1 host. at 13:33, 0.40s elapsed
+Initiating Connect Scan at 13:33
+Scanning scanme.nmap.org (45.33.32.156) [100 ports]
+Discovered open port 80/tcp on 45.33.32.156
+Discovered open port 22/tcp on 45.33.32.156
+Completed Connect Scan at 13:33, 6.46s elapsed (100 total ports)
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up, received syn-ack (0.16s latency).
+Scanned at 2021-03-30 13:33:31 HKT for 7s
+Not shown: 94 closed ports
+Reason: 94 conn-refused
+PORT    STATE    SERVICE      REASON
+22/tcp  open     ssh          syn-ack
+25/tcp  filtered smtp         no-response
+80/tcp  open     http         syn-ack
+>>>>>>> 17efab11bd33e21ad174e53ca031f3376eb28382
 135/tcp filtered msrpc        no-response
 139/tcp filtered netbios-ssn  no-response
 445/tcp filtered microsoft-ds no-response
